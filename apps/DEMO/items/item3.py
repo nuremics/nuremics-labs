@@ -1,0 +1,189 @@
+import os
+import attrs
+import json
+from pathlib import Path
+
+import pandas as pd
+
+import nuremics as nrs
+
+APP_NAME = os.path.split(__file__)[0].split("\\")[-2]
+
+userParams = [
+    "param2",
+    "param4",
+    "param5",
+]
+
+@attrs.define
+class Process3(nrs.AllProcesses):
+
+    param2: float = attrs.field(init=False)
+    param4: float = attrs.field(init=False)
+    param5: float = attrs.field(init=False)
+    output2_path: str = attrs.field(init=False)
+
+    def __attrs_post_init__(self):
+        super().__attrs_post_init__()
+
+        self.require = [
+            "output2",
+        ]
+
+    def __call__(self):
+
+        self.output2_path = self.get_build_path(self.require[0])
+
+        for param in userParams:
+            setattr(self, param, self.dict_params[param])
+
+        self.subprocess5()
+        self.subprocess6("output3.txt")
+        self.subprocess7()
+        self.subprocess8("output4.txt")
+
+    def subprocess5(self):
+        
+        output = "I am the Sub-process 5.\n"
+        output += "I belong to the Process 3.\n"
+        output += "\n"
+        output += f"I am currently processing {self.index}.\n"
+        output += "\n"
+        output += "Here are the input parameters I know :\n"
+        output += f"- Param2 : {self.param2}.\n"
+        output += f"- Param4 : {self.param4}.\n"
+        output += f"- Param5 : {self.param5}.\n"
+        output += "\n"
+        output += f"I know {self.require[0]} :\n"
+        output += "\n"
+        output += "'''\n"
+        f = open(self.output2_path, "r")
+        output += f.read()
+        output += "\n'''"
+
+        print("---------------------------------------------------------")
+        print(output)
+
+    @nrs.AllProcesses.builder(
+        build="output3",
+    )
+    def subprocess6(self,
+        dump: str,
+    ):
+        
+        output = "I am the Sub-process 6.\n"
+        output += "I belong to the Process 3.\n"
+        output += "\n"
+        output += f"I am currently processing {self.index}.\n"
+        output += "\n"
+        output += "Here are the input parameters I know :\n"
+        output += f"- Param2 : {self.param2}.\n"
+        output += f"- Param4 : {self.param4}.\n"
+        output += f"- Param5 : {self.param5}.\n"
+        output += "\n"
+        output += f"I know {self.require[0]} :\n"
+        output += "\n"
+        output += "'''\n"
+        f = open(self.output2_path, "r")
+        output += f.read()
+        output += "\n'''"
+
+        print("---------------------------------------------------------")
+        print(output)
+
+        with open(dump, "w") as f:
+            f.write(output)
+
+    def subprocess7(self):
+        
+        output = "I am the Sub-process 7.\n"
+        output += "I belong to the Process 3.\n"
+        output += "\n"
+        output += f"I am currently processing {self.index}.\n"
+        output += "\n"
+        output += "Here are the input parameters I know :\n"
+        output += f"- Param2 : {self.param2}.\n"
+        output += f"- Param4 : {self.param4}.\n"
+        output += f"- Param5 : {self.param5}.\n"
+        output += "\n"
+        output += f"I know {self.require[0]} :\n"
+        output += "\n"
+        output += "'''\n"
+        f = open(self.output2_path, "r")
+        output += f.read()
+        output += "\n'''"
+
+        print("---------------------------------------------------------")
+        print(output)
+
+    @nrs.AllProcesses.builder(
+        build="output4",
+    )
+    def subprocess8(self,
+        dump: str,
+    ):
+        
+        output = "I am the Sub-process 8.\n"
+        output += "I belong to the Process 3.\n"
+        output += "\n"
+        output += f"I am currently processing {self.index}.\n"
+        output += "\n"
+        output += "Here are the input parameters I know :\n"
+        output += f"- Param2 : {self.param2}.\n"
+        output += f"- Param4 : {self.param4}.\n"
+        output += f"- Param5 : {self.param5}.\n"
+        output += "\n"
+        output += f"I know {self.require[0]} :\n"
+        output += "\n"
+        output += "'''\n"
+        f = open(self.output2_path, "r")
+        output += f.read()
+        output += "\n'''"
+
+        print("---------------------------------------------------------")
+        print(output)
+        print("---------------------------------------------------------")
+
+        with open(dump, "w") as f:
+            f.write(output)
+
+
+if __name__ == "__main__":
+    
+    # Define working directory
+    cwd = Path(os.path.split(__file__)[0])
+    working_dir = cwd / Path(f"../../../data/apps/{APP_NAME}")
+
+    # Read input dataframe
+    df_inputs = pd.read_excel(
+        io=working_dir / "inputs.xlsx",
+        index_col=0,
+    )
+    df_inputs.fillna(
+        value="NA",
+        inplace=True,
+    )
+
+    # Read paths dictionary
+    with open(working_dir / "paths.json") as f:
+        dict_paths = json.load(f)
+    
+    # Create process
+    process = Process3(
+        df_inputs=df_inputs,
+        dict_paths=dict_paths,
+        params=userParams,
+        verbose=True,
+    )
+
+    # Select case
+    process.index = "Test1"
+    process.update_dict_params()
+    
+    # Go to working directory
+    os.chdir(working_dir / f"3_Process3/{process.index}")
+
+    # Launch process
+    print(">>> START <<<")
+    process()
+    print(">>> COMPLETED <<<")
