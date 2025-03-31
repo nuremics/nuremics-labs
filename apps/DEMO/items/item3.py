@@ -7,14 +7,6 @@ import pandas as pd
 
 import nuremics as nrs
 
-APP_NAME = os.path.split(__file__)[0].split("\\")[-2]
-
-userParams = [
-    "param2",
-    "param4",
-    "param5",
-]
-
 @attrs.define
 class Process3(nrs.AllProcesses):
 
@@ -34,8 +26,10 @@ class Process3(nrs.AllProcesses):
 
         self.output2_path = self.get_build_path(self.require[0])
 
-        for param in userParams:
+        for param in self.user_params:
             setattr(self, param, self.dict_params[param])
+        for param in self.dict_fixed_params.keys():
+            setattr(self, param, self.dict_fixed_params[param])
 
         self.subprocess5()
         self.subprocess6("output3.txt")
@@ -58,7 +52,8 @@ class Process3(nrs.AllProcesses):
         output += "\n"
         output += "'''\n"
         f = open(self.output2_path, "r")
-        output += f.read()
+        for line in f:
+            output += "    " + line
         output += "\n'''"
 
         print("---------------------------------------------------------")
@@ -85,7 +80,8 @@ class Process3(nrs.AllProcesses):
         output += "\n"
         output += "'''\n"
         f = open(self.output2_path, "r")
-        output += f.read()
+        for line in f:
+            output += "    " + line
         output += "\n'''"
 
         print("---------------------------------------------------------")
@@ -110,7 +106,8 @@ class Process3(nrs.AllProcesses):
         output += "\n"
         output += "'''\n"
         f = open(self.output2_path, "r")
-        output += f.read()
+        for line in f:
+            output += "    " + line
         output += "\n'''"
 
         print("---------------------------------------------------------")
@@ -137,7 +134,8 @@ class Process3(nrs.AllProcesses):
         output += "\n"
         output += "'''\n"
         f = open(self.output2_path, "r")
-        output += f.read()
+        for line in f:
+            output += "    " + line
         output += "\n'''"
 
         print("---------------------------------------------------------")
@@ -149,7 +147,10 @@ class Process3(nrs.AllProcesses):
 
 
 if __name__ == "__main__":
-    
+
+    # Name of the application using this item
+    APP_NAME = os.path.split(__file__)[0].split("\\")[-2]
+
     # Define working directory
     cwd = Path(os.path.split(__file__)[0])
     working_dir = cwd / Path(f"../../../data/apps/{APP_NAME}")
@@ -172,7 +173,11 @@ if __name__ == "__main__":
     process = Process3(
         df_inputs=df_inputs,
         dict_paths=dict_paths,
-        params=userParams,
+        params=[
+            "param2",
+            "param4",
+            "param5",
+        ],
         verbose=True,
     )
 

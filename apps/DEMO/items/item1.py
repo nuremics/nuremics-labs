@@ -7,26 +7,22 @@ import pandas as pd
 
 import nuremics as nrs
 
-APP_NAME = os.path.split(__file__)[0].split("\\")[-2]
-
-userParams = [
-    "param1",
-    "param2",
-]
-
 @attrs.define
 class Process1(nrs.AllProcesses):
 
     param1: float = attrs.field(init=False)
     param2: float = attrs.field(init=False)
+    hidden: float = attrs.field(init=False)
 
     def __attrs_post_init__(self):
         super().__attrs_post_init__()
 
     def __call__(self):
 
-        for param in userParams:
+        for param in self.user_params:
             setattr(self, param, self.dict_params[param])
+        for param in self.dict_fixed_params.keys():
+            setattr(self, param, self.dict_fixed_params[param])
 
         self.subprocess1()
         self.subprocess2()
@@ -42,6 +38,7 @@ class Process1(nrs.AllProcesses):
         output += "Here are the input parameters I know :\n"
         output += f"- Param1 : {self.param1}.\n"
         output += f"- Param2 : {self.param2}.\n"
+        output += f"- hidden : {self.param2}.\n"
         output += "\n"
         output += "I don't know any output from previous processes."
 
@@ -58,6 +55,7 @@ class Process1(nrs.AllProcesses):
         output += "Here are the input parameters I know :\n"
         output += f"- Param1 : {self.param1}.\n"
         output += f"- Param2 : {self.param2}.\n"
+        output += f"- hidden : {self.param2}.\n"
         output += "\n"
         output += "I don't know any output from previous processes."
 
@@ -79,6 +77,7 @@ class Process1(nrs.AllProcesses):
         output += "Here are the input parameters I know :\n"
         output += f"- Param1 : {self.param1}.\n"
         output += f"- Param2 : {self.param2}.\n"
+        output += f"- hidden : {self.param2}.\n"
         output += "\n"
         output += "I don't know any output from previous processes."
 
@@ -91,6 +90,9 @@ class Process1(nrs.AllProcesses):
 
 
 if __name__ == "__main__":
+
+    # Name of the application using this item
+    APP_NAME = os.path.split(__file__)[0].split("\\")[-2]
     
     # Define working directory
     cwd = Path(os.path.split(__file__)[0])
@@ -114,7 +116,13 @@ if __name__ == "__main__":
     process = Process1(
         df_inputs=df_inputs,
         dict_paths=dict_paths,
-        params=userParams,
+        params=[
+            "param1",
+            "param2",
+        ],
+        dict_fixed_params={
+            "hidden": 8.9,
+        },
         verbose=True,
     )
 

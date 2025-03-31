@@ -3,10 +3,10 @@ from pathlib import Path
 
 import nuremics as nrs
 
-import items.item1 as item1
-import items.item2 as item2
-import items.item3 as item3
-import items.item4 as item4
+from items.item1 import Process1
+from items.item2 import Process2
+from items.item3 import Process3
+from items.item4 import Process4
 
 APP_NAME = os.path.split(__file__)[0].split("\\")[-1]
 
@@ -23,26 +23,41 @@ class Application:
         # ---------------------------- #
         processes = [
             {
-                "module": item1.Process1,
-                "userParams": item1.userParams,
+                "module": Process1,
+                "userParams": [
+                    "param1",
+                    "param2",
+                ],
+                "fixedParams": {
+                    "hidden": 8.9,
+                },
                 "verbose": True,
                 "execute": True,
             },
             {
-                "module": item2.Process2,
-                "userParams": item2.userParams,
+                "module": Process2,
+                "userParams": [
+                    "param3"
+                ],
                 "verbose": True,
                 "execute": True,
             },
             {
-                "module": item3.Process3,
-                "userParams": item3.userParams,
+                "module": Process3,
+                "userParams": [
+                    "param2",
+                    "param4",
+                    "param5",
+                ],
                 "verbose": True,
                 "execute": True,
             },
             {
-                "module": item4.Process4,
-                "userParams": item4.userParams,
+                "module": Process4,
+                "userParams": [
+                    "param3",
+                    "param6",
+                ],
                 "verbose": True,
                 "execute": True,
             },

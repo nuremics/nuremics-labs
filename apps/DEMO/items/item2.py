@@ -7,12 +7,6 @@ import pandas as pd
 
 import nuremics as nrs
 
-APP_NAME = os.path.split(__file__)[0].split("\\")[-2]
-
-userParams = [
-    "param3"
-]
-
 @attrs.define
 class Process2(nrs.AllProcesses):
 
@@ -30,8 +24,10 @@ class Process2(nrs.AllProcesses):
 
         self.output1_path = self.get_build_path(self.require[0])
 
-        for param in userParams:
+        for param in self.user_params:
             setattr(self, param, self.dict_params[param])
+        for param in self.dict_fixed_params.keys():
+            setattr(self, param, self.dict_fixed_params[param])
 
         self.subprocess4("output2.txt")
 
@@ -54,7 +50,8 @@ class Process2(nrs.AllProcesses):
         output += "\n"
         output += "'''\n"
         f = open(self.output1_path, "r")
-        output += f.read()
+        for line in f:
+            output += "    " + line
         output += "\n'''"
 
         print("---------------------------------------------------------")
@@ -66,7 +63,10 @@ class Process2(nrs.AllProcesses):
 
 
 if __name__ == "__main__":
-    
+
+    # Name of the application using this item
+    APP_NAME = os.path.split(__file__)[0].split("\\")[-2]
+
     # Define working directory
     cwd = Path(os.path.split(__file__)[0])
     working_dir = cwd / Path(f"../../../data/apps/{APP_NAME}")
@@ -89,7 +89,9 @@ if __name__ == "__main__":
     process = Process2(
         df_inputs=df_inputs,
         dict_paths=dict_paths,
-        params=userParams,
+        params=[
+            "param3"
+        ],
         verbose=True,
     )
 

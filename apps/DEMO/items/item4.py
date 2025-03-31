@@ -7,13 +7,6 @@ import pandas as pd
 
 import nuremics as nrs
 
-APP_NAME = os.path.split(__file__)[0].split("\\")[-2]
-
-userParams = [
-    "param3",
-    "param6",
-]
-
 @attrs.define
 class Process4(nrs.AllProcesses):
 
@@ -35,8 +28,10 @@ class Process4(nrs.AllProcesses):
         self.output3_path = self.get_build_path(self.require[0])
         self.output4_path = self.get_build_path(self.require[1])
 
-        for param in userParams:
+        for param in self.user_params:
             setattr(self, param, self.dict_params[param])
+        for param in self.dict_fixed_params.keys():
+            setattr(self, param, self.dict_fixed_params[param])
 
         self.subprocess9()
         self.subprocess10("output5.txt")
@@ -56,14 +51,16 @@ class Process4(nrs.AllProcesses):
         output += "\n"
         output += "'''\n"
         f = open(self.output3_path, "r")
-        output += f.read()
+        for line in f:
+            output += "    " + line
         output += "\n'''\n"
         output += "\n"
         output += f"I know {self.require[1]} :\n"
         output += "\n"
         output += "'''\n"
         f = open(self.output4_path, "r")
-        output += f.read()
+        for line in f:
+            output += "    " + line
         output += "\n'''"
 
         print("---------------------------------------------------------")
@@ -89,14 +86,16 @@ class Process4(nrs.AllProcesses):
         output += "\n"
         output += "'''\n"
         f = open(self.output3_path, "r")
-        output += f.read()
+        for line in f:
+            output += "    " + line
         output += "\n'''\n"
         output += "\n"
         output += f"I know {self.require[1]} :\n"
         output += "\n"
         output += "'''\n"
         f = open(self.output4_path, "r")
-        output += f.read()
+        for line in f:
+            output += "    " + line
         output += "\n'''"
 
         print("---------------------------------------------------------")
@@ -107,7 +106,10 @@ class Process4(nrs.AllProcesses):
 
 
 if __name__ == "__main__":
-    
+
+    # Name of the application using this item
+    APP_NAME = os.path.split(__file__)[0].split("\\")[-2]
+
     # Define working directory
     cwd = Path(os.path.split(__file__)[0])
     working_dir = cwd / Path(f"../../../data/apps/{APP_NAME}")
@@ -130,7 +132,10 @@ if __name__ == "__main__":
     process = Process4(
         df_inputs=df_inputs,
         dict_paths=dict_paths,
-        params=userParams,
+        params=[
+            "param3",
+            "param6",
+        ],
         verbose=True,
     )
 
