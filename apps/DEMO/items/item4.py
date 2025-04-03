@@ -8,12 +8,12 @@ import pandas as pd
 import nuremics as nrs
 
 @attrs.define
-class Process4(nrs.AllProcesses):
+class Process4(nrs.Process):
 
     param3: float = attrs.field(init=False)
     param6: float = attrs.field(init=False)
-    output3_path: str = attrs.field(init=False)
-    output4_path: str = attrs.field(init=False)
+    output3: str = attrs.field(init=False)
+    output4: str = attrs.field(init=False)
 
     def __attrs_post_init__(self):
         super().__attrs_post_init__()
@@ -24,14 +24,7 @@ class Process4(nrs.AllProcesses):
         ]
 
     def __call__(self):
-
-        self.output3_path = self.get_build_path(self.require[0])
-        self.output4_path = self.get_build_path(self.require[1])
-
-        for param in self.user_params:
-            setattr(self, param, self.dict_params[param])
-        for param in self.dict_fixed_params.keys():
-            setattr(self, param, self.dict_fixed_params[param])
+        super().__call__()
 
         self.subprocess9()
         self.subprocess10("output5.txt")
@@ -44,13 +37,13 @@ class Process4(nrs.AllProcesses):
         output += f"I am currently processing {self.index}.\n"
         output += "\n"
         output += "Here are the input parameters I know :\n"
-        output += f"- Param3 : {self.param3}.\n"
-        output += f"- Param6 : {self.param6}.\n"
+        output += f"- param3 : {self.param3}\n"
+        output += f"- param6 : {self.param6}\n"
         output += "\n"
         output += f"I know {self.require[0]} :\n"
         output += "\n"
         output += "'''\n"
-        f = open(self.output3_path, "r")
+        f = open(self.output3, "r")
         for line in f:
             output += "    " + line
         output += "\n'''\n"
@@ -58,7 +51,7 @@ class Process4(nrs.AllProcesses):
         output += f"I know {self.require[1]} :\n"
         output += "\n"
         output += "'''\n"
-        f = open(self.output4_path, "r")
+        f = open(self.output4, "r")
         for line in f:
             output += "    " + line
         output += "\n'''"
@@ -66,7 +59,7 @@ class Process4(nrs.AllProcesses):
         print("---------------------------------------------------------")
         print(output)
 
-    @nrs.AllProcesses.builder(
+    @nrs.Process.builder(
         build="output5",
     )
     def subprocess10(self,
@@ -79,13 +72,13 @@ class Process4(nrs.AllProcesses):
         output += f"I am currently processing {self.index}.\n"
         output += "\n"
         output += "Here are the input parameters I know :\n"
-        output += f"- Param3 : {self.param3}.\n"
-        output += f"- Param6 : {self.param6}.\n"
+        output += f"- param3 : {self.param3}\n"
+        output += f"- param6 : {self.param6}\n"
         output += "\n"
         output += f"I know {self.require[0]} :\n"
         output += "\n"
         output += "'''\n"
-        f = open(self.output3_path, "r")
+        f = open(self.output3, "r")
         for line in f:
             output += "    " + line
         output += "\n'''\n"
@@ -93,7 +86,7 @@ class Process4(nrs.AllProcesses):
         output += f"I know {self.require[1]} :\n"
         output += "\n"
         output += "'''\n"
-        f = open(self.output4_path, "r")
+        f = open(self.output4, "r")
         for line in f:
             output += "    " + line
         output += "\n'''"
@@ -136,6 +129,7 @@ if __name__ == "__main__":
             "param3",
             "param6",
         ],
+        erase=True,
         verbose=True,
     )
 

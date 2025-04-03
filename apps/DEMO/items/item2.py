@@ -8,10 +8,10 @@ import pandas as pd
 import nuremics as nrs
 
 @attrs.define
-class Process2(nrs.AllProcesses):
+class Process2(nrs.Process):
 
     param3: float = attrs.field(init=False)
-    output1_path: str = attrs.field(init=False)
+    output1: str = attrs.field(init=False)
 
     def __attrs_post_init__(self):
         super().__attrs_post_init__()
@@ -21,17 +21,11 @@ class Process2(nrs.AllProcesses):
         ]
 
     def __call__(self):
-
-        self.output1_path = self.get_build_path(self.require[0])
-
-        for param in self.user_params:
-            setattr(self, param, self.dict_params[param])
-        for param in self.dict_fixed_params.keys():
-            setattr(self, param, self.dict_fixed_params[param])
+        super().__call__()
 
         self.subprocess4("output2.txt")
 
-    @nrs.AllProcesses.builder(
+    @nrs.Process.builder(
         build="output2",
     )
     def subprocess4(self,
@@ -44,12 +38,12 @@ class Process2(nrs.AllProcesses):
         output += f"I am currently processing {self.index}.\n"
         output += "\n"
         output += "Here are the input parameters I know :\n"
-        output += f"- Param3 : {self.param3}.\n"
+        output += f"- param3 : {self.param3}\n"
         output += "\n"
         output += f"I know {self.require[0]} :\n"
         output += "\n"
         output += "'''\n"
-        f = open(self.output1_path, "r")
+        f = open(self.output1, "r")
         for line in f:
             output += "    " + line
         output += "\n'''"
@@ -92,6 +86,7 @@ if __name__ == "__main__":
         params=[
             "param3"
         ],
+        erase=True,
         verbose=True,
     )
 

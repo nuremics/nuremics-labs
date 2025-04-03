@@ -8,12 +8,12 @@ import pandas as pd
 import nuremics as nrs
 
 @attrs.define
-class Process3(nrs.AllProcesses):
+class Process3(nrs.Process):
 
     param2: float = attrs.field(init=False)
     param4: float = attrs.field(init=False)
     param5: float = attrs.field(init=False)
-    output2_path: str = attrs.field(init=False)
+    output2: str = attrs.field(init=False)
 
     def __attrs_post_init__(self):
         super().__attrs_post_init__()
@@ -23,13 +23,7 @@ class Process3(nrs.AllProcesses):
         ]
 
     def __call__(self):
-
-        self.output2_path = self.get_build_path(self.require[0])
-
-        for param in self.user_params:
-            setattr(self, param, self.dict_params[param])
-        for param in self.dict_fixed_params.keys():
-            setattr(self, param, self.dict_fixed_params[param])
+        super().__call__()
 
         self.subprocess5()
         self.subprocess6("output3.txt")
@@ -44,14 +38,14 @@ class Process3(nrs.AllProcesses):
         output += f"I am currently processing {self.index}.\n"
         output += "\n"
         output += "Here are the input parameters I know :\n"
-        output += f"- Param2 : {self.param2}.\n"
-        output += f"- Param4 : {self.param4}.\n"
-        output += f"- Param5 : {self.param5}.\n"
+        output += f"- param2 : {self.param2}\n"
+        output += f"- param4 : {self.param4}\n"
+        output += f"- param5 : {self.param5}\n"
         output += "\n"
         output += f"I know {self.require[0]} :\n"
         output += "\n"
         output += "'''\n"
-        f = open(self.output2_path, "r")
+        f = open(self.output2, "r")
         for line in f:
             output += "    " + line
         output += "\n'''"
@@ -59,7 +53,7 @@ class Process3(nrs.AllProcesses):
         print("---------------------------------------------------------")
         print(output)
 
-    @nrs.AllProcesses.builder(
+    @nrs.Process.builder(
         build="output3",
     )
     def subprocess6(self,
@@ -72,14 +66,14 @@ class Process3(nrs.AllProcesses):
         output += f"I am currently processing {self.index}.\n"
         output += "\n"
         output += "Here are the input parameters I know :\n"
-        output += f"- Param2 : {self.param2}.\n"
-        output += f"- Param4 : {self.param4}.\n"
-        output += f"- Param5 : {self.param5}.\n"
+        output += f"- param2 : {self.param2}\n"
+        output += f"- param4 : {self.param4}\n"
+        output += f"- param5 : {self.param5}\n"
         output += "\n"
         output += f"I know {self.require[0]} :\n"
         output += "\n"
         output += "'''\n"
-        f = open(self.output2_path, "r")
+        f = open(self.output2, "r")
         for line in f:
             output += "    " + line
         output += "\n'''"
@@ -98,14 +92,14 @@ class Process3(nrs.AllProcesses):
         output += f"I am currently processing {self.index}.\n"
         output += "\n"
         output += "Here are the input parameters I know :\n"
-        output += f"- Param2 : {self.param2}.\n"
-        output += f"- Param4 : {self.param4}.\n"
-        output += f"- Param5 : {self.param5}.\n"
+        output += f"- param2 : {self.param2}\n"
+        output += f"- param4 : {self.param4}\n"
+        output += f"- param5 : {self.param5}\n"
         output += "\n"
         output += f"I know {self.require[0]} :\n"
         output += "\n"
         output += "'''\n"
-        f = open(self.output2_path, "r")
+        f = open(self.output2, "r")
         for line in f:
             output += "    " + line
         output += "\n'''"
@@ -113,7 +107,7 @@ class Process3(nrs.AllProcesses):
         print("---------------------------------------------------------")
         print(output)
 
-    @nrs.AllProcesses.builder(
+    @nrs.Process.builder(
         build="output4",
     )
     def subprocess8(self,
@@ -126,14 +120,14 @@ class Process3(nrs.AllProcesses):
         output += f"I am currently processing {self.index}.\n"
         output += "\n"
         output += "Here are the input parameters I know :\n"
-        output += f"- Param2 : {self.param2}.\n"
-        output += f"- Param4 : {self.param4}.\n"
-        output += f"- Param5 : {self.param5}.\n"
+        output += f"- param2 : {self.param2}\n"
+        output += f"- param4 : {self.param4}\n"
+        output += f"- param5 : {self.param5}\n"
         output += "\n"
         output += f"I know {self.require[0]} :\n"
         output += "\n"
         output += "'''\n"
-        f = open(self.output2_path, "r")
+        f = open(self.output2, "r")
         for line in f:
             output += "    " + line
         output += "\n'''"
@@ -178,6 +172,7 @@ if __name__ == "__main__":
             "param4",
             "param5",
         ],
+        erase=True,
         verbose=True,
     )
 

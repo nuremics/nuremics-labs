@@ -8,21 +8,17 @@ import pandas as pd
 import nuremics as nrs
 
 @attrs.define
-class Process1(nrs.AllProcesses):
+class Process1(nrs.Process):
 
     param1: float = attrs.field(init=False)
     param2: float = attrs.field(init=False)
-    hidden: float = attrs.field(init=False)
+    hidden: int = attrs.field(init=False)
 
     def __attrs_post_init__(self):
         super().__attrs_post_init__()
 
     def __call__(self):
-
-        for param in self.user_params:
-            setattr(self, param, self.dict_params[param])
-        for param in self.dict_fixed_params.keys():
-            setattr(self, param, self.dict_fixed_params[param])
+        super().__call__()
 
         self.subprocess1()
         self.subprocess2()
@@ -36,9 +32,9 @@ class Process1(nrs.AllProcesses):
         output += f"I am currently processing {self.index}.\n"
         output += "\n"
         output += "Here are the input parameters I know :\n"
-        output += f"- Param1 : {self.param1}.\n"
-        output += f"- Param2 : {self.param2}.\n"
-        output += f"- hidden : {self.param2}.\n"
+        output += f"- param1 : {self.param1}\n"
+        output += f"- param2 : {self.param2}\n"
+        output += f"- hidden : {self.hidden}\n"
         output += "\n"
         output += "I don't know any output from previous processes."
 
@@ -53,16 +49,16 @@ class Process1(nrs.AllProcesses):
         output += f"I am currently processing {self.index}.\n"
         output += "\n"
         output += "Here are the input parameters I know :\n"
-        output += f"- Param1 : {self.param1}.\n"
-        output += f"- Param2 : {self.param2}.\n"
-        output += f"- hidden : {self.param2}.\n"
+        output += f"- param1 : {self.param1}\n"
+        output += f"- param2 : {self.param2}\n"
+        output += f"- hidden : {self.hidden}\n"
         output += "\n"
         output += "I don't know any output from previous processes."
 
         print("---------------------------------------------------------")
         print(output)
 
-    @nrs.AllProcesses.builder(
+    @nrs.Process.builder(
         build="output1",
     )
     def subprocess3(self,
@@ -75,9 +71,9 @@ class Process1(nrs.AllProcesses):
         output += f"I am currently processing {self.index}.\n"
         output += "\n"
         output += "Here are the input parameters I know :\n"
-        output += f"- Param1 : {self.param1}.\n"
-        output += f"- Param2 : {self.param2}.\n"
-        output += f"- hidden : {self.param2}.\n"
+        output += f"- param1 : {self.param1}\n"
+        output += f"- param2 : {self.param2}\n"
+        output += f"- hidden : {self.hidden}\n"
         output += "\n"
         output += "I don't know any output from previous processes."
 
@@ -121,8 +117,9 @@ if __name__ == "__main__":
             "param2",
         ],
         dict_fixed_params={
-            "hidden": 8.9,
+            "hidden": 7,
         },
+        erase=True,
         verbose=True,
     )
 

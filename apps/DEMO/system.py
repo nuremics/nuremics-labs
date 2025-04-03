@@ -15,6 +15,7 @@ class Application:
     def __init__(
         self,
         working_dir: Path = None,
+        erase: bool = True,
         verbose: bool = True,
     ):
         
@@ -23,19 +24,19 @@ class Application:
         # ---------------------------- #
         processes = [
             {
-                "module": Process1,
+                "process": Process1,
                 "userParams": [
                     "param1",
                     "param2",
                 ],
                 "fixedParams": {
-                    "hidden": 8.9,
+                    "hidden": 7,
                 },
                 "verbose": True,
                 "execute": True,
             },
             {
-                "module": Process2,
+                "process": Process2,
                 "userParams": [
                     "param3"
                 ],
@@ -43,7 +44,7 @@ class Application:
                 "execute": True,
             },
             {
-                "module": Process3,
+                "process": Process3,
                 "userParams": [
                     "param2",
                     "param4",
@@ -53,7 +54,7 @@ class Application:
                 "execute": True,
             },
             {
-                "module": Process4,
+                "process": Process4,
                 "userParams": [
                     "param3",
                     "param6",
@@ -70,6 +71,7 @@ class Application:
             working_dir=working_dir,
             app_name=APP_NAME,
             processes=processes,
+            erase=erase,
             verbose=verbose,
         )
 
