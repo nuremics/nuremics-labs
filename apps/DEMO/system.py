@@ -24,7 +24,7 @@ def main(
                 "param1",
                 "param2",
             ],
-            "fixedParams": {
+            "hardParams": {
                 "hidden": 7,
             },
             "verbose": True,
@@ -83,7 +83,7 @@ if __name__ == "__main__":
     # -------------- #
     studies = [
         "Study1",
-        "Study2",
+        # "Study2",
     ]
 
     main(
