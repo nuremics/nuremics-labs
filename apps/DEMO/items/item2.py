@@ -3,8 +3,6 @@ import attrs
 import json
 from pathlib import Path
 
-import pandas as pd
-
 import nuremics as nrs
 
 @attrs.define
@@ -14,7 +12,6 @@ class Process2(nrs.Process):
     output1: str = attrs.field(init=False)
 
     def __attrs_post_init__(self):
-        super().__attrs_post_init__()
 
         self.require = [
             "output1",
@@ -58,46 +55,22 @@ class Process2(nrs.Process):
 
 if __name__ == "__main__":
 
-    # Name of the application using this item
-    APP_NAME = os.path.split(__file__)[0].split("\\")[-2]
-
     # Define working directory
     cwd = Path(os.path.split(__file__)[0])
-    working_dir = cwd / Path(f"../../../data/apps/{APP_NAME}")
+    working_dir = cwd / Path(f"../../../data/apps/DEMO/Study1/2_Process2/Test1")
 
-    # Read input dataframe
-    df_inputs = pd.read_excel(
-        io=working_dir / "inputs.xlsx",
-        index_col=0,
-    )
-    df_inputs.fillna(
-        value="NA",
-        inplace=True,
-    )
+    # Go to working directory
+    os.chdir(working_dir)
 
-    # Read paths dictionary
-    with open(working_dir / "paths.json") as f:
-        dict_paths = json.load(f)
+    # Read json containing parameters
+    with open("parameters.json") as f:
+        dict_params = json.load(f)
     
     # Create process
     process = Process2(
-        df_inputs=df_inputs,
-        dict_paths=dict_paths,
-        params=[
-            "param3"
-        ],
-        erase=True,
-        verbose=True,
+        dict_params=dict_params
     )
 
-    # Select case
-    process.index = "Test1"
-    process.update_dict_params()
-    
-    # Go to working directory
-    os.chdir(working_dir / f"2_Process2/{process.index}")
-
     # Launch process
-    print(">>> START <<<")
     process()
-    print(">>> COMPLETED <<<")
+    process.finalize()

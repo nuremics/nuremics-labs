@@ -55,7 +55,7 @@ def main(
                 "param6",
             ],
             "verbose": True,
-            "execute": True,
+            "execute": False,
         },
     ]
     
@@ -63,6 +63,7 @@ def main(
     # Launch application #
     # ------------------ #
     app = nrs.Application(
+        app_name = APP_NAME,
         working_dir=working_dir,
         processes=processes,
         studies=studies,
