@@ -10,7 +10,6 @@ class Process1(nrs.Process):
 
     param1: float = attrs.field(init=False)
     param2: float = attrs.field(init=False)
-    hidden: int = attrs.field(init=False)
 
     def __attrs_post_init__(self):
 
@@ -33,7 +32,6 @@ class Process1(nrs.Process):
         output += "Here are the input parameters I know :\n"
         output += f"- param1 : {self.param1}\n"
         output += f"- param2 : {self.param2}\n"
-        output += f"- hidden : {self.hidden}\n"
         output += "\n"
         output += "I don't know any output from previous processes."
 
@@ -50,7 +48,6 @@ class Process1(nrs.Process):
         output += "Here are the input parameters I know :\n"
         output += f"- param1 : {self.param1}\n"
         output += f"- param2 : {self.param2}\n"
-        output += f"- hidden : {self.hidden}\n"
         output += "\n"
         output += "I don't know any output from previous processes."
 
@@ -72,7 +69,6 @@ class Process1(nrs.Process):
         output += "Here are the input parameters I know :\n"
         output += f"- param1 : {self.param1}\n"
         output += f"- param2 : {self.param2}\n"
-        output += f"- hidden : {self.hidden}\n"
         output += "\n"
         output += "I don't know any output from previous processes."
 

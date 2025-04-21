@@ -9,6 +9,7 @@ import nuremics as nrs
 class Process2(nrs.Process):
 
     param3: float = attrs.field(init=False)
+    hidden: int = attrs.field(init=False)
     output1: str = attrs.field(init=False)
 
     def __attrs_post_init__(self):
@@ -36,6 +37,7 @@ class Process2(nrs.Process):
         output += "\n"
         output += "Here are the input parameters I know :\n"
         output += f"- param3 : {self.param3}\n"
+        output += f"- hidden : {self.hidden}\n"
         output += "\n"
         output += f"I know {self.require[0]} :\n"
         output += "\n"

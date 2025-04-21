@@ -12,7 +12,7 @@ from items.item4 import Process4
 
 def main(
     working_dir:Path = None,
-    studies:list = None,
+    studies:list = ["Default"],
 ):
     # ---------------- #
     # Define processes #
@@ -24,9 +24,9 @@ def main(
                 "param1",
                 "param2",
             ],
-            "hardParams": {
-                "hidden": 7,
-            },
+            "inputfiles": [
+                "input1.txt",
+            ],
             "verbose": True,
             "execute": True,
         },
@@ -35,6 +35,9 @@ def main(
             "userParams": [
                 "param3"
             ],
+            "hardParams": {
+                "hidden": 7,
+            },
             "verbose": True,
             "execute": True,
         },
@@ -54,8 +57,11 @@ def main(
                 "param3",
                 "param6",
             ],
+            "inputfiles": [
+                "input2.txt",
+            ],
             "verbose": True,
-            "execute": False,
+            "execute": True,
         },
     ]
     
@@ -68,7 +74,7 @@ def main(
         processes=processes,
         studies=studies,
     )
-    app()
+    # app()
 
 
 if __name__ == "__main__":
@@ -89,5 +95,5 @@ if __name__ == "__main__":
 
     main(
         working_dir=working_dir,
-        studies=studies,
+        # studies=studies,
     )
