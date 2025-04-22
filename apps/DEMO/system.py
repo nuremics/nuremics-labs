@@ -27,7 +27,7 @@ def main(
             "inputfiles": [
                 "input1.txt",
             ],
-            "verbose": True,
+            "verbose": False,
             "execute": True,
         },
         {
@@ -38,7 +38,7 @@ def main(
             "hardParams": {
                 "hidden": 7,
             },
-            "verbose": True,
+            "verbose": False,
             "execute": True,
         },
         {
@@ -48,7 +48,7 @@ def main(
                 "param4",
                 "param5",
             ],
-            "verbose": True,
+            "verbose": False,
             "execute": True,
         },
         {
@@ -60,7 +60,7 @@ def main(
             "inputfiles": [
                 "input2.txt",
             ],
-            "verbose": True,
+            "verbose": False,
             "execute": True,
         },
     ]
@@ -74,7 +74,7 @@ def main(
         processes=processes,
         studies=studies,
     )
-    # app()
+    app()
 
 
 if __name__ == "__main__":

@@ -12,6 +12,7 @@ class Process4(nrs.Process):
 
     param3: float = attrs.field(init=False)
     param6: float = attrs.field(init=False)
+    input2: str = attrs.field(init=False)
     output3: str = attrs.field(init=False)
     output4: str = attrs.field(init=False)
 
@@ -55,8 +56,9 @@ class Process4(nrs.Process):
             output += "    " + line
         output += "\n'''"
 
-        print("---------------------------------------------------------")
-        print(output)
+        if self.verbose:
+            print("---------------------------------------------------------")
+            print(output)
 
     @nrs.Process.builder(
         build="output5",
@@ -90,8 +92,9 @@ class Process4(nrs.Process):
             output += "    " + line
         output += "\n'''"
 
-        print("---------------------------------------------------------")
-        print(output)
+        if self.verbose:
+            print("---------------------------------------------------------")
+            print(output)
 
         with open(dump, "w") as f:
             f.write(output)

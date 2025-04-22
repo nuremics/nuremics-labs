@@ -49,8 +49,9 @@ class Process3(nrs.Process):
             output += "    " + line
         output += "\n'''"
 
-        print("---------------------------------------------------------")
-        print(output)
+        if self.verbose:
+            print("---------------------------------------------------------")
+            print(output)
 
     @nrs.Process.builder(
         build="output3",
@@ -77,8 +78,9 @@ class Process3(nrs.Process):
             output += "    " + line
         output += "\n'''"
 
-        print("---------------------------------------------------------")
-        print(output)
+        if self.verbose:
+            print("---------------------------------------------------------")
+            print(output)
 
         with open(dump, "w") as f:
             f.write(output)
@@ -103,8 +105,9 @@ class Process3(nrs.Process):
             output += "    " + line
         output += "\n'''"
 
-        print("---------------------------------------------------------")
-        print(output)
+        if self.verbose:
+            print("---------------------------------------------------------")
+            print(output)
 
     @nrs.Process.builder(
         build="output4",
@@ -131,9 +134,10 @@ class Process3(nrs.Process):
             output += "    " + line
         output += "\n'''"
 
-        print("---------------------------------------------------------")
-        print(output)
-        print("---------------------------------------------------------")
+        if self.verbose:
+            print("---------------------------------------------------------")
+            print(output)
+            print("---------------------------------------------------------")
 
         with open(dump, "w") as f:
             f.write(output)

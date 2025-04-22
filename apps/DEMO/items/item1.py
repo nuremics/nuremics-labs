@@ -10,6 +10,7 @@ class Process1(nrs.Process):
 
     param1: float = attrs.field(init=False)
     param2: float = attrs.field(init=False)
+    input1: str = attrs.field(init=False)
 
     def __attrs_post_init__(self):
 
@@ -35,8 +36,9 @@ class Process1(nrs.Process):
         output += "\n"
         output += "I don't know any output from previous processes."
 
-        print("---------------------------------------------------------")
-        print(output)
+        if self.verbose:
+            print("---------------------------------------------------------")
+            print(output)
 
     def subprocess2(self):
         
@@ -51,8 +53,9 @@ class Process1(nrs.Process):
         output += "\n"
         output += "I don't know any output from previous processes."
 
-        print("---------------------------------------------------------")
-        print(output)
+        if self.verbose:
+            print("---------------------------------------------------------")
+            print(output)
 
     @nrs.Process.builder(
         build="output1",
@@ -72,9 +75,10 @@ class Process1(nrs.Process):
         output += "\n"
         output += "I don't know any output from previous processes."
 
-        print("---------------------------------------------------------")
-        print(output)
-        print("---------------------------------------------------------")
+        if self.verbose:
+            print("---------------------------------------------------------")
+            print(output)
+            print("---------------------------------------------------------")
 
         with open(dump, "w") as f:
             f.write(output)
@@ -84,7 +88,7 @@ if __name__ == "__main__":
     
     # Define working directory
     cwd = Path(os.path.split(__file__)[0])
-    working_dir = cwd / Path(f"../../../data/apps/DEMO/Study1/1_Process1")
+    working_dir = cwd / Path(f"../../../data/apps/DEMO/Default/1_Process1")
 
     # Go to working directory
     os.chdir(working_dir)
