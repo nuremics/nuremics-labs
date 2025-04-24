@@ -20,48 +20,40 @@ def main(
     processes = [
         {
             "process": Process1,
-            "userParams": [
+            "input_params": [
                 "param1",
                 "param2",
             ],
-            "inputfiles": [
+            "input_paths": [
                 "input1.txt",
             ],
-            "verbose": False,
-            "execute": True,
         },
         {
             "process": Process2,
-            "userParams": [
+            "input_params": [
                 "param3"
             ],
-            "hardParams": {
+            "hard_params": {
                 "hidden": 7,
             },
-            "verbose": False,
-            "execute": True,
         },
         {
             "process": Process3,
-            "userParams": [
+            "input_params": [
                 "param2",
                 "param4",
                 "param5",
             ],
-            "verbose": False,
-            "execute": True,
         },
         {
             "process": Process4,
-            "userParams": [
+            "input_params": [
                 "param3",
                 "param6",
             ],
-            "inputfiles": [
+            "input_paths": [
                 "input2.txt",
             ],
-            "verbose": False,
-            "execute": True,
         },
     ]
     
