@@ -40,6 +40,17 @@ class Process4(nrs.Process):
         output += f"- param3 : {self.param3}\n"
         output += f"- param6 : {self.param6}\n"
         output += "\n"
+        output += "Here is the input file I know :\n"
+        output += f"- input2 : {self.input2}\n"
+        output += "\n"
+        output += "Whose the content is :\n"
+        output += "'''\n"
+        f = open(self.input2, "r")
+        for line in f:
+            output += "    " + line
+        output += "\n'''"
+        output += "\n"
+        output += "\n"
         output += f"I know {self.require[0]} :\n"
         output += "\n"
         output += "'''\n"
@@ -76,6 +87,17 @@ class Process4(nrs.Process):
         output += f"- param3 : {self.param3}\n"
         output += f"- param6 : {self.param6}\n"
         output += "\n"
+        output += "\n"
+        output += "Here is the input file I know :\n"
+        output += f"- input1 : {self.input2}\n"
+        output += "\n"
+        output += "Whose the content is :\n"
+        output += "'''\n"
+        f = open(self.input2, "r")
+        for line in f:
+            output += "    " + line
+        output += "\n'''"
+        output += "\n"
         output += f"I know {self.require[0]} :\n"
         output += "\n"
         output += "'''\n"
@@ -104,7 +126,7 @@ if __name__ == "__main__":
 
     # Define working directory
     cwd = Path(os.path.split(__file__)[0])
-    working_dir = cwd / Path(f"../../../data/apps/DEMO/Study1/4_Process4/Test1")
+    working_dir = cwd / Path(f"../../../data/apps/DEMO/Default/4_Process4/Test1")
 
     # Go to working directory
     os.chdir(working_dir)
@@ -115,7 +137,8 @@ if __name__ == "__main__":
     
     # Create process
     process = Process4(
-        dict_params=dict_params
+        dict_params=dict_params,
+        from_inputs_json=True,
     )
 
     # Launch process

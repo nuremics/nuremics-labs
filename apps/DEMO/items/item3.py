@@ -147,7 +147,7 @@ if __name__ == "__main__":
 
     # Define working directory
     cwd = Path(os.path.split(__file__)[0])
-    working_dir = cwd / Path(f"../../../data/apps/DEMO/Study1/3_Process3/Test1")
+    working_dir = cwd / Path(f"../../../data/apps/DEMO/Default/3_Process3")
 
     # Go to working directory
     os.chdir(working_dir)
@@ -158,7 +158,8 @@ if __name__ == "__main__":
     
     # Create process
     process = Process3(
-        dict_params=dict_params
+        dict_params=dict_params,
+        from_inputs_json=True,
     )
 
     # Launch process

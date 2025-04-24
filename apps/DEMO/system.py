@@ -89,6 +89,7 @@ if __name__ == "__main__":
     # Define studies #
     # -------------- #
     studies = [
+        "Default",
         "Study1",
         # "Study2",
     ]

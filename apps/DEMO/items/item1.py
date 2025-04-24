@@ -34,6 +34,17 @@ class Process1(nrs.Process):
         output += f"- param1 : {self.param1}\n"
         output += f"- param2 : {self.param2}\n"
         output += "\n"
+        output += "Here is the input file I know :\n"
+        output += f"- input1 : {self.input1}\n"
+        output += "\n"
+        output += "Whose the content is :\n"
+        output += "'''\n"
+        f = open(self.input1, "r")
+        for line in f:
+            output += "    " + line
+        output += "\n'''"
+        output += "\n"
+        output += "\n"
         output += "I don't know any output from previous processes."
 
         if self.verbose:
@@ -50,6 +61,17 @@ class Process1(nrs.Process):
         output += "Here are the input parameters I know :\n"
         output += f"- param1 : {self.param1}\n"
         output += f"- param2 : {self.param2}\n"
+        output += "\n"
+        output += "Here is the input file I know :\n"
+        output += f"- input1 : {self.input1}\n"
+        output += "\n"
+        output += "Whose the content is :\n"
+        output += "'''\n"
+        f = open(self.input1, "r")
+        for line in f:
+            output += "    " + line
+        output += "\n'''"
+        output += "\n"
         output += "\n"
         output += "I don't know any output from previous processes."
 
@@ -72,6 +94,17 @@ class Process1(nrs.Process):
         output += "Here are the input parameters I know :\n"
         output += f"- param1 : {self.param1}\n"
         output += f"- param2 : {self.param2}\n"
+        output += "\n"
+        output += "Here is the input file I know :\n"
+        output += f"- input1 : {self.input1}\n"
+        output += "\n"
+        output += "Whose the content is :\n"
+        output += "'''\n"
+        f = open(self.input1, "r")
+        for line in f:
+            output += "    " + line
+        output += "\n'''"
+        output += "\n"
         output += "\n"
         output += "I don't know any output from previous processes."
 
@@ -99,7 +132,8 @@ if __name__ == "__main__":
     
     # Create process
     process = Process1(
-        dict_params=dict_params
+        dict_params=dict_params,
+        from_inputs_json=True,
     )
 
     # Launch process
