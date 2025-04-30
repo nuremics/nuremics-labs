@@ -12,18 +12,14 @@ class Process1(nrs.Process):
     param2: float = attrs.field(init=False)
     input1: str = attrs.field(init=False)
 
-    def __attrs_post_init__(self):
-
-        self.require = []
-
     def __call__(self):
         super().__call__()
 
-        self.subprocess1()
-        self.subprocess2()
-        self.subprocess3("output1.txt")
+        self.operation1()
+        self.operation2()
+        self.operation3()
 
-    def subprocess1(self):
+    def operation1(self):
         
         output = "I am the Sub-process 1.\n"
         output += "I belong to the Process 1.\n"
@@ -51,7 +47,7 @@ class Process1(nrs.Process):
             print("---------------------------------------------------------")
             print(output)
 
-    def subprocess2(self):
+    def operation2(self):
         
         output = "I am the Sub-process 2.\n"
         output += "I belong to the Process 1.\n"
@@ -79,12 +75,7 @@ class Process1(nrs.Process):
             print("---------------------------------------------------------")
             print(output)
 
-    @nrs.Process.builder(
-        build="output1",
-    )
-    def subprocess3(self,
-        dump: str,
-    ):
+    def operation3(self):
         
         output = "I am the Sub-process 3.\n"
         output += "I belong to the Process 1.\n"
@@ -113,8 +104,14 @@ class Process1(nrs.Process):
             print(output)
             print("---------------------------------------------------------")
 
+        dump = "output1.txt"
         with open(dump, "w") as f:
             f.write(output)
+        
+        self.update(
+            build="output1",
+            dump=dump,
+        )
 
 
 if __name__ == "__main__":

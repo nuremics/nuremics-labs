@@ -27,6 +27,9 @@ def main(
             "input_paths": [
                 "input1.txt",
             ],
+            "build": [
+                "output1",
+            ],
         },
         {
             "process": Process2,
@@ -36,6 +39,12 @@ def main(
             "hard_params": {
                 "hidden": 7,
             },
+            "build": [
+                "output2",
+            ],
+            "require":[
+                "output1",
+            ],
         },
         {
             "process": Process3,
@@ -43,6 +52,13 @@ def main(
                 "param2",
                 "param4",
                 "param5",
+            ],
+            "build": [
+                "output3",
+                "output4",
+            ],
+            "require":[
+                "output2",
             ],
         },
         {
@@ -53,6 +69,13 @@ def main(
             ],
             "input_paths": [
                 "input2.txt",
+            ],
+            "build": [
+                "output5",
+            ],
+            "require":[
+                "output3",
+                "output4",
             ],
         },
     ]

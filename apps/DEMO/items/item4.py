@@ -16,20 +16,13 @@ class Process4(nrs.Process):
     output3: str = attrs.field(init=False)
     output4: str = attrs.field(init=False)
 
-    def __attrs_post_init__(self):
-
-        self.require = [
-            "output3",
-            "output4",
-        ]
-
     def __call__(self):
         super().__call__()
 
-        self.subprocess9()
-        self.subprocess10("output5.txt")
+        self.operation9()
+        self.operation10()
 
-    def subprocess9(self):
+    def operation9(self):
         
         output = "I am the Sub-process 5.\n"
         output += "I belong to the Process 3.\n"
@@ -51,7 +44,7 @@ class Process4(nrs.Process):
         output += "\n'''"
         output += "\n"
         output += "\n"
-        output += f"I know {self.require[0]} :\n"
+        output += f"I know output3 :\n"
         output += "\n"
         output += "'''\n"
         f = open(self.output3, "r")
@@ -59,7 +52,7 @@ class Process4(nrs.Process):
             output += "    " + line
         output += "\n'''\n"
         output += "\n"
-        output += f"I know {self.require[1]} :\n"
+        output += f"I know output4 :\n"
         output += "\n"
         output += "'''\n"
         f = open(self.output4, "r")
@@ -71,12 +64,7 @@ class Process4(nrs.Process):
             print("---------------------------------------------------------")
             print(output)
 
-    @nrs.Process.builder(
-        build="output5",
-    )
-    def subprocess10(self,
-        dump: str,
-    ):
+    def operation10(self):
         
         output = "I am the Sub-process 6.\n"
         output += "I belong to the Process 3.\n"
@@ -98,7 +86,7 @@ class Process4(nrs.Process):
             output += "    " + line
         output += "\n'''"
         output += "\n"
-        output += f"I know {self.require[0]} :\n"
+        output += f"I know output3 :\n"
         output += "\n"
         output += "'''\n"
         f = open(self.output3, "r")
@@ -106,7 +94,7 @@ class Process4(nrs.Process):
             output += "    " + line
         output += "\n'''\n"
         output += "\n"
-        output += f"I know {self.require[1]} :\n"
+        output += f"I know output4 :\n"
         output += "\n"
         output += "'''\n"
         f = open(self.output4, "r")
@@ -118,8 +106,14 @@ class Process4(nrs.Process):
             print("---------------------------------------------------------")
             print(output)
 
+        dump = "output5.txt"
         with open(dump, "w") as f:
             f.write(output)
+        
+        self.update(
+            build="output5",
+            dump=dump,
+        )
 
 
 if __name__ == "__main__":

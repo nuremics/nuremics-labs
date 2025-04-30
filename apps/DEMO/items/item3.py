@@ -15,21 +15,15 @@ class Process3(nrs.Process):
     param5: float = attrs.field(init=False)
     output2: str = attrs.field(init=False)
 
-    def __attrs_post_init__(self):
-
-        self.require = [
-            "output2",
-        ]
-
     def __call__(self):
         super().__call__()
 
-        self.subprocess5()
-        self.subprocess6("output3.txt")
-        self.subprocess7()
-        self.subprocess8("output4.txt")
+        self.operation5()
+        self.operation6()
+        self.operation7()
+        self.operation8()
 
-    def subprocess5(self):
+    def operation5(self):
         
         output = "I am the Sub-process 5.\n"
         output += "I belong to the Process 3.\n"
@@ -41,7 +35,7 @@ class Process3(nrs.Process):
         output += f"- param4 : {self.param4}\n"
         output += f"- param5 : {self.param5}\n"
         output += "\n"
-        output += f"I know {self.require[0]} :\n"
+        output += f"I know output2 :\n"
         output += "\n"
         output += "'''\n"
         f = open(self.output2, "r")
@@ -53,12 +47,7 @@ class Process3(nrs.Process):
             print("---------------------------------------------------------")
             print(output)
 
-    @nrs.Process.builder(
-        build="output3",
-    )
-    def subprocess6(self,
-        dump: str,
-    ):
+    def operation6(self):
         
         output = "I am the Sub-process 6.\n"
         output += "I belong to the Process 3.\n"
@@ -70,7 +59,7 @@ class Process3(nrs.Process):
         output += f"- param4 : {self.param4}\n"
         output += f"- param5 : {self.param5}\n"
         output += "\n"
-        output += f"I know {self.require[0]} :\n"
+        output += f"I know output2 :\n"
         output += "\n"
         output += "'''\n"
         f = open(self.output2, "r")
@@ -82,10 +71,16 @@ class Process3(nrs.Process):
             print("---------------------------------------------------------")
             print(output)
 
+        dump = "output3.txt"
         with open(dump, "w") as f:
             f.write(output)
+        
+        self.update(
+            build="output3",
+            dump=dump,
+        )
 
-    def subprocess7(self):
+    def operation7(self):
         
         output = "I am the Sub-process 7.\n"
         output += "I belong to the Process 3.\n"
@@ -97,7 +92,7 @@ class Process3(nrs.Process):
         output += f"- param4 : {self.param4}\n"
         output += f"- param5 : {self.param5}\n"
         output += "\n"
-        output += f"I know {self.require[0]} :\n"
+        output += f"I know output2 :\n"
         output += "\n"
         output += "'''\n"
         f = open(self.output2, "r")
@@ -109,12 +104,7 @@ class Process3(nrs.Process):
             print("---------------------------------------------------------")
             print(output)
 
-    @nrs.Process.builder(
-        build="output4",
-    )
-    def subprocess8(self,
-        dump: str,
-    ):
+    def operation8(self):
         
         output = "I am the Sub-process 8.\n"
         output += "I belong to the Process 3.\n"
@@ -126,7 +116,7 @@ class Process3(nrs.Process):
         output += f"- param4 : {self.param4}\n"
         output += f"- param5 : {self.param5}\n"
         output += "\n"
-        output += f"I know {self.require[0]} :\n"
+        output += f"I know output2 :\n"
         output += "\n"
         output += "'''\n"
         f = open(self.output2, "r")
@@ -139,15 +129,21 @@ class Process3(nrs.Process):
             print(output)
             print("---------------------------------------------------------")
 
+        dump = "output4.txt"
         with open(dump, "w") as f:
             f.write(output)
+        
+        self.update(
+            build="output4",
+            dump=dump,
+        )
 
 
 if __name__ == "__main__":
 
     # Define working directory
     cwd = Path(os.path.split(__file__)[0])
-    working_dir = cwd / Path(f"../../../data/apps/DEMO/Default/3_Process3")
+    working_dir = cwd / Path(f"../../../data/apps/DEMO/Default/3_Process3/Test1")
 
     # Go to working directory
     os.chdir(working_dir)

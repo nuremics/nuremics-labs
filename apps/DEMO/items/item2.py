@@ -12,23 +12,12 @@ class Process2(nrs.Process):
     hidden: int = attrs.field(init=False)
     output1: str = attrs.field(init=False)
 
-    def __attrs_post_init__(self):
-
-        self.require = [
-            "output1",
-        ]
-
     def __call__(self):
         super().__call__()
 
-        self.subprocess4("output2.txt")
+        self.operation4()
 
-    @nrs.Process.builder(
-        build="output2",
-    )
-    def subprocess4(self,
-        dump: str,
-    ):
+    def operation4(self):
         
         output = "I am the Sub-process 4.\n"
         output += "I belong to the Process 2.\n"
@@ -39,7 +28,7 @@ class Process2(nrs.Process):
         output += f"- param3 : {self.param3}\n"
         output += f"- hidden : {self.hidden}\n"
         output += "\n"
-        output += f"I know {self.require[0]} :\n"
+        output += f"I know output1 :\n"
         output += "\n"
         output += "'''\n"
         f = open(self.output1, "r")
@@ -52,8 +41,14 @@ class Process2(nrs.Process):
             print(output)
             print("---------------------------------------------------------")
 
+        dump = "output2.txt"
         with open(dump, "w") as f:
             f.write(output)
+        
+        self.update(
+            build="output2",
+            dump=dump,
+        )
 
 
 if __name__ == "__main__":
