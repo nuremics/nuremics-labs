@@ -8,30 +8,50 @@ import nuremics as nrs
 @attrs.define
 class Process2(nrs.Process):
 
-    param3: float = attrs.field(init=False)
-    hidden: int = attrs.field(init=False)
-    output1: str = attrs.field(init=False)
+    proc2_param1: float = attrs.field(init=False)
+    proc2_input1: Path = attrs.field(init=False)
+    proc2_input2: Path = attrs.field(init=False)
+    proc2_input3: Path = attrs.field(init=False)
 
     def __call__(self):
         super().__call__()
 
-        self.operation4()
+        self.proc2_operation1()
 
-    def operation4(self):
+    def proc2_operation1(self):
         
-        output = "I am the Sub-process 4.\n"
-        output += "I belong to the Process 2.\n"
+        output = "I am the proc2_operation1 function.\n"
+        output += "I belong to the Process2 class.\n"
         output += "\n"
         output += f"I am currently processing {self.index}.\n"
         output += "\n"
-        output += "Here are the input parameters I know :\n"
-        output += f"- param3 : {self.param3}\n"
-        output += f"- hidden : {self.hidden}\n"
+        output += "Here is the input parameter I know :\n"
+        output += f"- proc2_param1 : {self.proc2_param1}\n"
         output += "\n"
-        output += f"I know output1 :\n"
+        output += "Here are the input paths I know :\n"
+        output += f"- proc2_input1 : {self.proc2_input1}\n"
+        output += f"- proc2_input2 : {self.proc2_input2}\n"
+        output += f"- proc2_input3 : {self.proc2_input3}\n"
         output += "\n"
+        output += "The content of proc2_input1 is :\n"
         output += "'''\n"
-        f = open(self.output1, "r")
+        f = open(self.proc2_input1, "r")
+        for line in f:
+            output += "    " + line
+        output += "\n'''"
+        output += "\n"
+        output += "\n"
+        output += "The content of proc2_input2 is :\n"
+        output += "'''\n"
+        f = open(self.proc2_input2, "r")
+        for line in f:
+            output += "    " + line
+        output += "\n'''"
+        output += "\n"
+        output += "\n"
+        output += "The content of proc2_input3 is :\n"
+        output += "'''\n"
+        f = open(self.proc2_input3, "r")
         for line in f:
             output += "    " + line
         output += "\n'''"
@@ -41,21 +61,16 @@ class Process2(nrs.Process):
             print(output)
             print("---------------------------------------------------------")
 
-        dump = "output2.txt"
-        with open(dump, "w") as f:
+        file = self.build["proc2_output1"]
+        with open(file, "w") as f:
             f.write(output)
-        
-        self.update(
-            build="output2",
-            dump=dump,
-        )
 
 
 if __name__ == "__main__":
 
     # Define working directory
     cwd = Path(os.path.split(__file__)[0])
-    working_dir = cwd / Path(f"../../../data/apps/DEMO/Default/2_Process2")
+    working_dir = cwd / Path(f"../../../data/apps/DEMO/Study1/2_Process2/Test1")
 
     # Go to working directory
     os.chdir(working_dir)
@@ -68,7 +83,9 @@ if __name__ == "__main__":
     process = Process2(
         dict_params=dict_params,
         from_inputs_json=True,
+        verbose=True,
     )
+    process.build["proc2_output1"] = "output2.txt"
 
     # Launch process
     process()

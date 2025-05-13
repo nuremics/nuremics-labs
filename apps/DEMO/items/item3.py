@@ -3,42 +3,42 @@ import attrs
 import json
 from pathlib import Path
 
-import pandas as pd
-
 import nuremics as nrs
 
 @attrs.define
 class Process3(nrs.Process):
 
-    param2: float = attrs.field(init=False)
-    param4: float = attrs.field(init=False)
-    param5: float = attrs.field(init=False)
-    output2: str = attrs.field(init=False)
+    proc3_param1: float = attrs.field(init=False)
+    proc3_param2: float = attrs.field(init=False)
+    proc3_param3: float = attrs.field(init=False)
+    proc3_input1: Path = attrs.field(init=False)
 
     def __call__(self):
         super().__call__()
 
-        self.operation5()
-        self.operation6()
-        self.operation7()
-        self.operation8()
+        self.proc3_operation1()
+        self.proc3_operation2()
+        self.proc3_operation3()
+        self.proc3_operation4()
 
-    def operation5(self):
+    def proc3_operation1(self):
         
-        output = "I am the Sub-process 5.\n"
-        output += "I belong to the Process 3.\n"
+        output = "I am the proc3_operation1 function.\n"
+        output += "I belong to the Process3 class.\n"
         output += "\n"
         output += f"I am currently processing {self.index}.\n"
         output += "\n"
         output += "Here are the input parameters I know :\n"
-        output += f"- param2 : {self.param2}\n"
-        output += f"- param4 : {self.param4}\n"
-        output += f"- param5 : {self.param5}\n"
+        output += f"- proc3_param1 : {self.proc3_param1}\n"
+        output += f"- proc3_param2 : {self.proc3_param2}\n"
+        output += f"- proc3_param3 : {self.proc3_param3}\n"
         output += "\n"
-        output += f"I know output2 :\n"
+        output += "Here is the input path I know :\n"
+        output += f"- proc3_input1 : {self.proc3_input1}\n"
         output += "\n"
+        output += "The content of proc3_input1 is :\n"
         output += "'''\n"
-        f = open(self.output2, "r")
+        f = open(self.proc3_input1, "r")
         for line in f:
             output += "    " + line
         output += "\n'''"
@@ -47,22 +47,24 @@ class Process3(nrs.Process):
             print("---------------------------------------------------------")
             print(output)
 
-    def operation6(self):
+    def proc3_operation2(self):
         
-        output = "I am the Sub-process 6.\n"
-        output += "I belong to the Process 3.\n"
+        output = "I am the proc3_operation2 function.\n"
+        output += "I belong to the Process3 class.\n"
         output += "\n"
         output += f"I am currently processing {self.index}.\n"
         output += "\n"
         output += "Here are the input parameters I know :\n"
-        output += f"- param2 : {self.param2}\n"
-        output += f"- param4 : {self.param4}\n"
-        output += f"- param5 : {self.param5}\n"
+        output += f"- proc3_param1 : {self.proc3_param1}\n"
+        output += f"- proc3_param2 : {self.proc3_param2}\n"
+        output += f"- proc3_param3 : {self.proc3_param3}\n"
         output += "\n"
-        output += f"I know output2 :\n"
+        output += "Here is the input path I know :\n"
+        output += f"- proc3_input1 : {self.proc3_input1}\n"
         output += "\n"
+        output += "The content of proc3_input1 is :\n"
         output += "'''\n"
-        f = open(self.output2, "r")
+        f = open(self.proc3_input1, "r")
         for line in f:
             output += "    " + line
         output += "\n'''"
@@ -71,31 +73,28 @@ class Process3(nrs.Process):
             print("---------------------------------------------------------")
             print(output)
 
-        dump = "output3.txt"
-        with open(dump, "w") as f:
+        file = self.build["proc3_output1"]
+        with open(file, "w") as f:
             f.write(output)
-        
-        self.update(
-            build="output3",
-            dump=dump,
-        )
 
-    def operation7(self):
+    def proc3_operation3(self):
         
-        output = "I am the Sub-process 7.\n"
-        output += "I belong to the Process 3.\n"
+        output = "I am the proc3_operation3 function.\n"
+        output += "I belong to the Process3 class.\n"
         output += "\n"
         output += f"I am currently processing {self.index}.\n"
         output += "\n"
         output += "Here are the input parameters I know :\n"
-        output += f"- param2 : {self.param2}\n"
-        output += f"- param4 : {self.param4}\n"
-        output += f"- param5 : {self.param5}\n"
+        output += f"- proc3_param1 : {self.proc3_param1}\n"
+        output += f"- proc3_param2 : {self.proc3_param2}\n"
+        output += f"- proc3_param3 : {self.proc3_param3}\n"
         output += "\n"
-        output += f"I know output2 :\n"
+        output += "Here is the input path I know :\n"
+        output += f"- proc3_input1 : {self.proc3_input1}\n"
         output += "\n"
+        output += "The content of proc3_input1 is :\n"
         output += "'''\n"
-        f = open(self.output2, "r")
+        f = open(self.proc3_input1, "r")
         for line in f:
             output += "    " + line
         output += "\n'''"
@@ -104,22 +103,24 @@ class Process3(nrs.Process):
             print("---------------------------------------------------------")
             print(output)
 
-    def operation8(self):
+    def proc3_operation4(self):
         
-        output = "I am the Sub-process 8.\n"
-        output += "I belong to the Process 3.\n"
+        output = "I am the proc3_operation1 function.\n"
+        output += "I belong to the Process3 class.\n"
         output += "\n"
         output += f"I am currently processing {self.index}.\n"
         output += "\n"
         output += "Here are the input parameters I know :\n"
-        output += f"- param2 : {self.param2}\n"
-        output += f"- param4 : {self.param4}\n"
-        output += f"- param5 : {self.param5}\n"
+        output += f"- proc3_param1 : {self.proc3_param1}\n"
+        output += f"- proc3_param2 : {self.proc3_param2}\n"
+        output += f"- proc3_param3 : {self.proc3_param3}\n"
         output += "\n"
-        output += f"I know output2 :\n"
+        output += "Here is the input path I know :\n"
+        output += f"- proc3_input1 : {self.proc3_input1}\n"
         output += "\n"
+        output += "The content of proc3_input1 is :\n"
         output += "'''\n"
-        f = open(self.output2, "r")
+        f = open(self.proc3_input1, "r")
         for line in f:
             output += "    " + line
         output += "\n'''"
@@ -128,22 +129,17 @@ class Process3(nrs.Process):
             print("---------------------------------------------------------")
             print(output)
             print("---------------------------------------------------------")
-
-        dump = "output4.txt"
-        with open(dump, "w") as f:
+        
+        file = self.build["proc3_output2"]
+        with open(file, "w") as f:
             f.write(output)
-        
-        self.update(
-            build="output4",
-            dump=dump,
-        )
 
 
 if __name__ == "__main__":
 
     # Define working directory
     cwd = Path(os.path.split(__file__)[0])
-    working_dir = cwd / Path(f"../../../data/apps/DEMO/Default/3_Process3/Test1")
+    working_dir = cwd / Path(f"../../../data/apps/DEMO/Study1/3_Process3/Test1")
 
     # Go to working directory
     os.chdir(working_dir)
@@ -156,7 +152,10 @@ if __name__ == "__main__":
     process = Process3(
         dict_params=dict_params,
         from_inputs_json=True,
+        verbose=True,
     )
+    process.build["proc3_output1"] = "output3.txt"
+    process.build["proc3_output2"] = "output4.txt"
 
     # Launch process
     process()
