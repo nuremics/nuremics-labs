@@ -3,7 +3,7 @@ from pathlib import Path
 
 import nuremics as nrs
 
-APP_NAME = "DEMO"
+APP_NAME = "TOTO"
 
 from items.item1 import Process1
 from items.item2 import Process2
@@ -86,7 +86,7 @@ def main(
     # Launch application #
     # ------------------ #
     app = nrs.Application(
-        app_name = APP_NAME,
+        app_name=APP_NAME,
         working_dir=working_dir,
         workflow=workflow,
         studies=studies,
@@ -100,7 +100,7 @@ if __name__ == "__main__":
     # Define working directory #
     # ------------------------ #
     cwd = Path(os.path.split(__file__)[0])
-    working_dir = cwd / Path(f"../../data/apps/{APP_NAME}")
+    working_dir = cwd / Path(f"../../data/apps")
 
     # -------------- #
     # Define studies #
