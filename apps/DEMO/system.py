@@ -14,7 +14,6 @@ def main(
     working_dir:Path = None,
     studies:list = ["Default"],
 ):
-
     # --------------- #
     # Define workflow #
     # --------------- #

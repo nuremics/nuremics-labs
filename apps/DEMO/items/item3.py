@@ -8,10 +8,12 @@ import nuremics as nrs
 @attrs.define
 class Process3(nrs.Process):
 
-    proc3_param1: float = attrs.field(init=False)
+    proc3_param1: int = attrs.field(init=False)
     proc3_param2: float = attrs.field(init=False)
-    proc3_param3: float = attrs.field(init=False)
+    proc3_param3: bool = attrs.field(init=False)
     proc3_input1: Path = attrs.field(init=False)
+    # build["proc3_output1"] must be defined
+    # build["proc3_output2"] must be defined
 
     def __call__(self):
         super().__call__()

@@ -9,9 +9,10 @@ import nuremics as nrs
 class Process1(nrs.Process):
 
     proc1_param1: float = attrs.field(init=False)
-    proc1_param2: float = attrs.field(init=False)
-    proc1_param3: float = attrs.field(init=False)
+    proc1_param2: int = attrs.field(init=False)
+    proc1_param3: str = attrs.field(init=False)
     proc1_input1: Path = attrs.field(init=False)
+    # build["proc1_output1"] must be defined
 
     def __call__(self):
         super().__call__()

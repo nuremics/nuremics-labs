@@ -12,6 +12,7 @@ class Process2(nrs.Process):
     proc2_input1: Path = attrs.field(init=False)
     proc2_input2: Path = attrs.field(init=False)
     proc2_input3: Path = attrs.field(init=False)
+    # build["proc2_output1"] must be defined
 
     def __call__(self):
         super().__call__()
