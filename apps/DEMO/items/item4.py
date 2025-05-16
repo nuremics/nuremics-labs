@@ -8,12 +8,14 @@ import nuremics as nrs
 @attrs.define
 class Process4(nrs.Process):
 
-    proc4_param1: str = attrs.field(init=False)
-    proc4_param2: float = attrs.field(init=False)
-    proc4_input1: Path = attrs.field(init=False)
-    proc4_input2: Path = attrs.field(init=False)
-    proc4_input3: Path = attrs.field(init=False)
-    # build["proc4_output1"] must be defined
+    # Parameters
+    proc4_param1: str = attrs.field(init=False, metadata={"input": True})
+    proc4_param2: float = attrs.field(init=False, metadata={"input": True})
+    
+    # Paths
+    proc4_path1: Path = attrs.field(init=False, metadata={"input": True})
+    proc4_path2: Path = attrs.field(init=False, metadata={"input": True})
+    proc4_path3: Path = attrs.field(init=False, metadata={"input": True})
 
     def __call__(self):
         super().__call__()
@@ -33,29 +35,29 @@ class Process4(nrs.Process):
         output += f"- proc4_param2 : {self.proc4_param2}\n"
         output += "\n"
         output += "Here are the input paths I know :\n"
-        output += f"- proc4_input1 : {self.proc4_input1}\n"
-        output += f"- proc4_input2 : {self.proc4_input2}\n"
-        output += f"- proc4_input3 : {self.proc4_input3}\n"
+        output += f"- proc4_path1 : {self.proc4_path1}\n"
+        output += f"- proc4_path2 : {self.proc4_path2}\n"
+        output += f"- proc4_path3 : {self.proc4_path3}\n"
         output += "\n"
-        output += "The content of proc4_input1 is :\n"
+        output += "The content of proc4_path1 is :\n"
         output += "'''\n"
-        f = open(self.proc4_input1, "r")
+        f = open(self.proc4_path1, "r")
         for line in f:
             output += "    " + line
         output += "\n'''"
         output += "\n"
         output += "\n"
-        output += "The content of proc4_input2 is :\n"
+        output += "The content of proc4_path2 is :\n"
         output += "'''\n"
-        f = open(self.proc4_input2, "r")
+        f = open(self.proc4_path2, "r")
         for line in f:
             output += "    " + line
         output += "\n'''"
         output += "\n"
         output += "\n"
-        output += "The content of proc4_input3 is :\n"
+        output += "The content of proc4_path3 is :\n"
         output += "'''\n"
-        f = open(self.proc4_input3, "r")
+        f = open(self.proc4_path3, "r")
         for line in f:
             output += "    " + line
         output += "\n'''"
@@ -76,29 +78,29 @@ class Process4(nrs.Process):
         output += f"- proc4_param2 : {self.proc4_param2}\n"
         output += "\n"
         output += "Here are the input paths I know :\n"
-        output += f"- proc4_input1 : {self.proc4_input1}\n"
-        output += f"- proc4_input2 : {self.proc4_input2}\n"
-        output += f"- proc4_input3 : {self.proc4_input3}\n"
+        output += f"- proc4_path1 : {self.proc4_path1}\n"
+        output += f"- proc4_path2 : {self.proc4_path2}\n"
+        output += f"- proc4_path3 : {self.proc4_path3}\n"
         output += "\n"
-        output += "The content of proc4_input1 is :\n"
+        output += "The content of proc4_path1 is :\n"
         output += "'''\n"
-        f = open(self.proc4_input1, "r")
+        f = open(self.proc4_path1, "r")
         for line in f:
             output += "    " + line
         output += "\n'''"
         output += "\n"
         output += "\n"
-        output += "The content of proc4_input2 is :\n"
+        output += "The content of proc4_path2 is :\n"
         output += "'''\n"
-        f = open(self.proc4_input2, "r")
+        f = open(self.proc4_path2, "r")
         for line in f:
             output += "    " + line
         output += "\n'''"
         output += "\n"
         output += "\n"
-        output += "The content of proc4_input3 is :\n"
+        output += "The content of proc4_path3 is :\n"
         output += "'''\n"
-        f = open(self.proc4_input3, "r")
+        f = open(self.proc4_path3, "r")
         for line in f:
             output += "    " + line
         output += "\n'''"
@@ -122,13 +124,13 @@ if __name__ == "__main__":
     os.chdir(working_dir)
 
     # Read json containing parameters
-    with open("parameters.json") as f:
-        dict_params = json.load(f)
+    with open("inputs.json") as f:
+        dict_inputs = json.load(f)
     
     # Create process
     process = Process4(
-        dict_params=dict_params,
-        from_inputs_json=True,
+        dict_inputs=dict_inputs,
+        set_inputs=True,
         verbose=True,
     )
     process.build["proc4_output1"] = "output5.txt"

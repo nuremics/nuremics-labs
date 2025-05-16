@@ -8,12 +8,13 @@ import nuremics as nrs
 @attrs.define
 class Process3(nrs.Process):
 
-    proc3_param1: int = attrs.field(init=False)
-    proc3_param2: float = attrs.field(init=False)
-    proc3_param3: bool = attrs.field(init=False)
-    proc3_input1: Path = attrs.field(init=False)
-    # build["proc3_output1"] must be defined
-    # build["proc3_output2"] must be defined
+    # Parameters
+    proc3_param1: int = attrs.field(init=False, metadata={"input": True})
+    proc3_param2: float = attrs.field(init=False, metadata={"input": True})
+    proc3_param3: bool = attrs.field(init=False, metadata={"input": True})
+
+    # Paths
+    proc3_path1: Path = attrs.field(init=False, metadata={"input": True})
 
     def __call__(self):
         super().__call__()
@@ -36,11 +37,11 @@ class Process3(nrs.Process):
         output += f"- proc3_param3 : {self.proc3_param3}\n"
         output += "\n"
         output += "Here is the input path I know :\n"
-        output += f"- proc3_input1 : {self.proc3_input1}\n"
+        output += f"- proc3_path1 : {self.proc3_path1}\n"
         output += "\n"
-        output += "The content of proc3_input1 is :\n"
+        output += "The content of proc3_path1 is :\n"
         output += "'''\n"
-        f = open(self.proc3_input1, "r")
+        f = open(self.proc3_path1, "r")
         for line in f:
             output += "    " + line
         output += "\n'''"
@@ -62,11 +63,11 @@ class Process3(nrs.Process):
         output += f"- proc3_param3 : {self.proc3_param3}\n"
         output += "\n"
         output += "Here is the input path I know :\n"
-        output += f"- proc3_input1 : {self.proc3_input1}\n"
+        output += f"- proc3_path1 : {self.proc3_path1}\n"
         output += "\n"
-        output += "The content of proc3_input1 is :\n"
+        output += "The content of proc3_path1 is :\n"
         output += "'''\n"
-        f = open(self.proc3_input1, "r")
+        f = open(self.proc3_path1, "r")
         for line in f:
             output += "    " + line
         output += "\n'''"
@@ -92,11 +93,11 @@ class Process3(nrs.Process):
         output += f"- proc3_param3 : {self.proc3_param3}\n"
         output += "\n"
         output += "Here is the input path I know :\n"
-        output += f"- proc3_input1 : {self.proc3_input1}\n"
+        output += f"- proc3_path1 : {self.proc3_path1}\n"
         output += "\n"
-        output += "The content of proc3_input1 is :\n"
+        output += "The content of proc3_path1 is :\n"
         output += "'''\n"
-        f = open(self.proc3_input1, "r")
+        f = open(self.proc3_path1, "r")
         for line in f:
             output += "    " + line
         output += "\n'''"
@@ -118,11 +119,11 @@ class Process3(nrs.Process):
         output += f"- proc3_param3 : {self.proc3_param3}\n"
         output += "\n"
         output += "Here is the input path I know :\n"
-        output += f"- proc3_input1 : {self.proc3_input1}\n"
+        output += f"- proc3_path1 : {self.proc3_path1}\n"
         output += "\n"
-        output += "The content of proc3_input1 is :\n"
+        output += "The content of proc3_path1 is :\n"
         output += "'''\n"
-        f = open(self.proc3_input1, "r")
+        f = open(self.proc3_path1, "r")
         for line in f:
             output += "    " + line
         output += "\n'''"
@@ -135,6 +136,8 @@ class Process3(nrs.Process):
         file = self.build["proc3_output2"]
         with open(file, "w") as f:
             f.write(output)
+        
+        # file4 = self.build["proc3_output2qdazd"]
 
 
 if __name__ == "__main__":
@@ -147,13 +150,13 @@ if __name__ == "__main__":
     os.chdir(working_dir)
 
     # Read json containing parameters
-    with open("parameters.json") as f:
-        dict_params = json.load(f)
+    with open("inputs.json") as f:
+        dict_inputs = json.load(f)
     
     # Create process
     process = Process3(
-        dict_params=dict_params,
-        from_inputs_json=True,
+        dict_inputs=dict_inputs,
+        set_inputs=True,
         verbose=True,
     )
     process.build["proc3_output1"] = "output3.txt"

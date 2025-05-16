@@ -8,11 +8,16 @@ import nuremics as nrs
 @attrs.define
 class Process1(nrs.Process):
 
-    proc1_param1: float = attrs.field(init=False)
-    proc1_param2: int = attrs.field(init=False)
-    proc1_param3: str = attrs.field(init=False)
-    proc1_input1: Path = attrs.field(init=False)
-    # build["proc1_output1"] must be defined
+    # Parameters
+    proc1_param1: float = attrs.field(init=False, metadata={"input": True})
+    proc1_param2: int = attrs.field(init=False, metadata={"input": True})
+    proc1_param3: str = attrs.field(init=False, metadata={"input": True})
+    
+    # Paths
+    proc1_path1: Path = attrs.field(init=False, metadata={"input": True})
+
+    # Internal
+    internal_variable: float = attrs.field(init=False)
 
     def __call__(self):
         super().__call__()
@@ -34,11 +39,11 @@ class Process1(nrs.Process):
         output += f"- proc1_param3 : {self.proc1_param3}\n"
         output += "\n"
         output += "Here is the input path I know :\n"
-        output += f"- proc1_input1 : {self.proc1_input1}\n"
+        output += f"- proc1_path1 : {self.proc1_path1}\n"
         output += "\n"
-        output += "The content of proc1_input1 is :\n"
+        output += "The content of proc1_path1 is :\n"
         output += "'''\n"
-        f = open(self.proc1_input1, "r")
+        f = open(self.proc1_path1, "r")
         for line in f:
             output += "    " + line
         output += "\n'''"
@@ -60,11 +65,11 @@ class Process1(nrs.Process):
         output += f"- proc1_param3 : {self.proc1_param3}\n"
         output += "\n"
         output += "Here is the input path I know :\n"
-        output += f"- proc1_input1 : {self.proc1_input1}\n"
+        output += f"- proc1_path1 : {self.proc1_path1}\n"
         output += "\n"
-        output += "The content of proc1_input1 is :\n"
+        output += "The content of proc1_path1 is :\n"
         output += "'''\n"
-        f = open(self.proc1_input1, "r")
+        f = open(self.proc1_path1, "r")
         for line in f:
             output += "    " + line
         output += "\n'''"
@@ -86,11 +91,11 @@ class Process1(nrs.Process):
         output += f"- proc1_param3 : {self.proc1_param3}\n"
         output += "\n"
         output += "Here is the input path I know :\n"
-        output += f"- proc1_input1 : {self.proc1_input1}\n"
+        output += f"- proc1_path1 : {self.proc1_path1}\n"
         output += "\n"
-        output += "The content of proc1_input1 is :\n"
+        output += "The content of proc1_path1 is :\n"
         output += "'''\n"
-        f = open(self.proc1_input1, "r")
+        f = open(self.proc1_path1, "r")
         for line in f:
             output += "    " + line
         output += "\n'''"
@@ -109,19 +114,19 @@ if __name__ == "__main__":
     
     # Define working directory
     cwd = Path(os.path.split(__file__)[0])
-    working_dir = cwd / Path(f"../../../data/apps/DEMO/Study1/1_Process1/Test1")
+    working_dir = cwd / Path(f"../../../data/apps/DEMO/Study1/1_Process1")
 
     # Go to working directory
     os.chdir(working_dir)
 
-    # Read json containing parameters
-    with open("parameters.json") as f:
-        dict_params = json.load(f)
+    # Read json containing inputs
+    with open("inputs.json") as f:
+        dict_inputs = json.load(f)
     
     # Create process
     process = Process1(
-        dict_params=dict_params,
-        from_inputs_json=True,
+        dict_inputs=dict_inputs,
+        set_inputs=True,
         verbose=True,
     )
     process.build["proc1_output1"] = "output1.txt"
