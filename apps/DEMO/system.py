@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 
-import nuremics as nrs
+from nuremics import Application
 
 APP_NAME = "DEMO"
 
@@ -21,71 +21,71 @@ def main(
         {
             "process": Process1,
             "user_params": {
-                "proc1_param1": "param1", 
-                "proc1_param2": "param2", 
-                "proc1_param3": "param3",
+                "parameter1": "param1", 
+                "parameter2": "param2", 
+                "parameter3": "param3",
             },
             "user_paths": {
-                "proc1_path1": "input1.txt",
+                "path1": "input1.txt",
             },
-            "build": {
-                "proc1_output1": "output1.txt",
+            "output_paths": {
+                "output1": "output1.txt",
             },
         },
         {
             "process": Process2,
             "hard_params": {
-                "proc2_param1": 0.887, 
+                "parameter1": 0.887, 
             },
             "user_paths": {
-                "proc2_path1": "input1.txt",
-                "proc2_path2": "input2.txt",
+                "path1": "input1.txt",
+                "path2": "input2.txt",
             },
-            "require":{
-                "proc2_path3": "output1.txt",
+            "required_paths":{
+                "path3": "output1.txt",
             },
-            "build": {
-                "proc2_output1": "output2.txt",
+            "output_paths": {
+                "output1": "output2.txt",
             },
         },
         {
             "process": Process3,
             "user_params": {
-                "proc3_param1": "param2",
-                "proc3_param2": "param4",
-                "proc3_param3": "param5",
+                "parameter1": "param2",
+                "parameter2": "param4",
+                "parameter3": "param5",
             },
-            "require":{
-                "proc3_path1": "output2.txt",
+            "required_paths":{
+                "path1": "output2.txt",
             },
-            "build": {
-                "proc3_output1": "output3.txt",
-                "proc3_output2": "output4.txt",
+            "output_paths": {
+                "output1": "output3.txt",
+                "output2": "output4.txt",
             },
         },
         {
             "process": Process4,
             "user_params": {
-                "proc4_param1": "param3",
-                "proc4_param2": "param6",
+                "parameter1": "param3",
+                "parameter2": "param6",
             },
             "user_paths": {
-                "proc4_path1": "input3.txt",
+                "path1": "input3.txt",
             },
-            "require":{
-                "proc4_path2": "output3.txt",
-                "proc4_path3": "output4.txt",
+            "required_paths":{
+                "path2": "output3.txt",
+                "path3": "output4.txt",
             },
-            "build": {
-                "proc4_output1": "output5.txt",
+            "output_paths": {
+                "output1": "output5",
             },
         },
     ]
-    
+
     # ------------------ #
     # Launch application #
     # ------------------ #
-    app = nrs.Application(
+    app = Application(
         app_name=APP_NAME,
         working_dir=working_dir,
         workflow=workflow,
@@ -107,7 +107,7 @@ if __name__ == "__main__":
     # -------------- #
     studies = [
         "Study1",
-        # "Study2",
+        "Study2",
     ]
 
     main(

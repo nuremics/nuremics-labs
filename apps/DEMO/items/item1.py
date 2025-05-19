@@ -1,113 +1,117 @@
 import os
 import attrs
+import inspect
 import json
 from pathlib import Path
 
-import nuremics as nrs
+from nuremics import Process
 
 @attrs.define
-class Process1(nrs.Process):
+class Process1(Process):
 
     # Parameters
-    proc1_param1: float = attrs.field(init=False, metadata={"input": True})
-    proc1_param2: int = attrs.field(init=False, metadata={"input": True})
-    proc1_param3: str = attrs.field(init=False, metadata={"input": True})
+    parameter1: float = attrs.field(init=False, metadata={"input": True})
+    parameter2: int = attrs.field(init=False, metadata={"input": True})
+    parameter3: str = attrs.field(init=False, metadata={"input": True})
     
     # Paths
-    proc1_path1: Path = attrs.field(init=False, metadata={"input": True})
+    path1: Path = attrs.field(init=False, metadata={"input": True})
 
     # Internal
-    internal_variable: float = attrs.field(init=False)
+    variable: float = attrs.field(init=False)
 
     def __call__(self):
         super().__call__()
 
-        self.proc1_operation1()
-        self.proc1_operation2()
-        self.proc1_operation3()
+        self.operation1()
+        self.operation2()
+        self.operation3()
 
-    def proc1_operation1(self):
+    def operation1(self):
+
+        # Useful attributes from the parent class Process
+        self.study
+        if self.is_case:
+            self.index
         
-        output = "I am the proc1_operation1 function.\n"
-        output += "I belong to the Process1 class.\n"
-        output += "\n"
-        output += f"I am currently processing {self.index}.\n"
-        output += "\n"
-        output += "Here are the input parameters I know :\n"
-        output += f"- proc1_param1 : {self.proc1_param1}\n"
-        output += f"- proc1_param2 : {self.proc1_param2}\n"
-        output += f"- proc1_param3 : {self.proc1_param3}\n"
-        output += "\n"
-        output += "Here is the input path I know :\n"
-        output += f"- proc1_path1 : {self.proc1_path1}\n"
-        output += "\n"
-        output += "The content of proc1_path1 is :\n"
-        output += "'''\n"
-        f = open(self.proc1_path1, "r")
-        for line in f:
-            output += "    " + line
-        output += "\n'''"
-
-        if self.verbose:
-            print("---------------------------------------------------------")
-            print(output)
-
-    def proc1_operation2(self):
+        # Accessible input parameter(s)
+        self.parameter1
+        self.parameter2
+        self.parameter3
         
-        output = "I am the proc1_operation2 function.\n"
-        output += "I belong to the Process1 class.\n"
-        output += "\n"
-        output += f"I am currently processing {self.index}.\n"
-        output += "\n"
-        output += "Here are the input parameters I know :\n"
-        output += f"- proc1_param1 : {self.proc1_param1}\n"
-        output += f"- proc1_param2 : {self.proc1_param2}\n"
-        output += f"- proc1_param3 : {self.proc1_param3}\n"
-        output += "\n"
-        output += "Here is the input path I know :\n"
-        output += f"- proc1_path1 : {self.proc1_path1}\n"
-        output += "\n"
-        output += "The content of proc1_path1 is :\n"
-        output += "'''\n"
-        f = open(self.proc1_path1, "r")
-        for line in f:
-            output += "    " + line
-        output += "\n'''"
-
-        if self.verbose:
-            print("---------------------------------------------------------")
-            print(output)
-
-    def proc1_operation3(self):
+        # Accessible input path(s)
+        self.path1
         
-        output = "I am the proc1_operation3 function.\n"
-        output += "I belong to the Process1 class.\n"
-        output += "\n"
-        output += f"I am currently processing {self.index}.\n"
-        output += "\n"
-        output += "Here are the input parameters I know :\n"
-        output += f"- proc1_param1 : {self.proc1_param1}\n"
-        output += f"- proc1_param2 : {self.proc1_param2}\n"
-        output += f"- proc1_param3 : {self.proc1_param3}\n"
-        output += "\n"
-        output += "Here is the input path I know :\n"
-        output += f"- proc1_path1 : {self.proc1_path1}\n"
-        output += "\n"
-        output += "The content of proc1_path1 is :\n"
-        output += "'''\n"
-        f = open(self.proc1_path1, "r")
-        for line in f:
-            output += "    " + line
-        output += "\n'''"
+        # Set internal variable(s)
+        self.variable = 0.58 
 
+        # Play with it!
+        something = f"({inspect.currentframe().f_code.co_name}) "
+        something += "..."
+
+        # Print some infos
         if self.verbose:
-            print("---------------------------------------------------------")
-            print(output)
-            print("---------------------------------------------------------")
+            print(something)
 
-        file = self.build["proc1_output1"]
+    def operation2(self):
+
+        # Useful attributes from the parent class Process
+        self.study
+        if self.is_case:
+            self.index
+        
+        # Accessible input parameter(s)
+        self.parameter1
+        self.parameter2
+        self.parameter3
+        
+        # Accessible input path(s)
+        self.path1
+        
+        # Accessible internal variable(s)
+        self.variable 
+        
+        # Play with it!
+        something = f"({inspect.currentframe().f_code.co_name}) "
+        something += "..."
+
+        # Print some infos
+        if self.verbose:
+            print(something)
+
+    def operation3(self):
+
+        # Useful attributes from the parent class Process
+        self.study
+        if self.is_case:
+            self.index
+        
+        # Accessible input parameter(s)
+        self.parameter1
+        self.parameter2
+        self.parameter3
+        
+        # Accessible input path(s)
+        self.path1
+        
+        # Accessible internal variable(s)
+        self.variable 
+        
+        # Play with it!
+        something = f"({inspect.currentframe().f_code.co_name}) "
+        something += "..."
+
+        # Print some infos
+        if self.verbose:
+            print(something)
+
+        # Play with it!
+        result = "..."
+
+        # Write some results in output file or directory
+        file = self.output_paths["output1"]
         with open(file, "w") as f:
-            f.write(output)
+            f.write(result)
 
 
 if __name__ == "__main__":
@@ -129,7 +133,7 @@ if __name__ == "__main__":
         set_inputs=True,
         verbose=True,
     )
-    process.build["proc1_output1"] = "output1.txt"
+    process.output_paths["proc1_output1"] = "output1.txt"
 
     # Launch process
     process()

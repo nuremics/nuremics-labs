@@ -1,72 +1,63 @@
 import os
 import attrs
+import inspect
 import json
 from pathlib import Path
 
-import nuremics as nrs
+from nuremics import Process
 
 @attrs.define
-class Process2(nrs.Process):
+class Process2(Process):
 
     # Parameters
-    proc2_param1: float = attrs.field(init=False, metadata={"input": True})
+    parameter1: float = attrs.field(init=False, metadata={"input": True})
 
     # Paths
-    proc2_path1: Path = attrs.field(init=False, metadata={"input": True})
-    proc2_path2: Path = attrs.field(init=False, metadata={"input": True})
-    proc2_path3: Path = attrs.field(init=False, metadata={"input": True})
+    path1: Path = attrs.field(init=False, metadata={"input": True})
+    path2: Path = attrs.field(init=False, metadata={"input": True})
+    path3: Path = attrs.field(init=False, metadata={"input": True})
+
+    # Internal
+    variable: int = attrs.field(init=False)
 
     def __call__(self):
         super().__call__()
 
-        self.proc2_operation1()
+        self.operation1()
 
-    def proc2_operation1(self):
+    def operation1(self):
         
-        output = "I am the proc2_operation1 function.\n"
-        output += "I belong to the Process2 class.\n"
-        output += "\n"
-        output += f"I am currently processing {self.index}.\n"
-        output += "\n"
-        output += "Here is the input parameter I know :\n"
-        output += f"- proc2_param1 : {self.proc2_param1}\n"
-        output += "\n"
-        output += "Here are the input paths I know :\n"
-        output += f"- proc2_path1 : {self.proc2_path1}\n"
-        output += f"- proc2_path2 : {self.proc2_path2}\n"
-        output += f"- proc2_path3 : {self.proc2_path3}\n"
-        output += "\n"
-        output += "The content of proc2_path1 is :\n"
-        output += "'''\n"
-        f = open(self.proc2_path1, "r")
-        for line in f:
-            output += "    " + line
-        output += "\n'''"
-        output += "\n"
-        output += "\n"
-        output += "The content of proc2_path2 is :\n"
-        output += "'''\n"
-        f = open(self.proc2_path2, "r")
-        for line in f:
-            output += "    " + line
-        output += "\n'''"
-        output += "\n"
-        output += "\n"
-        output += "The content of proc2_path3 is :\n"
-        output += "'''\n"
-        f = open(self.proc2_path3, "r")
-        for line in f:
-            output += "    " + line
-        output += "\n'''"
+        # Useful attributes from the parent class Process
+        self.study
+        if self.is_case:
+            self.index
+        
+        # Accessible input parameter(s)
+        self.parameter1
+        
+        # Accessible input path(s)
+        self.path1
+        self.path2
+        self.path3
+        
+        # Set internal variable(s)
+        self.variable = 14 
 
+        # Play with it!
+        something = f"({inspect.currentframe().f_code.co_name}) "
+        something += "..."
+
+        # Print some infos
         if self.verbose:
-            print("---------------------------------------------------------")
-            print(output)
-            print("---------------------------------------------------------")
+            print(something)
 
-        file = self.build["proc2_output1"]
+        # Play with it!
+        result = "..."
+
+        # Write some results in output file or directory
+        file = self.output_paths["output1"]
         with open(file, "w") as f:
-            f.write(output)
+            f.write(result)
 
 
 if __name__ == "__main__":
