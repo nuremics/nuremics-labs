@@ -168,8 +168,8 @@ if __name__ == "__main__":
         set_inputs=True,
         verbose=True,
     )
-    process.build["proc3_output1"] = "output3.txt"
-    process.build["proc3_output2"] = "output4.txt"
+    process.output_paths["output1"] = "output3.txt"
+    process.output_paths["output2"] = "output4.txt"
 
     # Launch process
     process()

@@ -114,7 +114,7 @@ if __name__ == "__main__":
         set_inputs=True,
         verbose=True,
     )
-    process.build["proc4_output1"] = "output5.txt"
+    process.output_paths["output1"] = "output5"
 
     # Launch process
     process()

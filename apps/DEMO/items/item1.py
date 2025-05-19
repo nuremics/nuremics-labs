@@ -133,7 +133,7 @@ if __name__ == "__main__":
         set_inputs=True,
         verbose=True,
     )
-    process.output_paths["proc1_output1"] = "output1.txt"
+    process.output_paths["output1"] = "output1.txt"
 
     # Launch process
     process()
