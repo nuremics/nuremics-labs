@@ -4,7 +4,7 @@ import inspect
 import json
 from pathlib import Path
 
-from nuremics import Process
+from nuremics import Process, find_git_root
 
 @attrs.define
 class Process1(Process):
@@ -15,7 +15,7 @@ class Process1(Process):
     parameter3: str = attrs.field(init=False, metadata={"input": True})
     
     # Paths
-    path1: Path = attrs.field(init=False, metadata={"input": True})
+    path1: Path = attrs.field(init=False, metadata={"input": True}, converter=Path)
 
     # Internal
     variable: float = attrs.field(init=False)
@@ -40,14 +40,14 @@ class Process1(Process):
         self.parameter3
         
         # Accessible input path(s)
-        self.path1
+        with open(self.path1) as f:
+            content_path1 = f.read()
         
         # Set internal variable(s)
         self.variable = 0.58 
 
-        # Play with it!
-        something = f"({inspect.currentframe().f_code.co_name}) "
-        something += "..."
+        # Do something
+        something = f"({inspect.currentframe().f_code.co_name}) {"Play with it!"}"
 
         # Print some infos
         if self.verbose:
@@ -66,14 +66,14 @@ class Process1(Process):
         self.parameter3
         
         # Accessible input path(s)
-        self.path1
+        with open(self.path1) as f:
+            content_path1 = f.read()
         
         # Accessible internal variable(s)
         self.variable 
         
-        # Play with it!
-        something = f"({inspect.currentframe().f_code.co_name}) "
-        something += "..."
+        # Do something
+        something = f"({inspect.currentframe().f_code.co_name}) {"Play with it!"}"
 
         # Print some infos
         if self.verbose:
@@ -92,21 +92,21 @@ class Process1(Process):
         self.parameter3
         
         # Accessible input path(s)
-        self.path1
+        with open(self.path1) as f:
+            content_path1 = f.read()
         
         # Accessible internal variable(s)
         self.variable 
         
-        # Play with it!
-        something = f"({inspect.currentframe().f_code.co_name}) "
-        something += "..."
+        # Do something
+        something = f"({inspect.currentframe().f_code.co_name}) {"Play with it!"}"
 
         # Print some infos
         if self.verbose:
             print(something)
 
-        # Play with it!
-        result = "..."
+        # Define some results
+        result = "Play with it!"
 
         # Write some results in output file or directory
         file = self.output_paths["output1"]
@@ -117,8 +117,8 @@ class Process1(Process):
 if __name__ == "__main__":
     
     # Define working directory
-    cwd = Path(os.path.split(__file__)[0])
-    working_dir = cwd / Path(f"../../../data/apps/DEMO/Study1/1_Process1")
+    git_dir = find_git_root()
+    working_dir = git_dir / Path(f"data/apps/DEMO/Study1/1_Process1")
 
     # Go to working directory
     os.chdir(working_dir)

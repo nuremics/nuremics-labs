@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 
-from nuremics import Application
+from nuremics import Application, find_git_root
 
 APP_NAME = "DEMO"
 
@@ -39,7 +39,7 @@ def main(
             },
             "user_paths": {
                 "path1": "input1.txt",
-                "path2": "input2.txt",
+                "path2": "input2",
             },
             "required_paths":{
                 "path3": "output1.txt",
@@ -99,8 +99,8 @@ if __name__ == "__main__":
     # ------------------------ #
     # Define working directory #
     # ------------------------ #
-    cwd = Path(os.path.split(__file__)[0])
-    working_dir = cwd / Path(f"../../data/apps")
+    git_dir = find_git_root()
+    working_dir = git_dir / Path(f"data/apps")
 
     # -------------- #
     # Define studies #
