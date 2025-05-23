@@ -16,6 +16,4 @@ This repository contains examples of end-user applications built using the **NUR
 
 Readers are encouraged to begin their exploration of the **NUREMICS®** project with the `nuremics` repository to understand the core framework and its foundational building blocks, before diving into the examples and applications provided in `nuremics-apps`.
 
-Developers are invited to treat `nuremics` as the core engine, and to use `nuremics-apps` as a starting point for developing and maintaining their own scientific software built on top of the **NUREMICS®** framework.
-
 <!--- micromamba create -n nrs-env python=3.12 --->
