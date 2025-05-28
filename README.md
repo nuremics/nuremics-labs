@@ -101,6 +101,8 @@ class OneProc(Process):
     variable: float = attrs.field(init=False)
 ```
 
+The operations executed by the **Proc** are finally implemented as elementary functions, which are then sequentially called within the `__call__()` method to define the logic of the **Proc**.
+
 ```python
 import attrs
 from nuremics import Process
