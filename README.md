@@ -185,7 +185,7 @@ class OneProc(Process):
         # </> Write file </>
 ```
 
-Even though **Procs** are not intended to be executed independently by end-users, they are still designed with the possibility to run _out of the box_. This allows developers to easily execute them during the development phase or when implementing dedicated unit tests for a specific **Proc**. In such cases, it is important to set `set_inputs=True` when instantiating the **Proc**, to explicitly inform the **NUREMICS®** framework that the inputs are being provided manually, outside of any workflow context.
+Even though **Procs** are not intended to be executed independently by end-users, they are still designed with the possibility to run _out of the box_. This allows developers to easily execute them during the development phase or when implementing dedicated unit tests for a specific **Proc**. In such cases, it is important to set `set_inputs=True` when instantiating the **Proc**, to explicitly inform the **NUREMICS®** framework that the input data are being provided manually, outside of any workflow context.
 
 ```python
 import attrs
