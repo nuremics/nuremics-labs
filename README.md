@@ -261,6 +261,8 @@ if __name__ == "__main__":
     process.finalize()
 ```
 
+**Note:** The complete implementation of the `OneProc` **Proc**, as well as that of the `AnotherProc` **Proc** later used in this tutorial, can be found in the repository under `apps/ONE_APP/items/item1.py` and `apps/ONE_APP/items/item2.py`, respectively.
+
 ### Assemble Procs into App
 
 <!---
