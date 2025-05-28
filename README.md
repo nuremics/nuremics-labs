@@ -14,8 +14,9 @@ This repository is the core Python library, installable via `pip install`. It pr
 - **`nuremics-apps`** _(current repository)_:
 This repository contains examples of end-user applications built using the **NUREMICS®** framework. It is intended to be **forked** by developers to initiate their own `nuremics-apps` project and build custom applications tailored to their specific use cases.
 
-Readers are invited to begin their exploration of the **NUREMICS®** project with the [`nuremics`](https://github.com/nuremics/nuremics) repository to understand the core framework and its foundational concepts. Once you're familiar with the underlying logic, this `nuremics-apps` repository will guide you deeper into the code, showing how to implement your own **process items**, assemble them into full **applications**, and operate them both as a developer and as an end-user.
+Readers are invited to begin their exploration of the **NUREMICS®** project with the [`nuremics`](https://github.com/nuremics/nuremics) repository, to understand the core framework and its foundational concepts. Once you're familiar with the underlying logic, this `nuremics-apps` repository will guide you deeper into the code, showing how to implement your own **process items**, assemble them into full **applications**, and operate them both as a developer and as an end-user.
 
+<!---
 ```bash
 output/
 ├── process_item_1/
@@ -28,4 +29,4 @@ output/
     └── ...
 ```
 
-<!--- micromamba create -n nrs-env python=3.12 --->
+micromamba create -n nrs-env python=3.12 --->
