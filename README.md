@@ -43,6 +43,47 @@ Whether you're developing a quick prototype or a full-scale scientific workflow,
 
 ### Code Procs
 
+We start by defining the core building blocks of the **App** to be created: the **Procs**. Each **Proc** is a reusable item that encapsulates a specific piece of logic executed within the overall workflow. Internally, this logic can be further decomposed into elementary operations, implemented as individual functions (units) within the **Proc** itself.
+
+To implement our first **Proc**, we begin by importing the `Process` base class from **NUREMICS®**, which all custom **Procs** must inherit from. To make this inheritance simple and structured, we also import the `attrs` library, which helps define clean, data-driven Python classes.
+
+```python
+import attrs
+from nuremics import Process
+```
+
+We then declare our first **Proc** as a Python class named `OneProc`, inheriting from the `Process` base class. This marks it as a modular item of computation which can be executed within a **NUREMICS®** workflow.
+
+```python
+import attrs
+from nuremics import Process
+
+@attrs.define
+class OneProc(Process):
+```
+
+We now declare the input data required by our `OneProc`, grouped into two categories: **Parameters** and **Paths**.
+
+Each input is defined using `attrs.field()` and marked with `metadata={"input": True}`. This metadata is essential: it tells the **NUREMICS®** framework that these attributes are expected as input data, ensuring they are properly tracked and managed throughout the workflow.
+
+```python
+import attrs
+from nuremics import Process
+
+@attrs.define
+class OneProc(Process):
+
+    # Parameters
+    param1: float = attrs.field(init=False, metadata={"input": True})
+    param2: int = attrs.field(init=False, metadata={"input": True})
+    param3: bool = attrs.field(init=False, metadata={"input": True})
+    
+    # Paths
+    path1: Path = attrs.field(init=False, metadata={"input": True}, converter=Path)
+```
+
+Test
+
 ```python
 import attrs
 from nuremics import Process
