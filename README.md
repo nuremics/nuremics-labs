@@ -62,9 +62,7 @@ from nuremics import Process
 class OneProc(Process):
 ```
 
-We now declare the input data required by our `OneProc`, grouped into two categories: **Parameters** and **Paths**.
-
-Each input is defined using `attrs.field()` and marked with `metadata={"input": True}`. This metadata is essential: it tells the **NUREMICS®** framework that these attributes are expected as input data, ensuring they are properly tracked and managed throughout the workflow.
+We now declare the input data required by our `OneProc`, grouped into two categories: **Parameters** and **Paths**. Each input is defined using `attrs.field()` and marked with `metadata={"input": True}`. This metadata is essential: it tells the **NUREMICS®** framework that these attributes are expected as input data, ensuring they are properly tracked and managed throughout the workflow.
 
 ```python
 import attrs
