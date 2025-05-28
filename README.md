@@ -80,7 +80,26 @@ class OneProc(Process):
     path1: Path = attrs.field(init=False, metadata={"input": True}, converter=Path)
 ```
 
-Test
+In addition to inputs, a **Proc** can also define internal variables, attributes used during the execution of its internal logic but not provided as input data. These internal variables, like `variable` in our example below, are declared without the `metadata={"input": True}` tag, signaling to the **NUREMICS®** framework that they are not part of the input interface and will be set or computed within the **Proc** itself.
+
+```python
+import attrs
+from nuremics import Process
+
+@attrs.define
+class OneProc(Process):
+
+    # Parameters
+    param1: float = attrs.field(init=False, metadata={"input": True})
+    param2: int = attrs.field(init=False, metadata={"input": True})
+    param3: bool = attrs.field(init=False, metadata={"input": True})
+    
+    # Paths
+    path1: Path = attrs.field(init=False, metadata={"input": True}, converter=Path)
+
+    # Internal
+    variable: float = attrs.field(init=False)
+```
 
 ```python
 import attrs
