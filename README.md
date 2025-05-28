@@ -101,7 +101,7 @@ class OneProc(Process):
     variable: float = attrs.field(init=False)
 ```
 
-The operations executed by the **Proc** are finally implemented as elementary functions, which are then sequentially called within the `__call__()` method to define the logic of the **Proc**.
+The operations executed by the **Proc** are finally implemented as elementary functions, which are then sequentially called within the `__call__()` method to define the overall logic of the **Proc**.
 
 ```python
 import attrs
@@ -142,7 +142,7 @@ class OneProc(Process):
         # </> your code </>
 ```
 
-Note that the **Proc** should at some point produce output data, typically in the form of files or folders generated during the execution of its operations. To make this output trackable by the **NUREMICS®** framework, it must be registered in the `self.output_paths` dictionary using a label that is unique to the **Proc** (e.g., `"out1"`). This label will later serve to connect the output data produced by the current **Proc** within a broader application workflow.
+Note that the **Proc** should at some point produce output data, typically in the form of files or folders generated during the execution of its operations. To make these output data trackable by the **NUREMICS®** framework, each must be registered in the `self.output_paths` dictionary using a label that is unique to the **Proc** (e.g., `"out1"`). Using the dictionary syntax `self.output_paths["out1"]` effectively declares an output variable named `out1`, which will later be instantiated by assigning it a specific file or folder name when integrating the **Proc** into a broader application workflow.
 
 ```python
 import attrs
