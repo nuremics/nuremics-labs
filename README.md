@@ -20,7 +20,7 @@ Readers are invited to begin their exploration of the **NUREMICS®** project wit
 
 Once the present `nuremics-apps` repository has been forked and cloned to your local machine, installation proceeds as follows:
 
-1. **(Recommended)** Create a dedicated coding environment. While not mandatory, using [micromamba](https://mamba.readthedocs.io/en/latest/installation/micromamba-installation.html) is highly recommended for fast, reproducible, and lightweight environment management:
+1. **(Recommended) Create a dedicated coding environment.** While not mandatory, using [micromamba](https://mamba.readthedocs.io/en/latest/installation/micromamba-installation.html) is highly recommended for fast, reproducible, and lightweight environment management:
 
 ```bash
 micromamba create -n nrs-env python=3.12
@@ -53,7 +53,7 @@ class OneProc(Process):
     # Parameters
     param1: float = attrs.field(init=False, metadata={"input": True})
     param2: int = attrs.field(init=False, metadata={"input": True})
-    param3: str = attrs.field(init=False, metadata={"input": True})
+    param3: bool = attrs.field(init=False, metadata={"input": True})
     
     # Paths
     path1: Path = attrs.field(init=False, metadata={"input": True}, converter=Path)
