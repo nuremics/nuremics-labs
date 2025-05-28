@@ -14,7 +14,7 @@ This repository is the core Python library, installable via `pip install`. It pr
 - **`nuremics-apps`** _(current repository)_:
 This repository contains examples of end-user applications built using the **NUREMICS®** framework. It is intended to be **forked** by developers to initiate their own `nuremics-apps` project and build custom applications tailored to their specific use cases.
 
-Readers are invited to begin their exploration of the **NUREMICS®** project with the [`nuremics`](https://github.com/nuremics/nuremics) repository, to understand the core framework and its foundational concepts. Once you're familiar with the underlying logic, this `nuremics-apps` repository will guide you deeper into the code, showing how to implement your own **process items**, assemble them into full **applications**, and operate them both as a developer and as an end-user.
+Readers are invited to begin their exploration of the **NUREMICS®** project with the [`nuremics`](https://github.com/nuremics/nuremics) repository, to understand the core framework and its foundational concepts. Once you're familiar with the underlying logic, this `nuremics-apps` repository will guide you deeper into the code, showing how to implement your own **Procs**, assemble them into full **Apps**, and operate them both as a developer and as an end-user.
 
 ## Installation
 
@@ -34,6 +34,55 @@ pip install -r requirements.txt
 ```
 
 You're now ready to begin your coding journey with **NUREMICS®** 🧬
+
+## Create App
+
+This section walks you through the process of building a custom **NUREMICS®** application from scratch. You'll start by implementing your own **Procs**, which encapsulate domain-specific logic and computational tasks. Then, you’ll learn how to assemble these building blocks into a fully operational **App**, ready to run studies and generate structured results.
+
+Whether you're developing a quick prototype or a full-scale scientific workflow, this guide will help you translate your ideas into modular, reusable, traceable and scalable software components.
+
+### Code Procs
+
+```python
+import attrs
+from nuremics import Process
+
+@attrs.define
+class OneProc(Process):
+
+    # Parameters
+    param1: float = attrs.field(init=False, metadata={"input": True})
+    param2: int = attrs.field(init=False, metadata={"input": True})
+    param3: str = attrs.field(init=False, metadata={"input": True})
+    
+    # Paths
+    path1: Path = attrs.field(init=False, metadata={"input": True}, converter=Path)
+
+    # Internal
+    variable: float = attrs.field(init=False)
+
+    def __call__(self):
+        super().__call__()
+
+        self.operation1()
+        self.operation2()
+        self.operation3()
+        self.operation4()
+    
+    def operation1(self):
+        # </> your code </>
+
+    def operation2(self):
+        # </> your code </>
+
+    def operation3(self):
+        # </> your code </>
+
+    def operation4(self):
+        # </> your code </>
+```
+
+### Assemble Procs into App
 
 <!---
 ```bash
