@@ -66,6 +66,7 @@ We now declare the input data required by our `OneProc`, grouped into two catego
 
 ```python
 import attrs
+from pathlib import Path
 from nuremics import Process
 
 @attrs.define
@@ -84,6 +85,7 @@ In addition to the previously declared input data, a **Proc** can also define in
 
 ```python
 import attrs
+from pathlib import Path
 from nuremics import Process
 
 @attrs.define
@@ -105,6 +107,7 @@ The operations executed by the **Proc** are finally implemented as elementary fu
 
 ```python
 import attrs
+from pathlib import Path
 from nuremics import Process
 
 @attrs.define
@@ -146,6 +149,7 @@ Note that the **Proc** should at some point produce output data, typically in th
 
 ```python
 import attrs
+from pathlib import Path
 from nuremics import Process
 
 @attrs.define
@@ -188,7 +192,9 @@ class OneProc(Process):
 Even though **Procs** are not intended to be executed independently by end-users, they are still designed with the possibility to run _out of the box_. This allows developers to easily execute them during the development phase or when implementing dedicated unit tests for a specific **Proc**. In such cases, it is important to set `set_inputs=True` when instantiating the **Proc**, to explicitly inform the **NUREMICS®** framework that the input data are being provided manually, outside of any workflow context.
 
 ```python
+import os
 import attrs
+from pathlib import Path
 from nuremics import Process
 
 @attrs.define
