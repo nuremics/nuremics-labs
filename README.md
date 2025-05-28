@@ -80,7 +80,7 @@ class OneProc(Process):
     path1: Path = attrs.field(init=False, metadata={"input": True}, converter=Path)
 ```
 
-In addition to the previously declared input data, a **Proc** can also define internal variables: attributes used during the execution of its internal logic but not provided as input data. These internal variables, like `variable` in our example below, are declared without the `metadata={"input": True}` tag, signaling to the **NUREMICS®** framework that they are not part of the input interface and will be set or computed within the **Proc** itself.
+In addition to the previously declared input data, a **Proc** can also define internal variables: attributes used during the execution of its internal logic but not provided as input data. These internal variables, like `variable` in our example below, are declared without the `metadata={"input": True}` tag, signaling to the **NUREMICS®** framework that they are not exposed to the workflow and will be set or computed within the **Proc** itself.
 
 ```python
 import attrs
@@ -183,6 +183,77 @@ class OneProc(Process):
         # </> your code </>
         file = self.output_paths["out1"]
         # </> Write file </>
+```
+
+Even though **Procs** are not intended to be executed independently by end-users, it is important to emphasize that they are still designed to run _out of the box_. This allows developers to easily execute them during the development phase or when implementing dedicated unit tests for a specific **Proc**.
+
+```python
+import attrs
+from nuremics import Process
+
+@attrs.define
+class OneProc(Process):
+
+    # Parameters
+    param1: float = attrs.field(init=False, metadata={"input": True})
+    param2: int = attrs.field(init=False, metadata={"input": True})
+    param3: bool = attrs.field(init=False, metadata={"input": True})
+    
+    # Paths
+    path1: Path = attrs.field(init=False, metadata={"input": True}, converter=Path)
+
+    # Internal
+    variable: float = attrs.field(init=False)
+
+    def __call__(self):
+        super().__call__()
+
+        self.operation1()
+        self.operation2()
+        self.operation3()
+        self.operation4()
+    
+    def operation1(self):
+        # </> your code </>
+
+    def operation2(self):
+        # </> your code </>
+
+    def operation3(self):
+        # </> your code </>
+
+    def operation4(self):
+        # </> your code </>
+        file = self.output_paths["out1"]
+        # </> Write file </>
+
+if __name__ == "__main__":
+    
+    # Define working directory
+    working_dir = ...
+
+    # Go to working directory
+    os.chdir(working_dir)
+
+    # Create dictionary containg input data
+    dict_inputs = {
+        param1: ...,
+        param2: ...,
+        param3: ...,
+        path1: ...,
+    }
+    
+    # Create process
+    process = OneProc(
+        dict_inputs=dict_inputs,
+        set_inputs=True,
+        verbose=True,
+    )
+    process.output_paths["output1"] = "output1.txt"
+
+    # Run process
+    process()
+    process.finalize()
 ```
 
 ### Assemble Procs into App
