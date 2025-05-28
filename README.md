@@ -142,6 +142,49 @@ class OneProc(Process):
         # </> your code </>
 ```
 
+Note that the **Proc** should at some point produce output data, typically in the form of files or folders generated during the execution of its operations. To make this output trackable by the **NUREMICS®** framework, it must be registered in the `self.output_paths` dictionary using a label that is unique to the **Proc** (e.g., `"out1"`). This label will later serve to connect the output data produced by the current **Proc** within a broader application workflow.
+
+```python
+import attrs
+from nuremics import Process
+
+@attrs.define
+class OneProc(Process):
+
+    # Parameters
+    param1: float = attrs.field(init=False, metadata={"input": True})
+    param2: int = attrs.field(init=False, metadata={"input": True})
+    param3: bool = attrs.field(init=False, metadata={"input": True})
+    
+    # Paths
+    path1: Path = attrs.field(init=False, metadata={"input": True}, converter=Path)
+
+    # Internal
+    variable: float = attrs.field(init=False)
+
+    def __call__(self):
+        super().__call__()
+
+        self.operation1()
+        self.operation2()
+        self.operation3()
+        self.operation4()
+    
+    def operation1(self):
+        # </> your code </>
+
+    def operation2(self):
+        # </> your code </>
+
+    def operation3(self):
+        # </> your code </>
+
+    def operation4(self):
+        # </> your code </>
+        file = self.output_paths["out1"]
+        # </> Write file </>
+```
+
 ### Assemble Procs into App
 
 <!---
