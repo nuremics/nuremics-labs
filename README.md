@@ -502,7 +502,7 @@ When running the **App**, **NUREMICS®** first provides the following terminal f
 
 - A visual banner indicating the launch of a **NUREMICS® App**.
 
-- A structured overview of the assembled workflow, showing each registered **Proc** and its associated operations (functions).
+- A structured overview of the assembled workflow, showing each registered **Proc**, its associated operations (functions), and their order of execution within the **App** workflow.
 
 ```shell
                                                               0000000000000000000000
