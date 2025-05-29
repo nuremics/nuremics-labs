@@ -562,7 +562,7 @@ Let’s consider a case where the developer does not adhere to this enforced str
     def __call__(self):
         super().__call__()
 
-        some_parameter = 2 # <-- Additional logic added here
+        some_parameter = 2 # <-- External logic added here
 
         self.operation1()
         self.operation2()
