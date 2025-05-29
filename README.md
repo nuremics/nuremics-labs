@@ -593,11 +593,11 @@ ONE_APP_____
         ...
 ```
 
-**NUREMICS®** is then expected to display a summary of all required **input parameters** and **input paths** for each **Proc**, along with their current mapping status within the **App**.
+**NUREMICS®** is then expected to display a summary of all required input/output data for each **Proc**, along with their current mapping status within the **App**.
 
-At this stage, the system automatically verifies whether every required input data has been properly mapped within the **App** configuration.
+At this stage, the system automatically verifies whether every required input/output data has been properly mapped within the **App** configuration.
 
-If any **input parameters** are missing, they are explicitly listed, and the developer is prompted to map them using either the `"user_params"` or `"hard_params"` key.
+If any **input parameters** are missing, they are explicitly listed, and the developer is prompted to define them using either the `"user_params"` or `"hard_params"` key.
 
 ```shell
 | OneProc |
@@ -607,6 +607,75 @@ If any **input parameters** are missing, they are explicitly listed, and the dev
 (bool)  param3 -----||----- Not defined (X)
 
 (X) Please define all input parameters either in "user_params" or "hard_params".
+```
+
+Let's then properly map all **input parameters** of the **Proc** `OneProc` within the **App**.
+
+```python
+APP_NAME = "ONE_APP"
+
+from pathlib import Path
+from nuremics import Application
+from procs.OneProc.item import OneProc
+from procs.AnotherProc.item import AnotherProc
+
+def main(
+    working_dir: Path = None,
+    studies: list = ["Default"],
+):
+    # --------------- #
+    # Define workflow #
+    # --------------- #
+    workflow = [
+        {
+            "process": OneProc,
+            "user_params": {
+                "param1": "parameter1",
+                "param3": "parameter2",
+            },
+            "hard_params": {
+                "param2": 14,
+            },
+        },
+        {
+            "process": AnotherProc,
+        },
+    ]
+
+    # ------------------ #
+    # Define application #
+    # ------------------ #
+    app = Application(
+        app_name=APP_NAME,
+        working_dir=working_dir,
+        workflow=workflow,
+        studies=studies,
+    )
+    # Run it!
+    app()
+
+if __name__ == "__main__":
+
+    # ------------------------ #
+    # Define working directory #
+    # ------------------------ #
+    working_dir = Path(...)
+
+    # -------------- #
+    # Define studies #
+    # -------------- #
+    studies = [
+        "Study1",
+        "Study2",
+    ]
+
+    # --------------- #
+    # Run application #
+    # --------------- #
+    main(
+        working_dir=working_dir,
+        studies=studies,
+    )
 ```
 
 <!---
