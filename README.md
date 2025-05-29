@@ -498,9 +498,17 @@ if __name__ == "__main__":
     )
 ```
 
+At this stage, running the **App** in its current form produces the following terminal feedback from **NUREMICS®**:
 
+- A visual banner representing the launch of a **NUREMICS®** **App**.
 
-```bash
+- A detailed breakdown of the assembled workflow structure.
+
+- A summary of the input parameters expected by each **Proc**, and their current status.
+
+As shown below, **NUREMICS®** automatically checks, for each **Proc**, whether all required input parameters have been mapped within the **App**. If any are missing, they are explicitly listed, and the developer is prompted to map them using either the `"user_params"` or `"hard_params"` key.
+
+```shell
                                                               0000000000000000000000
                                       000                  00000000000000000000000000
                                        00000            0000000000000000000000000000000
@@ -546,6 +554,14 @@ ONE_APP_____
                                   |_____operation1
                                   |_____operation2
                                   |_____operation3
+
+| OneProc |
+> Input Parameter(s) :
+(float) param1 -----||----- Not defined (X)
+(int)   param2 -----||----- Not defined (X)
+(bool)  param3 -----||----- Not defined (X)
+
+(X) Please define all input parameters either in "user_params" or "hard_params".
 ```
 
 <!---
