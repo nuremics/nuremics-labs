@@ -552,6 +552,47 @@ ONE_APP_____
                                   |_____operation3
 ```
 
+At this stage, **NUREMICS®** also performs a structural check of each **Proc** by inspecting its `__call__` method. Specifically, it ensures that only functions defined within the **Proc** class itself are invoked during execution.
+
+This design choice enforces a clean and self-contained structure for each **Proc**, where all internal logic remains encapsulated.
+
+Let’s consider a case where the developer does not adhere to this enforced structural rule, for instance, by injecting additional logic directly into the `__call__` method of a **Proc** (in this example, in the `AnotherProc` class).
+
+```python
+    def __call__(self):
+        super().__call__()
+
+        some_parameter = 2 # <-- External logic added here
+
+        self.operation1()
+        self.operation2()
+        self.operation3()
+```
+
+In this situation, **NUREMICS®** will immediately raise a structural validation error and halt execution.
+
+```shell
+| Workflow |
+ONE_APP_____
+            |_____OneProc_____
+            |                 |_____operation1
+            |                 |_____operation2
+            |                 |_____operation3
+            |                 |_____operation4
+            |
+            |_____AnotherProc_____(X)
+
+(X) Each process must only call its internal function(s):
+
+    def __call__(self):
+        super().__call__()
+
+        self.operation1()
+        self.operation2()
+        self.operation3()
+        ...
+```
+
 <!---
 
 - A summary of the input parameters expected by each **Proc**, and their current status.
