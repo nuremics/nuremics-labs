@@ -68,7 +68,9 @@ from nuremics import Process
 class OneProc(Process):
 ```
 
-We now declare the input data required by our `OneProc`, grouped into two categories: **Parameters** and **Paths**. Each input is defined using `attrs.field()` and marked with `metadata={"input": True}`. This metadata is essential: it tells the **NUREMICS®** framework that these attributes are expected as input data, ensuring they are properly tracked and managed throughout the workflow.
+We now declare the input data required by our `OneProc`, grouped into two categories: **Parameters** and **Paths**. Each input is defined using `attrs.field()` and marked with `metadata={"input": True}`.
+
+This metadata is essential: it tells the **NUREMICS®** framework that these attributes are expected as input data, ensuring they are properly tracked and managed throughout the workflow.
 
 ```python
 import attrs
@@ -87,7 +89,9 @@ class OneProc(Process):
     path1: Path = attrs.field(init=False, metadata={"input": True}, converter=Path)
 ```
 
-In addition to the previously declared input data, a **Proc** can also define internal variables: attributes used during the execution of its internal logic but not provided as input data. These internal variables, like `variable` in our example below, are declared without the `metadata={"input": True}` tag, signaling to the **NUREMICS®** framework that they are not exposed to the workflow and will be set or computed within the **Proc** itself.
+In addition to the previously declared input data, a **Proc** can also define internal variables: attributes used during the execution of its internal logic but not provided as input data.
+
+These internal variables, like `variable` in our example below, are declared without the `metadata={"input": True}` tag, signaling to the **NUREMICS®** framework that they are not exposed to the workflow and will be set or computed within the **Proc** itself.
 
 ```python
 import attrs
@@ -151,7 +155,9 @@ class OneProc(Process):
         # </> your code </>
 ```
 
-Note that the **Proc** should at some point produce output data, typically in the form of files or folders generated during the execution of its operations. To make these output data trackable by the **NUREMICS®** framework, each must be registered in the `self.output_paths` dictionary using a label that is unique to the **Proc** (e.g., `"out1"`). Using the dictionary syntax `self.output_paths["out1"]` effectively declares an output variable named `out1`, which will later be instantiated by assigning it a specific file or folder name when integrating the **Proc** into a broader application workflow.
+Note that the **Proc** should at some point produce output data, typically in the form of files or folders generated during the execution of its operations. To make these output data trackable by the **NUREMICS®** framework, each must be registered in the `self.output_paths` dictionary using a label that is unique to the **Proc** (e.g., `"out1"`).
+
+Using the dictionary syntax `self.output_paths["out1"]` effectively declares an output variable named `out1`, which will later be instantiated by assigning it a specific file or folder name when integrating the **Proc** into a broader application workflow.
 
 ```python
 import attrs
@@ -195,7 +201,9 @@ class OneProc(Process):
         # </> Write file </>
 ```
 
-Even though **Procs** are not intended to be executed independently by end-users, they are still designed with the possibility to run _out of the box_. This allows developers to easily execute them during the development phase or when implementing dedicated unit tests for a specific **Proc**. In such cases, it is important to set `set_inputs=True` when instantiating the **Proc**, to explicitly inform the **NUREMICS®** framework that the input data are being provided manually, outside of any workflow context.
+Even though **Procs** are not intended to be executed independently by end-users, they are still designed with the possibility to run _out of the box_. This allows developers to easily execute them during the development phase or when implementing dedicated unit tests for a specific **Proc**.
+
+In such cases, it is important to set `set_inputs=True` when instantiating the **Proc**, to explicitly inform the **NUREMICS®** framework that the input data are being provided manually, outside of any workflow context.
 
 ```python
 import os
@@ -357,6 +365,12 @@ if __name__ == "__main__":
         studies=studies,
     )
 ```
+
+Inside the `main()` function, we define a list called `workflow` which contains the sequence of **Procs** to be executed, in the order specified. This list is made up of dictionaries, where each dictionary describes the characteristics of a particular **Proc**.
+
+Let's first define the key `"process"` of each dictionary, which specifies the **Proc** class (previously imported, e.g., `OneProc` and `AnotherProc`) to instantiate and execute within the **App** workflow.
+
+This dictionary-based structure offers flexibility to easily add more parameters or options later by simply adding new keys to each dictionary in the workflow.
 
 ```python
 APP_NAME = "ONE_APP"
