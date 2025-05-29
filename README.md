@@ -70,8 +70,8 @@ We then declare our first **Proc** as a Python class named `OneProc`, inheriting
 import attrs
 from nuremics import Process
 
-@attrs.define
-class OneProc(Process):
+@attrs.define           # Added
+class OneProc(Process): # Added
 ```
 
 We now declare the input data required by our `OneProc`, grouped into two categories: **Parameters** and **Paths**. Each input is defined using `attrs.field()` and marked with `metadata={"input": True}`.
@@ -85,14 +85,14 @@ from nuremics import Process
 
 @attrs.define
 class OneProc(Process):
-
-    # Parameters
-    param1: float = attrs.field(init=False, metadata={"input": True})
-    param2: int = attrs.field(init=False, metadata={"input": True})
-    param3: bool = attrs.field(init=False, metadata={"input": True})
-    
-    # Paths
-    path1: Path = attrs.field(init=False, metadata={"input": True}, converter=Path)
+                                                                                    # Added
+    # Parameters                                                                    # Added
+    param1: float = attrs.field(init=False, metadata={"input": True})               # Added
+    param2: int = attrs.field(init=False, metadata={"input": True})                 # Added
+    param3: bool = attrs.field(init=False, metadata={"input": True})                # Added
+                                                                                    # Added
+    # Paths                                                                         # Added
+    path1: Path = attrs.field(init=False, metadata={"input": True}, converter=Path) # Added
 ```
 
 In addition to the previously declared input data, a **Proc** can also define internal variables: attributes used during the execution of its internal logic but not provided as input data.
