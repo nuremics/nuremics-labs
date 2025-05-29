@@ -304,7 +304,6 @@ The source code of the **App** then adopts the structure of a standard Python sc
 APP_NAME = "ONE_APP"
 
 from nuremics import Application
-
 from procs.OneProc.item import OneProc
 from procs.AnotherProc.item import AnotherProc
 
@@ -313,6 +312,47 @@ def main():
 
 if __name__ == "__main__":
     main()
+```
+
+In the `main()` function, we add two input arguments that the end-user must specify when launching the **App** inside the `if __name__ == "__main__":` block:
+
+- `working_dir`: the working directory from which the application will be executed.
+
+- `studies`: a list of study names that the end-user wants to run with the application.
+
+```python
+APP_NAME = "ONE_APP"
+
+from pathlib import Path
+from nuremics import Application
+from procs.OneProc.item import OneProc
+from procs.AnotherProc.item import AnotherProc
+
+def main(
+    working_dir: Path = None,
+    studies: list = ["Default"],
+):
+    # Application logic here
+
+if __name__ == "__main__":
+
+    # ------------------------ #
+    # Define working directory #
+    # ------------------------ #
+    working_dir = Path(...)
+
+    # -------------- #
+    # Define studies #
+    # -------------- #
+    studies = [
+        "Study1",
+        "Study2",
+    ]
+
+    main(
+        working_dir=working_dir,
+        studies=studies,
+    )
 ```
 
 ```bash
