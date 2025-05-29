@@ -33,6 +33,12 @@ micromamba activate nrs-env
 pip install -r requirements.txt
 ```
 
+3. **Set the environment variable.** Make sure to add the root directory where you cloned the `nuremics-apps` repository to the `PYTHONPATH` environment variable of your local system. If `PYTHONPATH` does not already exist, please create it. This allows Python to locate all project modules correctly.
+
+```bash
+/absolute/path/to/nuremics-apps
+```
+
 You're now ready to begin your coding journey with **NUREMICS®** 🧬
 
 ## Create App
@@ -241,12 +247,12 @@ if __name__ == "__main__":
     # Go to working directory
     os.chdir(working_dir)
 
-    # Create dictionary containg input data
+    # Create dictionary containing input data
     dict_inputs = {
-        param1: ...,
-        param2: ...,
-        param3: ...,
-        path1: ...,
+        "param1": ...,
+        "param2": ...,
+        "param3": ...,
+        "path1": ...,
     }
     
     # Create process
@@ -254,16 +260,72 @@ if __name__ == "__main__":
         dict_inputs=dict_inputs,
         set_inputs=True,
     )
-    process.output_paths["output1"] = "output1.txt"
+    process.output_paths["out1"] = "output1.txt"
 
     # Run process
     process()
     process.finalize()
 ```
 
-**Note:** The complete implementation of the `OneProc` **Proc**, as well as that of the `AnotherProc` **Proc** later used in this tutorial, can be found in the repository under `apps/ONE_APP/items/item1.py` and `apps/ONE_APP/items/item2.py`, respectively.
+**Note:** The complete implementation of the `OneProc` **Proc**, as well as that of the `AnotherProc` **Proc** later used in this tutorial, can be found in the repository under `procs/OneProc/item.py` and `procs/AnotherProc/item.py`, respectively.
 
 ### Assemble Procs into App
+
+Most of the development effort has already been carried out when implementing the individual **Procs**. The next step consists in assembling them into a coherent **App**, where each **Proc** is instantiated, connected, and orchestrated to form a complete, executable workflow.
+
+We start by defining the name of our **App**.
+
+```python
+APP_NAME = "ONE_APP"
+```
+
+We then import the `Application` class from the **NUREMICS®** framework, which serves as the container and manager to define a workflow composed of multiple **Procs**.
+
+```python
+APP_NAME = "ONE_APP"
+
+from nuremics import Application
+```
+
+We now import the two **Procs**, `OneProc` and `AnotherProc`, that we previously implemented. These will be the building blocks to assemble into our final **App**.
+
+```python
+APP_NAME = "ONE_APP"
+
+from nuremics import Application
+
+from procs.OneProc.item import OneProc
+from procs.AnotherProc.item import AnotherProc
+```
+
+The source code of the **App** then adopts the structure of a standard Python script, which can both be executed directly or imported as a module. This is achieved by defining a `main()` function and guarding it with the typical `if __name__ == "__main__":` statement.
+
+```python
+APP_NAME = "ONE_APP"
+
+from nuremics import Application
+
+from procs.OneProc.item import OneProc
+from procs.AnotherProc.item import AnotherProc
+
+def main():
+    # Application logic here
+
+if __name__ == "__main__":
+    main()
+```
+
+```bash
+> APPLICATION <
+
+| Workflow |
+MY_APP_____
+           |_____OneProc_____
+                             |_____operation1
+                             |_____operation2
+                             |_____operation3
+                             |_____operation4
+```
 
 <!---
 ```bash
