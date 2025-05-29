@@ -595,7 +595,7 @@ ONE_APP_____
 
 **NUREMICS®** is then expected to display a summary of all required **input parameters** and **input paths** for each **Proc**, along with their current mapping status within the **App**.
 
-At this stage, the **NUREMICS®** automatically verifies whether every required input data has been properly mapped within the **App** configuration.
+At this stage, the system automatically verifies whether every required input data has been properly mapped within the **App** configuration.
 
 If any **input parameters** are missing, they are explicitly listed, and the developer is prompted to map them using either the `"user_params"` or `"hard_params"` key.
 
