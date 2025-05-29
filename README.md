@@ -33,10 +33,10 @@ micromamba activate nrs-env
 pip install -r requirements.txt
 ```
 
-3. **Set the environment variable.** Make sure to add the root directory where you cloned the `nuremics-apps` repository to the `PYTHONPATH` environment variable of your local system. If `PYTHONPATH` does not already exist, please create it. This allows Python to locate all project modules correctly.
+3. **Set the environment variable.** Add the absolute path of the `src` directory from your cloned `nuremics-apps` repository to the `PYTHONPATH` environment variable of your local system. If `PYTHONPATH` does not already exist, please create it. This allows Python to locate all project modules correctly.
 
 ```bash
-/absolute/path/to/nuremics-apps
+/absolute/path/to/nuremics-apps/src
 ```
 
 4. **(Optional) Define a default working directory.** It is also suggested to define another environment variable named `WORKING_DIR`, which serves as the default root folder where all your **Apps** write their results. This becomes particularly useful when working on multiple **Apps**, as it allows you to consistently manage output locations across your projects.
@@ -281,7 +281,7 @@ if __name__ == "__main__":
     process.finalize()
 ```
 
-**Note:** The complete implementation of the `OneProc` **Proc**, as well as that of the `AnotherProc` **Proc** later used in this tutorial, can be found in the repository under `procs/OneProc/item.py` and `procs/AnotherProc/item.py`, respectively.
+**Note:** The complete implementation of the `OneProc` **Proc**, as well as that of the `AnotherProc` **Proc** later used in this tutorial, can be found in the repository under `src/procs/OneProc/item.py` and `src/procs/AnotherProc/item.py`, respectively.
 
 ### Assemble Procs into App
 
@@ -930,11 +930,9 @@ The developer’s responsibility ends here (excluding, of course, the implementa
 
 From this point, users can interact with the **App** through its declared I/O interface, without needing to modify or understand the underlying code structure.
 
+**Note:** The complete source code of the `ONE_APP` **App**, as assembled and executed throughout this tutorial, is available in the repository under `src/apps/ONE_APP/system.py`.
+
 <!---
-
-- A summary of the input parameters expected by each **Proc**, and their current status.
-
-As shown below, **NUREMICS®** automatically checks, for each **Proc**, whether all required input parameters have been mapped within the **App**. If any are missing, they are explicitly listed, and the developer is prompted to map them using either the `"user_params"` or `"hard_params"` key.
 
 ```bash
 output/
