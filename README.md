@@ -47,7 +47,7 @@ This section walks you through the process of building a custom **NUREMICS®** a
 
 Whether you're developing a quick prototype or a full-scale scientific workflow, this guide will help you translate your ideas into modular, reusable, traceable and scalable software components.
 
-### Code Procs
+### Implement Procs
 
 We start by defining the core building blocks of the **App** to be created: the **Procs**. Each **Proc** is a reusable item that encapsulates a specific piece of logic executed within the overall workflow. Internally, this logic can be further decomposed into elementary operations, implemented as individual functions (units) within the **Proc** itself.
 
