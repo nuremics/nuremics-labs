@@ -316,9 +316,9 @@ if __name__ == "__main__":
 
 In the `main()` function, we add two input arguments that the end-user must specify when launching the **App** inside the `if __name__ == "__main__":` block:
 
-- `working_dir`: the working directory from which the application will be executed.
+- `working_dir`: the working directory from which the **App** will be executed.
 
-- `studies`: a list of study names that the end-user wants to run with the application.
+- `studies`: a list of study names that the end-user wants to run with the **App**.
 
 ```python
 APP_NAME = "ONE_APP"
@@ -349,6 +349,57 @@ if __name__ == "__main__":
         "Study2",
     ]
 
+    # --------------- #
+    # Run application #
+    # --------------- #
+    main(
+        working_dir=working_dir,
+        studies=studies,
+    )
+```
+
+```python
+APP_NAME = "ONE_APP"
+
+from pathlib import Path
+from nuremics import Application
+from procs.OneProc.item import OneProc
+from procs.AnotherProc.item import AnotherProc
+
+def main(
+    working_dir: Path = None,
+    studies: list = ["Default"],
+):
+    # --------------- #
+    # Define workflow #
+    # --------------- #
+    workflow = [
+        {
+            "process": OneProc,
+        },
+        {
+            "process": AnotherProc,
+        },
+    ]
+
+if __name__ == "__main__":
+
+    # ------------------------ #
+    # Define working directory #
+    # ------------------------ #
+    working_dir = Path(...)
+
+    # -------------- #
+    # Define studies #
+    # -------------- #
+    studies = [
+        "Study1",
+        "Study2",
+    ]
+
+    # --------------- #
+    # Run application #
+    # --------------- #
     main(
         working_dir=working_dir,
         studies=studies,
@@ -356,15 +407,51 @@ if __name__ == "__main__":
 ```
 
 ```bash
+                                                              0000000000000000000000
+                                      000                  00000000000000000000000000
+                                       00000            0000000000000000000000000000000
+                                        000000        0000000000000000000000000000000000
+                                        0000000      00000000000000000000000000000000000
+                                         0000000    000000000000000000000000000000000000
+                                         0000000    0000000000000000000000000000000000000
+                                         000000  00  00000000000000000000000000000000000
+                                        000000  0000  0000000000000000000000000000000000
+                                        000000  0000  0000000000000000000000000000000000
+                                       000000  000000  00000000000000000000000000000000
+                                      0000000  000000  000000000000000000000000000000
+                                    00000000  00000000 0000000000000000000000000000
+                                  0000000000  00000000  000000000000000000000000
+                               0000000000000  00000000  00000000000000
+                    000000000000000000000000  00000000  0000000000
+                 000000000000000000000000000  00000000  00000000
+               000000000000000000000000000000  000000  0000000
+              0000000000000000000000000000000  000000  000000
+             000000000000000000000000000000000  0000  000000
+            0000000000000000000000000000000000  0000  000000
+            00000000000000000000000000000000000  00  000000
+           0000000000000000000000000000000000000    0000000
+           00000000000000000000000000000000000000  00000000
+            00000000000000000000000000000000000      0000000
+            0000000000000000000000000000000000        000000
+             0000000000000000000000000000000            00000
+              000000000000000000000000000                  000
+                00000000000000000000000                      0
+                   000000000000000
+
 > APPLICATION <
 
 | Workflow |
-MY_APP_____
-           |_____OneProc_____
-                             |_____operation1
-                             |_____operation2
-                             |_____operation3
-                             |_____operation4
+ONE_APP_____
+            |_____OneProc_____
+            |                 |_____operation1
+            |                 |_____operation2
+            |                 |_____operation3
+            |                 |_____operation4
+            |
+            |_____AnotherProc_____
+                                  |_____operation1
+                                  |_____operation2
+                                  |_____operation3
 ```
 
 <!---
