@@ -85,13 +85,13 @@ from nuremics import Process
 
 @attrs.define
 class OneProc(Process):
-                                                                                    # Added
-    # Parameters                                                                    # Added
+
+    # Parameters
     param1: float = attrs.field(init=False, metadata={"input": True})               # Added
     param2: int = attrs.field(init=False, metadata={"input": True})                 # Added
     param3: bool = attrs.field(init=False, metadata={"input": True})                # Added
-                                                                                    # Added
-    # Paths                                                                         # Added
+
+    # Paths
     path1: Path = attrs.field(init=False, metadata={"input": True}, converter=Path) # Added
 ```
 
