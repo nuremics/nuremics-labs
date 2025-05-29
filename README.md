@@ -609,7 +609,7 @@ If any **input parameters** are missing, they are explicitly listed, and the dev
 (X) Please define all input parameters either in "user_params" or "hard_params".
 ```
 
-The **input parameters** of the **Proc** `OneProc` can be properly mapped within the **App** by including the `"user_params"` and `"hard_params"` keys in its corresponding dictionary entry inside the `workflow` list.
+The **input parameters** of the **Proc** `OneProc` can be properly mapped within the **App** by including the `"user_params"` and/or `"hard_params"` keys in its corresponding dictionary entry inside the `workflow` list.
 
 ```python
 APP_NAME = "ONE_APP"
@@ -692,6 +692,78 @@ However, it now reports that one or more **input paths** are missing. These are 
 path1 -----||----- Not defined (X)
 
 (X) Please define all input paths either in "user_paths" or "required_paths".
+```
+
+The **input paths** of the **Proc** `OneProc` can now be properly mapped within the **App** by including the `"user_paths"` and/or `"required_paths"` keys in its corresponding dictionary entry inside the workflow list.
+
+```python
+APP_NAME = "ONE_APP"
+
+from pathlib import Path
+from nuremics import Application
+from procs.OneProc.item import OneProc
+from procs.AnotherProc.item import AnotherProc
+
+def main(
+    working_dir: Path = None,
+    studies: list = ["Default"],
+):
+    # --------------- #
+    # Define workflow #
+    # --------------- #
+    workflow = [
+        {
+            "process": OneProc,
+            "user_params": {
+                "param1": "parameter1",
+                "param3": "parameter2",
+            },
+            "hard_params": {
+                "param2": 14,
+            },
+            "user_paths": {
+                "path1": "input1.txt",
+            },
+        },
+        {
+            "process": AnotherProc,
+        },
+    ]
+
+    # ------------------ #
+    # Define application #
+    # ------------------ #
+    app = Application(
+        app_name=APP_NAME,
+        working_dir=working_dir,
+        workflow=workflow,
+        studies=studies,
+    )
+    # Run it!
+    app()
+
+if __name__ == "__main__":
+
+    # ------------------------ #
+    # Define working directory #
+    # ------------------------ #
+    working_dir = Path(...)
+
+    # -------------- #
+    # Define studies #
+    # -------------- #
+    studies = [
+        "Study1",
+        "Study2",
+    ]
+
+    # --------------- #
+    # Run application #
+    # --------------- #
+    main(
+        working_dir=working_dir,
+        studies=studies,
+    )
 ```
 
 <!---
