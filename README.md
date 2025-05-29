@@ -875,9 +875,7 @@ if __name__ == "__main__":
     )
 ```
 
-With all required mappings now properly defined for each **Proc**, the **App** can be executed without raising any errors.
-
-**NUREMICS®** confirms that the full mapping is complete by prompting a summary for each **Proc**, indicating that all **input parameters**, **input paths**, and **output paths** have been successfully resolved.
+With all required mappings now properly defined for each **Proc**, the **App** can be executed without raising any errors. **NUREMICS®** confirms that the full mapping is complete by prompting a summary for each **Proc**, indicating that all **input parameters**, **input paths**, and **output paths** have been successfully resolved.
 
 ```shell
 | OneProc |
