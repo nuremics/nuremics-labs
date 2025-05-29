@@ -900,6 +900,32 @@ path2 -----||----- output1.csv (required_paths)
 out1 -----||----- output3.vtk (output_paths)
 ```
 
+As the **App** has now been fully assembled, **NUREMICS®** displays a clean summary of its I/O interface, as it will appear to the end-user.
+
+This summary includes all declared user parameters and user paths required as inputs, along with the corresponding output files and folders that the **App** will generate.
+
+It serves as an explicit interface contract, allowing end-users to clearly understand what data they need to provide and what results to expect.
+
+```shell
+> INPUTS <
+
+| User Parameters |
+> parameter1 (float)
+> parameter2 (bool)
+> parameter3 (int)
+> parameter4 (str)
+
+| User Paths |
+> input1.txt
+> input2
+
+> OUTPUTS <
+
+> output1.csv
+> output2
+> output3.vtk
+```
+
 <!---
 
 - A summary of the input parameters expected by each **Proc**, and their current status.
