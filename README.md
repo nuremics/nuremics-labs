@@ -678,7 +678,7 @@ if __name__ == "__main__":
     )
 ```
 
-When the running again the **App**, **NUREMICS®** now detects that all required **input parameters** for `OneProc` have been effectively mapped.
+When running the **App** again, **NUREMICS®** now detects that all required **input parameters** for `OneProc` have been successfully mapped.
 
 ```shell
 | OneProc |
