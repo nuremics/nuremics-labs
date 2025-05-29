@@ -875,6 +875,33 @@ if __name__ == "__main__":
     )
 ```
 
+With all required mappings now properly defined for each **Proc**, the **App** can be executed without raising any errors.
+
+**NUREMICS®** confirms that the full mapping is complete by prompting a summary for each **Proc**, indicating that all **input parameters**, **input paths**, and **output paths** have been successfully resolved.
+
+```shell
+| OneProc |
+> Input Parameter(s) :
+(float) param1 -----||----- parameter1 (user_params)
+(int)   param2 -----||----- 14         (hard_params)
+(bool)  param3 -----||----- parameter2 (user_params)
+> Input Path(s) :
+path1 -----||----- input1.txt (user_paths)
+> Output Path(s) :
+out1 -----||----- output1.csv (output_paths)
+out2 -----||----- output2     (output_paths)
+
+| AnotherProc |
+> Input Parameter(s) :
+(int) param1 -----||----- parameter3 (user_params)
+(str) param2 -----||----- parameter4 (user_params)
+> Input Path(s) :
+path1 -----||----- input2      (user_paths)
+path2 -----||----- output1.csv (required_paths)
+> Output Path(s) :
+out1 -----||----- output3.vtk (output_paths)
+```
+
 <!---
 
 - A summary of the input parameters expected by each **Proc**, and their current status.
