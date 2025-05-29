@@ -786,7 +786,7 @@ out1 -----||----- Not defined (X)
 
 The **output paths** of the **Proc** `OneProc` can be properly mapped within the **App** by defining the `"output_paths"` key in its corresponding dictionary entry inside the workflow list.
 
-In the same way, we also complete the mapping for the **Proc** `AnotherProc` by providing all required entries: `"user_params"`, `"hard_params"`, `"user_paths"`, `"required_paths"`, and `"output_paths"`.
+In the same way, we also complete the mapping for the **Proc** `AnotherProc` by providing all required entries: `"user_params"` and/or `"hard_params"`; `"user_paths"` and/or `"required_paths"`; and `"output_paths"`.
 
 ```python
 APP_NAME = "ONE_APP"
