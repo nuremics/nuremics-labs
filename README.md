@@ -70,8 +70,8 @@ We then declare our first **Proc** as a Python class named `OneProc`, inheriting
 import attrs
 from nuremics import Process
 
-@attrs.define           # Added
-class OneProc(Process): # Added
+@attrs.define
+class OneProc(Process):
 ```
 
 We now declare the input data required by our `OneProc`, grouped into two categories: **Parameters** and **Paths**. Each input is defined using `attrs.field()` and marked with `metadata={"input": True}`.
@@ -87,12 +87,12 @@ from nuremics import Process
 class OneProc(Process):
 
     # Parameters
-    param1: float = attrs.field(init=False, metadata={"input": True})               # Added
-    param2: int = attrs.field(init=False, metadata={"input": True})                 # Added
-    param3: bool = attrs.field(init=False, metadata={"input": True})                # Added
-
+    param1: float = attrs.field(init=False, metadata={"input": True})
+    param2: int = attrs.field(init=False, metadata={"input": True})
+    param3: bool = attrs.field(init=False, metadata={"input": True})
+    
     # Paths
-    path1: Path = attrs.field(init=False, metadata={"input": True}, converter=Path) # Added
+    path1: Path = attrs.field(init=False, metadata={"input": True}, converter=Path)
 ```
 
 In addition to the previously declared input data, a **Proc** can also define internal variables: attributes used during the execution of its internal logic but not provided as input data.
@@ -694,7 +694,7 @@ path1 -----||----- Not defined (X)
 (X) Please define all input paths either in "user_paths" or "required_paths".
 ```
 
-The **input paths** of the **Proc** `OneProc` can now be properly mapped within the **App** by including the `"user_paths"` and/or `"required_paths"` keys in its corresponding dictionary entry inside the workflow list.
+The **input paths** of the **Proc** `OneProc` can be properly mapped within the **App** by including the `"user_paths"` and/or `"required_paths"` keys in its corresponding dictionary entry inside the workflow list.
 
 ```python
 APP_NAME = "ONE_APP"
@@ -764,6 +764,24 @@ if __name__ == "__main__":
         working_dir=working_dir,
         studies=studies,
     )
+```
+
+When running the **App** again, **NUREMICS®** detects that all required **input paths** for `OneProc` have been successfully mapped.
+
+However, it now reports that one or more **output paths** are missing. These are explicitly listed, and the developer is prompted to define them using the `"output_paths"` key.
+
+```shell
+| OneProc |
+> Input Parameter(s) :
+(float) param1 -----||----- parameter1 (user_params)
+(int)   param2 -----||----- 14         (hard_params)
+(bool)  param3 -----||----- parameter2 (user_params)
+> Input Path(s) :
+path1 -----||----- input1.txt (user_paths)
+> Output Path(s) :
+out1 -----||----- Not defined (X)
+
+(X) Please define all output paths in "output_paths".
 ```
 
 <!---
