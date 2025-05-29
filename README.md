@@ -609,7 +609,7 @@ If any **input parameters** are missing, they are explicitly listed, and the dev
 (X) Please define all input parameters either in "user_params" or "hard_params".
 ```
 
-Let's then properly map all **input parameters** of the **Proc** `OneProc` within the **App**.
+The **input parameters** of the **Proc** `OneProc` can be properly mapped within the **App** by including the `"user_params"` and `"hard_params"` keys in its corresponding dictionary entry inside the `workflow` list.
 
 ```python
 APP_NAME = "ONE_APP"
