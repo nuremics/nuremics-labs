@@ -39,6 +39,12 @@ pip install -r requirements.txt
 /absolute/path/to/nuremics-apps
 ```
 
+4. **(Optional) Define a default working directory.** It is also suggested to define another environment variable named `WORKING_DIR`, which will serve as the default root folder where all your **Apps** write their results. This will become particularly useful when working on multiple **Apps**, as it will allow you to consistently manage output locations across your projects.
+
+```bash
+/absolute/path/to/default/working_dir
+```
+
 You're now ready to begin your coding journey with **NUREMICS®** 🧬
 
 ## Create App
