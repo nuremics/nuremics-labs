@@ -609,7 +609,7 @@ If any **input parameters** are missing, they are explicitly listed, and the dev
 (X) Please define all input parameters either in "user_params" or "hard_params".
 ```
 
-The **input parameters** of the **Proc** `OneProc` can be properly mapped within the **App** by including the `"user_params"` and/or `"hard_params"` keys in its corresponding dictionary entry inside the `workflow` list.
+The **input parameters** of the **Proc** `OneProc` can be properly mapped within the **App** by defining the `"user_params"` and/or `"hard_params"` keys in its corresponding dictionary entry inside the `workflow` list.
 
 ```python
 APP_NAME = "ONE_APP"
@@ -694,7 +694,7 @@ path1 -----||----- Not defined (X)
 (X) Please define all input paths either in "user_paths" or "required_paths".
 ```
 
-The **input paths** of the **Proc** `OneProc` can be properly mapped within the **App** by including the `"user_paths"` and/or `"required_paths"` keys in its corresponding dictionary entry inside the workflow list.
+The **input paths** of the **Proc** `OneProc` can be properly mapped within the **App** by defining the `"user_paths"` and/or `"required_paths"` keys in its corresponding dictionary entry inside the workflow list.
 
 ```python
 APP_NAME = "ONE_APP"
@@ -782,6 +782,97 @@ path1 -----||----- input1.txt (user_paths)
 out1 -----||----- Not defined (X)
 
 (X) Please define all output paths in "output_paths".
+```
+
+The **output paths** of the **Proc** `OneProc` can be properly mapped within the **App** by defining the `"output_paths"` key in its corresponding dictionary entry inside the workflow list.
+
+In the same way, we also complete the mapping for the **Proc** `AnotherProc` by providing all required entries: `"user_params"`, `"hard_params"`, `"user_paths"`, `"required_paths"`, and `"output_paths"`.
+
+```python
+APP_NAME = "ONE_APP"
+
+from pathlib import Path
+from nuremics import Application
+from procs.OneProc.item import OneProc
+from procs.AnotherProc.item import AnotherProc
+
+def main(
+    working_dir: Path = None,
+    studies: list = ["Default"],
+):
+    # --------------- #
+    # Define workflow #
+    # --------------- #
+    workflow = [
+        {
+            "process": OneProc,
+            "user_params": {
+                "param1": "parameter1",
+                "param3": "parameter2",
+            },
+            "hard_params": {
+                "param2": 14,
+            },
+            "user_paths": {
+                "path1": "input1.txt",
+            },
+            "output_paths": {
+                "out1": "output1.csv",
+                "out2": "output2",
+            },
+        },
+        {
+            "process": AnotherProc,
+            "user_params": {
+                "param1": "parameter3",
+                "param2": "parameter4",
+            },
+            "user_paths": {
+                "path1": "input2",
+            },
+            "required_paths":{
+                "path2": "output1.csv",
+            },
+            "output_paths": {
+                "out1": "output3.vtk",
+            },
+        },
+    ]
+
+    # ------------------ #
+    # Define application #
+    # ------------------ #
+    app = Application(
+        app_name=APP_NAME,
+        working_dir=working_dir,
+        workflow=workflow,
+        studies=studies,
+    )
+    # Run it!
+    app()
+
+if __name__ == "__main__":
+
+    # ------------------------ #
+    # Define working directory #
+    # ------------------------ #
+    working_dir = Path(...)
+
+    # -------------- #
+    # Define studies #
+    # -------------- #
+    studies = [
+        "Study1",
+        "Study2",
+    ]
+
+    # --------------- #
+    # Run application #
+    # --------------- #
+    main(
+        working_dir=working_dir,
+        studies=studies,
+    )
 ```
 
 <!---
