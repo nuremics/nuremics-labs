@@ -924,11 +924,9 @@ This summary includes all declared user parameters and user paths required as in
 > output3.vtk
 ```
 
-With all **Procs** implemented and properly assembled within the **App**, the development work is now complete.
+With all **Procs** implemented and properly assembled within the **App**, the development work is now complete. The developer’s responsibility ends here (excluding, of course, the implementation of unit tests to ensure long-term maintainability, which falls outside the scope of this tutorial).
 
-The developer’s responsibility ends here (excluding, of course, the implementation of unit tests to ensure long-term maintainability, which falls outside the scope of this tutorial). The **App** is now fully functional and ready to be operated by end-users.
-
-From this point, users can interact with the **App** through its declared I/O interface, without needing to modify or understand the underlying code structure.
+The **App** is now fully functional and ready to be operated by end-users. From this point, users can interact with the **App** through its declared I/O interface, without needing to modify or understand the underlying code structure.
 
 **Note:** The complete source code of the `ONE_APP` **App**, as assembled and executed throughout this tutorial, is available in the repository under `src/apps/ONE_APP/system.py`.
 
