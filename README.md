@@ -678,6 +678,16 @@ if __name__ == "__main__":
     )
 ```
 
+When the running again the **App**, **NUREMICS®** now detects that all required **input parameters** for `OneProc` have been effectively mapped.
+
+```shell
+| OneProc |
+> Input Parameter(s) :
+(float) param1 -----||----- parameter1 (user_params)
+(int)   param2 -----||----- 14         (hard_params)
+(bool)  param3 -----||----- parameter2 (user_params)
+```
+
 <!---
 
 - A summary of the input parameters expected by each **Proc**, and their current status.
