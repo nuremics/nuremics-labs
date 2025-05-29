@@ -680,7 +680,7 @@ if __name__ == "__main__":
 
 When running the **App** again, **NUREMICS®** detects that all required **input parameters** for `OneProc` have been successfully mapped.
 
-But it now tells that some **input paths** are missing, and the developer is prompted to define them using either the "user_paths" or "required_paths" key.
+However, it now reports that one or more **input paths** are missing. These are explicitly listed, and the developer is prompted to define them using either the `"user_paths"` or `"required_paths"` key.
 
 ```shell
 | OneProc |
