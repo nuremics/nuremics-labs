@@ -326,7 +326,7 @@ In the `main()` function, we add two input arguments that the end-user must spec
 
 - `working_dir`: the working directory from which the **App** will be executed.
 
-- `studies`: a list of study names that the end-user wants to run with the **App**.
+- `studies`: a list of study names that the end-user wants to perform with the **App**.
 
 ```python
 APP_NAME = "ONE_APP"
@@ -419,6 +419,80 @@ if __name__ == "__main__":
         studies=studies,
     )
 ```
+
+We now create an `Application` object `app`, which acts as the core engine of our **App**. This object is instantiated using the previously defined inputs:
+
+- `app_name`: the name of the **App**.
+
+- `working_dir`: the root directory from which the **App** is executed.
+
+- `workflow`: the ordered list of **Procs** to run.
+
+- `studies`: the list of studies the end-user wishes to perform.
+
+Once the `Application` object is created, calling `app()` launches the workflow execution of all the defined **Procs** for each study.
+
+```python
+APP_NAME = "ONE_APP"
+
+from pathlib import Path
+from nuremics import Application
+from procs.OneProc.item import OneProc
+from procs.AnotherProc.item import AnotherProc
+
+def main(
+    working_dir: Path = None,
+    studies: list = ["Default"],
+):
+    # --------------- #
+    # Define workflow #
+    # --------------- #
+    workflow = [
+        {
+            "process": OneProc,
+        },
+        {
+            "process": AnotherProc,
+        },
+    ]
+
+    # ------------------ #
+    # Define application #
+    # ------------------ #
+    app = Application(
+        app_name=APP_NAME,
+        working_dir=working_dir,
+        workflow=workflow,
+        studies=studies,
+    )
+    # Run it!
+    app()
+
+if __name__ == "__main__":
+
+    # ------------------------ #
+    # Define working directory #
+    # ------------------------ #
+    working_dir = Path(...)
+
+    # -------------- #
+    # Define studies #
+    # -------------- #
+    studies = [
+        "Study1",
+        "Study2",
+    ]
+
+    # --------------- #
+    # Run application #
+    # --------------- #
+    main(
+        working_dir=working_dir,
+        studies=studies,
+    )
+```
+
+
 
 ```bash
                                                               0000000000000000000000
