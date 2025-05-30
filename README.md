@@ -556,9 +556,7 @@ ONE_APP_____
                                   |_____operation3
 ```
 
-At this stage, **NUREMICS®** also performs a structural check of each **Proc** by inspecting its `__call__` method. Specifically, it ensures that only functions defined within the **Proc** class itself are invoked during execution.
-
-This design choice enforces a clean and self-contained structure for each **Proc**, where all internal logic remains encapsulated.
+At this stage, **NUREMICS®** also performs a structural check of each **Proc** by inspecting its `__call__` method. Specifically, it ensures that only functions defined within the **Proc** class itself are invoked during execution. This design choice enforces a clean and self-contained structure for each **Proc**, where all internal logic remains encapsulated.
 
 Let’s consider a case where the developer does not adhere to this enforced structural rule, for instance, by injecting additional logic directly into the `__call__` method of a **Proc** (in this example, in the `AnotherProc` class).
 
