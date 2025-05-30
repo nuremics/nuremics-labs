@@ -161,7 +161,7 @@ class OneProc(Process):
         # </> your code </>
 ```
 
-Note that the **Proc** should at some point produce output data, typically in the form of files or folders generated during the execution of its operations. To make these output data trackable by the **NUREMICS®** framework, each must be registered in the `self.output_paths` dictionary using a label that is unique to the **Proc** (e.g., `"out1"`).
+Note that the **Proc** should at some point produce output data, typically in the form of files or folders generated during the execution of its operations. To make these output data trackable by the **NUREMICS®** framework, each must be registered in the `self.output_paths` dictionary using a label that is unique to the **Proc** (e.g., `"out1"`, `"out2"`).
 
 Using the dictionary syntax `self.output_paths["out1"]` effectively declares an output variable named `out1`, which will later be instantiated by assigning it a specific file or folder name when integrating the **Proc** into a broader application workflow.
 
@@ -200,11 +200,13 @@ class OneProc(Process):
 
     def operation3(self):
         # </> your code </>
+        file = self.output_paths["out1"]
+        # </> Write file </>
 
     def operation4(self):
         # </> your code </>
-        file = self.output_paths["out1"]
-        # </> Write file </>
+        folder = self.output_paths["out2"]
+        # </> Write folder </>
 ```
 
 Even though **Procs** are not intended to be executed independently by end-users, they are still designed with the possibility to run _out of the box_. This allows developers to easily execute them during the development phase or when implementing dedicated unit tests for a specific **Proc**.
@@ -247,11 +249,13 @@ class OneProc(Process):
 
     def operation3(self):
         # </> your code </>
+        file = self.output_paths["out1"]
+        # </> Write file </>
 
     def operation4(self):
         # </> your code </>
-        file = self.output_paths["out1"]
-        # </> Write file </>
+        folder = self.output_paths["out2"]
+        # </> Write folder </>
 
 if __name__ == "__main__":
     
