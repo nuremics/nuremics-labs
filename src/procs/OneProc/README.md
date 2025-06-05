@@ -26,7 +26,7 @@ erDiagram
 
 ## Description
 
-Process to generate and plot a regular polygon shape.
+**Proc** to generate and plot a regular polygon shape.
 
 This class executes a two-step pipeline:
 - **`operation1`:** Generate the 2D coordinates of a regular polygon (given radius and number of sides).
