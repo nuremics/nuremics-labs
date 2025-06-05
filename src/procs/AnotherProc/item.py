@@ -206,17 +206,18 @@ class AnotherProc(Process):
 if __name__ == "__main__":
     
     # Define working directory
-    working_dir = ...
+    working_dir = Path(os.environ["WORKING_DIR"]) / "ONE_APP/Study1/2_AnotherProc/Test1"
 
     # Go to working directory
     os.chdir(working_dir)
 
     # Create dictionary containing input data
     dict_inputs = {
-        "param1": 4.6,
-        "param2": 60,
-        "path1": Path("toto/tata"),
-        "path2": Path("toto/tata"),
+        "param1": -9.81,
+        "param2": 1.0,
+        "path1": Path(os.environ["WORKING_DIR"])/"ONE_APP/study1/0_inputs/input2.json",
+        "path2": Path(os.environ["WORKING_DIR"])/"ONE_APP/study1/0_inputs/input3",
+        "path3": Path(os.environ["WORKING_DIR"])/"ONE_APP/study1/1_OneProc/Test1/output1.csv",
     }
     
     # Create process
@@ -224,7 +225,7 @@ if __name__ == "__main__":
         dict_inputs=dict_inputs,
         set_inputs=True,
     )
-    process.output_paths["out1"] = "output1.vtk"
+    process.output_paths["out1"] = "output3"
 
     # Run process
     process()
