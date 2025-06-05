@@ -36,15 +36,13 @@ Generate and plot a regular polygon shape.
 ## Input Parameter(s)
 
 - **`param1`:** Radius of the polygon.
-
 - **`param2`:** Number of sides of the polygon.
 
 ## Input Path(s)
 
-- **`path1`:** Path to a text file containing the plot title.
+- **`path1`:** File containing the plot title.
 
 ## Output Path(s)
 
 - **`out1`:** File containing the X/Y coordinates of the polygon vertices.
-
 - **`out2`:** Image of the plotted polygon figure.

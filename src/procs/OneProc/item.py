@@ -29,7 +29,7 @@ class OneProc(Process):
     Input paths
     -----------
         path1 : txt
-            Path to a text file containing the plot title.
+            File containing the plot title.
 
     Internal variables
     ------------------
