@@ -259,7 +259,7 @@ if __name__ == "__main__":
     process.finalize()
 ```
 
-**Note:** The complete implementation of the `OneProc` **Proc**, as well as that of the `AnotherProc` **Proc** later used in this tutorial, can be found in the repository under `src/procs/OneProc/item.py` and `src/procs/AnotherProc/item.py`, respectively.
+**Note:** The complete implementation of the `OneProc` **Proc**, as well as that of the `AnotherProc` **Proc** later used in this tutorial, can be found in the repository under [`src/procs/OneProc`](https://github.com/nuremics/nuremics-apps/tree/beta-version/src/procs/OneProc) and [`src/procs/AnotherProc`](https://github.com/nuremics/nuremics-apps/tree/beta-version/src/procs/AnotherProc), respectively.
 
 ### Assemble Procs into App
 
