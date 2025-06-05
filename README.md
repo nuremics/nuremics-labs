@@ -89,7 +89,6 @@ class OneProc(Process):
     # Parameters
     param1: float = attrs.field(init=False, metadata={"input": True})
     param2: int = attrs.field(init=False, metadata={"input": True})
-    param3: bool = attrs.field(init=False, metadata={"input": True})
     
     # Paths
     path1: Path = attrs.field(init=False, metadata={"input": True}, converter=Path)
@@ -101,6 +100,7 @@ These internal variables, like `variable` in our example below, are declared wit
 
 ```python
 import attrs
+import pandas as pd
 from pathlib import Path
 from nuremics import Process
 
@@ -110,19 +110,19 @@ class OneProc(Process):
     # Parameters
     param1: float = attrs.field(init=False, metadata={"input": True})
     param2: int = attrs.field(init=False, metadata={"input": True})
-    param3: bool = attrs.field(init=False, metadata={"input": True})
     
     # Paths
     path1: Path = attrs.field(init=False, metadata={"input": True}, converter=Path)
 
     # Internal
-    variable: float = attrs.field(init=False)
+    variable: pd.DataFrame = attrs.field(init=False)
 ```
 
 The operations executed by the **Proc** are finally implemented as elementary functions, which are then sequentially called within the `__call__()` method to define the overall logic of the **Proc**.
 
 ```python
 import attrs
+import pandas as pd
 from pathlib import Path
 from nuremics import Process
 
@@ -132,32 +132,23 @@ class OneProc(Process):
     # Parameters
     param1: float = attrs.field(init=False, metadata={"input": True})
     param2: int = attrs.field(init=False, metadata={"input": True})
-    param3: bool = attrs.field(init=False, metadata={"input": True})
     
     # Paths
     path1: Path = attrs.field(init=False, metadata={"input": True}, converter=Path)
 
     # Internal
-    variable: float = attrs.field(init=False)
+    variable: pd.DataFrame = attrs.field(init=False)
 
     def __call__(self):
         super().__call__()
 
         self.operation1()
         self.operation2()
-        self.operation3()
-        self.operation4()
     
     def operation1(self):
         # </> your code </>
 
     def operation2(self):
-        # </> your code </>
-
-    def operation3(self):
-        # </> your code </>
-
-    def operation4(self):
         # </> your code </>
 ```
 
@@ -167,6 +158,7 @@ Using the dictionary syntax `self.output_paths["out1"]` effectively declares an 
 
 ```python
 import attrs
+import pandas as pd
 from pathlib import Path
 from nuremics import Process
 
@@ -176,37 +168,28 @@ class OneProc(Process):
     # Parameters
     param1: float = attrs.field(init=False, metadata={"input": True})
     param2: int = attrs.field(init=False, metadata={"input": True})
-    param3: bool = attrs.field(init=False, metadata={"input": True})
     
     # Paths
     path1: Path = attrs.field(init=False, metadata={"input": True}, converter=Path)
 
     # Internal
-    variable: float = attrs.field(init=False)
+    variable: pd.DataFrame = attrs.field(init=False)
 
     def __call__(self):
         super().__call__()
 
         self.operation1()
         self.operation2()
-        self.operation3()
-        self.operation4()
     
     def operation1(self):
-        # </> your code </>
-
-    def operation2(self):
-        # </> your code </>
-
-    def operation3(self):
         # </> your code </>
         file = self.output_paths["out1"]
         # </> Write file </>
 
-    def operation4(self):
+    def operation2(self):
         # </> your code </>
-        folder = self.output_paths["out2"]
-        # </> Write folder </>
+        file = self.output_paths["out2"]
+        # </> Write file </>
 ```
 
 Even though **Procs** are not intended to be executed independently by end-users, they are still designed with the possibility to run _out of the box_. This allows developers to easily execute them during the development phase or when implementing dedicated unit tests for a specific **Proc**.
@@ -214,8 +197,8 @@ Even though **Procs** are not intended to be executed independently by end-users
 In such cases, it is important to set `set_inputs=True` when instantiating the **Proc**, to explicitly inform the **NUREMICS®** framework that the input data are being provided manually, outside of any workflow context.
 
 ```python
-import os
 import attrs
+import pandas as pd
 from pathlib import Path
 from nuremics import Process
 
@@ -225,37 +208,28 @@ class OneProc(Process):
     # Parameters
     param1: float = attrs.field(init=False, metadata={"input": True})
     param2: int = attrs.field(init=False, metadata={"input": True})
-    param3: bool = attrs.field(init=False, metadata={"input": True})
     
     # Paths
     path1: Path = attrs.field(init=False, metadata={"input": True}, converter=Path)
 
     # Internal
-    variable: float = attrs.field(init=False)
+    variable: pd.DataFrame = attrs.field(init=False)
 
     def __call__(self):
         super().__call__()
 
         self.operation1()
         self.operation2()
-        self.operation3()
-        self.operation4()
     
     def operation1(self):
-        # </> your code </>
-
-    def operation2(self):
-        # </> your code </>
-
-    def operation3(self):
         # </> your code </>
         file = self.output_paths["out1"]
         # </> Write file </>
 
-    def operation4(self):
+    def operation2(self):
         # </> your code </>
-        folder = self.output_paths["out2"]
-        # </> Write folder </>
+        file = self.output_paths["out2"]
+        # </> Write file </>
 
 if __name__ == "__main__":
     
@@ -269,7 +243,6 @@ if __name__ == "__main__":
     dict_inputs = {
         "param1": ...,
         "param2": ...,
-        "param3": ...,
         "path1": ...,
     }
     
@@ -278,7 +251,8 @@ if __name__ == "__main__":
         dict_inputs=dict_inputs,
         set_inputs=True,
     )
-    process.output_paths["out1"] = "output1.txt"
+    process.output_paths["out1"] = "output1.csv"
+    process.output_paths["out2"] = "output2.png"
 
     # Run process
     process()
