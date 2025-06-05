@@ -118,7 +118,7 @@ class OneProc(Process):
 if __name__ == "__main__":
     
     # Define working directory
-    working_dir = Path(os.environ["WORKING_DIR"]) / "ONE_APP/Study1/1_OneProc/Test1"
+    working_dir = Path(os.environ["WORKING_DIR"])/"ONE_APP/Study1/1_OneProc/Test1"
 
     # Go to working directory
     os.chdir(working_dir)
