@@ -14,7 +14,7 @@ erDiagram
   **Paths** {
     file path1 "txt"
   }
-  **AnotherProc** {
+  **OneProc** {
     function operation1
     function operation2
   }
@@ -24,39 +24,33 @@ erDiagram
   }
 ```
 
----
-
 ## Description
 
 Process to generate and plot a regular polygon shape.
 
 This class executes a two-step pipeline:
-- **operation1:** Generate the 2D coordinates of a regular polygon (given radius and number of sides).
-- **operation2:** Plot the shape with a title read from an external file.
+- **`operation1`**
+    Generate the 2D coordinates of a regular polygon (given radius and number of sides).
+- **`operation2`**
+    Plot the shape with a title read from an external file.
 
----
+## Input Parameter(s)
 
-### Input Parameter(s)
+- **`param1`**
+    Radius of the polygon.
 
-- **param1**
-Radius of the polygon.
+- **`param2`** 
+    Number of sides of the polygon.
 
-- **param2** 
-Number of sides of the polygon.
+## Input Path(s)
 
----
+- **`path1`**  
+    Path to a text file containing the plot title.
 
-### Input Path(s)
+## Output Path(s)
 
-- **path1**  
-Path to a text file containing the plot title.
+- **`out1`** 
+    File containing the X/Y coordinates of the polygon vertices.
 
----
-
-### Output Path(s)
-
-- **out1** 
-File containing the X/Y coordinates of the polygon vertices.
-
-- **out2**
-Image of the plotted polygon figure
+- **`out2`**
+    Image of the plotted polygon figure
