@@ -12,11 +12,12 @@ class OneProc(Process):
     """
     Process to generate and plot a regular polygon shape.
 
-    This class executes a two-step pipeline:
-    - operation1
-        Generate the 2D coordinates of a regular polygon (given radius and number of sides).
-    - operation2
-        Plot the shape with a title read from an external file.
+    Pipeline
+    --------
+        1. operation1
+            Generate the 2D coordinates of a regular polygon (given radius and number of sides).
+        2. operation2
+            Plot the shape with a title read from an external file.
 
     Input parameters
     ----------------
@@ -94,6 +95,7 @@ class OneProc(Process):
         Uses
         ----
             path1
+            variable
 
         Generates
         ---------
