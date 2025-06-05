@@ -10,7 +10,7 @@ from procs.OneProc import utils
 @attrs.define
 class OneProc(Process):
     """
-    Process to generate and plot a regular polygon shape.
+    Generate and plot a regular polygon shape.
 
     Pipeline
     --------
