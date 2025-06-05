@@ -33,7 +33,7 @@ class AnotherProc(Process):
     -----------
         path1 : json
             File containing initial conditions (v0, h0, angle).
-        path2 : directory
+        path2 : folder
             'solver_config.json' : File containing the parameters for solver configuration.
             'display_config.json' : File containing the parameters for display configuration.
         path3 : csv
@@ -54,7 +54,7 @@ class AnotherProc(Process):
 
     Outputs (stored in self.output_paths)
     -------
-        out1 : directory
+        out1 : folder
             'results.xlsx' : File containing model and theoritical trajectories.
             'model_vs_theory.png' : Image comparing both trajectories.
     """
