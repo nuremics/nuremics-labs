@@ -142,7 +142,7 @@ class AnotherProc(Process):
 
     def operation2(self):
         """
-        Compute the analytical trajectory and save results to Excel.
+        Compute the theoretical trajectory using analytical equations.
 
         Uses
         ----
@@ -185,7 +185,7 @@ class AnotherProc(Process):
     
     def operation3(self):
         """
-        Plot the comparison between model and theory.
+        Plot and save the comparison between simulated and theoretical trajectories.
 
         Uses
         ----
