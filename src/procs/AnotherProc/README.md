@@ -13,7 +13,7 @@ erDiagram
   }
   **Paths** {
     file path1 "json"
-    file path2 "directory"
+    folder path2 "_"
     file path3 "csv"
   }
   **AnotherProc** {
@@ -22,7 +22,7 @@ erDiagram
     function operation3
   }
   **Outputs** {
-    file out1 "directory"
+    folder out1 "_"
   }
 ```
 
