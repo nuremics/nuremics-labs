@@ -331,7 +331,7 @@ if __name__ == "__main__":
     # ------------------------ #
     # Define working directory #
     # ------------------------ #
-    working_dir = Path(...)
+    working_dir = Path(os.environ["WORKING_DIR"])
 
     # -------------- #
     # Define studies #
@@ -385,7 +385,7 @@ if __name__ == "__main__":
     # ------------------------ #
     # Define working directory #
     # ------------------------ #
-    working_dir = Path(...)
+    working_dir = Path(os.environ["WORKING_DIR"])
 
     # -------------- #
     # Define studies #
@@ -457,7 +457,7 @@ if __name__ == "__main__":
     # ------------------------ #
     # Define working directory #
     # ------------------------ #
-    working_dir = Path(...)
+    working_dir = Path(os.environ["WORKING_DIR"])
 
     # -------------- #
     # Define studies #
@@ -522,8 +522,6 @@ ONE_APP_____
             |_____OneProc_____
             |                 |_____operation1
             |                 |_____operation2
-            |                 |_____operation3
-            |                 |_____operation4
             |
             |_____AnotherProc_____
                                   |_____operation1
@@ -555,8 +553,6 @@ ONE_APP_____
             |_____OneProc_____
             |                 |_____operation1
             |                 |_____operation2
-            |                 |_____operation3
-            |                 |_____operation4
             |
             |_____AnotherProc_____(X)
 
@@ -583,7 +579,6 @@ If any **input parameters** are missing, they are explicitly listed, and the dev
 > Input Parameter(s) :
 (float) param1 -----||----- Not defined (X)
 (int)   param2 -----||----- Not defined (X)
-(bool)  param3 -----||----- Not defined (X)
 
 (X) Please define all input parameters either in "user_params" or "hard_params".
 ```
@@ -609,11 +604,10 @@ def main(
         {
             "process": OneProc,
             "user_params": {
-                "param1": "parameter1",
-                "param3": "parameter2",
+                "param2": "parameter1",
             },
             "hard_params": {
-                "param2": 14,
+                "param1": 0.5,
             },
         },
         {
@@ -638,7 +632,7 @@ if __name__ == "__main__":
     # ------------------------ #
     # Define working directory #
     # ------------------------ #
-    working_dir = Path(...)
+    working_dir = Path(os.environ["WORKING_DIR"])
 
     # -------------- #
     # Define studies #
@@ -665,9 +659,8 @@ However, it now reports that one or more **input paths** are missing. These are 
 ```shell
 | OneProc |
 > Input Parameter(s) :
-(float) param1 -----||----- parameter1 (user_params)
-(int)   param2 -----||----- 14         (hard_params)
-(bool)  param3 -----||----- parameter2 (user_params)
+(float) param1 -----||----- 0.5        (hard_params)
+(int)   param2 -----||----- parameter1 (user_params)
 > Input Path(s) :
 path1 -----||----- Not defined (X)
 
@@ -695,11 +688,10 @@ def main(
         {
             "process": OneProc,
             "user_params": {
-                "param1": "parameter1",
-                "param3": "parameter2",
+                "param2": "parameter1",
             },
             "hard_params": {
-                "param2": 14,
+                "param1": 0.5,
             },
             "user_paths": {
                 "path1": "input1.txt",
@@ -727,7 +719,7 @@ if __name__ == "__main__":
     # ------------------------ #
     # Define working directory #
     # ------------------------ #
-    working_dir = Path(...)
+    working_dir = Path(os.environ["WORKING_DIR"])
 
     # -------------- #
     # Define studies #
@@ -754,13 +746,13 @@ However, it now reports that one or more **output paths** are missing. These are
 ```shell
 | OneProc |
 > Input Parameter(s) :
-(float) param1 -----||----- parameter1 (user_params)
-(int)   param2 -----||----- 14         (hard_params)
-(bool)  param3 -----||----- parameter2 (user_params)
+(float) param1 -----||----- 0.5        (hard_params)
+(int)   param2 -----||----- parameter1 (user_params)
 > Input Path(s) :
 path1 -----||----- input1.txt (user_paths)
 > Output Path(s) :
 out1 -----||----- Not defined (X)
+out2 -----||----- Not defined (X)
 
 (X) Please define all output paths in "output_paths".
 ```
@@ -788,34 +780,34 @@ def main(
         {
             "process": OneProc,
             "user_params": {
-                "param1": "parameter1",
-                "param3": "parameter2",
+                "param2": "parameter1",
             },
             "hard_params": {
-                "param2": 14,
+                "param1": 0.5,
             },
             "user_paths": {
                 "path1": "input1.txt",
             },
             "output_paths": {
                 "out1": "output1.csv",
-                "out2": "output2",
+                "out2": "output2.png",
             },
         },
         {
             "process": AnotherProc,
             "user_params": {
-                "param1": "parameter3",
-                "param2": "parameter4",
+                "param1": "parameter2",
+                "param2": "parameter3",
             },
             "user_paths": {
-                "path1": "input2",
+                "path1": "input2.json",
+                "path2": "input3",
             },
-            "required_paths":{
-                "path2": "output1.csv",
+            "required_paths": {
+                "path3": "output1.csv",
             },
             "output_paths": {
-                "out1": "output3.vtk",
+                "out1": "output3",
             },
         },
     ]
@@ -837,7 +829,7 @@ if __name__ == "__main__":
     # ------------------------ #
     # Define working directory #
     # ------------------------ #
-    working_dir = Path(...)
+    working_dir = Path(os.environ["WORKING_DIR"])
 
     # -------------- #
     # Define studies #
@@ -862,24 +854,24 @@ With all required mappings now properly defined for each **Proc**, the **App** c
 ```shell
 | OneProc |
 > Input Parameter(s) :
-(float) param1 -----||----- parameter1 (user_params)
-(int)   param2 -----||----- 14         (hard_params)
-(bool)  param3 -----||----- parameter2 (user_params)
+(float) param1 -----||----- 0.5        (hard_params)
+(int)   param2 -----||----- parameter1 (user_params)
 > Input Path(s) :
 path1 -----||----- input1.txt (user_paths)
 > Output Path(s) :
 out1 -----||----- output1.csv (output_paths)
-out2 -----||----- output2     (output_paths)
+out2 -----||----- output2.png (output_paths)
 
 | AnotherProc |
 > Input Parameter(s) :
-(int) param1 -----||----- parameter3 (user_params)
-(str) param2 -----||----- parameter4 (user_params)
+(float) param1 -----||----- parameter2 (user_params)
+(float) param2 -----||----- parameter3 (user_params)
 > Input Path(s) :
-path1 -----||----- input2      (user_paths)
-path2 -----||----- output1.csv (required_paths)
+path1 -----||----- input2.json (user_paths)
+path2 -----||----- input3      (user_paths)
+path3 -----||----- output1.csv (required_paths)
 > Output Path(s) :
-out1 -----||----- output3.vtk (output_paths)
+out1 -----||----- output3 (output_paths)
 ```
 
 As the **App** has now been fully assembled, **NUREMICS®** displays a clean summary of its I/O interface, as it will appear to the end-user.
@@ -891,20 +883,20 @@ This summary includes all declared user parameters and user paths required as in
 > INPUTS <
 
 | User Parameters |
-> parameter1 (float)
-> parameter2 (bool)
-> parameter3 (int)
-> parameter4 (str)
+> parameter1 (int)
+> parameter2 (float)
+> parameter3 (float)
 
 | User Paths |
 > input1.txt
-> input2
+> input2.json
+> input3
 
 > OUTPUTS <
 
 > output1.csv
-> output2
-> output3.vtk
+> output2.png
+> output3
 ```
 
 With all **Procs** implemented and properly assembled within the **App**, the development work is now complete. The developer’s responsibility ends here (excluding, of course, the implementation of unit tests to ensure long-term maintainability, which falls outside the scope of this tutorial).
