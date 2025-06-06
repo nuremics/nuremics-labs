@@ -78,9 +78,9 @@ erDiagram
 ```mermaid
 erDiagram
   **ONE_APP** ||--|| **analysis** : mapping
-  **analysis** ||--|| **AnalysisProc** : mapping
+  **output_analysis** ||--|| **AnalysisProc** : mapping
 
-  **analysis** {
+  **output_analysis** {
     folder out1 "output3"
   }
 ```
