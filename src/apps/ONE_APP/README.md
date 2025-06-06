@@ -113,10 +113,26 @@ flowchart LR
   ONE_APP --> **OUTPUTS**
 ```
 
-### Inputs
+### INPUTS
 
 #### Parameters
 
+- **`parameter1`:** Number of sides of the polygon.
+- **`parameter2`:** Acceleration due to gravity (can be positive or negative).
+- **`parameter3`:** Mass of the projectile (used in the simulation).
+
 #### Paths
 
-### Outputs
+- **`input1.txt`:** File containing the plot title.
+- **`input2.json`:** File containing initial conditions (v0, h0, angle).
+- **`input3/`** 
+  - **`solver_config.json`:** File containing the parameters for solver configuration.
+  - **`display_config.json`:** File containing the parameters for display configuration.
+
+### OUTPUTS
+
+- **`output1.csv`:** File containing the X/Y coordinates of the polygon vertices.
+- **`output2.png`:** Image of the plotted polygon figure.
+- **`output3/`**
+  - **`results.xlsx`:** File containing model and theoritical trajectories.
+  - **`model_vs_theory.png`:** Image comparing both trajectories.
