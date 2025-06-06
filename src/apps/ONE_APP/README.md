@@ -83,7 +83,7 @@ erDiagram
   **output_paths** ||--|| **AnalysisProc** : mapping
 
   **output_analysis** {
-    folder out1 "output3"
+    folder analysis1 "output3"
   }
   **output_paths** {
     file out1 "output4.png"
