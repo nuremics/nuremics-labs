@@ -77,11 +77,16 @@ erDiagram
 
 ```mermaid
 erDiagram
+  **ONE_APP** ||--|| **output_paths** : mapping
   **ONE_APP** ||--|| **output_analysis** : mapping
   **output_analysis** ||--|| **AnalysisProc** : mapping
+  **output_paths** ||--|| **AnalysisProc** : mapping
 
   **output_analysis** {
     folder out1 "output3"
+  }
+  **output_paths** {
+    file out1 "output4.png"
   }
 ```
 
@@ -112,6 +117,7 @@ flowchart LR
     out1["output1.csv _(file)_"]
     out2["output2.png _(file)_"]
     out3["output3 _(folder)_"]
+    out4["output4.png _(file)_"]
   end
 
   **INPUTS** --> ONE_APP["**ONE_APP**"]
@@ -141,3 +147,4 @@ flowchart LR
 - **`output3/`**
   - **`results.xlsx`:** File containing model and theoritical trajectories.
   - **`model_vs_theory.png`:** Image comparing both trajectories.
+- **`output4.png`:** Image comparing both trajectories across all experiments.
