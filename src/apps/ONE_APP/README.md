@@ -78,15 +78,15 @@ erDiagram
 ```mermaid
 erDiagram
   **ONE_APP** ||--|| **output_paths** : mapping
-  **ONE_APP** ||--|| **output_analysis** : mapping
-  **output_analysis** ||--|| **AnalysisProc** : mapping
+  **ONE_APP** ||--|| **overall_analysis** : mapping
   **output_paths** ||--|| **AnalysisProc** : mapping
+  **overall_analysis** ||--|| **AnalysisProc** : mapping
 
-  **output_analysis** {
-    folder analysis1 "output3"
-  }
   **output_paths** {
     file out1 "output4.png"
+  }
+  **overall_analysis** {
+    folder analysis1 "output3"
   }
 ```
 
