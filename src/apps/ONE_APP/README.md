@@ -77,7 +77,7 @@ erDiagram
 
 ```mermaid
 erDiagram
-  **ONE_APP** ||--|| **analysis** : mapping
+  **ONE_APP** ||--|| **output_analysis** : mapping
   **output_analysis** ||--|| **AnalysisProc** : mapping
 
   **output_analysis** {
