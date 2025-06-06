@@ -17,14 +17,14 @@ The **NUREMICS®** project is organized into two complementary repositories:
 - **`nuremics`**:
 This repository is the core Python library, installable via `pip install`. It provides the foundational components to create modular and extensible software workflows.
 
-- **`nuremics-apps`** _(current repository)_:
-This repository contains examples of end-user applications built using the **NUREMICS®** framework. It is intended to be **forked** by developers to initiate their own `nuremics-apps` project and build custom applications tailored to their specific use cases.
+- **`nuremics-labs`** _(current repository)_:
+This repository contains examples of end-user applications built using the **NUREMICS®** framework. It is intended to be **forked** by developers to initiate their own `nuremics-labs` project and build custom applications tailored to their specific use cases.
 
-Readers are invited to begin their exploration of the **NUREMICS®** project with the [`nuremics`](https://github.com/nuremics/nuremics) repository, to understand the core framework and its foundational concepts. Once you're familiar with the underlying logic, this `nuremics-apps` repository will guide you deeper into the code, showing how to develop your own **NUREMICS®** applications, and operate them both as a developer and as an end-user.
+Readers are invited to begin their exploration of the **NUREMICS®** project with the [`nuremics`](https://github.com/nuremics/nuremics) repository, to understand the core framework and its foundational concepts. Once you're familiar with the underlying logic, this `nuremics-labs` repository will guide you deeper into the code, showing how to develop your own **NUREMICS®** applications, and operate them both as a developer and as an end-user.
 
 ## Installation
 
-Once the present `nuremics-apps` repository has been forked and cloned to your local machine, installation proceeds as follows:
+Once the present `nuremics-labs` repository has been forked and cloned to your local machine, installation proceeds as follows:
 
 1. **(Recommended) Create a dedicated coding environment.** While not mandatory, using [micromamba](https://mamba.readthedocs.io/en/latest/installation/micromamba-installation.html) is highly recommended for fast, reproducible, and lightweight environment management:
 
@@ -39,10 +39,10 @@ micromamba activate nrs-env
 pip install -r requirements.txt
 ```
 
-3. **Set the environment variable.** Add the absolute path of the `src` directory from your cloned `nuremics-apps` repository to the `PYTHONPATH` environment variable of your local system. If `PYTHONPATH` does not already exist, please create it. This allows Python to locate all project modules correctly.
+3. **Set the environment variable.** Add the absolute path of the `src` directory from your cloned `nuremics-labs` repository to the `PYTHONPATH` environment variable of your local system. If `PYTHONPATH` does not already exist, please create it. This allows Python to locate all project modules correctly.
 
 ```bash
-/absolute/path/to/nuremics-apps/src
+/absolute/path/to/nuremics-labs/src
 ```
 
 4. **(Optional) Define a default working directory.** It is also suggested to define another environment variable named `WORKING_DIR`, which serves as the default root folder where all your **Apps** write their results. This becomes particularly useful when working on multiple **Apps**, as it allows you to consistently manage output locations across your projects.
@@ -909,7 +909,7 @@ With all **Procs** implemented and properly assembled within the **App**, the de
 
 The **App** is now fully functional and ready to be operated by end-users. From this point, users can interact with the **App** through its declared I/O interface, without needing to modify or understand the underlying code structure.
 
-**Note:** The complete source code of the `ONE_APP` **App**, as assembled and executed throughout this tutorial, is available in the repository under `src/apps/ONE_APP/system.py`.
+**Note:** The complete source code of the `ONE_APP` **App**, as assembled and executed throughout this tutorial, is available in the repository under `src/apps/ONE_APP`.
 
 <!---
 
