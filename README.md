@@ -2,7 +2,7 @@
 
 # NUREMICS® _LABS_
 
-**NUREMICS® is an open-source Python™ framework for developing software-grade scientific workflows:**
+**NUREMICS® is an open-source Python™ framework for developing software-grade scientific workflows.**<br>
 🧠 Code like a scientist — build like an engineer.<br>
 🧩 Modular workflows — no more tangled scripts.<br>
 🧪 Parametric exploration — configuration over code.<br>
