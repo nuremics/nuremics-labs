@@ -77,7 +77,12 @@ erDiagram
 
 ```mermaid
 erDiagram
-  **ONE_APP** ||--|| **AnalysisProc** : mapping
+  **ONE_APP** ||--|| **analysis** : mapping
+  **analysis** ||--|| **AnalysisProc** : mapping
+
+  **analysis** {
+    folder out1 "output3"
+  }
 ```
 
 ## I/O Interface
