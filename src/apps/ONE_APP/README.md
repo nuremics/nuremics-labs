@@ -1,0 +1,122 @@
+## Diagram
+
+```mermaid
+flowchart BT
+  **OneProc** e1@--1--o **ONE_APP**
+  **AnotherProc** e2@--2--o **ONE_APP**
+  **AnalysisProc** e3@--3--o **ONE_APP**
+  e1@{ animate: true }
+  e2@{ animate: true }
+  e3@{ animate: true }
+```
+
+## Description
+
+Simulate a projectile trajectory and compare it with the analytical solution.
+
+## Workflow
+
+1. **`OneProc`:** Generate and plot a regular polygon shape.
+2. **`AnotherProc`:** Simulate a projectile trajectory and compare it with the analytical solution.
+3. **`AnalysisProc`:** Plot and save the comparison between simulated and theoretical trajectories.
+
+## Mapping
+
+```mermaid
+erDiagram
+  **ONE_APP** ||--|| **user_params** : mapping
+  **ONE_APP** ||--|| **hard_params** : mapping
+  **ONE_APP** ||--|| **user_paths** : mapping
+  **ONE_APP** ||--|| **output_paths** : mapping
+  **user_params** ||--|| **OneProc** : mapping
+  **hard_params** ||--|| **OneProc** : mapping
+  **user_paths** ||--|| **OneProc** : mapping
+  **output_paths** ||--|| **OneProc** : mapping
+
+  **user_params** {
+    int param2 "parameter1"
+  }
+  **hard_params** {
+    float param1 "0.5"
+  }
+  **user_paths** {
+    file path1 "input1.txt"
+  }
+  **output_paths** {
+    file out1 "output1.csv"
+    file out2 "output2.png"
+  }
+```
+
+```mermaid
+erDiagram
+  **ONE_APP** ||--|| **user_params** : mapping
+  **ONE_APP** ||--|| **user_paths** : mapping
+  **ONE_APP** ||--|| **required_paths** : mapping
+  **ONE_APP** ||--|| **output_paths** : mapping
+  **user_params** ||--|| **AnotherProc** : mapping
+  **user_paths** ||--|| **AnotherProc** : mapping
+  **required_paths** ||--|| **AnotherProc** : mapping
+  **output_paths** ||--|| **AnotherProc** : mapping
+
+  **user_params** {
+    float param1 "parameter2"
+    float param2 "parameter3"
+  }
+  **user_paths** {
+    file path1 "input2.json"
+    folder path2 "input3"
+  }
+  **required_paths** {
+    file path3 "output1.csv"
+  }
+  **output_paths** {
+    folder out1 "output3"
+  }
+```
+
+```mermaid
+erDiagram
+  **ONE_APP** ||--|| **AnalysisProc** : mapping
+```
+
+## I/O Interface
+
+```mermaid
+flowchart LR
+  subgraph **INPUTS**
+    direction TB
+
+    subgraph **Paths**
+      direction LR
+      path1["input1.txt _(file)_"]
+      path2["input2.json _(file)_"]
+      path3["input3 _(folder)_"]
+    end
+
+    subgraph **Parameters**
+      direction LR
+      param1["parameter1 _(int)_"]
+      param2["parameter2 _(float)_"]
+      param3["parameter3 _(float)_"]
+    end
+  end
+
+  subgraph **OUTPUTS**
+    direction RL
+    out1["output1.csv _(file)_"]
+    out2["output2.png _(file)_"]
+    out3["output3 _(folder)_"]
+  end
+
+  **INPUTS** --> ONE_APP["**ONE_APP**"]
+  ONE_APP --> **OUTPUTS**
+```
+
+### Inputs
+
+#### Parameters
+
+#### Paths
+
+### Outputs
