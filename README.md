@@ -482,7 +482,7 @@ When running the **App**, **NUREMICS®** first provides the following terminal f
 
 - A structured overview of the assembled workflow, showing each registered **Proc**, its associated operations (functions), and their order of execution within the **App** workflow.
 
-🖥️
+🖥️🔄👤
 ```shell
                                                               0000000000000000000000
                                       000                  00000000000000000000000000
@@ -548,7 +548,7 @@ Let’s consider a case where the developer does not adhere to this enforced str
 
 In this situation, **NUREMICS®** will immediately raise a structural validation error and halt execution.
 
-🖥️
+🖥️🔄👤
 ```shell
 | Workflow |
 ONE_APP_____
@@ -577,7 +577,7 @@ At this stage, the system automatically verifies whether every required input/ou
 
 If any **input parameters** are missing, they are explicitly listed, and the developer is prompted to define them using either the `"user_params"` or `"hard_params"` key.
 
-🖥️
+🖥️🔄👤
 ```shell
 | OneProc |
 > Input Parameter(s) :
@@ -661,7 +661,7 @@ When running the **App** again, **NUREMICS®** detects that all required **input
 
 However, it now reports that one or more **input paths** are missing. These are explicitly listed, and the developer is prompted to define them using either the `"user_paths"` or `"required_paths"` key.
 
-🖥️
+🖥️🔄👤
 ```shell
 | OneProc |
 > Input Parameter(s) :
@@ -750,7 +750,7 @@ When running the **App** again, **NUREMICS®** detects that all required **input
 
 However, it now reports that one or more **output paths** are missing. These are explicitly listed, and the developer is prompted to define them using the `"output_paths"` key.
 
-🖥️
+🖥️🔄👤
 ```shell
 | OneProc |
 > Input Parameter(s) :
@@ -858,7 +858,7 @@ if __name__ == "__main__":
 
 With all required mappings now properly defined for each **Proc**, the **App** can be executed without raising any errors. **NUREMICS®** confirms that the full mapping is complete by prompting a summary for each **Proc**, indicating that all **input parameters**, **input paths**, and **output paths** have been successfully resolved.
 
-🖥️
+🖥️🔄👤
 ```shell
 | OneProc |
 > Input Parameter(s) :
@@ -886,7 +886,7 @@ As the **App** has now been fully assembled, **NUREMICS®** displays a clean sum
 
 This summary includes all declared user parameters and user paths required as inputs, along with the corresponding output files and folders that the **App** will generate. It serves as an explicit interface contract, allowing end-users to clearly understand what data they need to provide and what results to expect.
 
-🖥️
+🖥️🔄👤
 ```shell
 > INPUTS <
 
