@@ -53,5 +53,5 @@ Simulate a projectile trajectory and compare it with the analytical solution.
 ## Output Path(s)
 
 - **`out1/`**
-  - **`results.xlsx`:** File containing model and theoritical trajectories.
+  - **`results.xlsx`:** File containing simulated (model) and theoritical trajectories.
   - **`model_vs_theory.png`:** Image comparing both trajectories.

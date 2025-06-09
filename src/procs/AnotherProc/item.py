@@ -55,7 +55,7 @@ class AnotherProc(Process):
     Outputs (stored in self.output_paths)
     -------
         out1 : folder
-            'results.xlsx' : File containing model and theoritical trajectories.
+            'results.xlsx' : File containing simulated (model) and theoritical trajectories.
             'model_vs_theory.png' : Image comparing both trajectories.
     """
 
