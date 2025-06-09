@@ -34,7 +34,7 @@ Simulate a projectile trajectory and compare it with the analytical solution.
 
 1. **`operation1`:** Run the physical simulation of a projectile.
 2. **`operation2`:** Compute the theoretical trajectory using analytical equations.
-3. **`operation3`:** Plot and save the comparison between simulated and theoretical trajectories.
+3. **`operation3`:** Plot and save the comparison between simulated (model) and theoretical trajectories.
 
 
 ## Input Parameter(s)
