@@ -10,7 +10,7 @@ from procs.OneProc import utils
 @attrs.define
 class OneProc(Process):
     """
-    Generate and plot a regular polygon shape.
+    Generate and plot a regular 2D polygon shape.
 
     Pipeline
     --------
@@ -29,7 +29,7 @@ class OneProc(Process):
     Input paths
     -----------
         path1 : txt
-            File containing the plot title.
+            File containing the plot title of the 2D polygon shape.
 
     Internal variables
     ------------------

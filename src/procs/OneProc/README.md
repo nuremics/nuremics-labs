@@ -26,7 +26,7 @@ erDiagram
 
 ## Description
 
-Generate and plot a regular polygon shape.
+Generate and plot a regular 2D polygon shape.
 
 ## Pipeline
 
@@ -40,7 +40,7 @@ Generate and plot a regular polygon shape.
 
 ## Input Path(s)
 
-- **`path1`:** File containing the plot title.
+- **`path1`:** File containing the plot title of the 2D polygon shape.
 
 ## Output Path(s)
 
