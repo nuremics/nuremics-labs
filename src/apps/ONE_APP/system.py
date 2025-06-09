@@ -6,7 +6,7 @@ APP_NAME = "ONE_APP"
 from nuremics import Application
 from procs.OneProc.item import OneProc
 from procs.AnotherProc.item import AnotherProc
-from apps.ONE_APP.procs.AnalysisProc.item import AnalysisProc
+from procs.AnalysisProc.item import AnalysisProc
 
 
 def main(
@@ -52,14 +52,13 @@ def main(
         },
         {
             "process": AnalysisProc,
-            "analysis": {
-                "output3": {
-                    "add": True,
-                    "line": "--r",
-                    "label": "Model",
-                },
-            }
-        }
+            "overall_analysis": {
+                "analysis1": "output3",
+            },
+            "output_paths": {
+                "out1": "output4.png",
+            },
+        },
     ]
 
     # ------------------ #
@@ -88,9 +87,11 @@ if __name__ == "__main__":
     studies = [
         "Study1",
         "Study2",
-        "Study3",
     ]
 
+    # --------------- #
+    # Run application #
+    # --------------- #
     main(
         working_dir=working_dir,
         studies=studies,
