@@ -17,11 +17,11 @@ Generate and plot a regular 2D polygon shape to define the geometry of a project
 ## Workflow
 
 1. **`OneProc`:** Generate and plot a regular 2D polygon shape.<br>
-  1.1. **`operation1`:** Generate the 2D coordinates of a regular polygon (given radius and number of sides).
+  1.1. **`operation1`:** Generate the 2D coordinates of a regular polygon (given radius and number of sides).<br>
   1.2. **`operation2`:** Plot the shape with a title read from an external file.
 2. **`AnotherProc`:** Simulate a projectile trajectory and compare it with the analytical solution.<br>
-  2.1. **`operation1`:** Run the physical simulation of a projectile.
-  2.2. **`operation2`:** Compute the theoretical trajectory using analytical equations.
+  2.1. **`operation1`:** Run the physical simulation of a projectile.<br>
+  2.2. **`operation2`:** Compute the theoretical trajectory using analytical equations.<br>
   2.3. **`operation3`:** Plot and save the comparison between simulated (model) and theoretical trajectories.
 3. **`AnalysisProc`:** Compare simulated (model) and theoretical trajectories of a projectile across all experiments.<br>
   3.1. **`operation1`:** Generate overall comparative plot of simulated (model) and theoritical trajectories.
