@@ -921,7 +921,7 @@ This section assumes the job of the developer is done, and shifts the focus to t
 
 ### Define Working Environment
 
-Before running a **NUREMICS® App**, the end-user must first define the working environment in the `if __name__ == "__main__":` section of the **App**.
+Before running a **NUREMICS® App**, the operator must first define the working environment in the `if __name__ == "__main__":` section of the **App**.
 
 This setup step specifies two key elements:
 - **Working directory (`working_dir`):** The root path where all input/output data, logs, and results will be stored.
@@ -968,7 +968,7 @@ As the **App** is executed, a new folder named after the **App** is automaticall
 The name of this folder is derived from the name of the application (`APP_NAME`) as defined during its construction.
 
 📄 **Studies configuration file** (`studies.json`)<br>
-This file serves as a centralized configuration hub for each study, allowing the end-user to specify which input data remain fixed and which can vary across various experiments.
+This file serves as a centralized configuration hub for each study, allowing the operator to specify which input data remain fixed and which can vary across various experiments.
 
 ### Configure Studies
 
