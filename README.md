@@ -970,6 +970,7 @@ The name of this folder is derived from the name of the application (`APP_NAME`)
 📄 **Studies configuration file** (`studies.json`)<br>
 This file serves as a centralized configuration hub for each study, allowing the end-user to specify which input data remain fixed and which can vary across various experiments.
 
+📄 `studies.json`
 ```json
 {
     "Study1": {
@@ -1023,6 +1024,7 @@ The **NUREMICS®** terminal now provides feedback on the defined studies and hal
 
 Let's configure `Study1` by allowing only `parameter1` to vary (by assigning a `true` value in the `studies.json` file), and keeping all other input data fixed (by assigning `false` values in the `studies.json` file) across the study.
 
+📄 `studies.json`
 ```json
 {
     "Study1": {
@@ -1082,6 +1084,7 @@ At the next execution of the **App**, the **NUREMICS®** terminal now prompts th
 
 Let's this time configure `Study2` by allowing both `parameter3` and `input2.json` to vary, and keeping all other input data fixed across the study.
 
+📄 `studies.json`
 ```json
 {
     "Study1": {
