@@ -1284,6 +1284,38 @@ Let's thus set some values of `parameter1` for each defined dataset within the `
 > Test3 : (V) parameter1
 ```
 
+The same job must be done to set the input data for `Study2`.
+
+```bash
+<working_dir>/
+└── ONE_APP/
+    ├── studies.json
+    ├── Study1/
+    │   ├── 0_inputs/
+    │   │   ├── input1.txt
+    │   │   ├── input2.json
+    │   │   └── input3
+    │   │       ├── solver_config.json
+    │   │       └── display_config.json
+    │   ├── inputs.json
+    │   └── inputs.csv
+    └── Study2/
+        ├── 0_inputs/
+        │   ├── 0_datasets/
+        │   │   ├── Test1/
+        │   │   │   └── input2.json
+        │   │   ├── Test2/
+        │   │   │   └── input2.json
+        │   │   └── Test3/
+        │   │       └── input2.json
+        │   ├── input1.txt
+        │   └── input3
+        │       ├── solver_config.json
+        │       └── display_config.json
+        ├── inputs.json
+        └── inputs.csv
+```
+
 <!---
 
 ```bash
