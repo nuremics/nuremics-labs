@@ -1144,9 +1144,9 @@ Going back to the data tree generated within the defined `working_dir`, we can s
 ```bash
 <working_dir>/
 └── ONE_APP/
+    ├── studies.json
     ├── Study1/
-    ├── Study2/
-    └── studies.json
+    └── Study2/
 ```
 
 ### Set Input Data
@@ -1156,6 +1156,7 @@ Each study directory within the data tree now contains an initialized input data
 ```bash
 <working_dir>/
 └── ONE_APP/
+    ├── studies.json
     ├── Study1/
     │   ├── 0_inputs/
     │   ├── inputs.json
@@ -1167,10 +1168,87 @@ Each study directory within the data tree now contains an initialized input data
 ```
 
 This input database thus contains:
-:
 - **`0_inputs`:** This folder must contain the input files and/or folders defined as `"user_paths"`.
 - **`inputs.json`:** This file must contain the input parameters defined as _fixed_ `"user_params"`.
 - **`inputs.csv`:** This file must contain the input parameters defined as _variable_ `"user_params"`.
+
+At this stage of the **App** execution, the **NUREMICS®** terminal prompts that all _fixed_ input data must be set.
+
+👤🔄🖥️
+```shell
+> SETTINGS <
+
+| Study1 |
+> Common : (X) parameter2 (X) parameter3 (X) input1.txt (X) input2.json (X) input3
+
+(X) Please set inputs :
+> C:\Users\julie\Work\ONE_APP\Study1\inputs.json
+> C:\Users\julie\Work\ONE_APP\Study1\0_inputs\input1.txt
+> C:\Users\julie\Work\ONE_APP\Study1\0_inputs\input2.json
+> C:\Users\julie\Work\ONE_APP\Study1\0_inputs\input3
+```
+
+For the `Study1`, we are thus speaking about:
+- `parameter2` and `parameter3` within the `inputs.json` file.
+- `input1.txt`, `input2.json` and `input3` within the `0_inputs` folder.
+
+📄 `inputs.json`
+```json
+{
+    "parameter2": -9.81,
+    "parameter3": 1.0
+}
+```
+
+📄 `input1.txt`
+```
+This is my title
+```
+
+📄 `input2.json`
+```json
+{
+    "h0": 0.5,
+    "v0": 15.0,
+    "angle": 45.0
+}
+```
+
+📄 `input3/solver_config.json`
+```json
+{
+    "timestep": 0.01
+}
+```
+
+📄 `input3/display_config.json`
+```json
+{
+    "fps": 60,
+    "size": 800
+}
+```
+
+All _fixed_ input data have now been completed within the `Study1` input database.
+
+```bash
+<working_dir>/
+└── ONE_APP/
+    ├── studies.json
+    ├── Study1/
+    │   ├── 0_inputs/
+    │   │   ├── input1.txt
+    │   │   ├── input2.json
+    │   │   └── input3
+    │   │       ├── solver_config.json
+    │   │       └── display_config.json
+    │   ├── inputs.json
+    │   └── inputs.csv
+    └── Study2/
+        ├── 0_inputs/
+        ├── inputs.json
+        └── inputs.csv
+```
 
 <!---
 
