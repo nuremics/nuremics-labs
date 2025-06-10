@@ -925,7 +925,7 @@ Before running a **NUREMICS® App**, the operator must first define the working 
 
 This setup step specifies two key elements:
 - **Working directory (`working_dir`):** The root path where all input/output data, logs, and results will be stored.
-- **Study names (`studies`):** A list of identifiers corresponding to the different studies the user wants to run. Each study will be managed in its own dedicated folder under the working directory.
+- **Study names (`studies`):** A list of identifiers corresponding to the different studies the operator wants to run. Each study will be managed in its own dedicated folder under the working directory.
 
 ```python
 if __name__ == "__main__":
