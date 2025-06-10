@@ -1135,12 +1135,12 @@ Each study directory within the data tree now contains an initialized input data
         └── inputs.csv
 ```
 
-This input database thus contains:
+This input database contains:
 - **`0_inputs`:** This folder must contain the input files and/or folders defined as `"user_paths"`.
 - **`inputs.json`:** This file must contain the input parameters defined as _fixed_ `"user_params"`.
 - **`inputs.csv`:** This file must contain the input parameters defined as _variable_ `"user_params"`.
 
-At this stage of the **App** execution, the **NUREMICS®** terminal prompts that all _fixed_ input data must be set.
+At this stage of the **App** execution, the **NUREMICS®** terminal halts by indicating that all _fixed_ input data must be set.
 
 👤🔄🖥️
 ```shell
@@ -1150,13 +1150,13 @@ At this stage of the **App** execution, the **NUREMICS®** terminal prompts that
 > Common : (X) parameter2 (X) parameter3 (X) input1.txt (X) input2.json (X) input3
 
 (X) Please set inputs :
-> C:\Users\julie\Work\ONE_APP\Study1\inputs.json
-> C:\Users\julie\Work\ONE_APP\Study1\0_inputs\input1.txt
-> C:\Users\julie\Work\ONE_APP\Study1\0_inputs\input2.json
-> C:\Users\julie\Work\ONE_APP\Study1\0_inputs\input3
+> .../ONE_APP/Study1/inputs.json
+> .../ONE_APP/Study1/0_inputs\input1.txt
+> .../ONE_APP/Study1/0_inputs\input2.json
+> .../ONE_APP/Study1/0_inputs\input3
 ```
 
-For the `Study1`, we are thus speaking about:
+For the `Study1`, we are speaking about:
 - `parameter2` and `parameter3` within the `inputs.json` file.
 - `input1.txt`, `input2.json` and `input3` within the `0_inputs` folder.
 <br>
@@ -1170,13 +1170,13 @@ For the `Study1`, we are thus speaking about:
 ```
 <br>
 
-📄 `input1.txt`
+📄 `0_inputs/input1.txt`
 ```
 This is my title
 ```
 <br>
 
-📄 `input2.json`
+📄 `0_inputs/input2.json`
 ```json
 {
     "h0": 0.5,
@@ -1186,7 +1186,7 @@ This is my title
 ```
 <br>
 
-📄 `input3/solver_config.json`
+📄 `0_inputs/input3/solver_config.json`
 ```json
 {
     "timestep": 0.01
@@ -1194,7 +1194,7 @@ This is my title
 ```
 <br>
 
-📄 `input3/display_config.json`
+📄 `0_inputs/input3/display_config.json`
 ```json
 {
     "fps": 60,
@@ -1223,6 +1223,28 @@ All _fixed_ input data have now been completed within the `Study1` input databas
         ├── inputs.json
         └── inputs.csv
 ```
+
+At this stage of the **App** execution, the **NUREMICS®** terminal prompts that all _fixed_ input data are now properly set, but halts by indicating that datasets of _variable_ input data must be defined (to conduct various experiments).
+
+👤🔄🖥️
+```shell
+> SETTINGS <
+
+| Study1 |
+> Common : (V) parameter2 (V) parameter3 (V) input1.txt (V) input2.json (V) input3
+
+(X) Please define at least one dataset in file :
+> .../ONE_APP/Study1/inputs.csv
+```
+
+Let's define three datasets identified as `Test1`, `Test2` and `Test3` within the `input.csv` file.
+
+📄 `input.csv`
+ |  ID   | parameter1 |
+ |-------|------------|
+ | Test1 |            |
+ | Test2 |            |
+ | Test3 |            |
 
 <!---
 
