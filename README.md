@@ -964,10 +964,10 @@ As the **App** is executed, a new folder named after the **App** is automaticall
     └── studies.json
 ```
 
-📁 **App folder** (`ONE_APP/`)
+📁 **App folder** (`ONE_APP/`)<br>
 The name of this folder is derived from the name of the application (`APP_NAME`) as defined during its construction.
 
-📄 **studies.json**
+📄 **studies.json**<br>
 This file serves as a centralized configuration hub for each study, allowing the end-user to specify which input data remain fixed and which can vary across various experiments.
 
 ```json
@@ -1003,7 +1003,7 @@ This file serves as a centralized configuration hub for each study, allowing the
 
 ### Configure Studies
 
-As the **App** is executed, the **NUREMICS®** terminal provides new feedback about the defined studies, and stop execution by prompting that the first study needs to be configured.
+The **NUREMICS®** terminal is now providing a new feedback about the defined studies, and stop execution by prompting that the first study needs to be configured.
 
 ```shell
 > STUDIES <
