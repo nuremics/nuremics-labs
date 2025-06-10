@@ -1054,7 +1054,7 @@ Let's configure `Study1` by allowing only `parameter1` to vary (by assigning a `
 }
 ```
 
-At the next execution of the **App**, the **NUREMICS®** terminal now indicates that `Study1` is properly configured, but halts indicating that the second study `Study2` still requires configuration.
+At the next execution of the **App**, the **NUREMICS®** terminal now prompts that `Study1` is properly configured, but halts indicating that the second study `Study2` still requires configuration.
 
 👤🔄🖥️
 ```shell
@@ -1113,7 +1113,7 @@ Let's this time configure `Study2` by allowing both `parameter3` and `input2.jso
 }
 ```
 
-At the next execution of the **App**, the **NUREMICS®** terminal now indicates that both `Study1` and `Study2` are properly configured.
+At the next execution of the **App**, the **NUREMICS®** terminal now prompts that both `Study1` and `Study2` are properly configured.
 
 👤🔄🖥️
 ```shell
@@ -1134,6 +1134,16 @@ At the next execution of the **App**, the **NUREMICS®** terminal now indicates 
 (V) input1.txt is fixed.
 (V) input2.json is variable.
 (V) input3 is fixed.
+```
+
+Going back to the data tree generated within the defined `working_dir`, we can see that a specific folder for each study has been created.
+
+```bash
+<working_dir>/
+└── ONE_APP/
+    └── Study1/
+    └── Study2/
+    └── studies.json
 ```
 
 <!---
