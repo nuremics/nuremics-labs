@@ -1151,7 +1151,10 @@ Going back to the data tree generated within the defined `working_dir`, we can s
 
 ### Set Input Data
 
-Each study directory within the data tree now contains
+Each study directory within the data tree now contains an initialized input database that must be completed by the operator:
+- **`0_inputs`:** This folder must contain the input files and/or folders defined as `"user_paths"`.
+- **`inputs.json`:** This file must contain the input parameters defined as _fixed_ `"user_params"`.
+- **`inputs.csv`:** This file must contain the input parameters defined as _variable_ `"user_params"`.
 
 ```bash
 <working_dir>/
@@ -1161,6 +1164,9 @@ Each study directory within the data tree now contains
     │   ├── inputs.json
     │   └── inputs.csv
     └── Study2/
+        ├── 0_inputs/
+        ├── inputs.json
+        └── inputs.csv
 ```
 
 <!---
