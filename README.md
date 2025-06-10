@@ -1157,11 +1157,11 @@ Each study directory within the data tree now contains
 <working_dir>/
 └── ONE_APP/
     ├── Study1/
-    |   └── 0_inputs/
-    |   └── inputs.json
-    |   └── inputs.csv
-    ├── ...
-    └── ...
+    │   ├── 0_inputs/
+    │   ├── inputs.json
+    │   └── inputs.csv
+    └── Study2/
+```
 
 <!---
 
