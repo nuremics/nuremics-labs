@@ -1144,10 +1144,24 @@ Going back to the data tree generated within the defined `working_dir`, we can s
 ```bash
 <working_dir>/
 └── ONE_APP/
-    └── Study1/
-    └── Study2/
+    ├── Study1/
+    ├── Study2/
     └── studies.json
 ```
+
+### Set Input Data
+
+Each study directory within the data tree now contains
+
+```bash
+<working_dir>/
+└── ONE_APP/
+    ├── Study1/
+    |   └── 0_inputs/
+    |   └── inputs.json
+    |   └── inputs.csv
+    ├── ...
+    └── ...
 
 <!---
 
