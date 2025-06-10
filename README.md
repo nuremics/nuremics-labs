@@ -1240,11 +1240,49 @@ At this stage of the **App** execution, the **NUREMICS®** terminal prompts that
 Let's define three datasets identified as `Test1`, `Test2` and `Test3` within the `input.csv` file.
 
 📄 `input.csv`
- |  ID   | parameter1 |
- |-------|------------|
- | Test1 |            |
- | Test2 |            |
- | Test3 |            |
+|  ID   | parameter1 |
+|-------|------------|
+| Test1 |            |
+| Test2 |            |
+| Test3 |            |
+
+We can now see that **NUREMICS®** has properly identified the three defined datasets, but is waiting for the _variable_ input data `parameter2` to be set for each of them.
+
+👤🔄🖥️
+```shell
+ > SETTINGS <
+
+| Study1 |
+> Common : (V) parameter2 (V) parameter3 (V) input1.txt (V) input2.json (V) input3
+> Test1 : (X) parameter1
+> Test2 : (X) parameter1
+> Test3 : (X) parameter1
+
+(X) Please set inputs :
+> .../ONE_APP/Study1/inputs.csv
+```
+
+Let's thus set some values within the `input.csv` file.
+
+📄 `input.csv`
+|  ID   | parameter1 |
+|-------|------------|
+| Test1 |     3      |
+| Test2 |     4      |
+| Test3 |     5      |
+
+**NUREMICS®** finally prompts that all input data are properly set for `Study1`.
+
+👤🔄🖥️
+```shell
+> SETTINGS <
+
+| Study1 |
+> Common : (V) parameter2 (V) parameter3 (V) input1.txt (V) input2.json (V) input3
+> Test1 : (V) parameter1
+> Test2 : (V) parameter1
+> Test3 : (V) parameter1
+```
 
 <!---
 
