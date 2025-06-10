@@ -1115,6 +1115,7 @@ Let's this time configure `Study2` by allowing both `parameter3` and `input2.jso
 
 At the next execution of the **App**, the **NUREMICS®** terminal now indicates that both `Study1` and `Study2` are properly configured.
 
+👤🔄🖥️
 ```shell
 > STUDIES <
 
