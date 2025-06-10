@@ -967,7 +967,7 @@ As the **App** is executed, a new folder named after the **App** is automaticall
 📁 **App folder** (`ONE_APP/`)<br>
 The name of this folder is derived from the name of the application (`APP_NAME`) as defined during its construction.
 
-📄 **studies.json**<br>
+📄 **Studies configuration file** (`studies.json`)<br>
 This file serves as a centralized configuration hub for each study, allowing the end-user to specify which input data remain fixed and which can vary across various experiments.
 
 ```json
@@ -1003,8 +1003,9 @@ This file serves as a centralized configuration hub for each study, allowing the
 
 ### Configure Studies
 
-The **NUREMICS®** terminal is now providing a new feedback about the defined studies, and stop execution by prompting that the first study needs to be configured.
+The **NUREMICS®** terminal now provides feedback on the defined studies and halts execution, indicating that the first study `Study1` requires configuration.
 
+👤🔄🖥️
 ```shell
 > STUDIES <
 
@@ -1017,7 +1018,40 @@ The **NUREMICS®** terminal is now providing a new feedback about the defined st
 (X) input3 not configured.
 
 (X) Please configure file :
-> C:\Users\julie\Work\ONE_APP\studies.json
+> .../ONE_APP/studies.json
+```
+
+Let's configure `Study1` by allowing only `parameter1` to vary (by assigning a `true` value in the `studies.json` file), and keeping all other input data fixed (by assigning a `false` value in the `studies.json` file) across the study.
+
+```json
+{
+    "Study1": {
+        "execute": true,
+        "user_params": {
+            "parameter1": true,
+            "parameter2": false,
+            "parameter3": false
+        },
+        "user_paths": {
+            "input1.txt": false,
+            "input2.json": false,
+            "input3": false
+        }
+    },
+    "Study2": {
+        "execute": true,
+        "user_params": {
+            "parameter1": null,
+            "parameter2": null,
+            "parameter3": null
+        },
+        "user_paths": {
+            "input1.txt": null,
+            "input2.json": null,
+            "input3": null
+        }
+    }
+}
 ```
 
 <!---
