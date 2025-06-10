@@ -970,38 +970,6 @@ The name of this folder is derived from the name of the application (`APP_NAME`)
 📄 **Studies configuration file** (`studies.json`)<br>
 This file serves as a centralized configuration hub for each study, allowing the end-user to specify which input data remain fixed and which can vary across various experiments.
 
-📄 `studies.json`
-```json
-{
-    "Study1": {
-        "execute": true,
-        "user_params": {
-            "parameter1": null,
-            "parameter2": null,
-            "parameter3": null
-        },
-        "user_paths": {
-            "input1.txt": null,
-            "input2.json": null,
-            "input3": null
-        }
-    },
-    "Study2": {
-        "execute": true,
-        "user_params": {
-            "parameter1": null,
-            "parameter2": null,
-            "parameter3": null
-        },
-        "user_paths": {
-            "input1.txt": null,
-            "input2.json": null,
-            "input3": null
-        }
-    }
-}
-```
-
 ### Configure Studies
 
 The **NUREMICS®** terminal now provides feedback on the defined studies and halts execution, indicating that the first study `Study1` requires configuration.
@@ -1199,11 +1167,13 @@ For the `Study1`, we are thus speaking about:
     "parameter3": 1.0
 }
 ```
+<br>
 
 📄 `input1.txt`
 ```
 This is my title
 ```
+<br>
 
 📄 `input2.json`
 ```json
@@ -1213,6 +1183,7 @@ This is my title
     "angle": 45.0
 }
 ```
+<br>
 
 📄 `input3/solver_config.json`
 ```json
@@ -1220,6 +1191,7 @@ This is my title
     "timestep": 0.01
 }
 ```
+<br>
 
 📄 `input3/display_config.json`
 ```json
