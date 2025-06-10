@@ -1246,7 +1246,7 @@ Let's define three datasets identified as `Test1`, `Test2` and `Test3` within th
 | Test2 |            |
 | Test3 |            |
 
-We can now see that **NUREMICS®** has properly identified the three defined datasets, but is waiting for the _variable_ input data `parameter2` to be set for each of them.
+We can now see that **NUREMICS®** has properly identified the three defined datasets, but is waiting for the _variable_ input data `parameter1` to be set for each of them.
 
 👤🔄🖥️
 ```shell
@@ -1262,7 +1262,7 @@ We can now see that **NUREMICS®** has properly identified the three defined dat
 > .../ONE_APP/Study1/inputs.csv
 ```
 
-Let's thus set some values within the `input.csv` file.
+Let's thus set some values of `parameter1` for each defined dataset within the `input.csv` file.
 
 📄 `input.csv`
 |  ID   | parameter1 |
