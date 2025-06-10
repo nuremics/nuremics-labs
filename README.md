@@ -911,6 +911,70 @@ The **App** is now fully functional and ready to be operated by end-users. From 
 
 **Note:** The complete source code of the `ONE_APP` **App**, as assembled and executed throughout this tutorial, is available in the repository under [`src/apps/ONE_APP`](https://github.com/nuremics/nuremics-labs/tree/main/src/apps/ONE_APP).
 
+## Use App
+
+Now that the **App** has been fully implemented and assembled, this new section focuses on its usage from the end-user's perspective.
+
+We will demonstrate how to interact with a ready-to-use **NUREMICS® App**, including how to provide inputs, run the **App**, and retrieve the expected outputs, all without needing to understand its internal structure.
+
+This section assumes the job of the developer is done, and shifts the focus to the operational phase of the **App**.
+
+### Define Working Environment
+
+Before running a **NUREMICS® App**, the end-user must first define the working environment in the `if __name__ == "__main__":` section of the **App**.
+
+This setup step specifies two key elements:
+- **Working directory:** The root path where all input/output data, logs, and results will be stored.
+- **Study names:** A list of identifiers corresponding to the different studies the user wants to run. Each study will be managed in its own dedicated folder under the working directory.
+
+```python
+if __name__ == "__main__":
+    
+    # ------------------------ #
+    # Define working directory #
+    # ------------------------ #
+    working_dir = Path(os.environ["WORKING_DIR"])
+
+    # -------------- #
+    # Define studies #
+    # -------------- #
+    studies = [
+        "Study1",
+        "Study2",
+    ]
+
+    # --------------- #
+    # Run application #
+    # --------------- #
+    main(
+        working_dir=working_dir,
+        studies=studies,
+    )
+```
+
+In this example:
+- The working directory is read from the environment variable `WORKING_DIR` previously introduced.
+- The studies list contains the names of the studies you want to run. You can define as many studies as needed, each representing a self-contained parametric study.
+
+### Configure Studies
+
+As the **App** is executed, the **NUREMICS®** terminal provides new feedback about the defined studies, and stop execution by prompting that the first study needs to be configured.
+
+```shell
+> STUDIES <
+
+| Study1 |
+(X) parameter1 not configured.
+(X) parameter2 not configured.
+(X) parameter3 not configured.
+(X) input1.txt not configured.
+(X) input2.json not configured.
+(X) input3 not configured.
+
+(X) Please configure file :
+> C:\Users\julie\Work\ONE_APP\studies.json
+```
+
 <!---
 
 ```bash
