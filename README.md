@@ -1159,6 +1159,7 @@ At this stage of the **App** execution, the **NUREMICS®** terminal prompts that
 For the `Study1`, we are thus speaking about:
 - `parameter2` and `parameter3` within the `inputs.json` file.
 - `input1.txt`, `input2.json` and `input3` within the `0_inputs` folder.
+<br>
 
 📄 `inputs.json`
 ```json
@@ -1200,6 +1201,7 @@ This is my title
     "size": 800
 }
 ```
+<br>
 
 All _fixed_ input data have now been completed within the `Study1` input database.
 
