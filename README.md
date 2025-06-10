@@ -1021,7 +1021,7 @@ The **NUREMICS®** terminal now provides feedback on the defined studies and hal
 > .../ONE_APP/studies.json
 ```
 
-Let's configure `Study1` by allowing only `parameter1` to vary (by assigning a `true` value in the `studies.json` file), and keeping all other input data fixed (by assigning a `false` value in the `studies.json` file) across the study.
+Let's configure `Study1` by allowing only `parameter1` to vary (by assigning a `true` value in the `studies.json` file), and keeping all other input data fixed (by assigning `false` values in the `studies.json` file) across the study.
 
 ```json
 {
