@@ -265,7 +265,7 @@ if __name__ == "__main__":
     process.finalize()
 ```
 
-**Note:** The complete implementation of the `OneProc` **Proc**, as well as that of the `AnotherProc` **Proc** later used in this tutorial, can be found in the repository under [`src/procs/OneProc`](https://github.com/nuremics/nuremics-apps/tree/beta-version/src/procs/OneProc) and [`src/procs/AnotherProc`](https://github.com/nuremics/nuremics-apps/tree/beta-version/src/procs/AnotherProc), respectively.
+**Note:** The complete implementation of the `OneProc` **Proc**, as well as that of the `AnotherProc` **Proc** later used in this tutorial, can be found in the repository under [`src/procs/OneProc`](https://github.com/nuremics/nuremics-labs/tree/main/src/procs/OneProc) and [`src/procs/AnotherProc`](https://github.com/nuremics/nuremics-labs/tree/main/src/procs/AnotherProc), respectively.
 
 ### Assemble Procs into App
 
@@ -909,7 +909,7 @@ With all **Procs** implemented and properly assembled within the **App**, the de
 
 The **App** is now fully functional and ready to be operated by end-users. From this point, users can interact with the **App** through its declared I/O interface, without needing to modify or understand the underlying code structure.
 
-**Note:** The complete source code of the `ONE_APP` **App**, as assembled and executed throughout this tutorial, is available in the repository under `src/apps/ONE_APP`.
+**Note:** The complete source code of the `ONE_APP` **App**, as assembled and executed throughout this tutorial, is available in the repository under [`src/apps/ONE_APP`](https://github.com/nuremics/nuremics-labs/tree/main/src/apps/ONE_APP).
 
 <!---
 
