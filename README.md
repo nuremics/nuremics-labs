@@ -1054,6 +1054,87 @@ Let's configure `Study1` by allowing only `parameter1` to vary (by assigning a `
 }
 ```
 
+At the next execution of the **App**, the **NUREMICS®** terminal now indicates that `Study1` is properly configured, but halts indicating that the second study `Study2` still requires configuration.
+
+👤🔄🖥️
+```shell
+> STUDIES <
+
+| Study1 |
+(V) parameter1 is variable.
+(V) parameter2 is fixed.
+(V) parameter3 is fixed.
+(V) input1.txt is fixed.
+(V) input2.json is fixed.
+(V) input3 is fixed.
+
+| Study2 |
+(X) parameter1 not configured.
+(X) parameter2 not configured.
+(X) parameter3 not configured.
+(X) input1.txt not configured.
+(X) input2.json not configured.
+(X) input3 not configured.
+
+(X) Please configure file :
+> .../ONE_APP/studies.json
+```
+
+Let's this time configure `Study2` by allowing both `parameter3` and `input2.json` to vary, and keeping all other input data fixed across the study.
+
+```json
+{
+    "Study1": {
+        "execute": true,
+        "user_params": {
+            "parameter1": true,
+            "parameter2": false,
+            "parameter3": false
+        },
+        "user_paths": {
+            "input1.txt": false,
+            "input2.json": false,
+            "input3": false
+        }
+    },
+    "Study2": {
+        "execute": true,
+        "user_params": {
+            "parameter1": false,
+            "parameter2": false,
+            "parameter3": true
+        },
+        "user_paths": {
+            "input1.txt": false,
+            "input2.json": true,
+            "input3": false
+        }
+    }
+}
+```
+
+At the next execution of the **App**, the **NUREMICS®** terminal now indicates that both `Study1` and `Study2` are properly configured.
+
+```shell
+> STUDIES <
+
+| Study1 |
+(V) parameter1 is variable.
+(V) parameter2 is fixed.
+(V) parameter3 is fixed.
+(V) input1.txt is fixed.
+(V) input2.json is fixed.
+(V) input3 is fixed.
+
+| Study2 |
+(V) parameter1 is fixed.
+(V) parameter2 is fixed.
+(V) parameter3 is variable.
+(V) input1.txt is fixed.
+(V) input2.json is variable.
+(V) input3 is fixed.
+```
+
 <!---
 
 ```bash
