@@ -1320,6 +1320,7 @@ The same job must be done to set the input data for `Study2`.
         ├── inputs.json
         └── inputs.csv
 ```
+<br>
 
 Let's here consider the same _fixed_ input data `input1.txt` and `input3` as for the previous study `Study1`.
 
