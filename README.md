@@ -1539,4 +1539,4 @@ You can now start experimenting with the demo `ONE_APP` **NUREMICS® App**: add 
 From here, you're ready to build your custom **Apps** within your own `nuremics-labs` repository, tailored to your specific needs and use cases.
 
 🚀 This is your starting point to turn scientific ideas into robust, traceable, and reusable applications.<br>
-**May the source be with you** 🌌
+🌌 **May the source be with you.**
