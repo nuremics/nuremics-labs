@@ -1,4 +1,7 @@
 <img src="https://raw.githubusercontent.com/julien-siguenza/nuremics-data/main/assets/banner.jpg" alt="NUREMICS Banner" width="100%">
+<p align="left">
+  <img src="https://img.shields.io/badge/nuremics-0.0.0b0-007bff" />
+</p>
 
 # NUREMICS® _LABS_
 
