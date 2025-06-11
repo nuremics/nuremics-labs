@@ -1393,17 +1393,93 @@ Let's here consider the same _fixed_ input data `input1.txt` and `input3` as for
 > Test3 : (V) parameter3 (V) input2.json
 ```
 
-<!---
+### Get Results
 
-```bash
-output/
-├── process_item_1/
-    ├── Test1/
-    ├── Test2/
-    └── ...
-├── process_item_2/
-    ├── Test1/
-    ├── Test2/
-    └── ...
+**NUREMICS®** is now ready to run all the defined studies and generate the corresponding results.
+
+👤🔄🖥️
+```shell
+> RUNNING <
+
+| Study1 | OneProc | Test1 |
+> param2 = 3
+> param1 = 0.5
+> path1 = .../ONE_APP/Study1/0_inputs/input1.txt
+>>> START
+COMPLETED <<<
+
+| Study1 | OneProc | Test2 |
+> param2 = 4
+> param1 = 0.5
+> path1 = .../ONE_APP/Study1/0_inputs/input1.txt
+>>> START
+COMPLETED <<<
+
+| Study1 | OneProc | Test3 |
+> param2 = 5
+> param1 = 0.5
+> path1 = .../ONE_APP/Study1/0_inputs/input1.txt
+>>> START
+COMPLETED <<<
+
+| Study1 | AnotherProc | Test1 |
+> param1 = -9.81
+> param2 = 1.0
+> path1 = .../ONE_APP/Study1/0_inputs/input2.json
+> path2 = .../ONE_APP/Study1/0_inputs/input3
+> path3 = .../ONE_APP/Study1/1_OneProc/Test1/output1.csv
+>>> START
+COMPLETED <<<
+
+| Study1 | AnotherProc | Test2 |
+> param1 = -9.81
+> param2 = 1.0
+> path1 = .../ONE_APP/Study1/0_inputs/input2.json
+> path2 = .../ONE_APP/Study1/0_inputs/input3
+> path3 = .../ONE_APP/Study1/1_OneProc/Test2/output1.csv
+>>> START
+COMPLETED <<<
+
+| Study1 | AnotherProc | Test3 |
+> param1 = -9.81
+> param2 = 1.0
+> path1 = .../ONE_APP/Study1/0_inputs/input2.json
+> path2 = .../ONE_APP/Study1/0_inputs/input3
+> path3 = .../ONE_APP/Study1/1_OneProc/Test3/output1.csv
+>>> START
+COMPLETED <<<
+
+| Study2 | OneProc |
+> param2 = 4
+> param1 = 0.5
+> path1 = .../ONE_APP/Study2/0_inputs/input1.txt
+>>> START
+COMPLETED <<<
+
+| Study2 | AnotherProc | Test1 |
+> param2 = 1.0
+> param1 = -9.81
+> path2 = .../ONE_APP/Study2/0_inputs/input3
+> path1 = .../ONE_APP/Study2/0_inputs/0_datasets/Test1/input2.json
+> path3 = .../ONE_APP/Study2/1_OneProc/output1.csv
+>>> START
+COMPLETED <<<
+
+| Study2 | AnotherProc | Test2 |
+> param2 = 0.1
+> param1 = -9.81
+> path2 = .../ONE_APP/Study2/0_inputs/input3
+> path1 = .../ONE_APP/Study2/0_inputs/0_datasets/Test2/input2.json
+> path3 = .../ONE_APP/Study2/1_OneProc/output1.csv
+>>> START
+COMPLETED <<<
+
+| Study2 | AnotherProc | Test3 |
+> param2 = 0.05
+> param1 = -9.81
+> path2 = .../ONE_APP/Study2/0_inputs/input3
+> path1 = .../ONE_APP/Study2/0_inputs/0_datasets/Test3/input2.json
+> path3 = .../ONE_APP/Study2/1_OneProc/output1.csv
+>>> START
+COMPLETED <<<
 ```
---->
