@@ -1110,6 +1110,7 @@ At the next execution of the **App**, the **NUREMICS®** terminal now prompts th
 
 Going back to the data tree generated within the defined `working_dir`, we can see that a specific folder for each study has been created.
 
+👤👁️💾
 ```bash
 <working_dir>/
 └── ONE_APP/
@@ -1319,6 +1320,57 @@ The same job must be done to set the input data for `Study2`.
         ├── inputs.json
         └── inputs.csv
 ```
+
+Let's here consider the same _fixed_ input data `input1.txt` and `input3` as for the previous study `Study1`.
+<br>
+
+📄 `inputs.json`
+```json
+{
+    "parameter1": 4,
+    "parameter2": -9.81
+}
+```
+<br>
+
+📄 `input.csv`
+|  ID   | parameter3 |
+|-------|------------|
+| Test1 |    1.0     |
+| Test2 |    0.1     |
+| Test3 |    0.05    |
+
+<br>
+
+📄 `0_inputs/0_datasets/Test1/input2.json`
+```json
+{
+    "h0": 0.5,
+    "v0": 15.0,
+    "angle": 45.0
+}
+```
+<br>
+
+📄 `0_inputs/0_datasets/Test2/input2.json`
+```json
+{
+    "h0": 0.5,
+    "v0": 20.0,
+    "angle": 45.0
+}
+```
+<br>
+
+📄 `0_inputs/0_datasets/Test3/input2.json`
+```json
+{
+    "h0": 0.5,
+    "v0": 20.0,
+    "angle": 60.0
+}
+```
+<br>
 
 <!---
 
