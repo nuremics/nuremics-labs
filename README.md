@@ -1243,7 +1243,7 @@ At this stage of the **App** execution, the **NUREMICS®** terminal prompts that
 
 Let's define three datasets identified as `Test1`, `Test2` and `Test3` within the `input.csv` file.
 
-📄 `input.csv`
+📄 `inputs.csv`
 |  ID   | parameter1 |
 |-------|------------|
 | Test1 |            |
@@ -1268,7 +1268,7 @@ We can now see that **NUREMICS®** has properly identified the three defined dat
 
 Let's thus set some values of `parameter1` for each defined dataset within the `input.csv` file.
 
-📄 `input.csv`
+📄 `inputs.csv`
 |  ID   | parameter1 |
 |-------|------------|
 | Test1 |     3      |
@@ -1335,7 +1335,7 @@ Let's here consider the same _fixed_ input data `input1.txt` and `input3` as for
 ```
 <br>
 
-📄 `input.csv`
+📄 `inputs.csv`
 |  ID   | parameter3 |
 |-------|------------|
 | Test1 |    1.0     |
@@ -1373,6 +1373,25 @@ Let's here consider the same _fixed_ input data `input1.txt` and `input3` as for
 }
 ```
 <br>
+
+**NUREMICS®** is now prompting that all input data are properly set for both `Study1` and `Study2`.
+
+👤🔄🖥️
+```shell
+> SETTINGS <
+
+| Study1 |
+> Common : (V) parameter2 (V) parameter3 (V) input1.txt (V) input2.json (V) input3
+> Test1 : (V) parameter1
+> Test2 : (V) parameter1
+> Test3 : (V) parameter1
+
+| Study2 |
+> Common : (V) parameter1 (V) parameter2 (V) input1.txt (V) input3
+> Test1 : (V) parameter3 (V) input2.json
+> Test2 : (V) parameter3 (V) input2.json
+> Test3 : (V) parameter3 (V) input2.json
+```
 
 <!---
 
