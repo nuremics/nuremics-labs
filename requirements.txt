@@ -1,1 +1,6 @@
 git+https://github.com/nuremics/nuremics.git@beta-version#egg=nuremics
+matplotlib == 3.10.3
+pygame == 2.6.1
+pymunk == 7.0.1
+XlsxWriter == 3.2.3
+openpyxl == 3.1.5
