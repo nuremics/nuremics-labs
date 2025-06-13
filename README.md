@@ -1,6 +1,12 @@
 <img src="https://raw.githubusercontent.com/julien-siguenza/nuremics-data/main/assets/banner.jpg" alt="NUREMICS Banner" width="100%">
 <p align="left">
+  <img src="https://img.shields.io/badge/Python-3.12+-ffcd3b?style=flat&logo=python&logoColor=white" />
   <img src="https://img.shields.io/badge/nuremics-0.0.0b0-007bff" />
+  <img src="https://img.shields.io/badge/matplotlib-3.10.3-11557c" />
+  <img src="https://img.shields.io/badge/pygame-2.6.1-08df1c" />
+  <img src="https://img.shields.io/badge/pymunk-7.0.1-3398da" />
+  <img src="https://img.shields.io/badge/XlsxWriter-3.2.3-207346" />
+  <img src="https://img.shields.io/badge/openpyxl-3.1.5-010043" />
 </p>
 
 # NUREMICS® _LABS_

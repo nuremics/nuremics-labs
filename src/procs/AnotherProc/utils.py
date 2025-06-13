@@ -1,4 +1,11 @@
+import sys
+import io
+
+stdout_orig = sys.stdout
+sys.stdout = io.StringIO()
 import pygame
+sys.stdout = stdout_orig
+
 import pymunk
 import pymunk.pygame_util
 import pandas as pd
@@ -83,8 +90,8 @@ def run_model(
     contact = False
     running = True
     current_time = 0.0
-    dt = timestep         # Time step (s)
-    t_final = t_flight+2.0   # Final simulation time
+    dt = timestep           # Time step (s)
+    t_final = t_flight+2.0  # Final simulation time
 
     # Define visualization scale and window size
     metric = window_size/max((d_flight+4.0), (h_max+3.0))
