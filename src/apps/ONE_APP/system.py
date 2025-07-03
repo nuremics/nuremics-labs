@@ -78,7 +78,8 @@ if __name__ == "__main__":
     # ------------------------ #
     # Define working directory #
     # ------------------------ #
-    working_dir = Path(os.environ["WORKING_DIR"])
+    working_dir = Path(os.environ.get("WORKING_DIR", ".")).resolve()
+    # working_dir = Path(os.environ["WORKING_DIR"])
 
     # -------------- #
     # Define studies #
