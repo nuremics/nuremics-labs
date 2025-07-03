@@ -173,7 +173,7 @@ def run_model(
         try:
             shape.shapes_collide(segment_ground)
             contact = True
-        except:
+        except Exception:
             if not contact:
                 pos = shape.body.position
                 new_row = {"t": current_time, "x_model": pos.x, "y_model": pos.y}
@@ -282,7 +282,7 @@ def compute_analytical_characteristics(
     tuple[float, float, float]
         A tuple containing:
         - t_flight : float, total time of flight until hitting the ground (s)
-        - d_flight : float, horizontal distance travelled (m)
+        - d_flight : float, horizontal distance traveled (m)
         - h_max : float, maximum vertical position reached (m)
     """
 
@@ -296,7 +296,7 @@ def compute_analytical_characteristics(
     # Total flight time until the projectile reaches the ground
     t_flight = (vsin + np.sqrt(vsin**2 + 2 * g * h0)) / g
 
-    # Horizontal distance travelled during flight
+    # Horizontal distance traveled during flight
     d_flight = vcos * t_flight
 
     # Maximum height reached during the trajectory
