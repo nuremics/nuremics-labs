@@ -1,0 +1,40 @@
+{
+    "Study1": {
+        "execute": true,
+        "user_params": {
+            "parameter1": null,
+            "parameter2": null,
+            "parameter3": null
+        },
+        "user_paths": {
+            "input1.txt": null,
+            "input2.json": null,
+            "input3": null
+        },
+        "clean_outputs": {
+            "output1.csv": false,
+            "output2.png": false,
+            "output3": false,
+            "output4.png": false
+        }
+    },
+    "Study2": {
+        "execute": true,
+        "user_params": {
+            "parameter1": null,
+            "parameter2": null,
+            "parameter3": null
+        },
+        "user_paths": {
+            "input1.txt": null,
+            "input2.json": null,
+            "input3": null
+        },
+        "clean_outputs": {
+            "output1.csv": false,
+            "output2.png": false,
+            "output3": false,
+            "output4.png": false
+        }
+    }
+}
