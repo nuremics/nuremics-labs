@@ -1,16 +1,15 @@
 import os
 from pathlib import Path
-
-APP_NAME = "ONE_APP"
-
 from nuremics import Application
 from procs.OneProc.item import OneProc
 from procs.AnotherProc.item import AnotherProc
 from procs.AnalysisProc.item import AnalysisProc
 
+APP_NAME = "ONE_APP"
+
 
 def main(
-    working_dir: Path = None,
+    working_dir: Path | None = None,
     studies: list = ["Default"],
 ):
     # --------------- #
@@ -75,7 +74,7 @@ def main(
 
 
 if __name__ == "__main__":
-    
+
     # ------------------------ #
     # Define working directory #
     # ------------------------ #

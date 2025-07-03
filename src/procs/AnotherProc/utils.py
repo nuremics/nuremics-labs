@@ -1,11 +1,12 @@
 import sys
 import io
 
+# ruff: noqa: E402
 stdout_orig = sys.stdout
 sys.stdout = io.StringIO()
 import pygame
-sys.stdout = stdout_orig
 
+sys.stdout = stdout_orig
 import pymunk
 import pymunk.pygame_util
 import pandas as pd
@@ -72,12 +73,12 @@ def run_model(
     trajectory = pd.DataFrame(columns=["t", "x_model", "y_model"])
 
     # Compute initial velocity components
-    vx = v0*np.cos(np.radians(angle))
-    vy = v0*np.sin(np.radians(angle))
+    vx = v0 * np.cos(np.radians(angle))
+    vy = v0 * np.sin(np.radians(angle))
 
     # Reset frame rate depending on timestep setting
-    fps = min(fps, int(1/timestep))
-    
+    fps = min(fps, int(1 / timestep))
+
     # Compute theoretical flight characteristics (time, distance, height)
     t_flight, d_flight, h_max = compute_analytical_characteristics(
         v0=v0,
@@ -90,11 +91,11 @@ def run_model(
     contact = False
     running = True
     current_time = 0.0
-    dt = timestep           # Time step (s)
-    t_final = t_flight+2.0  # Final simulation time
+    dt = timestep  # Time step (s)
+    t_final = t_flight + 2.0  # Final simulation time
 
     # Define visualization scale and window size
-    metric = window_size/max((d_flight+4.0), (h_max+3.0))
+    metric = window_size / max((d_flight + 4.0), (h_max + 3.0))
     window_height = window_size
     window_width = window_size
 
@@ -109,8 +110,8 @@ def run_model(
             b=0,
             c=0,
             d=-metric,
-            tx=1.5*metric,
-            ty=window_height-2.0*metric,
+            tx=1.5 * metric,
+            ty=window_height - 2.0 * metric,
         )
 
     # Create pymunk simulation space with gravity
@@ -120,9 +121,9 @@ def run_model(
     # Create static ground segment
     segment_ground = pymunk.Segment(
         body=space.static_body,
-        a=(d_flight-1.0, -0.5),
-        b=(d_flight+1.0, -0.5),
-        radius=0.5
+        a=(d_flight - 1.0, -0.5),
+        b=(d_flight + 1.0, -0.5),
+        radius=0.5,
     )
     segment_ground.friction = 1.0
     space.add(segment_ground)
@@ -130,15 +131,15 @@ def run_model(
     # Create static vertical wall forming a corner
     segment_wall = pymunk.Segment(
         body=space.static_body,
-        a=(d_flight+1.0, -0.5),
-        b=(d_flight+1.0, 1.5),
-        radius=0.5
+        a=(d_flight + 1.0, -0.5),
+        b=(d_flight + 1.0, 1.5),
+        radius=0.5,
     )
     segment_wall.friction = 1.0
     space.add(segment_wall)
 
     # Create the dynamic body from shape and add it to the space
-    shape:pymunk.Poly = create_body(
+    shape: pymunk.Poly = create_body(
         space=space,
         points=df_points,
         position=(0.0, h0),
@@ -149,7 +150,7 @@ def run_model(
 
     # Main simulation loop
     while running:
-        
+
         # Handle user window events (e.g., quit)
         if verbose:
             for event in pygame.event.get():
@@ -225,7 +226,7 @@ def create_body(
     pymunk.Poly
         The Pymunk polygon shape object that was created and added to the space.
     """
-    
+
     # Extract point coordinates from DataFrame
     x_coords = points["X"].tolist()
     y_coords = points["Y"].tolist()
@@ -237,11 +238,11 @@ def create_body(
 
     # Center the coordinates around the centroid (local reference frame)
     centered_points = [(x - cx, y - cy) for x, y in point_list]
-    
+
     # Create the body with specified mass and moment of inertia
     body = pymunk.Body(1, pymunk.moment_for_poly(mass, centered_points))
-    body.position = position   # Set initial position
-    body.velocity = velocity   # Set initial velocity
+    body.position = position  # Set initial position
+    body.velocity = velocity  # Set initial velocity
 
     # Create the polygon shape and set its friction
     shape = pymunk.Poly(body, centered_points)
@@ -284,22 +285,22 @@ def compute_analytical_characteristics(
         - d_flight : float, horizontal distance travelled (m)
         - h_max : float, maximum vertical position reached (m)
     """
-    
+
     # Use absolute value to ensure positive gravity for calculation
     g = np.abs(gravity)
 
     # Compute velocity components
-    vsin = v0*np.sin(np.radians(angle))  # Vertical component
-    vcos = v0*np.cos(np.radians(angle))  # Horizontal component
-    
+    vsin = v0 * np.sin(np.radians(angle))  # Vertical component
+    vcos = v0 * np.cos(np.radians(angle))  # Horizontal component
+
     # Total flight time until the projectile reaches the ground
-    t_flight = (vsin+np.sqrt(vsin**2+2*g*h0))/g
+    t_flight = (vsin + np.sqrt(vsin**2 + 2 * g * h0)) / g
 
     # Horizontal distance travelled during flight
-    d_flight = vcos*t_flight
+    d_flight = vcos * t_flight
 
     # Maximum height reached during the trajectory
-    h_max = h0+vsin**2/(2*g)
+    h_max = h0 + vsin**2 / (2 * g)
 
     return t_flight, d_flight, h_max
 
@@ -352,20 +353,20 @@ def compute_analytical_trajectory(
     for idx, t in enumerate(df["t"]):
 
         # Compute horizontal position using uniform linear motion
-        x = v0*np.cos(np.radians(angle))*t
+        x = v0 * np.cos(np.radians(angle)) * t
         # Compute vertical position using uniformly accelerated motion
-        y = h0+v0*np.sin(np.radians(angle))*t+0.5*gravity*t**2
-        
+        y = h0 + v0 * np.sin(np.radians(angle)) * t + 0.5 * gravity * t**2
+
         # Store computed values in the DataFrame
         df.loc[idx, "x_theory"] = x
         df.loc[idx, "y_theory"] = y
-    
+
     # Set the time column as index for convenience in plotting or analysis
     df.set_index(
         keys="t",
         inplace=True,
     )
-    
+
     return df
 
 
@@ -398,18 +399,18 @@ def plot_comparison(
 
     # Plot model/simulated trajectory (dashed blue line)
     plt.plot(df["x_model"], df["y_model"], "--r", label="Model")
-    
+
     # Set title and axis labels
     plt.title("(x, y) trajectory: model vs. theory")
     plt.xlabel("x")
     plt.ylabel("y")
-    
+
     # Add legend and grid
     plt.legend()
     plt.grid(True)
 
     # Keep aspect ratio equal for visual accuracy
-    plt.axis("equal") 
+    plt.axis("equal")
 
     # Save the plot to the specified file (with high resolution)
     plt.savefig(filename, dpi=300)
