@@ -1,18 +1,50 @@
-import os
+import sys
 from pathlib import Path
-
-APP_NAME = "ONE_APP"
-
+import json
 from nuremics import Application
+from tkinter import Tk, filedialog
 from procs.OneProc.item import OneProc
 from procs.AnotherProc.item import AnotherProc
 from procs.AnalysisProc.item import AnalysisProc
 
+APP_NAME = "ONE_APP"
 
-def main(
-    working_dir: Path = None,
-    studies: list = ["Default"],
-):
+
+def main():
+
+    # ---------------------------------------------------- #
+    # Get (or ask) working directory from settings.json #
+    # ---------------------------------------------------- #
+    settings_path = Path(__file__).parent / "settings.json"
+    with settings_path.open("r", encoding="utf-8") as f:
+        settings = json.load(f)
+
+    working_dir = settings.get("working_dir")
+
+    # if working_dir == null
+    if settings["working_dir"] is None:
+        root = Tk()
+        root.withdraw()  # Cache la fenêtre principale
+        working_dir = filedialog.askdirectory(
+            title=f"Chose working directory for {APP_NAME}"
+        )
+        if not working_dir:
+            sys.exit(1)
+        else:
+            settings["working_dir"] = working_dir
+            with settings_path.open("w", encoding="utf-8") as f:
+                json.dump(settings, f, indent=2, ensure_ascii=False)
+
+    working_dir = Path(working_dir)
+
+    # -------------- #
+    # Define studies #
+    # -------------- #
+    studies = [
+        "Study1",
+        "Study2",
+    ]
+
     # --------------- #
     # Define workflow #
     # --------------- #
@@ -75,24 +107,5 @@ def main(
 
 
 if __name__ == "__main__":
-    
-    # ------------------------ #
-    # Define working directory #
-    # ------------------------ #
-    working_dir = Path(os.environ["WORKING_DIR"])
 
-    # -------------- #
-    # Define studies #
-    # -------------- #
-    studies = [
-        "Study1",
-        "Study2",
-    ]
-
-    # --------------- #
-    # Run application #
-    # --------------- #
-    main(
-        working_dir=working_dir,
-        studies=studies,
-    )
+    main()
