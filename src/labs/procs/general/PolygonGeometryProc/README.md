@@ -3,7 +3,7 @@
 <p align="left">
   <img src="https://img.shields.io/badge/Pandas-2.2.2+-0b0153?style=flat&logo=pandas&logoColor=white" />
   <img src="https://img.shields.io/badge/NumPy-2.0.1+-4dabcf?style=flat&logo=numpy&logoColor=white" />
-  <img src="https://img.shields.io/badge/matplotlib-3.10.3-11557c" />
+  <img src="https://img.shields.io/badge/matplotlib-3.10.3+-11557c" />
 </p>
 
 ## Process
