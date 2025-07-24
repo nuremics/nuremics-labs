@@ -1,0 +1,59 @@
+[project]
+name = "nuremics-labs"
+version = "1.0.0"
+description = "Laboratory of applications developed with the NUREMICS framework"
+authors = [
+  { name = "Julien SIGUENZA", email = "contact@julien-siguenza.com" },
+]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+  "nuremics @ git+https://github.com/nuremics/nuremics.git@main"
+]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Operating System :: OS Independent",
+]
+license = "BSD-3-Clause"
+license-files = [
+  "LICENSE",
+  "LICENSE_TRADEMARK",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/nuremics/nuremics-labs"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[project.optional-dependencies]
+polygon_geometry = [
+    "matplotlib>=3.10.3",
+]
+projectile_model = [
+    "pygame>=2.6.1",
+    "pymunk>=7.0.1",
+    "XlsxWriter>=3.2.3",
+]
+trajectory_analysis = [
+    "matplotlib>=3.10.3",
+    "openpyxl>=3.1.5",
+]
+
+PolygonGeometryProc = ["nuremics-labs[polygon_geometry]"]
+ProjectileModelProc = ["nuremics-labs[projectile_model]"]
+TrajectoryAnalysisProc = ["nuremics-labs[trajectory_analysis]"]
+
+DEMO_APP = [
+  "nuremics-labs[PolygonGeometryProc]",
+  "nuremics-labs[ProjectileModelProc]",
+  "nuremics-labs[TrajectoryAnalysisProc]",
+]
+
+all = [
+  "nuremics-labs[DEMO_APP]",
+]
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"

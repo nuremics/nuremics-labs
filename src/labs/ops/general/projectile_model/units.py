@@ -1,3 +1,4 @@
+import os
 import sys
 import io
 
@@ -10,7 +11,9 @@ import pymunk
 import pymunk.pygame_util
 import pandas as pd
 import numpy as np
+import matplotlib
 import matplotlib.pyplot as plt
+matplotlib.use("TkAgg")
 
 
 def run_model(
@@ -71,6 +74,8 @@ def run_model(
     # Prepare an empty DataFrame to store trajectory points
     trajectory = pd.DataFrame(columns=["t", "x_model", "y_model"])
 
+    os.environ['SDL_VIDEO_WINDOW_POS'] = "1220,40"
+
     # Compute initial velocity components
     vx = v0*np.cos(np.radians(angle))
     vy = v0*np.sin(np.radians(angle))
@@ -101,7 +106,7 @@ def run_model(
     # Initialize pygame and pymunk rendering
     if verbose:
         pygame.init()
-        screen = pygame.display.set_mode((window_height, window_width))
+        screen = pygame.display.set_mode((window_width, window_height))
         clock = pygame.time.Clock()
         draw_options = pymunk.pygame_util.DrawOptions(screen)
         draw_options.transform = pymunk.Transform(
@@ -112,6 +117,8 @@ def run_model(
             tx=1.5*metric,
             ty=window_height-2.0*metric,
         )
+    
+    # pygame.time.wait(2000)
 
     # Create pymunk simulation space with gravity
     space = pymunk.Space()
@@ -157,7 +164,7 @@ def run_model(
                     running = False
 
             # Clear the screen and draw the current state
-            screen.fill((240, 240, 240))
+            screen.fill((255, 255, 255))
             space.debug_draw(draw_options)
 
             # Update the display and timing
@@ -393,30 +400,63 @@ def plot_comparison(
         If True, the plot will be displayed interactively.
     """
 
-    # Plot theoretical trajectory (solid red line)
-    plt.plot(df["x_theory"], df["y_theory"], "k", label="Theory")
+    manager = plt.get_current_fig_manager()
+    manager.window.wm_geometry("+1110+0")
 
-    # Plot model/simulated trajectory (dashed blue line)
-    plt.plot(df["x_model"], df["y_model"], "--r", label="Model")
-    
+    fig, ax = plt.subplots()
+
+    line1, = ax.plot(df["x_theory"], df["y_theory"],
+        linewidth=2.0,
+        color="k",
+        zorder=3,
+        label="Theory",
+    )
+    line2, = ax.plot(df["x_model"], df["y_model"],
+        linestyle="--",
+        linewidth=2.0,
+        color="r",
+        zorder=4,
+        label="Model",
+    )
+    line1.set_visible(True)
+    line2.set_visible(True)
+
+    # # Plot theoretical trajectory (solid red line)
+    # plt.plot(df["x_theory"], df["y_theory"],
+    #     linewidth=2.0,
+    #     color="k",
+    #     zorder=3,
+    #     label="Theory",
+    # )
+
+    # # Plot model/simulated trajectory (dashed blue line)
+    # plt.plot(df["x_model"], df["y_model"],
+    #     linestyle="--",
+    #     linewidth=2.0,
+    #     color="r",
+    #     zorder=4,
+    #     label="Model",
+    # )
+
     # Set title and axis labels
-    plt.title("(x, y) trajectory: model vs. theory")
-    plt.xlabel("x")
-    plt.ylabel("y")
+    plt.title("(x, y) trajectory: model vs. theory", fontsize=14)
+    plt.xlabel("x (m)", fontsize=14)
+    plt.ylabel("y (m)", fontsize=14)
     
     # Add legend and grid
-    plt.legend()
+    plt.legend(fontsize=14)
     plt.grid(True)
 
     # Keep aspect ratio equal for visual accuracy
     plt.axis("equal") 
 
     # Save the plot to the specified file (with high resolution)
-    plt.savefig(filename, dpi=300)
+    # plt.savefig(filename, dpi=300)
+    fig.savefig(f"comparaison0.png", transparent=True, dpi=300)
 
-    # Display the plot in a window if verbose mode is enabled
-    if verbose:
-        plt.show()
+    # # Display the plot in a window if verbose mode is enabled
+    # if verbose:
+    #     plt.show()
 
     # Close the figure to release memory
     plt.close()

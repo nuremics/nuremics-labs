@@ -1,6 +1,8 @@
 from pathlib import Path
 import pandas as pd
+import matplotlib
 import matplotlib.pyplot as plt
+matplotlib.use("TkAgg")
 
 from nuremics import Process
 
@@ -36,6 +38,9 @@ def run_analysis(
     verbose : bool
         If True, displays the plot interactively using a window (e.g. for inspection).
     """
+
+    manager = plt.get_current_fig_manager()
+    manager.window.wm_geometry("+1110+0")
     
     # Flag to plot "Theory" label only once
     first = True
@@ -49,29 +54,53 @@ def run_analysis(
         df = pd.read_excel(Path(out) / "results.xlsx")
 
         # Extract line style and label for the case
-        line = settings[case]["line"]
+        color = settings[case]["color"]
+        linestyle = settings[case]["linestyle"]
+        linewidth = settings[case]["linewidth"]
+        marker = settings[case]["marker"]
+        markersize = settings[case]["markersize"]
+        markerevery = settings[case]["markevery"]
         label = settings[case]["label"]
         if label == "Model":
             label = case
         
         # Plot theoretical trajectory (black line), only label the first one
         if first:
-            plt.plot(df["x_theory"], df["y_theory"], "k", label="Theory")
+            plt.plot(df["x_theory"], df["y_theory"], "k",
+                zorder=3,
+                linewidth=linewidth,
+                label="Theory",
+            )
         else:
-            plt.plot(df["x_theory"], df["y_theory"], "k")
+            plt.plot(df["x_theory"], df["y_theory"], "k",
+                zorder=3,
+                linewidth=linewidth,
+            )
         
         # Plot model trajectory
-        plt.plot(df["x_model"], df["y_model"], line, label=label)
+        plt.plot(df["x_model"], df["y_model"],
+            color=color,
+            linestyle=linestyle,
+            linewidth=linewidth,
+            marker=marker,
+            markevery=markerevery,
+            markersize=markersize,
+            label=label,
+            zorder=4,
+        )
 
         first = False
     
     # Set title and axis labels
-    plt.title("(x, y) trajectory: model vs. theory")
-    plt.xlabel("x")
-    plt.ylabel("y")
+    plt.title("(x, y) trajectory: model vs. theory", fontsize=14)
+    plt.xlabel("x (m)", fontsize=14)
+    plt.ylabel("y (m)", fontsize=14)
     
     # Add legend and grid
-    plt.legend()
+    plt.legend(
+        fontsize=14,
+        loc="upper right",
+    )
     plt.grid(True)
 
     # Keep aspect ratio equal for visual accuracy

@@ -1,5 +1,4 @@
-# Generated folders
-data/
-
-# Byte-compiled / optimized / DLL files
+.nuremics
+.vscode
+*.egg-info/
 __pycache__/

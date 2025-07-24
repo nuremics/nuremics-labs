@@ -4,11 +4,11 @@ import json
 from pathlib import Path
 
 from nuremics import Process
-from procs.AnalysisProc import utils
+from labs.ops.general.trajectory_analysis import units
 
 
 @attrs.define
-class AnalysisProc(Process):
+class TrajectoryAnalysisProc(Process):
     """
     Compare simulated (model) and theoretical trajectories of a projectile across all experiments. 
 
@@ -19,12 +19,12 @@ class AnalysisProc(Process):
 
     Analysis
     --------
-        - analysis1 : folder
+        - comp_folder : folder
             'results.xlsx' : File containing model and theoritical trajectories.
 
     Outputs (stored in self.output_paths)
     -------
-        out1 : png
+        fig_file : png
             Image comparing both trajectories across all experiments.
     """
 
@@ -34,18 +34,23 @@ class AnalysisProc(Process):
         "analysis": True,
         "settings": {
             "add": True,
-            "line": "--r",
+            "color": "red",
+            "linestyle": "None",
+            "linewidth": 1.0,
+            "marker": "o",
+            "markersize": 4,
+            "markevery": 7,
             "label": "Model"
         }
     }
-    analysis1: str = attrs.field(init=False, metadata=metadata)
+    comp_folder: str = attrs.field(init=False, metadata=metadata)
 
     def __call__(self):
         super().__call__()
 
-        self.operation1()
+        self.plot_overall_model_vs_theory()
     
-    def operation1(self):
+    def plot_overall_model_vs_theory(self):
         """
         Generate overall comparative plot of simulated (model) and theoritical trajectories.
 
@@ -59,9 +64,9 @@ class AnalysisProc(Process):
         """
 
         self.process_output(
-            out=self.analysis1,
-            func=utils.run_analysis,
-            filename=self.output_paths["out1"],
+            out=self.comp_folder,
+            func=units.run_analysis,
+            filename=self.output_paths["fig_file"],
             verbose=self.verbose,
         )
 

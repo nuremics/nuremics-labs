@@ -3,12 +3,12 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 
-def create_shape(
+def generate_polygon_shape(
     radius: float,
     n_sides: int,
 ) -> pd.DataFrame:
     """
-    Generates the coordinates of a regular polygon.
+    Generate the 2D coordinates of a regular polygon.
 
     Parameters
     ----------
@@ -41,19 +41,19 @@ def create_shape(
     return df_points
 
 
-def plot_shape(
+def plot_polygon_shape(
     df_points: pd.DataFrame,
     title: str,
     filename: str,
     verbose: bool = True,
 ) -> None:
     """
-    Plots a closed 2D polygon from a set of points and saves the figure as a PNG file.
+    Plot a closed 2D polygon from a set of points.
 
     Parameters
     ----------
     df_points : pd.DataFrame
-        DataFrame with columns 'X' and 'Y' representing the polygon vertices.
+        DataFrame with columns '['X', 'Y'] representing the polygon vertices.
     title : str
         Title of the plot.
     verbose : bool
@@ -68,21 +68,32 @@ def plot_shape(
         ignore_index=True,
     )
 
-    # Plot the polygon with red lines and circular markers
-    plt.plot(df_points["X"], df_points["Y"], "r-o")
+    # Define plot
+    fig, ax = plt.subplots()
+
+    # Plot the polygon shape
+    line, = ax.plot(df_points["X"], df_points["Y"],
+        linewidth=2.0,
+        color="#3398db",
+        marker="o",
+        markersize=10,
+        zorder=3,
+    )
+    line.set_visible(True)
 
     # Set equal aspect ratio and axis labels
-    plt.gca().set_aspect("equal")
-    plt.title(title)
-    plt.xlabel("x")
-    plt.ylabel("y")
+    ax.set_aspect("equal")
+    ax.set_title(title, fontsize=14)
+    ax.set_xlabel("x (m)", fontsize=14)
+    ax.set_ylabel("y (m)", fontsize=14)
+    ax.grid(True)
 
     # Save the figure to the specified filename
-    plt.savefig(filename, dpi=300)
+    fig.savefig(filename, dpi=300)
 
     # Show the plot if requested
     if verbose:
         plt.show()
     
     # Close the figure to release memory
-    plt.close()
+    plt.close(fig)

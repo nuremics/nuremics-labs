@@ -5,11 +5,11 @@ import pandas as pd
 from pathlib import Path
 
 from nuremics import Process
-from procs.AnotherProc import utils
+from labs.ops.general.projectile_model import units
 
 
 @attrs.define
-class AnotherProc(Process):
+class ProjectileModelProc(Process):
     """
     Simulate a projectile trajectory and compare it with the analytical solution.
 
@@ -24,19 +24,19 @@ class AnotherProc(Process):
 
     Input parameters
     ----------------
-        param1 : float
+        gravity : float
             Acceleration due to gravity (can be positive or negative).
-        param2 : float
+        mass : float
             Mass of the projectile (used in the simulation).
 
     Input paths
     -----------
-        path1 : json
+        velocity_file : json
             File containing initial conditions (v0, h0, angle).
-        path2 : folder
+        configs_folder : folder
             'solver_config.json' : File containing the parameters for solver configuration.
             'display_config.json' : File containing the parameters for display configuration.
-        path3 : csv
+        coords_file : csv
             File with 2D coordinates ('X', 'Y') of the polygonal shape to simulate.
 
     Internal variables
@@ -54,19 +54,19 @@ class AnotherProc(Process):
 
     Outputs (stored in self.output_paths)
     -------
-        out1 : folder
+        comp_folder : folder
             'results.xlsx' : File containing simulated (model) and theoritical trajectories.
             'model_vs_theory.png' : Image comparing both trajectories.
     """
 
     # Parameters
-    param1: float = attrs.field(init=False, metadata={"input": True})
-    param2: float = attrs.field(init=False, metadata={"input": True})
+    gravity: float = attrs.field(init=False, metadata={"input": True})
+    mass: float = attrs.field(init=False, metadata={"input": True})
     
     # Paths
-    path1: Path = attrs.field(init=False, metadata={"input": True}, converter=Path)
-    path2: Path = attrs.field(init=False, metadata={"input": True}, converter=Path)
-    path3: Path = attrs.field(init=False, metadata={"input": True}, converter=Path)
+    velocity_file: Path = attrs.field(init=False, metadata={"input": True}, converter=Path)
+    configs_folder: Path = attrs.field(init=False, metadata={"input": True}, converter=Path)
+    coords_file: Path = attrs.field(init=False, metadata={"input": True}, converter=Path)
 
     # Internal
     variable1: dict = attrs.field(init=False)
@@ -78,11 +78,11 @@ class AnotherProc(Process):
     def __call__(self):
         super().__call__()
 
-        self.operation1()
-        self.operation2()
-        self.operation3()
+        self.simulate_projectile_motion()
+        self.calculate_analytical_trajectory()
+        self.compare_model_vs_analytical_trajectories()
     
-    def operation1(self):
+    def simulate_projectile_motion(self):
         """
         Run the physical simulation of a projectile.
 
@@ -107,29 +107,29 @@ class AnotherProc(Process):
         """
 
         # Load initial conditions
-        with open(self.path1) as f:
+        with open(self.velocity_file) as f:
             self.variable1 = json.load(f)
 
         # Load solver configuration
-        path = self.path2 / "solver_config.json"
+        path = self.configs_folder / "solver_config.json"
         with open(path) as f:
             self.variable2 = json.load(f)
 
         # Load display configuration
-        path = self.path2 / "display_config.json"
+        path = self.configs_folder / "display_config.json"
         with open(path) as f:
             self.variable3 = json.load(f)
 
         # Read 2D polygon shape coordinates (X, Y) from CSV file
         df_points = pd.read_csv(
-            filepath_or_buffer=self.path3,
+            filepath_or_buffer=self.coords_file,
         )
 
         # Run simulation model
-        trajectory = utils.run_model(
+        trajectory = units.run_model(
             df_points=df_points,
-            mass=self.param2,
-            gravity=self.param1,
+            mass=self.mass,
+            gravity=self.gravity,
             h0=self.variable1["h0"],
             v0=self.variable1["v0"],
             angle=self.variable1["angle"],
@@ -140,7 +140,7 @@ class AnotherProc(Process):
         )
         self.variable4 = trajectory
 
-    def operation2(self):
+    def calculate_analytical_trajectory(self):
         """
         Compute the theoretical trajectory using analytical equations.
 
@@ -160,30 +160,30 @@ class AnotherProc(Process):
         """
 
         # Create output directory
-        output_dir:Path = Path(self.output_paths["out1"])
+        output_dir:Path = Path(self.output_paths["comp_folder"])
         output_dir.mkdir(
             exist_ok=True,
             parents=True,
         )
 
         # Compute analytical solution
-        df_results = utils.compute_analytical_trajectory(
+        df_results = units.compute_analytical_trajectory(
             df=self.variable4,
             v0=self.variable1["v0"],
             h0=self.variable1["h0"],
             angle=self.variable1["angle"],
-            gravity=self.param1,
+            gravity=self.gravity,
         )
         self.variable5 = df_results
 
         # Save results to Excel
         df_results.to_excel(
-            excel_writer=os.path.join(self.output_paths["out1"], "results.xlsx"),
+            excel_writer=os.path.join(self.output_paths["comp_folder"], "results.xlsx"),
             engine="xlsxwriter",
             index=True,
         )
     
-    def operation3(self):
+    def compare_model_vs_analytical_trajectories(self):
         """
         Plot and save the comparison between simulated (model) and theoretical trajectories.
 
@@ -196,9 +196,9 @@ class AnotherProc(Process):
             out1/model_vs_theory.png
         """
 
-        utils.plot_comparison(
+        units.plot_comparison(
             df=self.variable5,
-            filename=os.path.join(self.output_paths["out1"], "model_vs_theory.png"),
+            filename=os.path.join(self.output_paths["comp_folder"], "model_vs_theory.png"),
             verbose=self.verbose,
         )
 
