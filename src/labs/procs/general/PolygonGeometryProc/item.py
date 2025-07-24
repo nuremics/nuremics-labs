@@ -12,11 +12,11 @@ class PolygonGeometryProc(Process):
     """
     Generate and plot a regular 2D polygon shape.
 
-    Pipeline
-    --------
-        1. generate_polygon_shape
+    Process
+    -------
+        A/ generate_polygon_shape
             Generate the 2D coordinates of a regular polygon.
-        2. plot_polygon_shape
+        B/ plot_polygon_shape
             Plot a closed 2D polygon from a set of points.
 
     Input parameters
@@ -117,7 +117,7 @@ class PolygonGeometryProc(Process):
 if __name__ == "__main__":
     
     # Define working directories
-    app_dir = Path("C:/Users/julie/Work/DEMO_APP")
+    app_dir = Path("...")
     study_dir = app_dir / "Study_Velocity"
     process_dir = study_dir / "1_PolygonGeometryProc"
     case_dir = process_dir / ""
