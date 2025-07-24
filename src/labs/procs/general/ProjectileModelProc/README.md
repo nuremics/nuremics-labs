@@ -11,7 +11,7 @@
 
 ## Process
 
-Simulate projectile motion and compare its trajectory with the analytical solution.<br>
+Simulate the motion of a projectile and compare its trajectory with the analytical solution.<br>
 A/ **`simulate_projectile_motion`:** Simulate the motion of a 2D rigid body under gravity projected with an initial velocity.<br>
 B/ **`calculate_analytical_trajectory`:** Calculate the theoretical trajectory of a projectile using analytical equations.<br>
 C/ **`compare_model_vs_analytical_trajectories`:** Plot and save the comparison between simulated (model) and theoretical projectile trajectories.

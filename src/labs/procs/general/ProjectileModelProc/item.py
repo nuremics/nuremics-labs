@@ -11,7 +11,7 @@ from labs.ops.general.projectile_model import units
 @attrs.define
 class ProjectileModelProc(Process):
     """
-    Simulate projectile motion and compare its trajectory with the analytical solution.
+    Simulate the motion of a projectile and compare its trajectory with the analytical solution.
 
     Process
     -------
