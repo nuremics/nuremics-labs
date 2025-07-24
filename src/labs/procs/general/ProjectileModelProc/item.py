@@ -27,7 +27,7 @@ class ProjectileModelProc(Process):
         gravity : float
             Acceleration due to gravity (can be positive or negative).
         mass : float
-            Mass of the projectile (used in the simulation).
+            Mass of the projectile.
 
     Input paths
     -----------
@@ -130,7 +130,7 @@ class ProjectileModelProc(Process):
             df_points=df_points,
             mass=self.mass,
             gravity=self.gravity,
-            h0=0.5,
+            h0=self.dict_velocity["h0"],
             v0=self.dict_velocity["v0"],
             angle=self.dict_velocity["angle"],
             timestep=self.dict_solver_config["timestep"],
@@ -204,7 +204,7 @@ class ProjectileModelProc(Process):
 if __name__ == "__main__":
     
     # Define working directory
-    working_dir = Path(os.environ["WORKING_DIR"])/"ONE_APP/Study1/2_AnotherProc/Test1"
+    working_dir = Path("...")   # to be edited
 
     # Go to working directory
     os.chdir(working_dir)
@@ -212,18 +212,20 @@ if __name__ == "__main__":
     # Create dictionary containing input data
     dict_inputs = {
         "gravity": -9.81,
-        "mass": 1.0,
-        "velocity_file": Path(os.environ["WORKING_DIR"])/"ONE_APP/study1/0_inputs/input2.json",
-        "configs_folder": Path(os.environ["WORKING_DIR"])/"ONE_APP/study1/0_inputs/input3",
-        "coords_file": Path(os.environ["WORKING_DIR"])/"ONE_APP/study1/1_OneProc/Test1/output1.csv",
+        "mass": 0.1,
+        "velocity_file": Path(".../velocity.json"),          # to be edited
+        "configs_folder": Path(".../configs"),               # to be edited
+        "coords_file": Path(".../points_coordinates.csv"),   # to be edited
     }
     
     # Create process
-    process = AnotherProc(
+    process = ProjectileModelProc(
         dict_inputs=dict_inputs,
         set_inputs=True,
     )
-    process.output_paths["comp_folder"] = "output3"
+
+    # Define output paths
+    process.output_paths["comp_folder"] = "comparison"
 
     # Run process
     process()
