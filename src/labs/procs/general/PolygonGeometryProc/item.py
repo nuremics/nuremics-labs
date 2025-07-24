@@ -126,7 +126,7 @@ if __name__ == "__main__":
     dict_inputs = {
         "radius": 0.5,
         "n_sides": 3,
-        "title_file": ".../plot_title.txt",   # to be edited
+        "title_file": Path(".../plot_title.txt"),   # to be edited
     }
     
     # Create process
