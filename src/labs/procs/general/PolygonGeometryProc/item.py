@@ -89,7 +89,7 @@ class PolygonGeometryProc(Process):
 
     def plot_polygon_shape(self):
         """
-        Plots a closed 2D polygon from a set of points.
+        Plot a closed 2D polygon from a set of points.
 
         Uses
         ----

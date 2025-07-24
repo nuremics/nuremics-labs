@@ -81,11 +81,14 @@ def plot_polygon_shape(
     )
     line.set_visible(True)
 
-    # Set equal aspect ratio and axis labels
-    ax.set_aspect("equal")
+    # Set title and axis labels
     ax.set_title(title, fontsize=14)
     ax.set_xlabel("x (m)", fontsize=14)
     ax.set_ylabel("y (m)", fontsize=14)
+    
+    # Set equal aspect ratio and grid
+    ax.set_aspect("equal", adjustable="datalim")
+    ax.autoscale_view()
     ax.grid(True)
 
     # Save the figure to the specified filename

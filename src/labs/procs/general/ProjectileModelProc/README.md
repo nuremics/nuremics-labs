@@ -1,57 +1,53 @@
-## Diagram
+# ProjectileModelProc
+
+## Process
+
+Simulate projectile motion and compare its trajectory with the analytical solution.<br>
+A/ **`simulate_projectile_motion`:** Simulate the motion of a 2D rigid body under gravity projected with an initial velocity.<br>
+B/ **`calculate_analytical_trajectory`:** Calculate the theoretical trajectory of a projectile using analytical equations.<br>
+C/ **`compare_model_vs_analytical_trajectories`:** Plot and save the comparison between simulated (model) and theoretical projectile trajectories.
 
 ```mermaid
 erDiagram
   **Parameters** ||--|| **Inputs** : provides
   **Paths** ||--|| **Inputs** : provides
-  **Inputs** ||--|| **AnotherProc** : feeds
-  **AnotherProc** ||--|| **Outputs** : generates
+  **Inputs** ||--|| **ProjectileModelProc** : feeds
+  **ProjectileModelProc** ||--|| **Outputs** : generates
 
   **Parameters** {
-    float param1
-    float param2
+    float gravity
+    float mass
   }
   **Paths** {
-    file path1 "json"
-    folder path2 "_"
-    file path3 "csv"
+    file velocity_file "json"
+    folder configs_folder "_"
+    file coords_file "csv"
   }
-  **AnotherProc** {
-    function operation1
-    function operation2
-    function operation3
+  **ProjectileModelProc** {
+    op simulate_projectile_motion
+    op calculate_analytical_trajectory
+    op compare_model_vs_analytical_trajectories
   }
   **Outputs** {
-    folder out1 "_"
+    folder comp_folder "_"
   }
 ```
 
-## Description
-
-Simulate a projectile trajectory and compare it with the analytical solution.
-
-## Pipeline
-
-1. **`operation1`:** Run the physical simulation of a projectile.
-2. **`operation2`:** Compute the theoretical trajectory using analytical equations.
-3. **`operation3`:** Plot and save the comparison between simulated (model) and theoretical trajectories.
-
-
 ## Input Parameter(s)
 
-- **`param1`:** Acceleration due to gravity (can be positive or negative).
-- **`param2`:** Mass of the projectile (used in the simulation).
+- **`gravity`:** Acceleration due to gravity (can be positive or negative).
+- **`mass`:** Mass of the projectile (used in the simulation).
 
 ## Input Path(s)
 
-- **`path1`:** File containing initial conditions (v0, h0, angle).
-- **`path2/`**
-  - **`solver_config.json`:** File containing the parameters for solver configuration.
-  - **`display_config.json`:** File containing the parameters for display configuration.
-- **`path3`:** File with 2D coordinates ('X', 'Y') of the polygonal shape to simulate.
+- **`velocity_file`:** File containing the velocity initial conditions (v0, angle).
+- **`configs_folder/`**<br>
+  **`solver_config.json`:** File containing the parameters for solver configuration.<br>
+  **`display_config.json`:** File containing the parameters for display configuration.
+- **`coords_file`:** File containing the X/Y coordinates of the polygonal shape to simulate.
 
 ## Output Path(s)
 
-- **`out1/`**
-  - **`results.xlsx`:** File containing simulated (model) and theoritical trajectories.
-  - **`model_vs_theory.png`:** Image comparing both trajectories.
+- **`comp_folder/`**<br>
+  **`results.xlsx`:** File containing simulated (model) and theoritical trajectories.<br>
+  **`model_vs_theory.png`:** Image comparing both trajectories.

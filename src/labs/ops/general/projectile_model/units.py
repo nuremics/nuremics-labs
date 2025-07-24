@@ -1,4 +1,3 @@
-import os
 import sys
 import io
 
@@ -11,12 +10,10 @@ import pymunk
 import pymunk.pygame_util
 import pandas as pd
 import numpy as np
-import matplotlib
 import matplotlib.pyplot as plt
-matplotlib.use("TkAgg")
 
 
-def run_model(
+def simulate_projectile_motion(
     df_points: pd.DataFrame,
     mass: float,
     gravity: float,
@@ -29,7 +26,7 @@ def run_model(
     verbose: bool = True,
 ) -> pd.DataFrame:
     """
-    Simulates the motion of a 2D rigid body under gravity using pymunk and pygame.
+    Simulate the motion of a 2D rigid body under gravity projected with an initial velocity.
 
     A polygonal rigid body is launched with a given initial speed and angle from an initial height.
     The simulation is run using the pymunk physics engine, and displayed using pygame. The environment
@@ -74,8 +71,6 @@ def run_model(
     # Prepare an empty DataFrame to store trajectory points
     trajectory = pd.DataFrame(columns=["t", "x_model", "y_model"])
 
-    os.environ['SDL_VIDEO_WINDOW_POS'] = "1220,40"
-
     # Compute initial velocity components
     vx = v0*np.cos(np.radians(angle))
     vy = v0*np.sin(np.radians(angle))
@@ -117,8 +112,6 @@ def run_model(
             tx=1.5*metric,
             ty=window_height-2.0*metric,
         )
-    
-    # pygame.time.wait(2000)
 
     # Create pymunk simulation space with gravity
     space = pymunk.Space()
@@ -311,7 +304,7 @@ def compute_analytical_characteristics(
     return t_flight, d_flight, h_max
 
 
-def compute_analytical_trajectory(
+def calculate_analytical_trajectory(
     df: pd.DataFrame,
     v0: float,
     h0: float,
@@ -319,11 +312,12 @@ def compute_analytical_trajectory(
     gravity: float,
 ) -> pd.DataFrame:
     """
-    Computes the analytical trajectory of a projectile and appends the results to a DataFrame.
+    Calculate the theoretical trajectory of a projectile using analytical equations.
 
     For each time 't' in the input DataFrame, this function calculates the theoretical
     x and y positions of a projectile launched from an initial height 'h0' with velocity 'v0'
-    at an angle 'angle', under a constant gravitational acceleration.
+    at an angle 'angle', under a constant gravitational acceleration. Results are appended 
+    to a DataFrame.
 
     The analytical expressions used are:
         x(t) = v0 * cos(angle) * t
@@ -376,13 +370,13 @@ def compute_analytical_trajectory(
     return df
 
 
-def plot_comparison(
+def compare_model_vs_analytical_trajectories(
     df: pd.DataFrame,
     filename: str,
     verbose: bool = True,
 ) -> None:
     """
-    Plots and saves a comparison between the theoretical and simulated projectile trajectories.
+    Plot and save the comparison between simulated (model) and theoretical projectile trajectories.
 
     This function takes a DataFrame containing theoretical and model-based (x, y) trajectories,
     generates a 2D plot comparing them, and saves the figure to the specified file.
@@ -400,17 +394,18 @@ def plot_comparison(
         If True, the plot will be displayed interactively.
     """
 
-    manager = plt.get_current_fig_manager()
-    manager.window.wm_geometry("+1110+0")
-
     fig, ax = plt.subplots()
 
+    # Plot theoretical trajectory
     line1, = ax.plot(df["x_theory"], df["y_theory"],
         linewidth=2.0,
         color="k",
         zorder=3,
         label="Theory",
     )
+    line1.set_visible(True)
+
+    # Plot model/simulated trajectory
     line2, = ax.plot(df["x_model"], df["y_model"],
         linestyle="--",
         linewidth=2.0,
@@ -418,45 +413,25 @@ def plot_comparison(
         zorder=4,
         label="Model",
     )
-    line1.set_visible(True)
     line2.set_visible(True)
 
-    # # Plot theoretical trajectory (solid red line)
-    # plt.plot(df["x_theory"], df["y_theory"],
-    #     linewidth=2.0,
-    #     color="k",
-    #     zorder=3,
-    #     label="Theory",
-    # )
-
-    # # Plot model/simulated trajectory (dashed blue line)
-    # plt.plot(df["x_model"], df["y_model"],
-    #     linestyle="--",
-    #     linewidth=2.0,
-    #     color="r",
-    #     zorder=4,
-    #     label="Model",
-    # )
-
     # Set title and axis labels
-    plt.title("(x, y) trajectory: model vs. theory", fontsize=14)
-    plt.xlabel("x (m)", fontsize=14)
-    plt.ylabel("y (m)", fontsize=14)
+    ax.set_title("(x, y) trajectory: model vs. theory", fontsize=14)
+    ax.set_xlabel("x (m)", fontsize=14)
+    ax.set_ylabel("y (m)", fontsize=14)
     
-    # Add legend and grid
-    plt.legend(fontsize=14)
-    plt.grid(True)
-
-    # Keep aspect ratio equal for visual accuracy
-    plt.axis("equal") 
+    # Set equal aspect ratio, legend and grid
+    ax.set_aspect("equal", adjustable="datalim")
+    ax.autoscale_view()
+    ax.legend(fontsize=14)
+    ax.grid(True)
 
     # Save the plot to the specified file (with high resolution)
-    # plt.savefig(filename, dpi=300)
-    fig.savefig(f"comparaison0.png", transparent=True, dpi=300)
+    fig.savefig(filename, dpi=300)
 
-    # # Display the plot in a window if verbose mode is enabled
-    # if verbose:
-    #     plt.show()
+    # Display the plot in a window if verbose mode is enabled
+    if verbose:
+        plt.show()
 
     # Close the figure to release memory
-    plt.close()
+    plt.close(fig)
