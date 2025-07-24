@@ -116,20 +116,17 @@ class PolygonGeometryProc(Process):
 
 if __name__ == "__main__":
     
-    # Define working directories
-    app_dir = Path("...")
-    study_dir = app_dir / "Study_Velocity"
-    process_dir = study_dir / "1_PolygonGeometryProc"
-    case_dir = process_dir / ""
+    # Define working directory
+    working_dir = Path("...")   # to be edited
 
-    # Go to case directory
-    os.chdir(case_dir)
+    # Go to working directory
+    os.chdir(working_dir)
 
     # Create dictionary containing input data
     dict_inputs = {
         "radius": 0.5,
         "n_sides": 3,
-        "title_file": study_dir / "0_inputs/plot_title.txt",
+        "title_file": ".../plot_title.txt",   # to be edited
     }
     
     # Create process
