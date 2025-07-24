@@ -44,8 +44,8 @@ erDiagram
 
 ## Input Parameter(s)
 
-- **`gravity`:** Acceleration due to gravity (can be positive or negative).
-- **`mass`:** Mass of the projectile.
+- **`gravity`:** Acceleration due to gravity.
+- **`mass`:** Mass of the body.
 
 ## Input Path(s)
 

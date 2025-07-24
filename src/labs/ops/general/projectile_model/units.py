@@ -44,7 +44,7 @@ def simulate_projectile_motion(
     mass : float
         Mass of the body.
     gravity : float
-        Gravitational acceleration.
+        Acceleration due to gravity.
     h0 : float
         Initial vertical position of the body's center.
     v0 : float

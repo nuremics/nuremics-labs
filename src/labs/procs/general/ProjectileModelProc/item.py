@@ -25,9 +25,9 @@ class ProjectileModelProc(Process):
     Input parameters
     ----------------
         gravity : float
-            Acceleration due to gravity (can be positive or negative).
+            Acceleration due to gravity.
         mass : float
-            Mass of the projectile.
+            Mass of the body.
 
     Input paths
     -----------
