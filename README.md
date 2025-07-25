@@ -28,7 +28,43 @@ Developers are thus encouraged to treat `nuremics` as the core engine, and to us
 
 ## Getting Started
 
-...
+### Installation
+
+1. **Fork and clone the [`nuremics-labs`](https://github.com/nuremics/nuremics-labs){:target="_blank"} repository.** You have two options to get started:
+    
+    - Option A (recommended): _Fork_ the repository to your own GitHub or GitLab account, then clone your fork. This allows you to modify the code and push your changes to your personal version of the project.
+
+        ```bash
+            nuremics-labs  →  fork  →  your-labs  →  clone
+        ```
+    
+    - Option B (quick start): If you just want to try the framework without making changes, you can simply clone the main repository directly.
+
+2. **Create the NUREMICS virtual environment.** From the root directory of your cloned repository, use either conda or micromamba to create and install the environment using the provided `environment.yml` file.
+
+    <details>
+    <summary><strong>Using Conda</strong></summary>
+
+    _- Creation -_
+    ```bash
+    conda create -f environment.yml
+    ```
+
+    _- Activation -_
+    ```bash
+    conda activate nrs-env
+    ```
+
+    </details>
+
+
+3. **Install the demo application.** Each application in `nuremics-labs` can be installed independently. You can start by installing the [DEMO_APP](labs/Apps/General/DEMO_APP.md){:target="_blank"}.
+
+    ```bash
+    pip install .[DEMO_APP]
+    ```
+
+### Run the demo
 
 ## Dive into NUREMICS
 
