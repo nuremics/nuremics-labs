@@ -29,3 +29,10 @@ Developers are encouraged to treat `nuremics` as the core engine, and to use `nu
 ## Getting Started
 
 ...
+
+## Dive into NUREMICS
+
+Ready to go beyond the demo?
+
+Visit the **NUREMICS** website to explore the full potential of the framework and build your own scientific software applications:
+nuremics.github.io
