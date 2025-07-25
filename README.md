@@ -45,17 +45,28 @@ Developers are thus encouraged to treat `nuremics` as the core engine, and to us
     <details>
     <summary><strong>Using Conda</strong></summary>
 
-    _- Creation -_
     ```bash
     conda create -f environment.yml
     ```
-
-    _- Activation -_
     ```bash
     conda activate nrs-env
     ```
 
     </details>
+
+    <details>
+    <summary><strong>Using Micromamba</strong></summary>
+
+    ```bash
+    micromamba create -f environment.yml
+    ```
+    ```bash
+    micromamba activate nrs-env
+    ```
+
+    </details>
+
+    This will create a reproducible virtual environment with all required dependencies, including the `nuremics` core package itself.
 
 
 3. **Install the demo application.** Each application in `nuremics-labs` can be installed independently. You can start by installing the [DEMO_APP](labs/Apps/General/DEMO_APP.md){:target="_blank"}.
