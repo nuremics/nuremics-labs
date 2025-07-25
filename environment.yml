@@ -7,4 +7,4 @@ dependencies:
   - setuptools=80.8.0
   - wheel
   - pip:
-    - -e .[all]
+    - .
