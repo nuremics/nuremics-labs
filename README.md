@@ -34,6 +34,6 @@ Developers are encouraged to treat `nuremics` as the core engine, and to use `nu
 
 Ready to go beyond the demo?
 
-Explore the **NUREMICS** handbook to unlock the full potential of the framework and start building your own scientific software applications:
+Explore the **NUREMICS Handbook** to unlock the full potential of the framework and start building your own scientific software applications:
 
 🔗 [nuremics.github.io](https://nuremics.github.io/)
