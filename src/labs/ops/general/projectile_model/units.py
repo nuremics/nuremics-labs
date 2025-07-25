@@ -413,6 +413,7 @@ def compare_model_vs_analytical_trajectories(
         If True, the plot will be displayed interactively.
     """
 
+    # Define plot
     fig, ax = plt.subplots()
 
     # Plot theoretical trajectory

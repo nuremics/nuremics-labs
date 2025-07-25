@@ -194,20 +194,39 @@ class ProjectileModelProc(Process):
 
 
 if __name__ == "__main__":
+
+    # ================================================================== #
+    #                      USER-DEFINED PARAMETERS                       #
+    #              >>>>> TO BE EDITED BY THE OPERATOR <<<<<              #
+    # ================================================================== #
+
+    # Working directory
+    working_dir = Path(r"...")
     
-    # Define working directory
-    working_dir = Path("...")   # to be edited
+    # Input parameters
+    gravity = -9.81
+    mass = 0.1
+    
+    # Input paths
+    velocity_file = Path(r"...") / "velocity.json"
+    configs_folder = Path(r"...") / "configs"
+    coords_file = Path(r"...") / "points_coordinates.csv"
+
+    # Output paths
+    comp_folder = "comparison"
+
+    # ================================================================== #
 
     # Go to working directory
     os.chdir(working_dir)
 
     # Create dictionary containing input data
     dict_inputs = {
-        "gravity": -9.81,
-        "mass": 0.1,
-        "velocity_file": Path(".../velocity.json"),          # to be edited
-        "configs_folder": Path(".../configs"),               # to be edited
-        "coords_file": Path(".../points_coordinates.csv"),   # to be edited
+        "gravity": gravity,
+        "mass": mass,
+        "velocity_file": velocity_file,
+        "configs_folder": configs_folder,
+        "coords_file": coords_file, 
     }
     
     # Create process
@@ -217,7 +236,7 @@ if __name__ == "__main__":
     )
 
     # Define output paths
-    process.output_paths["comp_folder"] = "comparison"
+    process.output_paths["comp_folder"] = comp_folder
 
     # Run process
     process()
