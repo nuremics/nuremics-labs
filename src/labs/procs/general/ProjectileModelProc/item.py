@@ -25,14 +25,14 @@ class ProjectileModelProc(Process):
     Input parameters
     ----------------
         gravity : float
-            Acceleration due to gravity.
+            Gravitational acceleration (m/s²).
         mass : float
-            Mass of the body.
+            Mass of the body (kg).
 
     Input paths
     -----------
         velocity_file : json
-            File containing initial conditions (v0, h0, angle).
+            File containing the velocity initial conditions {v0 (m/s); angle (°)}.
         configs_folder : folder
             'solver_config.json' : File containing the parameters for solver configuration.
             'display_config.json' : File containing the parameters for display configuration.
@@ -130,7 +130,6 @@ class ProjectileModelProc(Process):
             df_points=df_points,
             mass=self.mass,
             gravity=self.gravity,
-            h0=self.dict_velocity["h0"],
             v0=self.dict_velocity["v0"],
             angle=self.dict_velocity["angle"],
             timestep=self.dict_solver_config["timestep"],
@@ -165,20 +164,13 @@ class ProjectileModelProc(Process):
             parents=True,
         )
 
-        # Compute analytical solution
+        # Compute analytical solution and save results to Excel
         self.df_trajectory_model_vs_theory = units.calculate_analytical_trajectory(
             df=self.df_trajectory_model,
             v0=self.dict_velocity["v0"],
-            h0=self.dict_velocity["h0"],
             angle=self.dict_velocity["angle"],
             gravity=self.gravity,
-        )
-
-        # Save results to Excel
-        self.df_trajectory_model_vs_theory.to_excel(
-            excel_writer=os.path.join(self.output_paths["comp_folder"], "results.xlsx"),
-            engine="xlsxwriter",
-            index=True,
+            filename=os.path.join(self.output_paths["comp_folder"], "results.xlsx"),
         )
     
     def compare_model_vs_analytical_trajectories(self):

@@ -44,12 +44,12 @@ erDiagram
 
 ## Input Parameter(s)
 
-- **`gravity`:** Acceleration due to gravity.
-- **`mass`:** Mass of the body.
+- **`gravity`:** Gravitational acceleration (m/s²).
+- **`mass`:** Mass of the body (kg).
 
 ## Input Path(s)
 
-- **`velocity_file`:** File containing the velocity initial conditions (v0, angle).
+- **`velocity_file`:** File containing the velocity initial conditions {v0 (m/s); angle (°)}.
 - **`configs_folder/`**<br>
   **`solver_config.json`:** File containing the parameters for solver configuration.<br>
   **`display_config.json`:** File containing the parameters for display configuration.

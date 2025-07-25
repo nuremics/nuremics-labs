@@ -11,13 +11,13 @@ import pymunk.pygame_util
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+from typing import Optional
 
 
 def simulate_projectile_motion(
     df_points: pd.DataFrame,
     mass: float,
     gravity: float,
-    h0: float,
     v0: float,
     angle: float,
     timestep: float,
@@ -42,13 +42,11 @@ def simulate_projectile_motion(
     df_points : pd.DataFrame
         2D coordinates of the polygon defining the shape of the body (in its local frame).
     mass : float
-        Mass of the body.
+        Mass of the body (kg).
     gravity : float
-        Acceleration due to gravity.
-    h0 : float
-        Initial vertical position of the body's center.
+        Gravitational acceleration (m/s²).
     v0 : float
-        Initial velocity magnitude.
+        Initial velocity magnitude (m/s).
     angle : float
         Launch angle in degrees (from horizontal).
     timestep : float
@@ -69,11 +67,16 @@ def simulate_projectile_motion(
     """
 
     # Prepare an empty DataFrame to store trajectory points
-    trajectory = pd.DataFrame(columns=["t", "x_model", "y_model"])
+    df_trajectory = pd.DataFrame(columns=["t", "x_model", "y_model"])
 
     # Compute initial velocity components
-    vx = v0*np.cos(np.radians(angle))
-    vy = v0*np.sin(np.radians(angle))
+    vx = v0 * np.cos(np.radians(angle))
+    vy = v0 * np.sin(np.radians(angle))
+
+    # Compute initial vertical position of the body's center.
+    coords = df_points[["X", "Y"]].values
+    distances = np.linalg.norm(coords, axis=1)
+    h0 = np.mean(distances)
 
     # Reset frame rate depending on timestep setting
     fps = min(fps, int(1/timestep))
@@ -90,11 +93,11 @@ def simulate_projectile_motion(
     contact = False
     running = True
     current_time = 0.0
-    dt = timestep           # Time step (s)
-    t_final = t_flight+2.0  # Final simulation time
+    dt = timestep             # Time step (s)
+    t_final = t_flight + 2.0  # Final simulation time
 
     # Define visualization scale and window size
-    metric = window_size/max((d_flight+4.0), (h_max+3.0))
+    metric = window_size / max((d_flight+4.0), (h_max+3.0))
     window_height = window_size
     window_width = window_size
 
@@ -147,6 +150,11 @@ def simulate_projectile_motion(
         velocity=(vx, vy),
     )
 
+    # Write initial conditions in trajectory dataframe
+    pos = shape.body.position
+    new_row = {"t": current_time, "x_model": pos.x, "y_model": pos.y}
+    df_trajectory.loc[len(df_trajectory)] = new_row
+
     # Main simulation loop
     while running:
         
@@ -176,7 +184,7 @@ def simulate_projectile_motion(
             if not contact:
                 pos = shape.body.position
                 new_row = {"t": current_time, "x_model": pos.x, "y_model": pos.y}
-                trajectory.loc[len(trajectory)] = new_row
+                df_trajectory.loc[len(df_trajectory)] = new_row
 
         # Stop simulation after final time
         if current_time > t_final:
@@ -186,7 +194,7 @@ def simulate_projectile_motion(
     if verbose:
         pygame.quit()
 
-    return trajectory
+    return df_trajectory
 
 
 def create_body(
@@ -214,7 +222,7 @@ def create_body(
     position : tuple[float, float]
         The initial (x, y) position of the center of mass of the body in world coordinates.
     mass : float
-        Mass of the rigid body.
+        Mass of the body (kg).
     friction : float
         Friction coefficient applied to the polygon shape.
     velocity : tuple[float, float]
@@ -289,17 +297,17 @@ def compute_analytical_characteristics(
     g = np.abs(gravity)
 
     # Compute velocity components
-    vsin = v0*np.sin(np.radians(angle))  # Vertical component
-    vcos = v0*np.cos(np.radians(angle))  # Horizontal component
+    vsin = v0 * np.sin(np.radians(angle))  # Vertical component
+    vcos = v0 * np.cos(np.radians(angle))  # Horizontal component
     
     # Total flight time until the projectile reaches the ground
-    t_flight = (vsin+np.sqrt(vsin**2+2*g*h0))/g
+    t_flight = (vsin + np.sqrt(vsin**2 + 2 * g * h0)) / g
 
     # Horizontal distance travelled during flight
-    d_flight = vcos*t_flight
+    d_flight = vcos * t_flight
 
     # Maximum height reached during the trajectory
-    h_max = h0+vsin**2/(2*g)
+    h_max = h0 + vsin**2 / (2 * g)
 
     return t_flight, d_flight, h_max
 
@@ -307,9 +315,9 @@ def compute_analytical_characteristics(
 def calculate_analytical_trajectory(
     df: pd.DataFrame,
     v0: float,
-    h0: float,
     angle: float,
     gravity: float,
+    filename: Optional[str] = None,
 ) -> pd.DataFrame:
     """
     Calculate the theoretical trajectory of a projectile using analytical equations.
@@ -329,12 +337,12 @@ def calculate_analytical_trajectory(
         DataFrame containing a time column 't' (in seconds).
     v0 : float
         Initial velocity magnitude (m/s).
-    h0 : float
-        Initial vertical position (m).
     angle : float
         Launch angle in degrees (0° is horizontal).
     gravity : float
         Gravitational acceleration (m/s²). Can be positive (upward) or negative (downward).
+    filename : str, optional
+        If defined, results are saved to an Excel file with the provided filename.
 
     Returns
     -------
@@ -349,13 +357,16 @@ def calculate_analytical_trajectory(
     df["x_theory"] = np.nan
     df["y_theory"] = np.nan
 
+    # Get initial vertical position from model trajectory
+    h0 = df["y_model"].iloc[0]
+
     # Loop through each time point and compute the x and y positions
     for idx, t in enumerate(df["t"]):
 
         # Compute horizontal position using uniform linear motion
-        x = v0*np.cos(np.radians(angle))*t
+        x = v0 * np.cos(np.radians(angle)) * t
         # Compute vertical position using uniformly accelerated motion
-        y = h0+v0*np.sin(np.radians(angle))*t+0.5*gravity*t**2
+        y = h0 + v0 * np.sin(np.radians(angle)) * t + 0.5 * gravity * t**2
         
         # Store computed values in the DataFrame
         df.loc[idx, "x_theory"] = x
@@ -366,6 +377,14 @@ def calculate_analytical_trajectory(
         keys="t",
         inplace=True,
     )
+
+    # Save results to Excel file
+    if filename is not None:
+        df.to_excel(
+            excel_writer=filename,
+            engine="xlsxwriter",
+            index=True,
+        )
     
     return df
 
