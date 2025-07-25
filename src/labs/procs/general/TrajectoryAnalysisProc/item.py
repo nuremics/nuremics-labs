@@ -10,22 +10,22 @@ from labs.ops.general.trajectory_analysis import units
 @attrs.define
 class TrajectoryAnalysisProc(Process):
     """
-    Compare simulated (model) and theoretical trajectories of a projectile across all experiments. 
+    Perform overall comparisons between simulated (model) and theoretical trajectories.
 
     Pipeline
     --------
-        1. operation1
-            Generate overall comparative plot of simulated (model) and theoritical trajectories.
+        A/ plot_overall_model_vs_theory
+            Generate overall comparative plots of simulated (model) and theoritical trajectories.
 
     Analysis
     --------
         - comp_folder : folder
-            'results.xlsx' : File containing model and theoritical trajectories.
+            'results.xlsx' : File containing both trajectories.
 
     Outputs (stored in self.output_paths)
     -------
         fig_file : png
-            Image comparing both trajectories across all experiments.
+            Image containing overall comparative plots.
     """
 
     # Analysis
@@ -52,51 +52,73 @@ class TrajectoryAnalysisProc(Process):
     
     def plot_overall_model_vs_theory(self):
         """
-        Generate overall comparative plot of simulated (model) and theoritical trajectories.
+        Generate overall comparative plots of simulated (model) and theoritical trajectories.
 
         Uses
         ----
-            analysis1
+            comp_folder
 
         Generates
         ---------
-            out1
+            fig_file
         """
 
         self.process_output(
             out=self.comp_folder,
-            func=units.run_analysis,
+            func=units.plot_overall_model_vs_theory,
             filename=self.output_paths["fig_file"],
             verbose=self.verbose,
         )
 
 
 if __name__ == "__main__":
+
+    # ================================================================== #
+    #                      USER-DEFINED PARAMETERS                       #
+    #              >>>>> TO BE EDITED BY THE OPERATOR <<<<<              #
+    # ================================================================== #
     
     # Define working directory
-    working_dir = Path(os.environ["WORKING_DIR"])/"ONE_APP/Study1/3_AnalysisProc"
+    working_dir = Path(r"...")
+
+    # Analysis
+    comp_folder = "comparison"
+
+    # Output paths
+    fig_file = "overall_comparisons.png"
+
+    # Paths file
+    paths_file = Path(r"...") / ".paths.json"
+
+    # Analysis file
+    analysis_file = Path(r"...") / "analysis.json"
+
+    # ================================================================== #
 
     # Go to working directory
     os.chdir(working_dir)
 
     # Create dictionary containing input data
     dict_inputs = {
-        "analysis1": "output3",
+        "comp_folder": comp_folder,
     }
     
     # Create process
-    process = AnalysisProc(
+    process = TrajectoryAnalysisProc(
         dict_inputs=dict_inputs,
         set_inputs=True,
     )
-    process.output_paths["out1"] = "output4.png"
+    process.is_case = False
+
+    # Define output paths
+    process.output_paths["fig_file"] = fig_file
 
     # Get dictionary of paths
-    with open(working_dir/"../.paths.json") as f:
-        process.dict_paths = json.load(f) 
+    with open(paths_file) as f:
+        process.dict_paths = json.load(f)
 
     # Get dictionary of analysis settings
-    with open(working_dir/"../analysis.json") as f:
+    with open(analysis_file) as f:
         process.dict_analysis = json.load(f) 
 
     # Run process

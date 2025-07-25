@@ -1,35 +1,38 @@
-## Diagram
+# TrajectoryAnalysisProc
+
+<p align="left">
+  <img src="https://img.shields.io/badge/Pandas-2.2.2+-0b0153?style=flat&logo=pandas&logoColor=white" />
+  <img src="https://img.shields.io/badge/matplotlib-3.10.3+-11557c" />
+  <img src="https://img.shields.io/badge/openpyxl-3.1.5+-010043" />
+</p>
+
+## Process
+
+Perform overall comparisons between simulated (model) and theoretical trajectories.<br>
+A/ **`plot_overall_model_vs_theory`:** Generate overall comparative plots of simulated (model) and theoritical trajectories.
 
 ```mermaid
 erDiagram
   **Analysis** ||--|| **Inputs** : provides
-  **Inputs** ||--|| **AnalysisProc** : feeds
-  **AnalysisProc** ||--|| **Outputs** : generates
+  **Inputs** ||--|| **TrajectoryAnalysisProc** : feeds
+  **TrajectoryAnalysisProc** ||--|| **Outputs** : generates
 
   **Analysis** {
-    folder analysis1 "_"
+    folder comp_folder "_"
   }
-  **AnalysisProc** {
-    function operation1
+  **TrajectoryAnalysisProc** {
+    op plot_overall_model_vs_theory
   }
   **Outputs** {
-    file out1 "png"
+    file fig_file "png"
   }
 ```
 
-## Description
-
-Compare simulated (model) and theoretical trajectories of a projectile across all experiments. 
-
-## Pipeline
-
-1. **`operation1`:** Generate overall comparative plot of simulated (model) and theoritical trajectories.
-
 ## Input Analysis
 
-- **`analysis1/`**
-  - **`results.xlsx`:** File containing simulated (model) and theoritical trajectories.
+- **`comp_folder/`**<br>
+  **`results.xlsx`:** File containing both trajectories.
 
 ## Output Path(s)
 
-- **`out1`:** Image comparing both trajectories across all experiments.
+- **`fig_file`:** Image containing overall comparative plots.

@@ -1,22 +1,20 @@
 from pathlib import Path
 import pandas as pd
-import matplotlib
 import matplotlib.pyplot as plt
-matplotlib.use("TkAgg")
 
 from nuremics import Process
 
 @Process.analysis_function
-def run_analysis(
+def plot_overall_model_vs_theory(
     output: dict,
     settings: dict,
     filename: str,
     verbose: bool,
 ) -> None:
     """
-    Compare model vs. theoretical (x, y) trajectories.
+    Generate overall comparative plots of simulated (model) and theoritical trajectories.
 
-    This function loads trajectory data from a results file ("results.xlsx")
+    This function loads (x, y) trajectory data from a results file ("results.xlsx")
     and compares the model prediction to the theoretical reference for multiple 
     scenarios.
 
@@ -38,12 +36,12 @@ def run_analysis(
     verbose : bool
         If True, displays the plot interactively using a window (e.g. for inspection).
     """
-
-    manager = plt.get_current_fig_manager()
-    manager.window.wm_geometry("+1110+0")
     
     # Flag to plot "Theory" label only once
     first = True
+
+    # Define plot
+    fig, ax = plt.subplots()
     
     # Browse output for each case
     for case, out in output.items():
@@ -64,21 +62,21 @@ def run_analysis(
         if label == "Model":
             label = case
         
-        # Plot theoretical trajectory (black line), only label the first one
+        # Plot theoretical trajectory, only label the first one
         if first:
-            plt.plot(df["x_theory"], df["y_theory"], "k",
+            ax.plot(df["x_theory"], df["y_theory"], "k",
                 zorder=3,
                 linewidth=linewidth,
                 label="Theory",
             )
         else:
-            plt.plot(df["x_theory"], df["y_theory"], "k",
+            ax.plot(df["x_theory"], df["y_theory"], "k",
                 zorder=3,
                 linewidth=linewidth,
             )
         
         # Plot model trajectory
-        plt.plot(df["x_model"], df["y_model"],
+        ax.plot(df["x_model"], df["y_model"],
             color=color,
             linestyle=linestyle,
             linewidth=linewidth,
@@ -92,26 +90,25 @@ def run_analysis(
         first = False
     
     # Set title and axis labels
-    plt.title("(x, y) trajectory: model vs. theory", fontsize=14)
-    plt.xlabel("x (m)", fontsize=14)
-    plt.ylabel("y (m)", fontsize=14)
-    
-    # Add legend and grid
-    plt.legend(
+    ax.set_title("(x, y) trajectory: model vs. theory", fontsize=14)
+    ax.set_xlabel("x (m)", fontsize=14)
+    ax.set_ylabel("y (m)", fontsize=14)
+
+    # Set equal aspect ratio, legend and grid
+    ax.set_aspect("equal", adjustable="datalim")
+    ax.autoscale_view()
+    ax.legend(
         fontsize=14,
         loc="upper right",
     )
-    plt.grid(True)
-
-    # Keep aspect ratio equal for visual accuracy
-    plt.axis("equal")
+    ax.grid(True)
 
     # Save the plot to the specified file (with high resolution)
-    plt.savefig(filename, dpi=300)
+    fig.savefig(filename, dpi=300)
 
     # Display the plot in a window if verbose mode is enabled
     if verbose:
         plt.show()
     
     # Close the figure to release memory
-    plt.close()
+    plt.close(fig)
