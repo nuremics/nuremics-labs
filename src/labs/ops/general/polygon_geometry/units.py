@@ -1,11 +1,13 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from typing import Optional
 
 
 def generate_polygon_shape(
     radius: float,
     n_sides: int,
+    filename: Optional[str] = None,
 ) -> pd.DataFrame:
     """
     Generate the 2D coordinates of a regular polygon.
@@ -13,9 +15,11 @@ def generate_polygon_shape(
     Parameters
     ----------
     radius : float
-        The radius of the circumscribed circle of the polygon.
+        Radius (m) of the circumscribed circle of the polygon.
     n_sides : int
-        The number of sides (vertices) of the polygon.
+        Number of sides of the polygon.
+    filename : str, optional
+        If defined, coordinates are saved to a CSV file with the provided filename.
 
     Returns
     -------
@@ -37,6 +41,10 @@ def generate_polygon_shape(
         data=np.array(points),
         columns=["X", "Y"],
     )
+
+    # Save coordinates to CSV file
+    if filename is not None:
+        df_points.to_csv(filename)
     
     return df_points
 

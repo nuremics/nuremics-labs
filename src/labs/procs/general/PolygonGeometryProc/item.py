@@ -22,9 +22,9 @@ class PolygonGeometryProc(Process):
     Input parameters
     ----------------
         radius : float
-            The radius of the circumscribed circle of the polygon.
+            Radius (m) of the circumscribed circle of the polygon.
         n_sides : int
-            The number of sides (vertices) of the polygon.
+            Number of sides of the polygon.
 
     Input paths
     -----------
@@ -78,14 +78,12 @@ class PolygonGeometryProc(Process):
             coords_file
         """
 
-        # Create shape points
+        # Create shape points and save coordinates to CSV file
         self.df_points = units.generate_polygon_shape(
             radius=self.radius,
             n_sides=self.n_sides,
+            filename=self.output_paths["coords_file"],
         )
-
-        # Save coordinates to CSV file
-        self.df_points.to_csv(self.output_paths["coords_file"])
 
     def plot_polygon_shape(self):
         """

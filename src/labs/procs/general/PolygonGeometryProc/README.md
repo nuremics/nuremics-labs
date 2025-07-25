@@ -38,7 +38,7 @@ erDiagram
 
 ## Input Parameter(s)
 
-- **`radius`:** Radius of the polygon.
+- **`radius`:** Radius (m) of the circumscribed circle of the polygon.
 - **`n_sides`:** Number of sides of the polygon.
 
 ## Input Path(s)
