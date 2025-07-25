@@ -42,31 +42,31 @@ Developers are thus encouraged to treat `nuremics` as the core engine, and to us
 
 2. **Create the NUREMICS virtual environment.** From the root directory of your cloned repository, use either conda or micromamba to create and install the environment using the provided `environment.yml` file.
 
-  <details>
-  <summary><strong>Using Conda</strong></summary>
+    <details>
+    <summary><strong>Using Conda</strong></summary>
 
-  ```bash
-  conda create -f environment.yml
-  ```
-  ```bash
-  conda activate nrs-env
-  ```
+    ```bash
+    conda create -f environment.yml
+    ```
+    ```bash
+    conda activate nrs-env
+    ```
 
-  </details>
+    </details>
 
-  <details>
-  <summary><strong>Using Micromamba</strong></summary>
+    <details>
+    <summary><strong>Using Micromamba</strong></summary>
 
-  ```bash
-  micromamba create -f environment.yml
-  ```
-  ```bash
-  micromamba activate nrs-env
-  ```
+    ```bash
+    micromamba create -f environment.yml
+    ```
+    ```bash
+    micromamba activate nrs-env
+    ```
 
-  </details>
+    </details>
 
-  This will create a reproducible virtual environment with all required dependencies, including the `nuremics` core package itself.
+    This will create a reproducible virtual environment with all required dependencies, including the `nuremics` core package itself.
 
 
 3. **Install the demo application.** Each application in `nuremics-labs` can be installed independently. You can start by installing the [DEMO_APP](https://github.com/nuremics/nuremics-labs/tree/main/src/labs/apps/general/DEMO_APP).
