@@ -95,8 +95,7 @@ def plot_polygon_shape(
     ax.set_ylabel("y (m)", fontsize=14)
     
     # Set equal aspect ratio and grid
-    ax.set_aspect("equal", adjustable="datalim")
-    ax.autoscale_view()
+    ax.set_aspect("equal")
     ax.grid(True)
 
     # Save the figure to the specified filename

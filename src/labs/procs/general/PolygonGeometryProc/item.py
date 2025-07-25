@@ -114,17 +114,35 @@ class PolygonGeometryProc(Process):
 
 if __name__ == "__main__":
     
-    # Define working directory
-    working_dir = Path("...")   # to be edited
+    # ================================================================== #
+    #                      USER-DEFINED PARAMETERS                       #
+    #              >>>>> TO BE EDITED BY THE OPERATOR <<<<<              #
+    # ================================================================== #
+
+    # Working directory
+    working_dir = Path(r"...")
+    
+    # Input parameters
+    radius = 0.5
+    n_sides = 3
+    
+    # Input paths
+    title_file = Path(r"...") / "plot_title.txt"
+
+    # Output paths
+    coords_file = "points_coordinates.csv"
+    fig_file = "polygon_shape.png"
+
+    # ================================================================== #
 
     # Go to working directory
     os.chdir(working_dir)
 
     # Create dictionary containing input data
     dict_inputs = {
-        "radius": 0.5,
-        "n_sides": 3,
-        "title_file": Path(".../plot_title.txt"),   # to be edited
+        "radius": radius,
+        "n_sides": n_sides,
+        "title_file": title_file,
     }
     
     # Create process
@@ -134,8 +152,8 @@ if __name__ == "__main__":
     )
 
     # Define output paths
-    process.output_paths["coords_file"] = "points_coordinates.csv"
-    process.output_paths["fig_file"] = "polygon_shape.png"
+    process.output_paths["coords_file"] = coords_file
+    process.output_paths["fig_file"] = fig_file
 
     # Run process
     process()
