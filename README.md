@@ -67,7 +67,7 @@ Developers are thus encouraged to treat `nuremics` as the core engine, and to us
     </details>
 
 
-3. **Install the demo application.** Each application in `nuremics-labs` can be installed independently. You can start by installing the [DEMO_APP](https://github.com/nuremics/nuremics-labs/tree/main/src/labs/apps/general/DEMO_APP).
+3. **Install the demo application.** Each application in `nuremics-labs` can be installed independently. You can start by installing the [`DEMO_APP`](https://github.com/nuremics/nuremics-labs/tree/main/src/labs/apps/general/DEMO_APP).
 
     ```bash
     pip install .[DEMO_APP]
@@ -81,7 +81,7 @@ The essence of the **NUREMICS** framework is to enable the development of scient
 
 To get hands-on experience, you'll start by running the `DEMO_APP` and reproduce the scientific results of the `Study_Shape` and `Study_Velocity` studies, as presented in the video below.
 
-▶️ [Presentation of the NUREMICS demo application](https://youtu.be/HyUkWXGqEIM)
+▶️ [Watch Video](https://youtu.be/HyUkWXGqEIM)
 
 When you run a **NUREMICS App** for the first time, the **NUREMICS** framework generates a local folder on your system. This folder becomes the workspace of your application, where you configure your studies, set the input data for the experiments you want to run, and collect the resulting output data.
 
@@ -91,11 +91,11 @@ Here are the steps to follow in order to reproduce these scientific studies with
 
 1. **Download the NUREMICS working directory.** You’ll receive it as a compressed `nrs_working_dir` archive which contains the preconfigured `DEMO_APP` folder. Unzip it and place it anywhere you want on your system.
 
-    [📦 Download NUREMICS working directory](assets/nrs_working_dir.zip)
+    📦 [Download NUREMICS working directory](assets/nrs_working_dir.zip)
 
 2. **Download the `.nuremics` directory.** This special folder contains the `settings.json` file, which acts as the central manager for all your **NUREMICS Apps**. Unzip it and place it at the root of your forked/cloned `nuremics-labs` repository.
 
-    [📦 Download `.nuremics` directory](assets/nrs_working_dir.zip)
+    📦 [Download .nuremics directory](assets/nrs_working_dir.zip)
 
 3. **Set the working directory for `DEMO_APP`**. You now need to tell **NUREMICS** where to find the `nrs_working_dir` folder on your system, from which the `DEMO_APP` will be executed. This is done by editing the `settings.json` file (downloaded in step 2). Update the `working_dir` field with the full path to your local `nrs_working_dir` folder. In the `studies` field, you'll also find the list of studies that the `DEMO_APP` will run. Here, `Study_Shape` and `Study_Velocity` are already defined.
 
