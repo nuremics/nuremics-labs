@@ -97,7 +97,7 @@ Here are the steps to follow in order to reproduce these scientific studies with
 
     📦 [Download .nuremics directory](assets/nrs_working_dir.zip)
 
-3. **Set the working directory for `DEMO_APP`**. You now need to tell **NUREMICS** where to find the `nrs_working_dir` folder on your system, from which the `DEMO_APP` will be executed. This is done by editing the `settings.json` file (downloaded in step 2). Update the `working_dir` field with the full path to your local `nrs_working_dir` folder. In the `studies` field, you'll also find the list of studies that the `DEMO_APP` will run. Here, `Study_Shape` and `Study_Velocity` are already defined.
+3. **Set the working directory for `DEMO_APP`**. You now need to tell **NUREMICS** where to find the `nrs_working_dir` folder on your system, from which the `DEMO_APP` will be executed. This is done by editing the `settings.json` file (downloaded in step 2). Update the `working_dir` field with the full path to your local `nrs_working_dir` folder.
 
     📄 `nuremics-labs/.nuremics/settings.json`
     ```json hl_lines="7"
