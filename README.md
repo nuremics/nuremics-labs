@@ -96,7 +96,7 @@ Follow these steps:
 3. **Set the working directory for `DEMO_APP`**. Edit the `"working_dir"` field in `.nuremics/settings.json` and set the full path to your local `nrs_working_dir`.
 
     <details>
-    <summary><strong>📄 nuremics-labs/.nuremics/settings.json</strong></summary>
+    <summary>📄<code>nuremics-labs/.nuremics/settings.json</code></summary>
     
     ```json
     {
@@ -133,7 +133,7 @@ Now that you've successfully run the `DEMO_APP` and reproduced the scientific re
 Want to skip the execution of a specific study when running your **App**? Set its `"execute"` field to `false` in the `studies.json` file.
 
 <details>
-<summary><strong>📄 nrs_working_dir/DEMO_APP/studies.json</strong></summary>
+<summary>📄<code>nrs_working_dir/DEMO_APP/studies.json</code></summary>
 
 ```json
 {
@@ -154,7 +154,7 @@ Want to skip the execution of a specific study when running your **App**? Set it
 Want to skip the execution of a specific process (**Proc**) within a study? Set its `"execute"` field to `false` in the `process.json` file.
 
 <details>
-<summary><strong>📄 nrs_working_dir/DEMO_APP/Study_Velocity/process.json</strong></summary>
+<summary>📄<code>nrs_working_dir/DEMO_APP/Study_Velocity/process.json</code></summary>
 
 ```json
 {
@@ -179,7 +179,7 @@ Want to skip the execution of a specific process (**Proc**) within a study? Set 
 Want a specific process (**Proc**) to be executed in silent mode within a study? Set its `"silent"` field to `true` in the `process.json` file.
 
 <details>
-<summary><strong>📄 nrs_working_dir/DEMO_APP/Study_Velocity/process.json</strong></summary>
+<summary>📄<code>nrs_working_dir/DEMO_APP/Study_Velocity/process.json</code></summary>
 
 ```json
 {
@@ -204,7 +204,7 @@ Want a specific process (**Proc**) to be executed in silent mode within a study?
 Want to skip the execution of a specific experiment in a study? Set the value of the `EXECUTE` flag to `0` in the `inputs.csv` file for the experiment you want to skip.
 
 <details>
-<summary><strong>📄 nrs_working_dir/DEMO_APP/Study_Velocity/inputs.csv</strong></summary>
+<summary>📄<code>nrs_working_dir/DEMO_APP/Study_Velocity/inputs.csv</code></summary>
 
 ```csv
 ID,EXECUTE
@@ -219,7 +219,7 @@ Test3,1
 Want to run a new experiment in a study? Add a new line with a unique `ID` to the `inputs.csv` file.
 
 <details>
-<summary><strong>📄 nrs_working_dir/DEMO_APP/Study_Velocity/inputs.csv</strong></summary>
+<summary>📄<code>nrs_working_dir/DEMO_APP/Study_Velocity/inputs.csv</code></summary>
 
 ```csv
 ID,EXECUTE
