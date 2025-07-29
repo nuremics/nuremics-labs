@@ -85,15 +85,15 @@ When first run, a **NUREMICS App** creates a local workspace on your system, whe
 
 Follow these steps:
 
-1. **Download the NUREMICS working directory.** Get the preconfigured `nrs_working_dir` archive, unzip it, and place it anywhere on your system.
+1. **Download the `NUREMICS_Starter` archive**. Retrieve the preconfigured `NUREMICS_Starter` archive and unzip it anywhere on your system.
 
-    📦 [Download NUREMICS working directory](assets/nrs_working_dir.zip)
+    📦 [Download NUREMICS_Starter archive](assets/NUREMICS_Starter.zip)
 
-2. **Download the `.nuremics` directory.** This folder contains `settings.json`, the central config file for all your **Apps**. Unzip it at the root of your forked/cloned `nuremics-labs` repo.
+2. **Prepare the NUREMICS working directory.** Locate the `nrs_working_dir` folder inside the unzipped archive and move it to any location on your system that is most convenient for you.
 
-    📦 [Download .nuremics](assets/nrs_working_dir.zip)
+3. **Prepare the `.nuremics` directory.** Locate the `.nuremics` folder in the same unzipped archive and place it at the root of your forked/cloned `nuremics-labs` repo.
 
-3. **Set the working directory for `DEMO_APP`**. Edit the `"working_dir"` field in `.nuremics/settings.json` and set the full path to your local `nrs_working_dir`.
+4. **Set the working directory for `DEMO_APP`**. Edit the `"working_dir"` field in `.nuremics/settings.json` and set the full path to your local `nrs_working_dir`.
 
     <details>
     <summary>📄<code>nuremics-labs/.nuremics/settings.json</code></summary>
@@ -101,17 +101,15 @@ Follow these steps:
     ```json
     {
         "default_working_dir": null,
-        "apps": [
-            {
-                "id": 0,
-                "name": "DEMO_APP",
-            >>> "working_dir": "path/to/nrs_working_dir", <<<
+        "apps": {
+            "DEMO_APP": {
+            >>> "working_dir": "path/to/your/nrs_working_dir", <<<
                 "studies": [
                     "Study_Shape",
                     "Study_Velocity"
                 ]
             }
-        ]
+        }
     }
     ```
     </details>
