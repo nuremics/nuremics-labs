@@ -209,7 +209,7 @@ Want to skip the execution of a specific experiment in a study? Set the value of
 ```csv
 ID,EXECUTE
 Test1,1
->>> Test2,0 <<<
+Test2,0 🔴
 Test3,1
 ```
 </details>
