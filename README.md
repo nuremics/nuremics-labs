@@ -199,6 +199,21 @@ Want a specific process (**Proc**) to be executed in silent mode within a study?
 ```
 </details>
 
+#### Skip an experiment
+
+Want to skip the execution of a specific experiment in a study? Set the value of the `EXECUTE` flag to `0` in the `inputs.csv` file for the experiment you want to skip.
+
+<details>
+<summary><strong>📄 nrs_working_dir/DEMO_APP/Study_Velocity/inputs.csv</strong></summary>
+
+```csv
+ID,EXECUTE
+Test1,1
+>>> Test2,0 <<<
+Test3,1
+```
+</details>
+
 ## Dive into NUREMICS
 
 Ready to go beyond the demo?
