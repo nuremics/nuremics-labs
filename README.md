@@ -105,7 +105,7 @@ Follow these steps:
             {
                 "id": 0,
                 "name": "DEMO_APP",
-                "working_dir": "path/to/nrs_working_dir",
+                "working_dir": "path/to/nrs_working_dir", <<<
                 "studies": [
                     "Study_Shape",
                     "Study_Velocity"
@@ -114,7 +114,7 @@ Follow these steps:
         ]
     }
     ```
-    
+
     </details>
 
 4. **Run the `DEMO_APP`**. From the `nuremics-labs/src/labs/apps/general/DEMO_APP` folder, run the **App**.
