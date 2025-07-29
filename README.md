@@ -214,6 +214,35 @@ Test3,1
 ```
 </details>
 
+#### Run a new experiment
+
+Want to run a new experiment in a study? Add a new line with a unique `ID` to the `inputs.csv` file.
+
+<details>
+<summary><strong>📄 nrs_working_dir/DEMO_APP/Study_Velocity/inputs.csv</strong></summary>
+
+```csv
+ID,EXECUTE
+Test1,1
+Test2,0
+Test3,1
+MyExp,1 🔴
+```
+</details>
+
+Then run the **App**, which will automatically generate the corresponding input folder where you must upload the required `velocity.json` file.
+
+<details>
+<summary><strong>📄 nrs_working_dir/DEMO_APP/Study_Velocity/0_inputs/0_datasets/MyExp/velocity.json</strong></summary>
+
+    ```json
+    {
+        "v0": 15.0,
+        "angle": 60.0
+    }
+    ```
+</details>
+
 ## Dive into NUREMICS
 
 Ready to go beyond the demo?
