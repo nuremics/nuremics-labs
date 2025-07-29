@@ -290,7 +290,7 @@ Want to customize the overall analysis of experiment results for a given study? 
             "linewidth": 2.0,
             "marker": "o",
             "markersize": 8,
-            "markevery": 15,
+            "markevery": 20,
             "label": "Model"
         }
     },
