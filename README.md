@@ -96,7 +96,7 @@ Follow these steps:
 3. **Set the working directory for `DEMO_APP`**. Edit the `"working_dir"` field in `.nuremics/settings.json` and set the full path to your local `nrs_working_dir`.
 
     <details>
-    <summary><strong>📄 `nuremics-labs/.nuremics/settings.json`</strong></summary>
+    <summary><strong>📄 `nuremics-labs/.nuremics/settings.json` </strong></summary>
     
     ```json
     {
