@@ -130,7 +130,7 @@ Now that you've successfully run the `DEMO_APP` and reproduced the scientific re
 
 #### Skip a study
 
-Want to skip the execution of a specific study when running your **App**? Set its `"execute"` field to `false` in the `studies.json` file.
+**Want to skip the execution of a specific study when running your App?** Set its `"execute"` field to `false` in the `studies.json` file.
 
 <details>
 <summary><strong>📄 nrs_working_dir/DEMO_APP/studies.json</strong></summary>
@@ -144,6 +144,31 @@ Want to skip the execution of a specific study when running your **App**? Set it
     "Study_Velocity": {
         "execute": true,
         "..."
+    }
+}
+```
+</details>
+
+#### Skip a process
+
+**Want to skip the execution of a specific process (Proc) within a study?** Set its `"execute"` field to `false` in the `process.json` file.
+
+<details>
+<summary><strong>📄 nrs_working_dir/DEMO_APP/Study_Velocity/process.json</strong></summary>
+
+```json
+{
+    "PolygonGeometryProc": {
+    >>> "execute": false, <<<
+        "silent": false
+    },
+    "ProjectileModelProc": {
+        "execute": true,
+        "silent": false
+    },
+    "TrajectoryAnalysisProc": {
+        "execute": true,
+        "silent": false
     }
 }
 ```
