@@ -40,7 +40,7 @@ Developers are thus encouraged to treat `nuremics` as the core engine, and to us
     
     - Option B (quick start): If you just want to try the framework without making changes, you can simply clone the main repo directly.
 
-2. **Create the NUREMICS virtual environment.** From the root directory of your cloned repo, use either conda or micromamba to create and install the environment using the provided `environment.yml` file.
+2. **_(Optional, but recommended)_ Create the NUREMICS virtual environment.** From the root directory of your cloned repo, use either conda or micromamba to create and install the environment using the provided `environment.yml` file.
 
     <details>
     <summary><strong>Using Conda</strong></summary>
@@ -305,6 +305,6 @@ Want to customize the overall analysis of experiment results for a given study? 
 
 Ready to go beyond the demo?
 
-Explore the **NUREMICS Handbook** to unlock the full potential of the framework and start building your own scientific software applications:
+Explore the **NUREMICS Handbook** to unlock the full potential of the framework and start building your own scientific software applications.
 
 🔗 [nuremics.github.io](https://nuremics.github.io/)
