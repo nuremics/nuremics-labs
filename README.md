@@ -130,7 +130,7 @@ Now that you've successfully run the `DEMO_APP` and reproduced the scientific re
 
 #### Skip a study
 
-You can skip the execution of a specific study without deleting it. Set its `"execute"` field to `false` in the `studies.json` file.
+Want to skip the execution of a specific study when running your **App**? Set its `"execute"` field to `false` in the `studies.json` file.
 
 <details>
 <summary><strong>📄 nrs_working_dir/DEMO_APP/studies.json</strong></summary>
