@@ -305,6 +305,6 @@ Want to customize the overall analysis of experiment results for a given study? 
 
 Ready to go beyond the demo?
 
-Head over to the **NUREMICS** website to unlock the full potential of the framework and start building your own scientific software applications.
+Head over to the **NUREMICS** website to fully explore the framework and start building your own scientific software applications.
 
 🔗 [nuremics.github.io](https://nuremics.github.io/)
