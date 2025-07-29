@@ -235,12 +235,12 @@ Then run the **App**, which will automatically generate the corresponding input 
 <details>
 <summary><strong>📄 nrs_working_dir/DEMO_APP/Study_Velocity/0_inputs/0_datasets/MyExp/velocity.json</strong></summary>
 
-    ```json
-    {
-        "v0": 15.0,
-        "angle": 60.0
-    }
-    ```
+```json
+{
+    "v0": 15.0,
+    "angle": 60.0
+}
+```
 </details>
 
 ## Dive into NUREMICS
