@@ -105,7 +105,7 @@ Follow these steps:
             {
                 "id": 0,
                 "name": "DEMO_APP",
-                "working_dir": "path/to/nrs_working_dir", <<<
+            >>> "working_dir": "path/to/nrs_working_dir", <<<
                 "studies": [
                     "Study_Shape",
                     "Study_Velocity"
