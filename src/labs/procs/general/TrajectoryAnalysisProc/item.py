@@ -36,10 +36,10 @@ class TrajectoryAnalysisProc(Process):
             "add": True,
             "color": "red",
             "linestyle": "None",
-            "linewidth": 1.0,
+            "linewidth": 2.0,
             "marker": "o",
-            "markersize": 4,
-            "markevery": 7,
+            "markersize": 8,
+            "markevery": 20,
             "label": "Model"
         }
     }
