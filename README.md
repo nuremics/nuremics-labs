@@ -97,6 +97,7 @@ Follow these steps:
 
     <details>
     <summary><strong>📄 `nuremics-labs/.nuremics/settings.json`</strong></summary>
+    
     ```json
     {
         "default_working_dir": null,
@@ -113,6 +114,7 @@ Follow these steps:
         ]
     }
     ```
+    
     </details>
 
 4. **Run the `DEMO_APP`**. From the `nuremics-labs/src/labs/apps/general/DEMO_APP` folder, run the **App**.
