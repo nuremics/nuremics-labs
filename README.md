@@ -174,6 +174,31 @@ Want to skip the execution of a specific process (**Proc**) within a study? Set 
 ```
 </details>
 
+#### Silent a process
+
+Want a specific process (**Proc**) to be executed in silent mode within a study? Set its `"silent"` field to `true` in the `process.json` file.
+
+<details>
+<summary><strong>📄 nrs_working_dir/DEMO_APP/Study_Velocity/process.json</strong></summary>
+
+```json
+{
+    "PolygonGeometryProc": {
+        "execute": false,
+        "silent": false
+    },
+    "ProjectileModelProc": {
+        "execute": true,
+    >>> "silent": true <<<
+    },
+    "TrajectoryAnalysisProc": {
+        "execute": true,
+        "silent": false
+    }
+}
+```
+</details>
+
 ## Dive into NUREMICS
 
 Ready to go beyond the demo?
