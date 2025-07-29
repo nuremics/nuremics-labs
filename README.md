@@ -135,18 +135,18 @@ You can skip the execution of a specific study without deleting it. Set its `"ex
 <details>
 <summary><strong>📄 nrs_working_dir/DEMO_APP/studies.json</strong></summary>
 
-    ```json
-    {
-        "Study_Shape": {
-        >>> "execute": false, <<<
-            ...
-        },
-        "Study_Velocity": {
-            "execute": true,
-            ...
-        }
+```json
+{
+    "Study_Shape": {
+    >>> "execute": false, <<<
+        ...
+    },
+    "Study_Velocity": {
+        "execute": true,
+        ...
     }
-    ```
+}
+```
 </details>
 
 ## Dive into NUREMICS
