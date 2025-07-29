@@ -1,7 +1,7 @@
 <img src="https://raw.githubusercontent.com/nuremics/nuremics.github.io/main/images/banner.jpg" width="100%">
 <p align="left">
   <img src="https://img.shields.io/badge/Python-3.12+-ffcd3b?style=flat&logo=python&logoColor=white" />
-  <img src="https://img.shields.io/badge/nuremics-1.0.0-007bff" />
+  <img src="https://img.shields.io/badge/nuremics-1.0.0+-007bff" />
 </p>
 
 # NUREMICS® _Labs_
@@ -305,6 +305,6 @@ Want to customize the overall analysis of experiment results for a given study? 
 
 Ready to go beyond the demo?
 
-Explore the **NUREMICS Handbook** to unlock the full potential of the framework and start building your own scientific software applications.
+Head over to the **NUREMICS** website to unlock the full potential of the framework and start building your own scientific software applications.
 
 🔗 [nuremics.github.io](https://nuremics.github.io/)
