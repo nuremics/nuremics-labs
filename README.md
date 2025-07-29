@@ -243,6 +243,64 @@ Then run the **App**, which will automatically generate the corresponding input 
 ```
 </details>
 
+#### Modify analysis settings
+
+Want to customize the overall analysis of experiment results for a given study? Use the `analysis.json` file to control how each one is handled.
+
+<details>
+<summary>📄<code>nrs_working_dir/DEMO_APP/Study_Velocity/analysis.json</code></summary>
+
+```json
+{
+    "points_coordinates.csv": {},
+    "polygon_shape.png": {},
+    "comparison": {
+        "Test1": {
+            "add": true,
+            "color": "red",
+            "linestyle": "None",
+            "linewidth": 2.0,
+            "marker": "D",
+            "markersize": 8,
+            "markevery": 20,
+            "label": "Model"
+        },
+        "Test2": {
+            "add": true,
+            "color": "limegreen",
+            "linestyle": "None",
+            "linewidth": 2.0,
+            "marker": "v",
+            "markersize": 10,
+            "markevery": 15,
+            "label": "Model"
+        },
+        "Test3": {
+            "add": true,
+            "color": "dodgerblue",
+            "linestyle": "None",
+            "linewidth": 2.0,
+            "marker": "X",
+            "markersize": 8,
+            "markevery": 20,
+            "label": "Model"
+        },
+        "MyExp": {
+            "add": true,
+        >>> "color": "fuchsia", <<<
+            "linestyle": "None",
+            "linewidth": 2.0,
+            "marker": "o",
+            "markersize": 8,
+            "markevery": 15,
+            "label": "Model"
+        }
+    },
+    "overall_comparisons.png": {}
+}
+```
+</details>
+
 ## Dive into NUREMICS
 
 Ready to go beyond the demo?
