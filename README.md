@@ -96,7 +96,7 @@ Follow these steps:
 3. **Set the working directory for `DEMO_APP`**. Edit the `"working_dir"` field in `.nuremics/settings.json` and set the full path to your local `nrs_working_dir`.
 
     <details>
-    <summary><strong>📄 nuremics-labs/.nuremics/settings.json </strong></summary>
+    <summary><strong>📄 nuremics-labs/.nuremics/settings.json</strong></summary>
     
     ```json
     {
@@ -114,7 +114,6 @@ Follow these steps:
         ]
     }
     ```
-
     </details>
 
 4. **Run the `DEMO_APP`**. From the `nuremics-labs/src/labs/apps/general/DEMO_APP` folder, run the **App**.
@@ -124,6 +123,31 @@ Follow these steps:
     ```
 
     This will launch both studies and store results in `nrs_working_dir/DEMO_APP`.
+
+### Play with it
+
+Now that you've successfully run the `DEMO_APP` and reproduced the scientific results of the `Study_Shape` and `Study_Velocity` studies, let's play with it!
+
+#### Skip a study
+
+You can skip the execution of a specific study without deleting it. Set its `"execute"` field to `false` in the `studies.json` file.
+
+<details>
+<summary><strong>📄 nrs_working_dir/DEMO_APP/studies.json</strong></summary>
+
+    ```json
+    {
+        "Study_Shape": {
+        >>> "execute": false, <<<
+            ...
+        },
+        "Study_Velocity": {
+            "execute": true,
+            ...
+        }
+    }
+    ```
+</details>
 
 ## Dive into NUREMICS
 
