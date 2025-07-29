@@ -139,11 +139,11 @@ You can skip the execution of a specific study without deleting it. Set its `"ex
 {
     "Study_Shape": {
     >>> "execute": false, <<<
-        ...
+        "..."
     },
     "Study_Velocity": {
         "execute": true,
-        ...
+        "..."
     }
 }
 ```
