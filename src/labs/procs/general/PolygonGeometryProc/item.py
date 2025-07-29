@@ -108,7 +108,7 @@ class PolygonGeometryProc(Process):
             df_points=self.df_points,
             title=text,
             filename=self.output_paths["fig_file"],
-            verbose=self.verbose,
+            silent=self.silent,
         )
 
 

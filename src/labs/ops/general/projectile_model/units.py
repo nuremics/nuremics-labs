@@ -23,7 +23,7 @@ def simulate_projectile_motion(
     timestep: float,
     fps: int = 60,
     window_size: int = 600,
-    verbose: bool = True,
+    silent: bool = False,
 ) -> pd.DataFrame:
     """
     Simulate the motion of a 2D rigid body under gravity projected with an initial velocity.
@@ -52,12 +52,12 @@ def simulate_projectile_motion(
     timestep : float
         Time increment for physics simulation steps (in seconds).
     fps : int, optional (default is 60)
-        Frame rate for the visual simulation when verbose is True (in frames per second).
+        Frame rate for the visual simulation when silent is False (in frames per second).
     window_size : int, optional (default is 600)
         Size in pixels of the square pygame window for visual simulation.
-    verbose : bool, optional (default is True)
-        If True, displays the simulation using pygame.
-        If False, runs silently.
+    silent : bool (default is False)
+        If False, displays the simulation using pygame.
+        If True, runs silently.
 
     Returns
     -------
@@ -102,7 +102,7 @@ def simulate_projectile_motion(
     window_width = window_size
 
     # Initialize pygame and pymunk rendering
-    if verbose:
+    if not silent:
         pygame.init()
         screen = pygame.display.set_mode((window_width, window_height))
         clock = pygame.time.Clock()
@@ -159,7 +159,7 @@ def simulate_projectile_motion(
     while running:
         
         # Handle user window events (e.g., quit)
-        if verbose:
+        if not silent:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
@@ -191,7 +191,7 @@ def simulate_projectile_motion(
             running = False
 
     # Clean up the pygame window
-    if verbose:
+    if not silent:
         pygame.quit()
 
     return df_trajectory
@@ -392,7 +392,7 @@ def calculate_analytical_trajectory(
 def compare_model_vs_analytical_trajectories(
     df: pd.DataFrame,
     filename: str,
-    verbose: bool = True,
+    silent: bool = False,
 ) -> None:
     """
     Plot and save the comparison between simulated (model) and theoretical projectile trajectories.
@@ -409,8 +409,8 @@ def compare_model_vs_analytical_trajectories(
         - 'x_model', 'y_model': Model/simulated trajectory coordinates.
     filename : str
         Path where the output plot image will be saved.
-    verbose : bool, optional (default is True)
-        If True, the plot will be displayed interactively.
+    silent : bool (default is False)
+        If False, the plot will be displayed interactively.
     """
 
     # Define plot
@@ -449,8 +449,8 @@ def compare_model_vs_analytical_trajectories(
     # Save the plot to the specified file (with high resolution)
     fig.savefig(filename, dpi=300)
 
-    # Display the plot in a window if verbose mode is enabled
-    if verbose:
+    # Display the plot in a window if silent mode is disabled
+    if not silent:
         plt.show()
 
     # Close the figure to release memory

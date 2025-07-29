@@ -135,7 +135,7 @@ class ProjectileModelProc(Process):
             timestep=self.dict_solver_config["timestep"],
             fps=self.dict_display_config["fps"],
             window_size=self.dict_display_config["size"],
-            verbose=self.verbose,
+            silent=self.silent,
         )
 
     def calculate_analytical_trajectory(self):
@@ -189,7 +189,7 @@ class ProjectileModelProc(Process):
         units.compare_model_vs_analytical_trajectories(
             df=self.df_trajectory_model_vs_theory,
             filename=os.path.join(self.output_paths["comp_folder"], "model_vs_theory.png"),
-            verbose=self.verbose,
+            silent=self.silent,
         )
 
 

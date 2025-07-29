@@ -9,7 +9,7 @@ def plot_overall_model_vs_theory(
     output: dict,
     settings: dict,
     filename: str,
-    verbose: bool,
+    silent: bool = False,
 ) -> None:
     """
     Generate overall comparative plots of simulated (model) and theoritical trajectories.
@@ -33,8 +33,8 @@ def plot_overall_model_vs_theory(
     
     filename : str
         Path to the file where the generated plot image will be saved (PNG format recommended).
-    verbose : bool
-        If True, displays the plot interactively using a window (e.g. for inspection).
+    silent : bool (default is False)
+        If False, displays the plot interactively using a window (e.g. for inspection).
     """
     
     # Flag to plot "Theory" label only once
@@ -106,8 +106,8 @@ def plot_overall_model_vs_theory(
     # Save the plot to the specified file (with high resolution)
     fig.savefig(filename, dpi=300)
 
-    # Display the plot in a window if verbose mode is enabled
-    if verbose:
+    # Display the plot in a window if silent mode is disabled
+    if not silent:
         plt.show()
     
     # Close the figure to release memory

@@ -53,7 +53,7 @@ def plot_polygon_shape(
     df_points: pd.DataFrame,
     title: str,
     filename: str,
-    verbose: bool = True,
+    silent: bool = False,
 ) -> None:
     """
     Plot a closed 2D polygon from a set of points.
@@ -64,8 +64,8 @@ def plot_polygon_shape(
         DataFrame with columns '['X', 'Y'] representing the polygon vertices.
     title : str
         Title of the plot.
-    verbose : bool
-        If True, the plot is displayed on screen.
+    silent : bool (default is False)
+        If False, the plot is displayed on screen.
     filename : str
         Path to save the plot image (e.g., "shape.png").
     """
@@ -101,8 +101,8 @@ def plot_polygon_shape(
     # Save the figure to the specified filename
     fig.savefig(filename, dpi=300)
 
-    # Show the plot if requested
-    if verbose:
+    # Display the plot in a window if silent mode is disabled
+    if not silent:
         plt.show()
     
     # Close the figure to release memory

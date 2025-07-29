@@ -67,7 +67,7 @@ class TrajectoryAnalysisProc(Process):
             out=self.comp_folder,
             func=units.plot_overall_model_vs_theory,
             filename=self.output_paths["fig_file"],
-            verbose=self.verbose,
+            silent=self.silent,
         )
 
 
