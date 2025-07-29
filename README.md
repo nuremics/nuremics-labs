@@ -233,7 +233,7 @@ MyExp,1 🔴
 Then run the **App**, which will automatically generate the corresponding input folder where you must upload the required `velocity.json` file.
 
 <details>
-<summary><strong>📄 nrs_working_dir/DEMO_APP/Study_Velocity/0_inputs/0_datasets/MyExp/velocity.json</strong></summary>
+<summary><code>📄 nrs_working_dir/DEMO_APP/Study_Velocity/0_inputs/0_datasets/MyExp/velocity.json</code></summary>
 
 ```json
 {
