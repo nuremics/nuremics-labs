@@ -79,7 +79,7 @@ Developers are thus encouraged to treat `nuremics` as the core engine, and to us
 
 To get hands-on experience with the **NUREMICS** framework, you'll start by running the `DEMO_APP` and reproducing the scientific results of the `Study_Shape` and `Study_Velocity` studies, as demonstrated in the video below.
 
-▶️ [Watch video](https://youtu.be/HyUkWXGqEIM)
+▶️ [Watch video](https://youtu.be/nqGbva-uvTc)
 
 When first run, a **NUREMICS App** creates a local workspace on your system, where you configure studies, set input data, and collect results. In this tutorial, instead of setting up from scratch, you'll start with a preconfigured folder to reproduce the `Study_Shape` and `Study_Velocity` studies.
 
