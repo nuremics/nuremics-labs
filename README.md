@@ -79,7 +79,7 @@ Developers are thus encouraged to treat `nuremics` as the core engine, and to us
 
 To get hands-on experience with the **NUREMICS** framework, you'll start by running the `DEMO_APP` and reproducing the scientific results of the `Study_Shape` and `Study_Velocity` studies, as demonstrated in the video below.
 
-▶️ [Watch video](https://youtu.be/nqGbva-uvTc)
+▶️ [Watch video](https://youtu.be/HyUkWXGqEIM)
 
 When first run, a **NUREMICS App** creates a local workspace on your system, where you configure studies, set input data, and collect results. In this tutorial, instead of setting up from scratch, you'll start with a preconfigured folder to reproduce the `Study_Shape` and `Study_Velocity` studies.
 
@@ -87,7 +87,7 @@ Follow these steps:
 
 1. **Download the `NUREMICS_Starter` archive**. Retrieve the preconfigured `NUREMICS_Starter` archive and unzip it anywhere on your system.
 
-    📦 [Download NUREMICS_Starter archive](assets/NUREMICS_Starter.zip)
+    📦 [Download NUREMICS_Starter archive](https://nuremics.github.io/assets/NUREMICS_Starter.zip)
 
 2. **Prepare the NUREMICS working directory.** Locate the `nrs_working_dir` folder inside the unzipped archive and move it to any location on your system that is most convenient for you.
 
