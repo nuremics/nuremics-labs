@@ -81,7 +81,7 @@ To get hands-on experience with the **NUREMICS** framework, you'll start by runn
 
 ▶️ [Watch video](https://youtu.be/HyUkWXGqEIM)
 
-When first run, a **NUREMICS App** creates a local workspace on your system, where you configure studies, set input data, and collect results. In this tutorial, instead of setting up from scratch, you'll start with a preconfigured folder to reproduce the `Study_Shape` and `Study_Velocity` studies.
+When first run, a **NUREMICS App** creates a local workspace on your system, where you configure studies, set input data, and collect results. In this tutorial, instead of setting up from scratch, you'll start with a preconfigured workspace to reproduce the `Study_Shape` and `Study_Velocity` studies.
 
 Follow these steps:
 
