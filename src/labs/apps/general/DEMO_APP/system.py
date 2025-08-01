@@ -1,4 +1,3 @@
-
 import git
 from pathlib import Path
 
@@ -9,6 +8,7 @@ from labs.procs.general.TrajectoryAnalysisProc.item import TrajectoryAnalysisPro
 
 APP_NAME = "DEMO_APP"
 repo = git.Repo(Path(__file__).resolve().parent, search_parent_directories=True)
+
 
 def main():
 
