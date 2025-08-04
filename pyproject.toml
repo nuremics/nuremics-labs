@@ -8,7 +8,7 @@ authors = [
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-  "nuremics @ git+https://github.com/nuremics/nuremics.git@main"
+  "nuremics @ git+https://github.com/nuremics/nuremics.git@decrease-numpy-version"
 ]
 classifiers = [
   "Programming Language :: Python :: 3",
@@ -43,15 +43,26 @@ trajectory_analysis = [
 PolygonGeometryProc = ["nuremics-labs[polygon_geometry]"]
 ProjectileModelProc = ["nuremics-labs[projectile_model]"]
 TrajectoryAnalysisProc = ["nuremics-labs[trajectory_analysis]"]
+WaterCubeProc = [
+  "torch>=2.7.1",
+  "torchvision>=0.22.1",
+  "torchaudio>=2.7.1",
+  "libigl<=2.5.1",
+  "genesis-world>=0.2.1",
+]
 
 DEMO_APP = [
   "nuremics-labs[PolygonGeometryProc]",
   "nuremics-labs[ProjectileModelProc]",
   "nuremics-labs[TrajectoryAnalysisProc]",
 ]
+WATER_CUBE_APP = [
+  "nuremics-labs[WaterCubeProc]",
+]
 
 all = [
   "nuremics-labs[DEMO_APP]",
+  "nuremics-labs[WATER_CUBE_APP]"
 ]
 
 [build-system]
