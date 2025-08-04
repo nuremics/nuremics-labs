@@ -2,7 +2,7 @@ import git
 from pathlib import Path
 
 from nuremics import Application
-from labs.apps.general.WATER_CUBE_APP.WaterCubeProc.item import WaterCubeProc
+from labs.apps.general.WATER_CUBE_APP.procs.WaterCubeProc.item import WaterCubeProc
 
 APP_NAME = "WATER_CUBE_APP"
 repo = git.Repo(Path(__file__).resolve().parent, search_parent_directories=True)
