@@ -13,6 +13,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 from typing import Optional
 
+from importlib.resources import files
+from labs.ops.general.plotting import units as plotting
+
 
 def simulate_projectile_motion(
     df_points: pd.DataFrame,
@@ -445,6 +448,15 @@ def compare_model_vs_analytical_trajectories(
     ax.autoscale_view()
     ax.legend(fontsize=14)
     ax.grid(True)
+
+    # Insert NUREMICS logo in plot background
+    plotting.insert_image_into_plot(
+        img_path=files("nuremics.resources").joinpath("logo.png"),
+        fig=fig,
+        ax=ax,
+        alpha=0.3,
+        scale=0.8,
+    )
 
     # Save the plot to the specified file (with high resolution)
     fig.savefig(filename, dpi=300)

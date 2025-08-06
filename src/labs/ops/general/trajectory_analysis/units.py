@@ -3,6 +3,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 from nuremics import Process
+from importlib.resources import files
+from labs.ops.general.plotting import units as plotting
 
 @Process.analysis_function
 def plot_overall_model_vs_theory(
@@ -102,6 +104,15 @@ def plot_overall_model_vs_theory(
         loc="upper right",
     )
     ax.grid(True)
+
+    # Insert NUREMICS logo in plot background
+    plotting.insert_image_into_plot(
+        img_path=files("nuremics.resources").joinpath("logo.png"),
+        fig=fig,
+        ax=ax,
+        alpha=0.3,
+        scale=0.8,
+    )
 
     # Save the plot to the specified file (with high resolution)
     fig.savefig(filename, dpi=300)

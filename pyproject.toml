@@ -6,7 +6,7 @@ authors = [
   { name = "Julien SIGUENZA", email = "contact@julien-siguenza.com" },
 ]
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.9"
 dependencies = [
   "nuremics @ git+https://github.com/nuremics/nuremics.git@main"
 ]
@@ -28,7 +28,7 @@ where = ["src"]
 
 [project.optional-dependencies]
 polygon_geometry = [
-    "matplotlib>=3.10.3",
+    "matplotlib>=3.9.4",
 ]
 projectile_model = [
     "pygame>=2.6.1",
@@ -36,7 +36,7 @@ projectile_model = [
     "XlsxWriter>=3.2.3",
 ]
 trajectory_analysis = [
-    "matplotlib>=3.10.3",
+    "matplotlib>=3.9.4",
     "openpyxl>=3.1.5",
 ]
 

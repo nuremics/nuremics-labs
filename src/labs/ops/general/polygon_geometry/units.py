@@ -3,6 +3,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from typing import Optional
 
+from importlib.resources import files
+from labs.ops.general.plotting import units as plotting
+
 
 def generate_polygon_shape(
     radius: float,
@@ -76,7 +79,7 @@ def plot_polygon_shape(
         ignore_index=True,
     )
 
-    # Define plot
+    # Create figure and axis
     fig, ax = plt.subplots()
 
     # Plot the polygon shape
@@ -97,6 +100,15 @@ def plot_polygon_shape(
     # Set equal aspect ratio and grid
     ax.set_aspect("equal")
     ax.grid(True)
+
+    # Insert NUREMICS logo in plot background
+    plotting.insert_image_into_plot(
+        img_path=files("nuremics.resources").joinpath("logo.png"),
+        fig=fig,
+        ax=ax,
+        alpha=0.3,
+        scale=0.8,
+    )
 
     # Save the figure to the specified filename
     fig.savefig(filename, dpi=300)
