@@ -4,7 +4,7 @@ import pandas as pd
 from pathlib import Path
 
 from nuremics import Process
-from labs.ops.general.polygon_geometry import units
+from labs.ops.general import polygon_geometry
 
 
 @attrs.define
@@ -79,7 +79,7 @@ class PolygonGeometryProc(Process):
         """
 
         # Create shape points and save coordinates to CSV file
-        self.df_points = units.generate_polygon_shape(
+        self.df_points = polygon_geometry.generate_polygon_shape(
             radius=self.radius,
             n_sides=self.n_sides,
             filename=self.output_paths["coords_file"],
@@ -104,7 +104,7 @@ class PolygonGeometryProc(Process):
             text = f.read()
 
         # Plot and save figure
-        units.plot_polygon_shape(
+        polygon_geometry.plot_polygon_shape(
             df_points=self.df_points,
             title=text,
             filename=self.output_paths["fig_file"],

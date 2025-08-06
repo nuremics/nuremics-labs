@@ -4,7 +4,9 @@ import matplotlib.pyplot as plt
 from typing import Optional
 
 from importlib.resources import files
-from labs.ops.general.plotting import units as plotting
+from labs.ops.general.plotting import (
+    insert_image_into_plot,
+)
 
 
 def generate_polygon_shape(
@@ -102,7 +104,7 @@ def plot_polygon_shape(
     ax.grid(True)
 
     # Insert NUREMICS logo in plot background
-    plotting.insert_image_into_plot(
+    insert_image_into_plot(
         img_path=files("nuremics.resources").joinpath("logo.png"),
         fig=fig,
         ax=ax,

@@ -4,7 +4,10 @@ import matplotlib.pyplot as plt
 
 from nuremics import Process
 from importlib.resources import files
-from labs.ops.general.plotting import units as plotting
+from labs.ops.general.plotting import (
+    insert_image_into_plot,
+)
+
 
 @Process.analysis_function
 def plot_overall_model_vs_theory(
@@ -106,7 +109,7 @@ def plot_overall_model_vs_theory(
     ax.grid(True)
 
     # Insert NUREMICS logo in plot background
-    plotting.insert_image_into_plot(
+    insert_image_into_plot(
         img_path=files("nuremics.resources").joinpath("logo.png"),
         fig=fig,
         ax=ax,

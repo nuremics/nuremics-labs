@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 
 from nuremics import Process
-from labs.ops.general.trajectory_analysis import units
+from labs.ops.general import trajectory_analysis
 
 
 @attrs.define
@@ -65,7 +65,7 @@ class TrajectoryAnalysisProc(Process):
 
         self.process_output(
             out=self.comp_folder,
-            func=units.plot_overall_model_vs_theory,
+            func=trajectory_analysis.plot_overall_model_vs_theory,
             filename=self.output_paths["fig_file"],
             silent=self.silent,
         )

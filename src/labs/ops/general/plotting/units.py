@@ -1,6 +1,6 @@
+import matplotlib.image as mpimg
 from matplotlib.figure import Figure
 from matplotlib.axes import Axes
-import matplotlib.image as mpimg
 from PIL import Image
 
 

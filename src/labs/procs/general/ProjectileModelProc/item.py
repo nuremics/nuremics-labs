@@ -5,7 +5,7 @@ import pandas as pd
 from pathlib import Path
 
 from nuremics import Process
-from labs.ops.general.projectile_model import units
+from labs.ops.general import projectile_model
 
 
 @attrs.define
@@ -126,7 +126,7 @@ class ProjectileModelProc(Process):
         )
 
         # Run simulation model
-        self.df_trajectory_model = units.simulate_projectile_motion(
+        self.df_trajectory_model = projectile_model.simulate_projectile_motion(
             df_points=df_points,
             mass=self.mass,
             gravity=self.gravity,
@@ -165,7 +165,7 @@ class ProjectileModelProc(Process):
         )
 
         # Compute analytical solution and save results to Excel
-        self.df_trajectory_model_vs_theory = units.calculate_analytical_trajectory(
+        self.df_trajectory_model_vs_theory = projectile_model.calculate_analytical_trajectory(
             df=self.df_trajectory_model,
             v0=self.dict_velocity["v0"],
             angle=self.dict_velocity["angle"],
@@ -186,7 +186,7 @@ class ProjectileModelProc(Process):
             comp_folder/model_vs_theory.png
         """
 
-        units.compare_model_vs_analytical_trajectories(
+        projectile_model.compare_model_vs_analytical_trajectories(
             df=self.df_trajectory_model_vs_theory,
             filename=os.path.join(self.output_paths["comp_folder"], "model_vs_theory.png"),
             silent=self.silent,

@@ -14,7 +14,9 @@ import matplotlib.pyplot as plt
 from typing import Optional
 
 from importlib.resources import files
-from labs.ops.general.plotting import units as plotting
+from labs.ops.general.plotting import (
+    insert_image_into_plot,
+)
 
 
 def simulate_projectile_motion(
@@ -450,7 +452,7 @@ def compare_model_vs_analytical_trajectories(
     ax.grid(True)
 
     # Insert NUREMICS logo in plot background
-    plotting.insert_image_into_plot(
+    insert_image_into_plot(
         img_path=files("nuremics.resources").joinpath("logo.png"),
         fig=fig,
         ax=ax,

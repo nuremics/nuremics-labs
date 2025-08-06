@@ -27,17 +27,23 @@ license-files = [
 where = ["src"]
 
 [project.optional-dependencies]
+plotting = [
+  "matplotlib>=3.9.4",
+]
 polygon_geometry = [
-    "matplotlib>=3.9.4",
+  "nuremics-labs[plotting]",
+  "matplotlib>=3.9.4",
 ]
 projectile_model = [
-    "pygame>=2.6.1",
-    "pymunk>=7.0.1",
-    "XlsxWriter>=3.2.3",
+  "nuremics-labs[plotting]",
+  "pygame>=2.6.1",
+  "pymunk>=7.0.1",
+  "XlsxWriter>=3.2.3",
 ]
 trajectory_analysis = [
-    "matplotlib>=3.9.4",
-    "openpyxl>=3.1.5",
+  "nuremics-labs[plotting]",
+  "matplotlib>=3.9.4",
+  "openpyxl>=3.1.5",
 ]
 
 PolygonGeometryProc = ["nuremics-labs[polygon_geometry]"]
