@@ -49,6 +49,7 @@ DEMO_APP = [
   "nuremics-labs[ProjectileModelProc]",
   "nuremics-labs[TrajectoryAnalysisProc]",
 ]
+BASE_APP = []
 
 all = [
   "nuremics-labs[DEMO_APP]",

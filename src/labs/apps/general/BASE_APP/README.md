@@ -6,9 +6,9 @@
 
 ## Workflow
 
-1. **[`FirstProc`](https://github.com/nuremics/nuremics-labs/tree/main/src/labs/procs/general/FirstProc):** Description of the Proc.<br>
+1. **[`FirstProc`](https://github.com/nuremics/nuremics-labs/tree/main/src/labs/apps/general/BASE_APP/procs/FirstProc):** Description of the Proc.<br>
   A/ **`operation`:** Description of the operation.
-2. **[`SecondProc`](https://github.com/nuremics/nuremics-labs/tree/main/src/labs/procs/general/SecondProc):** Description of the Proc.<br>
+2. **[`SecondProc`](https://github.com/nuremics/nuremics-labs/tree/main/src/labs/apps/general/BASE_APP/procs/SecondProc):** Description of the Proc.<br>
   A/ **`operation`:** Description of the operation.
 
 ```mermaid
