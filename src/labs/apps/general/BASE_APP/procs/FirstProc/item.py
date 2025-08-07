@@ -43,7 +43,7 @@ class FirstProc(Process):
 
     # Parameters
     param: float = attrs.field(init=False, metadata={"input": True})
-  
+
     # Paths
     # infile: Path = attrs.field(init=False, metadata={"input": True}, converter=Path)
 
@@ -86,7 +86,7 @@ class FirstProc(Process):
 
 
 if __name__ == "__main__":
-    
+
     # ================================================================== #
     #                      USER-DEFINED PARAMETERS                       #
     #              >>>>> TO BE EDITED BY THE OPERATOR <<<<<              #
@@ -94,10 +94,10 @@ if __name__ == "__main__":
 
     # Working directory
     working_dir = Path(r"...")
-    
+
     # Input parameters
     param = 1.4
-    
+
     # Input paths
     infile = Path(r"...") / "input.txt"
 
@@ -114,7 +114,7 @@ if __name__ == "__main__":
         "param": param,
         "infile": infile,
     }
-    
+
     # Create process
     process = FirstProc(
         dict_inputs=dict_inputs,

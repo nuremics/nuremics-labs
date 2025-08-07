@@ -44,7 +44,7 @@ class SecondProc(Process):
 
     # Parameters
     # param: int = attrs.field(init=False, metadata={"input": True})
-  
+
     # Paths
     infile: Path = attrs.field(init=False, metadata={"input": True}, converter=Path)
 
@@ -94,7 +94,7 @@ class SecondProc(Process):
 
 
 if __name__ == "__main__":
-    
+
     # ================================================================== #
     #                      USER-DEFINED PARAMETERS                       #
     #              >>>>> TO BE EDITED BY THE OPERATOR <<<<<              #
@@ -102,10 +102,10 @@ if __name__ == "__main__":
 
     # Working directory
     working_dir = Path(r"...")
-    
+
     # Input parameters
     param = 14
-    
+
     # Input paths
     infile = Path(r"...") / "output.txt"
 
@@ -122,7 +122,7 @@ if __name__ == "__main__":
         "param": param,
         "infile": infile,
     }
-    
+
     # Create process
     process = SecondProc(
         dict_inputs=dict_inputs,
