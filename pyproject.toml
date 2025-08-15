@@ -56,6 +56,7 @@ DEMO_APP = [
   "nuremics-labs[TrajectoryAnalysisProc]",
 ]
 BASE_APP = []
+CANTILEVER_SHEAR_APP = []
 
 all = [
   "nuremics-labs[DEMO_APP]",
