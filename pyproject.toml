@@ -50,16 +50,20 @@ PolygonGeometryProc = ["nuremics-labs[polygon_geometry]"]
 ProjectileModelProc = ["nuremics-labs[projectile_model]"]
 TrajectoryAnalysisProc = ["nuremics-labs[trajectory_analysis]"]
 
+BASE_APP = []
 DEMO_APP = [
   "nuremics-labs[PolygonGeometryProc]",
   "nuremics-labs[ProjectileModelProc]",
   "nuremics-labs[TrajectoryAnalysisProc]",
 ]
-BASE_APP = []
-CANTILEVER_SHEAR_APP = []
+CANTILEVER_SHEAR_APP = [
+  "cadquery>=2.5.2",
+  "gmsh>=4.14.0",
+]
 
 all = [
   "nuremics-labs[DEMO_APP]",
+  "nuremics-labs[CANTILEVER_SHEAR_APP]",
 ]
 
 [build-system]
