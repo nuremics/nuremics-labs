@@ -37,7 +37,7 @@ erDiagram
 
 - **`dim`:** Dimension of the geometry: 1 for a line (beam), 2 for a rectangle (plate), 3 for a box (block).
 - **`length`:** Length of the geometry along the X axis.
-- **`width`:** Width of the geometry along the Y axis (only used if dim = 2/3).
+- **`width`:** Width of the geometry along the Y axis (only used if dim = 2|3).
 - **`height`:** Height of the geometry along the Z axis (only used if dim = 3).
 
 ## Output Path(s)
