@@ -42,4 +42,4 @@ erDiagram
 
 ## Output Path(s)
 
-- **`outfile`:** File containing the created geometry (in .step if `dim` = 3/2 or .brep if `dim` = 1).
+- **`outfile`:** File containing the created geometry (in .step if `dim` = 3|2 or .brep if `dim` = 1).
