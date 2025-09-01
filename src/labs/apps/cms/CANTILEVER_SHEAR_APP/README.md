@@ -1,67 +1,43 @@
-# BASE_APP
+# CANTILEVER_SHEAR_APP
 
 <p align="left">
-  <img src="https://img.shields.io/badge/dependency-x.x.x+-007bff" />
+  <img src="https://img.shields.io/badge/CadQuery-2.5.2+-2980b9" />
 </p>
 
 ## Workflow
 
-1. **[`FirstProc`](https://github.com/nuremics/nuremics-labs/tree/main/src/labs/apps/general/BASE_APP/procs/FirstProc):** Description of the Proc.<br>
-  A/ **`operation`:** Description of the operation.
-2. **[`SecondProc`](https://github.com/nuremics/nuremics-labs/tree/main/src/labs/apps/general/BASE_APP/procs/SecondProc):** Description of the Proc.<br>
-  A/ **`operation`:** Description of the operation.
+1. **[`GeometryProc`](https://github.com/nuremics/nuremics-labs/tree/cantilever-shear/src/labs/apps/cms/CANTILEVER_SHEAR_APP/procs/GeometryProc):** Create a geometric representation of a physical system.<br>
+  A/ **`create_geometry`:** Create and export a simple geometric entity (beam, plate, or block) in STEP or BREP format.
 
 ```mermaid
 flowchart RL
-  **FirstProc** e1@--1--o **BASE_APP**
-  **SecondProc** e2@--2--o **BASE_APP**
-  operation1["**operation**"] e3@--A--o **FirstProc**
-  operation2["**operation**"] e4@--A--o **SecondProc**
+  **GeometryProc** e1@--1--o **CANTILEVER_SHEAR_APP**
+  **create_geometry** e2@--A--o **GeometryProc**
   e1@{ animate: true }
   e2@{ animate: true }
-  e3@{ animate: true }
-  e4@{ animate: true }
 ```
 
 ## Mapping
 
 ```mermaid
 erDiagram
-  **BASE_APP** ||--|| **hard_params** : mapping
-  **BASE_APP** ||--|| **user_paths** : mapping
-  **BASE_APP** ||--|| **output_paths** : mapping
-  **hard_params** ||--|| **FirstProc** : mapping
-  **user_paths** ||--|| **FirstProc** : mapping
-  **output_paths** ||--|| **FirstProc** : mapping
-
-  **hard_params** {
-    float param "1.4"
-  }
-  **user_paths** {
-    file infile "input.txt"
-  }
-  **output_paths** {
-    file outfile "output.txt"
-  }
-```
-
-```mermaid
-erDiagram
-  **BASE_APP** ||--|| **user_params** : mapping
-  **BASE_APP** ||--|| **required_paths** : mapping
-  **BASE_APP** ||--|| **output_paths** : mapping
-  **user_params** ||--|| **SecondProc** : mapping
-  **required_paths** ||--|| **SecondProc** : mapping
-  **output_paths** ||--|| **SecondProc** : mapping
+  **CANTILEVER_SHEAR_APP** ||--|| **user_params** : mapping
+  **CANTILEVER_SHEAR_APP** ||--|| **hard_params** : mapping
+  **CANTILEVER_SHEAR_APP** ||--|| **output_paths** : mapping
+  **user_params** ||--|| **GeometryProc** : mapping
+  **hard_params** ||--|| **GeometryProc** : mapping
+  **output_paths** ||--|| **GeometryProc** : mapping
 
   **user_params** {
-    int param "parameter"   
+    int dim "dimension"
   }
-  **required_paths** {
-    file infile "output.txt"
+  **hard_params** {
+    float length "10.0"
+    float width "1.0"
+    float height "0.1"
   }
   **output_paths** {
-    folder outfolder "output"
+    file outfile "geometry.(step/brep)"
   }
 ```
 
@@ -72,31 +48,24 @@ flowchart LR
   subgraph **INPUTS**
     direction TB
 
-    subgraph **Paths**
-      direction LR
-      path1["input.txt _(file)_"]
-    end
-
     subgraph **Parameters**
       direction LR
-      param1["parameter _(int)_"]
+      param1["dimension _(int)_"]
     end
   end
 
-  subgraph **BASE_APP**
+  subgraph **CANTILEVER_SHEAR_APP**
     direction RL
-    proc1["FirstProc"]
-    proc2["SecondProc"]
+    proc1["GeometryProc"]
   end
 
   subgraph **OUTPUTS**
     direction RL
-    out1["output.txt _(file)_"]
-    out2["output _(folder)_"]
+    out1["geometry.(step/brep) _(file)_"]
   end
 
-  **INPUTS** --> **BASE_APP**
-  **BASE_APP** --> **OUTPUTS**
+  **INPUTS** --> **CANTILEVER_SHEAR_APP**
+  **CANTILEVER_SHEAR_APP** --> **OUTPUTS**
 ```
 
 ```mermaid
@@ -104,76 +73,32 @@ flowchart LR
   subgraph **INPUTS**
     direction TB
 
-    subgraph **Paths**
-      direction LR
-      path1["input.txt _(file)_"]
-    end
-
     subgraph **Parameters**
       direction LR
-      param1["_"]
+      param1["dimension _(int)_"]
     end
   end
 
-  subgraph **BASE_APP**
+  subgraph **CANTILEVER_SHEAR_APP**
     direction RL
-    proc1["FirstProc"]
+    proc1["GeometryProc"]
   end
 
   subgraph **OUTPUTS**
     direction RL
-    out1["output.txt _(file)_"]
+    out1["geometry.(step/brep) _(file)_"]
   end
 
   **INPUTS** --> proc1
   proc1 --> **OUTPUTS**
 ```
 
-```mermaid
-flowchart LR
-  subgraph **INPUTS**
-    direction TB
-
-    subgraph **Paths**
-      direction LR
-      out1["output.txt _(file)_"]
-    end
-
-    subgraph **Parameters**
-      direction LR
-      param1["parameter _(int)_"]
-    end
-  end
-
-  subgraph **BASE_APP**
-    direction RL
-    proc2["SecondProc"]
-  end
-
-  subgraph **OUTPUTS**
-    direction RL
-    out2["output _(folder)_"]
-  end
-
-  **INPUTS** --> proc2
-  proc2 --> **OUTPUTS**
-
-  classDef blueBox fill:#d0e6ff,stroke:#339,stroke-width:1.5px;
-  class out1 blueBox;
-```
-
 ### INPUTS
 
 #### Parameters
 
-- **`parameter`:** Description of the parameter.
-
-#### Paths
-
-- **`input.txt`:** Description of the file.
+- **`dimension`:** Dimension of the geometry: 1 for a line (beam), 2 for a rectangle (plate), 3 for a box (block).
 
 ### OUTPUTS
 
-- **`output/`**<br>
-  **`output1.txt`:** Description of the file.<br>
-  **`output2.txt`:** Description of the file.
+- **`geometry.(step/brep)`:** File containing the created geometry (in .step if `dimension` = 3/2 or .brep if `dimension` = 1).
