@@ -101,4 +101,4 @@ flowchart LR
 
 ### OUTPUTS
 
-- **`geometry.(step/brep)`:** File containing the created geometry (in .step if `dimension` = 3/2 or .brep if `dimension` = 1).
+- **`geometry.(step/brep)`:** File containing the created geometry (in .step if `dimension` = 3|2 or .brep if `dimension` = 1).
