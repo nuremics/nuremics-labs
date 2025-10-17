@@ -1,4 +1,3 @@
-import gmsh
 from pathlib import Path
 from PyQt6.QtWidgets import QApplication
 from OCC.Display.backend import load_backend
@@ -9,49 +8,16 @@ from OCC.Core.BRepTools import breptools
 from OCC.Core.TopoDS import TopoDS_Shape
 from OCC.Core.BRep import BRep_Builder
 from OCC.Core.Graphic3d import Graphic3d_NameOfMaterial
+from OCC.Core.TopExp import TopExp_Explorer
+from OCC.Core.TopAbs import TopAbs_FACE, TopAbs_EDGE, TopAbs_VERTEX
+from OCC.Core.Graphic3d import Graphic3d_NameOfMaterial
 
 
-def visualize_geometry_gmsh(
+def visualize_boundary_condition(
     filename: str,
-):
-    """
-    Display a geometry file in Gmsh.
-
-    The function loads a CAD geometry (e.g., STEP or BREP), 
-    synchronizes the model, switches to solid surface visualization, 
-    and opens the interactive Gmsh GUI. The session is automatically 
-    initialized and finalized within the function.
-
-    Parameters
-    ----------
-    filename : str
-        Path to the input CAD file (STEP, BREP, or other supported formats)
-        that will be opened and displayed in Gmsh.
-    """
-    
-    # Initialize gmsh
-    gmsh.initialize()
-    gmsh.clear()
-
-    # Open input file
-    gmsh.open(filename)
-
-    # Synchronize gmh
-    gmsh.model.occ.synchronize()
-
-    # Change surface aspect to solid
-    gmsh.option.setNumber("Geometry.SurfaceType", 2)
-    
-    # Launch gmsh
-    gmsh.fltk.run()
-    
-    # Finalize gmsh
-    gmsh.clear()
-    gmsh.finalize()
-
-
-def visualize_geometry_qt(
-    filename: str,
+    label: str,
+    entity: str,
+    ids: list,
 ):
     """
     Display a CAD geometry in an interactive PyQt6 window using pythonOCC-core.
@@ -94,9 +60,32 @@ def visualize_geometry_qt(
         shapes=shape,
         material=Graphic3d_NameOfMaterial.Graphic3d_NOM_METALIZED,
         color="ORANGE",
+        transparency=0.7,
     )
 
-    viewer.setWindowTitle("Geometry")
+    # Explore entities
+    if entity == "face":
+        exp = TopExp_Explorer(shape, TopAbs_FACE)
+    elif entity == "edge":
+        exp = TopExp_Explorer(shape, TopAbs_EDGE)
+    elif entity == "vertex":
+        exp = TopExp_Explorer(shape, TopAbs_VERTEX)
+
+    index = 1
+    while exp.More():
+        face = exp.Current()
+        if index in ids:
+            viewer._display.DisplayShape(
+                shapes=face,
+                material=Graphic3d_NameOfMaterial.Graphic3d_NOM_METALIZED,
+                color="RED",
+                transparency=0.0,
+            )
+        exp.Next()
+        index += 1
+
+    viewer.setWindowTitle(f"Boundary Condition: {label}")
+    # viewer.setWindowIcon(QIcon(r"C:\Users\julie\GitRepo\nuremics-docs\docs\images\logo.png"))
     viewer._display.FitAll()
     viewer.show()
     app.exec()

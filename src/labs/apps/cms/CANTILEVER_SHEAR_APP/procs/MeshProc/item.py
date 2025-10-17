@@ -1,15 +1,16 @@
 import os
 import attrs
+import json
 from pathlib import Path
 
 from nuremics import Process
-from labs.apps.cms.CANTILEVER_SHEAR_APP.procs.GeometryProc.ops import (
-    create_geometry,
+from labs.apps.cms.CANTILEVER_SHEAR_APP.procs.MeshProc.ops import (
+    create_mesh,
 )
 
 
 @attrs.define
-class GeometryProc(Process):
+class MeshProc(Process):
     """
     Create a geometric representation of a physical system.
 
@@ -39,16 +40,17 @@ class GeometryProc(Process):
 
     # Parameters
     dim: int = attrs.field(init=False, metadata={"input": True})
-    length: float = attrs.field(init=False, metadata={"input": True})
-    width: float = attrs.field(init=False, metadata={"input": True})
-    height: float = attrs.field(init=False, metadata={"input": True})
+
+    # Paths
+    mesh_settings_file: Path = attrs.field(init=False, metadata={"input": True}, converter=Path)
+    infile: Path = attrs.field(init=False, metadata={"input": True}, converter=Path)
 
     def __call__(self):
         super().__call__()
 
-        self.create_geometry()
+        self.create_mesh()
 
-    def create_geometry(self):
+    def create_mesh(self):
         """
         Create and export a simple geometric entity (beam, plate, or block)
         in STEP or BREP format.
@@ -65,15 +67,21 @@ class GeometryProc(Process):
             outfile
         """
 
-        create_geometry(
-            dim=self.dim,
-            length=self.length,
-            width=self.width,
-            height=self.height,
-            outfile=self.output_paths["outfile"],
-            silent=self.silent,
-        )
-        open(self.output_paths["outfile"], "w").close()
+        # Load mesh settings
+        with open(self.mesh_settings_file) as f:
+            dict_mesh_settings = json.load(f)
+
+        # create_mesh(
+        #     infile=self.infile,
+        #     outfile=self.output_paths["outfile"],
+        #     dim=self.dim,
+        #     elem=dict_mesh_settings["elem"],
+        #     dx=dict_mesh_settings["dx"],
+        #     nb_elem_length=dict_mesh_settings["nb_elem_length"],
+        #     nb_elem_width=dict_mesh_settings["nb_elem_width"],
+        #     nb_elem_height=dict_mesh_settings["nb_elem_height"],
+        #     silent=self.silent,
+        # )
 
 
 if __name__ == "__main__":

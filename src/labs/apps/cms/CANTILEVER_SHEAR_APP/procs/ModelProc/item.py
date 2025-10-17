@@ -1,15 +1,16 @@
 import os
 import attrs
+import json
 from pathlib import Path
 
 from nuremics import Process
-from labs.apps.cms.CANTILEVER_SHEAR_APP.procs.GeometryProc.ops import (
-    create_geometry,
+from labs.apps.cms.CANTILEVER_SHEAR_APP.procs.ModelProc.ops import (
+    set_boundary_conditions,
 )
 
 
 @attrs.define
-class GeometryProc(Process):
+class ModelProc(Process):
     """
     Create a geometric representation of a physical system.
 
@@ -39,16 +40,16 @@ class GeometryProc(Process):
 
     # Parameters
     dim: int = attrs.field(init=False, metadata={"input": True})
-    length: float = attrs.field(init=False, metadata={"input": True})
-    width: float = attrs.field(init=False, metadata={"input": True})
-    height: float = attrs.field(init=False, metadata={"input": True})
+
+    # Paths
+    infile: Path = attrs.field(init=False, metadata={"input": True}, converter=Path)
 
     def __call__(self):
         super().__call__()
 
-        self.create_geometry()
+        self.set_boundary_conditions()
 
-    def create_geometry(self):
+    def set_boundary_conditions(self):
         """
         Create and export a simple geometric entity (beam, plate, or block)
         in STEP or BREP format.
@@ -64,16 +65,11 @@ class GeometryProc(Process):
         ---------
             outfile
         """
-
-        create_geometry(
+        
+        set_boundary_conditions(
+            infile=self.infile,
             dim=self.dim,
-            length=self.length,
-            width=self.width,
-            height=self.height,
-            outfile=self.output_paths["outfile"],
-            silent=self.silent,
         )
-        open(self.output_paths["outfile"], "w").close()
 
 
 if __name__ == "__main__":

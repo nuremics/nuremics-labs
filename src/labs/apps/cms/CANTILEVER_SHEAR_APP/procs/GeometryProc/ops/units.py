@@ -2,7 +2,7 @@ import sys
 import cadquery as cq
 from cadquery import exporters
 
-from labs.ops.cms.geometry import visualize_geometry
+from labs.ops.cms.geometry import visualize_geometry_gmsh
 
 
 def create_geometry(
@@ -74,6 +74,6 @@ def create_geometry(
 
     # View geometry
     if not silent:
-        visualize_geometry(
+        visualize_geometry_gmsh(
             filename=outfile+ext,
         )

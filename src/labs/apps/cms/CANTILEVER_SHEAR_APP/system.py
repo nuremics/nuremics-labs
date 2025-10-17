@@ -4,6 +4,8 @@ from pathlib import Path
 from nuremics import Application
 from labs.apps.cms.CANTILEVER_SHEAR_APP.procs import (
     GeometryProc,
+    ModelProc,
+    MeshProc,
 )
 
 APP_NAME = "CANTILEVER_SHEAR_APP"
@@ -29,6 +31,33 @@ def main():
             "output_paths": {
                 "outfile": "geometry",
             },
+        },
+        {
+            "process": ModelProc,
+            "user_params": {
+                "dim": "dimension",
+            },
+            "required_paths": {
+                "infile": "geometry",
+            },
+            # "output_paths": {
+            #     "outfile": "mesh.msh",
+            # },
+        },
+        {
+            "process": MeshProc,
+            "user_params": {
+                "dim": "dimension",
+            },
+            "user_paths": {
+                "mesh_settings_file": "mesh_settings.json",
+            },
+            "required_paths": {
+                "infile": "geometry",
+            },
+            # "output_paths": {
+            #     "outfile": "mesh.msh",
+            # },
         },
     ]
 
