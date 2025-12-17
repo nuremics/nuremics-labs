@@ -34,7 +34,7 @@ class GeometryProc(Process):
     Outputs (stored in self.output_paths)
     -------
         outfile : .step or .brep
-            File containing the created geometry (in .step if dim = 3/2 or .brep if dim = 1).
+            File containing the geometric model (in .step if dim = 3/2 or .brep if dim = 1).
     """
 
     # Parameters
