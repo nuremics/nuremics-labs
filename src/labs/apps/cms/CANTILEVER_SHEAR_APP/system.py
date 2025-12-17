@@ -4,7 +4,7 @@ from pathlib import Path
 from nuremics import Application
 from labs.apps.cms.CANTILEVER_SHEAR_APP.procs import (
     GeometryProc,
-    ModelProc,
+    LabelingProc,
     MeshProc,
 )
 
@@ -33,32 +33,32 @@ def main():
             },
         },
         {
-            "process": ModelProc,
+            "process": LabelingProc,
             "user_params": {
                 "dim": "dimension",
             },
             "required_paths": {
                 "infile": "geometry",
             },
-            # "output_paths": {
-            #     "outfile": "mesh.msh",
-            # },
+            "output_paths": {
+                "outfile": "labels.json",
+            },
         },
-        {
-            "process": MeshProc,
-            "user_params": {
-                "dim": "dimension",
-            },
-            "user_paths": {
-                "mesh_settings_file": "mesh_settings.json",
-            },
-            "required_paths": {
-                "infile": "geometry",
-            },
-            # "output_paths": {
-            #     "outfile": "mesh.msh",
-            # },
-        },
+        # {
+        #     "process": MeshProc,
+        #     "user_params": {
+        #         "dim": "dimension",
+        #     },
+        #     "user_paths": {
+        #         "mesh_settings_file": "mesh_settings.json",
+        #     },
+        #     "required_paths": {
+        #         "infile": "geometry",
+        #     },
+        #     # "output_paths": {
+        #     #     "outfile": "mesh.msh",
+        #     # },
+        # },
     ]
 
     # ------------------ #

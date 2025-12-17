@@ -1,41 +1,38 @@
 import os
 import attrs
-import json
 from pathlib import Path
 
 from nuremics import Process
-from labs.apps.cms.CANTILEVER_SHEAR_APP.procs.ModelProc.ops import (
-    set_boundary_conditions,
+from labs.apps.cms.CANTILEVER_SHEAR_APP.procs.LabelingProc.ops import (
+    label_entities,
 )
 
 
 @attrs.define
-class ModelProc(Process):
+class LabelingProc(Process):
     """
-    Create a geometric representation of a physical system.
+    Define and label the entities of a physical system from its geometric representation.
 
     Process
     -------
-        A/ create_geometry
-            Create and export a simple geometric entity (beam, plate, or block)
-            in STEP or BREP format.
+        A/ label_entities
+            Assign labels to the entities of a geometric model.
 
     Input parameters
     ----------------
         dim : int
             Dimension of the geometry: 
             1 for a line (beam), 2 for a rectangle (plate), 3 for a box (block).
-        length : float
-            Length of the geometry along the X axis.
-        width : float
-            Width of the geometry along the Y axis (only used if dim = 2/3).
-        height : float
-            Height of the geometry along the Z axis (only used if dim = 3).
+
+    Input paths
+    -----------
+        infile : .step or .brep
+            File containing the geometric model (in .step if dim = 3|2 or .brep if dim = 1).
 
     Outputs (stored in self.output_paths)
     -------
-        outfile : .step or .brep
-            File containing the created geometry (in .step if dim = 3/2 or .brep if dim = 1).
+        outfile : .json
+            File containing the labeled geometric entities.
     """
 
     # Parameters
@@ -47,28 +44,26 @@ class ModelProc(Process):
     def __call__(self):
         super().__call__()
 
-        self.set_boundary_conditions()
+        self.label_entities()
 
-    def set_boundary_conditions(self):
+    def label_entities(self):
         """
-        Create and export a simple geometric entity (beam, plate, or block)
-        in STEP or BREP format.
+        Assign labels to the entities of a geometric model.
 
         Uses
         ----
             dim
-            length
-            width
-            height
+            infile
         
         Generates
         ---------
             outfile
         """
         
-        set_boundary_conditions(
-            infile=self.infile,
+        label_entities(
             dim=self.dim,
+            infile=self.infile,
+            outfile=self.output_paths["outfile"],
         )
 
 
@@ -84,12 +79,12 @@ if __name__ == "__main__":
 
     # Input parameters
     dim = 3
-    length = 10.0 
-    width = 1.0
-    height = 0.1
+
+    # Input parameters
+    infile = Path(r"...")
 
     # Output paths
-    outfile = "geometry"
+    outfile = "labels.json"
 
     # ================================================================== #
 
@@ -99,13 +94,11 @@ if __name__ == "__main__":
     # Create dictionary containing input data
     dict_inputs = {
         "dim": dim,
-        "length": length,
-        "width": width,
-        "height": height,
+        "infile": infile,
     }
 
     # Create process
-    process = GeometryProc(
+    process = LabelingProc(
         dict_inputs=dict_inputs,
         set_inputs=True,
     )

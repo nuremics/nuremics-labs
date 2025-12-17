@@ -1,3 +1,3 @@
 from .GeometryProc.item import GeometryProc
-from .ModelProc.item import ModelProc
+from .LabelingProc.item import LabelingProc
 from .MeshProc.item import MeshProc
