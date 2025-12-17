@@ -27,14 +27,14 @@ class GeometryProc(Process):
         length : float
             Length of the geometry along the X axis.
         width : float
-            Width of the geometry along the Y axis (only used if dim = 2/3).
+            Width of the geometry along the Y axis (only used if dim = 2|3).
         height : float
             Height of the geometry along the Z axis (only used if dim = 3).
 
     Outputs (stored in self.output_paths)
     -------
         outfile : .step or .brep
-            File containing the geometric model (in .step if dim = 3/2 or .brep if dim = 1).
+            File containing the geometric model (in .step if dim = 3|2 or .brep if dim = 1).
     """
 
     # Parameters
