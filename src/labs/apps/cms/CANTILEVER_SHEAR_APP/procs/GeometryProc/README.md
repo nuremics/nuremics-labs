@@ -2,6 +2,7 @@
 
 <p align="left">
   <img src="https://img.shields.io/badge/CadQuery-2.5.2+-2980b9" />
+  <img src="https://img.shields.io/badge/Gmsh-4.14.0+-ffffff" />
 </p>
 
 ## Process
@@ -42,4 +43,4 @@ erDiagram
 
 ## Output Path(s)
 
-- **`outfile`:** File containing the created geometry (in .step if `dim` = 3|2 or .brep if `dim` = 1).
+- **`outfile`:** File containing the geometric model (in .step if `dim` = 3|2 or .brep if `dim` = 1).
