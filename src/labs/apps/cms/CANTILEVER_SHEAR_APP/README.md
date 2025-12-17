@@ -9,9 +9,9 @@
 
 ## Workflow
 
-1. **[`GeometryProc`](procs/GeometryProc.md):** Create a geometric representation of a physical system.<br>
+1. **[`GeometryProc`](https://github.com/nuremics/nuremics-labs/tree/cantilever-shear/src/labs/apps/cms/CANTILEVER_SHEAR_APP/procs/GeometryProc):** Create a geometric representation of a physical system.<br>
   A/ **`create_geometry`:** Create and export a simple geometric entity (beam, plate, or block) in STEP or BREP format.
-2. **[`LabelingProc`](procs/LabelingProc.md):** Define and label the entities of a physical system from its geometric representation.<br>
+2. **[`LabelingProc`](https://github.com/nuremics/nuremics-labs/tree/cantilever-shear/src/labs/apps/cms/CANTILEVER_SHEAR_APP/procs/LabelingProc):** Define and label the entities of a physical system from its geometric representation.<br>
   A/ **`label_entities`:** Assign labels to the entities of a geometric model.
 
 ```mermaid
