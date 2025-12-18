@@ -45,6 +45,14 @@ trajectory_analysis = [
   "matplotlib>=3.9.4",
   "openpyxl>=3.1.5",
 ]
+cms_geometry = [
+  "cadquery>=2.5.2",
+  "gmsh>=4.14.0",
+  "PyQt6==6.9.1",
+]
+cms_labeling = [
+  "PyQt6==6.9.1",
+]
 
 PolygonGeometryProc = ["nuremics-labs[polygon_geometry]"]
 ProjectileModelProc = ["nuremics-labs[projectile_model]"]
@@ -57,8 +65,8 @@ DEMO_APP = [
   "nuremics-labs[TrajectoryAnalysisProc]",
 ]
 CANTILEVER_SHEAR_APP = [
-  "cadquery>=2.5.2",
-  "gmsh>=4.14.0",
+  "nuremics-labs[cms_geometry]",
+  "nuremics-labs[cms_labeling]",
 ]
 
 all = [

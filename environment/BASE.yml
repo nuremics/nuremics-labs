@@ -1,0 +1,7 @@
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - pip
+  - setuptools=80.8.0
+  - wheel
