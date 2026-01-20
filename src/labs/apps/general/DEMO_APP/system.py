@@ -1,13 +1,9 @@
-import git
-from pathlib import Path
-
 from nuremics import Application
 from labs.procs.general.PolygonGeometryProc import PolygonGeometryProc
 from labs.procs.general.ProjectileModelProc import ProjectileModelProc
 from labs.procs.general.TrajectoryAnalysisProc import TrajectoryAnalysisProc
 
 APP_NAME = "DEMO_APP"
-repo = git.Repo(Path(__file__).resolve().parent, search_parent_directories=True)
 
 
 def main():
@@ -65,7 +61,6 @@ def main():
     # ------------------ #
     app = Application(
         app_name=APP_NAME,
-        nuremics_dir=repo.working_tree_dir,
         workflow=workflow,
     )
     # Run it!
