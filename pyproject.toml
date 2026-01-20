@@ -9,7 +9,7 @@ readme = "README.md"
 requires-python = ">=3.9"
 dependencies = [
 #  "nuremics @ git+https://github.com/nuremics/nuremics.git@main"
-  "nuremics @ git+https://github.com/nuremics/nuremics.git@upgrade-for-gui"
+  "nuremics @ git+https://github.com/nuremics/nuremics.git@upgrades-for-gui"
 ]
 classifiers = [
   "Programming Language :: Python :: 3",
