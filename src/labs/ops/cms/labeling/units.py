@@ -1,18 +1,15 @@
 from pathlib import Path
-from PyQt6.QtWidgets import QApplication
-# from PyQt6.QtGui import QIcon
-from OCC.Display.backend import load_backend
-load_backend("pyqt6")
-from OCC.Display.qtDisplay import qtViewer3d
 from OCC.Core.STEPControl import STEPControl_Reader
 from OCC.Core.BRepTools import breptools
 from OCC.Core.TopoDS import TopoDS_Shape
 from OCC.Core.BRep import BRep_Builder
 from OCC.Core.Graphic3d import Graphic3d_NameOfMaterial
 from OCC.Core.TopExp import TopExp_Explorer
-from OCC.Core.TopAbs import TopAbs_FACE, TopAbs_EDGE, TopAbs_VERTEX
+from OCC.Core.TopAbs import TopAbs_SOLID, TopAbs_FACE, TopAbs_EDGE, TopAbs_VERTEX
 from OCC.Core.Graphic3d import Graphic3d_NameOfMaterial
 from OCC.Core.Quantity import Quantity_Color, Quantity_TOC_RGB
+from OCC.Display.SimpleGui import init_display
+from PyQt6.QtWidgets import QApplication
 # from importlib.resources import files
 
 
@@ -41,6 +38,7 @@ def visualize_label(
         visualized. This value is displayed in the viewer window title.
     dim : int
         Topological dimension of the entities to highlight:
+        - 3 → solids
         - 2 → faces
         - 1 → edges
         - 0 → vertices
@@ -69,19 +67,20 @@ def visualize_label(
         builder = BRep_Builder()
         breptools.Read(shape, filename, builder)
 
-    # --------------------------------------- #
-    # Initialize Qt application and 3D viewer #
-    # --------------------------------------- #
-    app = QApplication([])
-    
-    viewer = qtViewer3d()
-    viewer.create()
-    viewer.InitDriver()
+    # ------------------ #
+    # Initialize display #
+    # ------------------ #
+    display, start_display, add_menu, add_function_to_menu = \
+        init_display(
+            display_triedron=False,
+            background_gradient_color1=[30, 30, 30],
+            background_gradient_color2=[30, 30, 30],
+        )
 
     # ---------------------------------------- #
     # Display full geometry (semi-transparent) #
     # ---------------------------------------- #
-    viewer._display.DisplayShape(
+    display.DisplayShape(
         shapes=shape,
         material=Graphic3d_NameOfMaterial.Graphic3d_NOM_METALIZED,
         color="orange",
@@ -91,7 +90,10 @@ def visualize_label(
     # --------------------------------------------- #
     # Select entities to explore based on dimension #
     # --------------------------------------------- #
-    if dim == 2:
+    if dim == 3:
+        # Explore solids
+        exp = TopExp_Explorer(shape, TopAbs_SOLID)
+    elif dim == 2:
         # Explore faces
         exp = TopExp_Explorer(shape, TopAbs_FACE)
     elif dim == 1:
@@ -108,11 +110,11 @@ def visualize_label(
     light_blue = Quantity_Color(0.0, 0.78, 0.75, Quantity_TOC_RGB)
 
     while exp.More():
-        face = exp.Current()
+        entity = exp.Current()
         if index in ids:
             # Highlight entities corresponding to the given label
-            viewer._display.DisplayShape(
-                shapes=face,
+            display.DisplayShape(
+                shapes=entity,
                 material=Graphic3d_NameOfMaterial.Graphic3d_NOM_METALIZED,
                 color=light_blue,
                 transparency=0.0,
@@ -120,13 +122,10 @@ def visualize_label(
         exp.Next()
         index += 1
 
-    # -------------------------------------- #
-    # Configure viewer and start interaction #
-    # -------------------------------------- #
-    viewer.setWindowTitle(f"Label: {label}")
-    # viewer.setWindowIcon(QIcon(str(files("nuremics.resources").joinpath("logo.png"))))
-    viewer._display.FitAll()
+    display.FitAll()
 
-    viewer.show()
-    app.exec()  # Block execution until the window is closed
-    viewer.close()
+    app = QApplication.instance()
+    windows = app.topLevelWidgets()
+    windows[0].setWindowTitle(f"Label: {label}")
+
+    start_display()

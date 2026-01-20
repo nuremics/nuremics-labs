@@ -1,8 +1,9 @@
 import sys
+import subprocess
 import cadquery as cq
 from cadquery import exporters
 
-from labs.ops.cms.geometry import visualize_geometry_gmsh
+from labs.ops.cms.geometry import visualize_geometry_occ
 
 
 def create_geometry(
@@ -70,10 +71,15 @@ def create_geometry(
         sys.exit("Dimension must be either 1, 2 or 3.")
 
     # Export geometry
-    exporters.export(geometry, outfile+ext)
+    filename = outfile+ext
+    exporters.export(
+        w=geometry,
+        fname=outfile+ext,
+    )
 
     # View geometry
     if not silent:
-        visualize_geometry_gmsh(
-            filename=outfile+ext,
-        )
+        subprocess.run([
+            "python", "-m", "labs.ops.cms.geometry.visualize_geometry_occ",
+            filename,  # CAD file to display
+        ])

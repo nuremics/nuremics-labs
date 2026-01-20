@@ -23,6 +23,9 @@ class LabelingProc(Process):
         dim : int
             Dimension of the geometry: 
             1 for a line (beam), 2 for a rectangle (plate), 3 for a box (block).
+        automatic : bool
+            If `True`, labeling is done automatically.
+            If `False`, labeling is done manually using the Gmsh GUI.
 
     Input paths
     -----------
@@ -37,6 +40,7 @@ class LabelingProc(Process):
 
     # Parameters
     dim: int = attrs.field(init=False, metadata={"input": True})
+    automatic: bool = attrs.field(init=False, metadata={"input": True})
 
     # Paths
     infile: Path = attrs.field(init=False, metadata={"input": True}, converter=Path)
@@ -53,6 +57,7 @@ class LabelingProc(Process):
         Uses
         ----
             dim
+            automatic
             infile
         
         Generates
@@ -62,6 +67,7 @@ class LabelingProc(Process):
         
         label_entities(
             dim=self.dim,
+            automatic=self.automatic,
             infile=self.infile,
             outfile=self.output_paths["outfile"],
         )

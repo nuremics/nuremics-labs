@@ -36,6 +36,7 @@ def main():
             "process": LabelingProc,
             "user_params": {
                 "dim": "dimension",
+                "automatic": "autolabeling",
             },
             "required_paths": {
                 "infile": "geometry",
