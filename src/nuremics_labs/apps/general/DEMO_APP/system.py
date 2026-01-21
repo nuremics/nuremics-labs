@@ -1,7 +1,7 @@
 from nuremics import Application
-from labs.procs.general.PolygonGeometryProc import PolygonGeometryProc
-from labs.procs.general.ProjectileModelProc import ProjectileModelProc
-from labs.procs.general.TrajectoryAnalysisProc import TrajectoryAnalysisProc
+from nuremics_labs.procs.general.PolygonGeometryProc import PolygonGeometryProc
+from nuremics_labs.procs.general.ProjectileModelProc import ProjectileModelProc
+from nuremics_labs.procs.general.TrajectoryAnalysisProc import TrajectoryAnalysisProc
 
 APP_NAME = "DEMO_APP"
 

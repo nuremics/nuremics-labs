@@ -5,7 +5,7 @@ import pandas as pd
 from pathlib import Path
 
 from nuremics import Process
-from labs.ops.general import projectile_model
+from nuremics_labs.ops.general import projectile_model
 
 
 @attrs.define

@@ -2,7 +2,7 @@ import git
 from pathlib import Path
 
 from nuremics import Application
-from labs.apps.general.BASE_APP.procs import (
+from nuremics_labs.apps.general.BASE_APP.procs import (
     FirstProc,
     SecondProc,
 )

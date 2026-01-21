@@ -4,7 +4,7 @@ import pandas as pd
 from pathlib import Path
 
 from nuremics import Process
-from labs.ops.general import polygon_geometry
+from nuremics_labs.ops.general import polygon_geometry
 
 
 @attrs.define

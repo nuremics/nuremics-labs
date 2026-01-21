@@ -3,7 +3,7 @@ import attrs
 from pathlib import Path
 
 from nuremics import Process
-from labs.apps.general.BASE_APP.procs.SecondProc.ops import (
+from nuremics_labs.apps.general.BASE_APP.procs.SecondProc.ops import (
     operation,
 )
 

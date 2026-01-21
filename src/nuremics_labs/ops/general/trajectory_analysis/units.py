@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 from nuremics import Process
 from importlib.resources import files
-from labs.ops.general.plotting import (
+from nuremics_labs.ops.general.plotting import (
     insert_image_into_plot,
 )
 

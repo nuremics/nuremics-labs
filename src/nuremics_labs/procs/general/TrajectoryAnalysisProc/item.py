@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 
 from nuremics import Process
-from labs.ops.general import trajectory_analysis
+from nuremics_labs.ops.general import trajectory_analysis
 
 
 @attrs.define
