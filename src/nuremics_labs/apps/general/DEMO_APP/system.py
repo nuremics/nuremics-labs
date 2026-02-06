@@ -1,12 +1,16 @@
+from typing import Optional
 from nuremics import Application
 from nuremics_labs.procs.general.PolygonGeometryProc import PolygonGeometryProc
 from nuremics_labs.procs.general.ProjectileModelProc import ProjectileModelProc
 from nuremics_labs.procs.general.TrajectoryAnalysisProc import TrajectoryAnalysisProc
 
+
 APP_NAME = "DEMO_APP"
 
 
-def main():
+def main(
+    stage: Optional[str] = "run",
+):
 
     # --------------- #
     # Define workflow #
@@ -56,6 +60,15 @@ def main():
         },
     ]
 
+    # ----------------------------------- #
+    # Define default values of parameters #
+    # ----------------------------------- #
+    default_params = {
+        "nb_sides": 5,
+        "gravity": -9.81,
+        "mass": 0.1,
+    }
+
     # ------------------ #
     # Define application #
     # ------------------ #
@@ -63,8 +76,17 @@ def main():
         app_name=APP_NAME,
         workflow=workflow,
     )
-    # Run it!
-    app()
+    if stage == "config":
+        app.configure()
+    elif stage == "settings":
+        app.configure()
+        app.settings()
+    elif stage == "run":
+        app.configure()
+        app.settings()
+        app()
+    
+    return workflow, app, default_params
 
 
 if __name__ == "__main__":
@@ -72,4 +94,4 @@ if __name__ == "__main__":
     # --------------- #
     # Run application #
     # --------------- #
-    main()
+    workflow, app = main(stage="run")

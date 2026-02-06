@@ -40,7 +40,7 @@ class TrajectoryAnalysisProc(Process):
             "marker": "o",
             "markersize": 8,
             "markevery": 20,
-            "label": "Model"
+            "label": ""
         }
     }
     comp_folder: str = attrs.field(init=False, metadata=metadata)

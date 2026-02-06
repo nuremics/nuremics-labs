@@ -64,7 +64,7 @@ def plot_overall_model_vs_theory(
         markersize = settings[case]["markersize"]
         markerevery = settings[case]["markevery"]
         label = settings[case]["label"]
-        if label == "Model":
+        if label == "":
             label = case
         
         # Plot theoretical trajectory, only label the first one
