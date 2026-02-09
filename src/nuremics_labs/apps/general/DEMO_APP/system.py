@@ -94,4 +94,4 @@ if __name__ == "__main__":
     # --------------- #
     # Run application #
     # --------------- #
-    workflow, app = main(stage="run")
+    workflow, app, _ = main(stage="run")

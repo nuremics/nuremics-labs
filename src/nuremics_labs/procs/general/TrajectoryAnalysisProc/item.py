@@ -22,7 +22,7 @@ class TrajectoryAnalysisProc(Process):
         - comp_folder : folder
             'results.xlsx' : File containing both trajectories.
 
-    Outputs (stored in self.output_paths)
+    Outputs
     -------
         fig_file : png
             Image containing overall comparative plots.
@@ -45,6 +45,9 @@ class TrajectoryAnalysisProc(Process):
     }
     comp_folder: str = attrs.field(init=False, metadata=metadata)
 
+    # Outputs
+    fig_file: Path = attrs.field(init=False, metadata={"output": True}, converter=Path)
+
     def __call__(self):
         super().__call__()
 
@@ -66,7 +69,7 @@ class TrajectoryAnalysisProc(Process):
         self.process_output(
             out=self.comp_folder,
             func=trajectory_analysis.plot_overall_model_vs_theory,
-            filename=self.output_paths["fig_file"],
+            filename=self.fig_file,
             silent=self.silent,
         )
 
@@ -101,6 +104,7 @@ if __name__ == "__main__":
     # Create dictionary containing input data
     dict_inputs = {
         "comp_folder": comp_folder,
+        "fig_file": fig_file,
     }
     
     # Create process
@@ -109,9 +113,6 @@ if __name__ == "__main__":
         set_inputs=True,
     )
     process.is_case = False
-
-    # Define output paths
-    process.output_paths["fig_file"] = fig_file
 
     # Get dictionary of paths
     with open(paths_file) as f:

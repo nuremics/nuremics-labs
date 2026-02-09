@@ -11,6 +11,7 @@ import pymunk.pygame_util
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+from pathlib import Path
 from typing import Optional
 
 from importlib.resources import files
@@ -322,7 +323,7 @@ def calculate_analytical_trajectory(
     v0: float,
     angle: float,
     gravity: float,
-    filename: Optional[str] = None,
+    filename: Optional[Path] = None,
 ) -> pd.DataFrame:
     """
     Calculate the theoretical trajectory of a projectile using analytical equations.
@@ -396,7 +397,7 @@ def calculate_analytical_trajectory(
 
 def compare_model_vs_analytical_trajectories(
     df: pd.DataFrame,
-    filename: str,
+    filename: Path,
     silent: bool = False,
 ) -> None:
     """

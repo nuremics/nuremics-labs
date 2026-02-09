@@ -31,17 +31,17 @@ class PolygonGeometryProc(Process):
         title_file : txt
             File containing the plot title of the 2D polygon shape.
 
-    Internal variables
-    ------------------
-        df_points : pd.DataFrame
-            Stores the generated polygon coordinates with columns ['X', 'Y'].
-
-    Outputs (stored in self.output_paths)
+    Outputs
     -------
         coords_file : csv
             File containing the X/Y coordinates of the polygon vertices.
         fig_file : png
             Image of the plotted polygon figure.
+
+    Internal variables
+    ------------------
+        df_points : pd.DataFrame
+            Stores the generated polygon coordinates with columns ['X', 'Y'].
     """
 
     # Parameters
@@ -50,6 +50,10 @@ class PolygonGeometryProc(Process):
   
     # Paths
     title_file: Path = attrs.field(init=False, metadata={"input": True}, converter=Path)
+
+    # Outputs
+    coords_file: Path = attrs.field(init=False, metadata={"output": True}, converter=Path)
+    fig_file: Path = attrs.field(init=False, metadata={"output": True}, converter=Path)
 
     # Internal
     df_points: pd.DataFrame = attrs.field(init=False)
@@ -82,7 +86,7 @@ class PolygonGeometryProc(Process):
         self.df_points = polygon_geometry.generate_polygon_shape(
             radius=self.radius,
             n_sides=self.n_sides,
-            filename=self.output_paths["coords_file"],
+            filename=self.coords_file,
         )
 
     def plot_polygon_shape(self):
@@ -107,7 +111,7 @@ class PolygonGeometryProc(Process):
         polygon_geometry.plot_polygon_shape(
             df_points=self.df_points,
             title=text,
-            filename=self.output_paths["fig_file"],
+            filename=self.fig_file,
             silent=self.silent,
         )
 
@@ -143,6 +147,8 @@ if __name__ == "__main__":
         "radius": radius,
         "n_sides": n_sides,
         "title_file": title_file,
+        "coords_file": coords_file,
+        "fig_file": fig_file,
     }
     
     # Create process
@@ -150,10 +156,6 @@ if __name__ == "__main__":
         dict_inputs=dict_inputs,
         set_inputs=True,
     )
-
-    # Define output paths
-    process.output_paths["coords_file"] = coords_file
-    process.output_paths["fig_file"] = fig_file
 
     # Run process
     process()
