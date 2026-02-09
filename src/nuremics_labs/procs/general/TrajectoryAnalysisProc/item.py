@@ -32,16 +32,6 @@ class TrajectoryAnalysisProc(Process):
     metadata = {
         "input": True,
         "analysis": True,
-        "settings": {
-            "add": True,
-            "color": "red",
-            "linestyle": "None",
-            "linewidth": 2.0,
-            "marker": "o",
-            "markersize": 8,
-            "markevery": 20,
-            "label": ""
-        }
     }
     comp_folder: str = attrs.field(init=False, metadata=metadata)
 

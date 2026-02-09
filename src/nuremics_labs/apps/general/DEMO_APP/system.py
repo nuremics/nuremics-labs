@@ -57,6 +57,16 @@ def main(
             "output_paths": {
                 "fig_file": "overall_comparisons.png",
             },
+            "settings": {
+                "add": True,
+                "color": "red",
+                "linestyle": "None",
+                "linewidth": 2.0,
+                "marker": "o",
+                "markersize": 8,
+                "markevery": 20,
+                "label": ""
+            },
         },
     ]
 
