@@ -9,7 +9,6 @@ ruff = ">=0.12.7,<0.16"
 
 [pypi-dependencies]
 nuremics-labs = { path = ".", editable = true }
-nuremics = { path = "../nuremics", editable = true }
 
 [tasks]
 ruff-check = "ruff check"
