@@ -15,7 +15,7 @@ from pathlib import Path
 from typing import Optional
 
 from importlib.resources import files
-from nuremics_labs.ops.general.plotting import (
+from nuremics_labs.deps.plotting import (
     insert_image_into_plot,
 )
 
@@ -88,7 +88,7 @@ def simulate_projectile_motion(
     fps = min(fps, int(1/timestep))
     
     # Compute theoretical flight characteristics (time, distance, height)
-    t_flight, d_flight, h_max = compute_analytical_characteristics(
+    t_flight, d_flight, h_max = _compute_analytical_characteristics(
         v0=v0,
         h0=h0,
         angle=angle,
@@ -147,7 +147,7 @@ def simulate_projectile_motion(
     space.add(segment_wall)
 
     # Create the dynamic body from shape and add it to the space
-    shape:pymunk.Poly = create_body(
+    shape:pymunk.Poly = _create_body(
         space=space,
         points=df_points,
         position=(0.0, h0),
@@ -203,7 +203,7 @@ def simulate_projectile_motion(
     return df_trajectory
 
 
-def create_body(
+def _create_body(
     space: pymunk.Space,
     points: pd.DataFrame,
     position: tuple[float, float],
@@ -267,7 +267,7 @@ def create_body(
     return shape
 
 
-def compute_analytical_characteristics(
+def _compute_analytical_characteristics(
     v0: float,
     h0: float,
     angle: float,

@@ -16,7 +16,8 @@ dependencies = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/nuremics/nuremics-labs"
+homepage = "https://nuremics.github.io/"
+repository = "https://github.com/nuremics/nuremics-labs"
 
 [build-system]
 requires = ["setuptools>=68", "wheel"]
