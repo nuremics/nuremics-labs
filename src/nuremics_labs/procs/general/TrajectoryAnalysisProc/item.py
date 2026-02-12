@@ -1,9 +1,10 @@
-import os
-import attrs
 import json
+import os
 from pathlib import Path
 
+import attrs
 from nuremics import Process
+
 from nuremics_labs.ops.general import trajectory_analysis
 
 
@@ -38,12 +39,12 @@ class TrajectoryAnalysisProc(Process):
     # Outputs
     fig_file: Path = attrs.field(init=False, metadata={"output": True}, converter=Path)
 
-    def __call__(self):
+    def __call__(self) -> None:
         super().__call__()
 
         self.plot_overall_model_vs_theory()
     
-    def plot_overall_model_vs_theory(self):
+    def plot_overall_model_vs_theory(self) -> None:
         """
         Generate overall comparative plots of simulated (model) and theoritical trajectories.
 

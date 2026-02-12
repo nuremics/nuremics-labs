@@ -1,5 +1,1 @@
-from .utils import *
-
-__all__ = [
-    "insert_image_into_plot"
-]
+from .utils import insert_image_into_plot as insert_image_into_plot

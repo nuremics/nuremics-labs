@@ -1,9 +1,10 @@
 import os
-import attrs
-import pandas as pd
 from pathlib import Path
 
+import attrs
+import pandas as pd
 from nuremics import Process
+
 from nuremics_labs.ops.general import polygon_geometry
 
 
@@ -58,13 +59,13 @@ class PolygonGeometryProc(Process):
     # Internal
     df_points: pd.DataFrame = attrs.field(init=False)
 
-    def __call__(self):
+    def __call__(self) -> None:
         super().__call__()
 
         self.generate_polygon_shape()
         self.plot_polygon_shape()
 
-    def generate_polygon_shape(self):
+    def generate_polygon_shape(self) -> None:
         """
         Generate the 2D coordinates of a regular polygon.
 
@@ -89,7 +90,7 @@ class PolygonGeometryProc(Process):
             filename=self.coords_file,
         )
 
-    def plot_polygon_shape(self):
+    def plot_polygon_shape(self) -> None:
         """
         Plot a closed 2D polygon from a set of points.
 

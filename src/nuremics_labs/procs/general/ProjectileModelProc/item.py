@@ -1,10 +1,11 @@
-import os
-import attrs
 import json
-import pandas as pd
+import os
 from pathlib import Path
 
+import attrs
+import pandas as pd
 from nuremics import Process
+
 from nuremics_labs.ops.general import projectile_model
 
 
@@ -78,14 +79,14 @@ class ProjectileModelProc(Process):
     df_trajectory_model: pd.DataFrame = attrs.field(init=False)
     df_trajectory_model_vs_theory: pd.DataFrame = attrs.field(init=False)
 
-    def __call__(self):
+    def __call__(self) -> None:
         super().__call__()
 
         self.simulate_projectile_motion()
         self.calculate_analytical_trajectory()
         self.compare_model_vs_analytical_trajectories()
     
-    def simulate_projectile_motion(self):
+    def simulate_projectile_motion(self) -> None:
         """
         Simulate the motion of a 2D rigid body under gravity projected with an initial velocity.
 
@@ -141,7 +142,7 @@ class ProjectileModelProc(Process):
             silent=self.silent,
         )
 
-    def calculate_analytical_trajectory(self):
+    def calculate_analytical_trajectory(self) -> None:
         """
         Calculate the theoretical trajectory of a projectile using analytical equations.
 
@@ -175,7 +176,7 @@ class ProjectileModelProc(Process):
             filename=self.comp_folder / "results.xlsx",
         )
     
-    def compare_model_vs_analytical_trajectories(self):
+    def compare_model_vs_analytical_trajectories(self) -> None:
         """
         Plot and save the comparison between simulated (model) and theoretical projectile trajectories.
 

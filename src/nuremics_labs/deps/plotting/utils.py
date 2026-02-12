@@ -1,6 +1,6 @@
 import matplotlib.image as mpimg
-from matplotlib.figure import Figure
 from matplotlib.axes import Axes
+from matplotlib.figure import Figure
 from PIL import Image
 
 
@@ -10,7 +10,7 @@ def insert_image_into_plot(
     ax: Axes,
     alpha: float = 0.5,
     scale: float = 1.0,
-):
+) -> None:
     """
     Insert an image into a matplotlib Axes, preserving its aspect ratio and plot limits.
 

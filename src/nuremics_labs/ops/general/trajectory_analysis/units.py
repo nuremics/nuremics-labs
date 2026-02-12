@@ -1,9 +1,10 @@
-from pathlib import Path
-import pandas as pd
-import matplotlib.pyplot as plt
-
-from nuremics import Process
 from importlib.resources import files
+from pathlib import Path
+
+import matplotlib.pyplot as plt
+import pandas as pd
+from nuremics import Process
+
 from nuremics_labs.deps.plotting import (
     insert_image_into_plot,
 )

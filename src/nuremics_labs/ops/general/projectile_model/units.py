@@ -1,20 +1,14 @@
-import sys
-import io
-
-stdout_orig = sys.stdout
-sys.stdout = io.StringIO()
-import pygame
-sys.stdout = stdout_orig
-
-import pymunk
-import pymunk.pygame_util
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
+from importlib.resources import files
 from pathlib import Path
 from typing import Optional
 
-from importlib.resources import files
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import pygame
+import pymunk
+import pymunk.pygame_util
+
 from nuremics_labs.deps.plotting import (
     insert_image_into_plot,
 )
@@ -85,7 +79,7 @@ def simulate_projectile_motion(
     h0 = np.mean(distances)
 
     # Reset frame rate depending on timestep setting
-    fps = min(fps, int(1/timestep))
+    fps = min(fps, int(1 / timestep))
     
     # Compute theoretical flight characteristics (time, distance, height)
     t_flight, d_flight, h_max = _compute_analytical_characteristics(
@@ -103,7 +97,7 @@ def simulate_projectile_motion(
     t_final = t_flight + 2.0  # Final simulation time
 
     # Define visualization scale and window size
-    metric = window_size / max((d_flight+4.0), (h_max+3.0))
+    metric = window_size / max((d_flight + 4.0), (h_max + 3.0))
     window_height = window_size
     window_width = window_size
 
@@ -118,8 +112,8 @@ def simulate_projectile_motion(
             b=0,
             c=0,
             d=-metric,
-            tx=1.5*metric,
-            ty=window_height-2.0*metric,
+            tx=1.5 * metric,
+            ty=window_height - 2.0 * metric,
         )
 
     # Create pymunk simulation space with gravity
@@ -129,8 +123,8 @@ def simulate_projectile_motion(
     # Create static ground segment
     segment_ground = pymunk.Segment(
         body=space.static_body,
-        a=(d_flight-1.0, -0.5),
-        b=(d_flight+1.0, -0.5),
+        a=(d_flight - 1.0, -0.5),
+        b=(d_flight + 1.0, -0.5),
         radius=0.5
     )
     segment_ground.friction = 1.0
@@ -139,15 +133,15 @@ def simulate_projectile_motion(
     # Create static vertical wall forming a corner
     segment_wall = pymunk.Segment(
         body=space.static_body,
-        a=(d_flight+1.0, -0.5),
-        b=(d_flight+1.0, 1.5),
+        a=(d_flight + 1.0, -0.5),
+        b=(d_flight + 1.0, 1.5),
         radius=0.5
     )
     segment_wall.friction = 1.0
     space.add(segment_wall)
 
     # Create the dynamic body from shape and add it to the space
-    shape:pymunk.Poly = _create_body(
+    shape: pymunk.Poly = _create_body(
         space=space,
         points=df_points,
         position=(0.0, h0),
@@ -186,7 +180,7 @@ def simulate_projectile_motion(
         try:
             shape.shapes_collide(segment_ground)
             contact = True
-        except:
+        except AssertionError:
             if not contact:
                 pos = shape.body.position
                 new_row = {"t": current_time, "x_model": pos.x, "y_model": pos.y}

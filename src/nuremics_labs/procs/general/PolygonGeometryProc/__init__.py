@@ -1,1 +1,1 @@
-from .item import PolygonGeometryProc
+from .item import PolygonGeometryProc as PolygonGeometryProc

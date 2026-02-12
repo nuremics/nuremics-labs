@@ -1,9 +1,10 @@
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
+from importlib.resources import files
 from typing import Optional
 
-from importlib.resources import files
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+
 from nuremics_labs.deps.plotting import (
     insert_image_into_plot,
 )
@@ -36,8 +37,8 @@ def generate_polygon_shape(
     
     # Compute the coordinates of each vertex
     points = [
-        (radius * np.cos(2*np.pi*i/n_sides),
-         radius * np.sin(2*np.pi*i/n_sides))
+        (radius * np.cos(2 * np.pi * i / n_sides),
+         radius * np.sin(2 * np.pi * i / n_sides))
         for i in range(n_sides)
     ]
 

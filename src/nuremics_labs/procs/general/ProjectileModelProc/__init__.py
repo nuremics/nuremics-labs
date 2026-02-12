@@ -1,1 +1,1 @@
-from .item import ProjectileModelProc
+from .item import ProjectileModelProc as ProjectileModelProc

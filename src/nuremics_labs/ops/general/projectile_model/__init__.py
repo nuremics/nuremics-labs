@@ -1,1 +1,3 @@
-from .units import *
+from .units import calculate_analytical_trajectory as calculate_analytical_trajectory
+from .units import compare_model_vs_analytical_trajectories as compare_model_vs_analytical_trajectories
+from .units import simulate_projectile_motion as simulate_projectile_motion

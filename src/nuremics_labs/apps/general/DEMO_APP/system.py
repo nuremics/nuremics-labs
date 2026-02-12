@@ -1,16 +1,17 @@
 from typing import Optional
+
 from nuremics import Application
+
 from nuremics_labs.procs.general.PolygonGeometryProc import PolygonGeometryProc
 from nuremics_labs.procs.general.ProjectileModelProc import ProjectileModelProc
 from nuremics_labs.procs.general.TrajectoryAnalysisProc import TrajectoryAnalysisProc
-
 
 APP_NAME = "DEMO_APP"
 
 
 def main(
     stage: Optional[str] = "run",
-):
+) -> None:
 
     # --------------- #
     # Define workflow #

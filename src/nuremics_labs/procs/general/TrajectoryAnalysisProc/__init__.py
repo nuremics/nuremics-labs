@@ -1,1 +1,1 @@
-from .item import TrajectoryAnalysisProc
+from .item import TrajectoryAnalysisProc as TrajectoryAnalysisProc
