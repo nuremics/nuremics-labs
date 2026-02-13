@@ -2,6 +2,7 @@
 <p align="left">
   <img src="https://img.shields.io/badge/Python-3.9+-ffcd3b?style=flat&logo=python&logoColor=white" />
   <img src="https://img.shields.io/badge/nuremics-1.0.0+-007bff" />
+  <img src="https://img.shields.io/badge/attrs-22.1.0+-000000" />
 </p>
 
 **nuRemics is an open-source Python framework for building software-grade scientific tools.**
