@@ -49,4 +49,4 @@ It automatically generates a structured directory tree (Study > Process > Test) 
 
 ## Getting Started
 
-🔗 [Get started with nuRemics](https://nuremics.github.io/getting-started)
+➡️ [Get started with nuRemics](https://nuremics.github.io/getting-started)
