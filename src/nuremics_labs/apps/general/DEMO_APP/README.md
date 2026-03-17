@@ -24,15 +24,15 @@
 
 ```mermaid
 flowchart RL
-  **PolygonGeometryProc** e1@--1--o **DEMO_APP**
-  **ProjectileModelProc** e2@--2--o **DEMO_APP**
-  **TrajectoryAnalysisProc** e3@--3--o **DEMO_APP**
-  **generate_polygon_shape** e4@--A--o **PolygonGeometryProc**
-  **plot_polygon_shape** e5@--B--o **PolygonGeometryProc**
-  **simulate_projectile_motion** e6@--A--o **ProjectileModelProc**
-  **calculate_analytical_trajectory** e7@--B--o **ProjectileModelProc**
-  **compare_model_vs_analytical_trajectories** e8@--C--o **ProjectileModelProc**
-  **plot_overall_model_vs_theory** e9@--A--o **TrajectoryAnalysisProc**
+  Proc1[<b>PolygonGeometryProc<b>] e1@--1--o App[<b>DEMO_APP<b>]
+  Proc2[<b>ProjectileModelProc<b>] e2@--2--o App
+  Proc3[<b>TrajectoryAnalysisProc<b>] e3@--3--o App
+  Op11[<b>generate_polygon_shape<b>] e4@--A--o Proc1
+  Op12[<b>plot_polygon_shape<b>] e5@--B--o Proc1
+  Op21[<b>simulate_projectile_motion<b>] e6@--A--o Proc2
+  Op22[<b>calculate_analytical_trajectory<b>] e7@--B--o Proc2
+  Op23[<b>compare_model_vs_analytical_trajectories<b>] e8@--C--o Proc2
+  Op31[<b>plot_overall_model_vs_theory<b>] e9@--A--o Proc3
   e1@{ animate: true }
   e2@{ animate: true }
   e3@{ animate: true }
@@ -118,105 +118,105 @@ erDiagram
 
 ```mermaid
 flowchart LR
-  subgraph **INPUTS**
+  subgraph Inputs[<b>INPUTS<b>]
     direction TB
 
-    subgraph **Paths**
+    subgraph Paths[<b>Paths<b>]
       direction LR
-      path1["plot_title.txt _(file)_"]
-      path2["velocity.json _(file)_"]
-      path3["configs _(folder)_"]
+      path1["plot_title.txt <i>(file)<i>"]
+      path2["velocity.json <i>(file)<i>"]
+      path3["configs <i>(folder)<i>"]
     end
 
-    subgraph **Parameters**
+    subgraph Parameters[<b>Parameters<b>]
       direction LR
-      param1["nb_sides _(int)_"]
-      param2["gravity _(float)_"]
-      param3["mass _(float)_"]
+      param1["nb_sides <i>(int)<i>"]
+      param2["gravity <i>(float)<i>"]
+      param3["mass <i>(float)<i>"]
     end
   end
 
-  subgraph **DEMO_APP**
+  subgraph App[<b>DEMO_APP<b>]
     direction RL
     proc1["PolygonGeometryProc"]
     proc2["ProjectileModelProc"]
     proc3["TrajectoryAnalysisProc"]
   end
 
-  subgraph **OUTPUTS**
+  subgraph Outputs[<b>OUTPUTS<b>]
     direction RL
-    out1["points_coordinates.csv _(file)_"]
-    out2["polygon_shape.png _(file)_"]
-    out3["comparison _(folder)_"]
-    out4["overall_comparisons.png _(file)_"]
+    out1["points_coordinates.csv <i>(file)<i>"]
+    out2["polygon_shape.png <i>(file)<i>"]
+    out3["comparison <i>(folder)<i>"]
+    out4["overall_comparisons.png <i>(file)<i>"]
   end
 
-  **INPUTS** --> **DEMO_APP**
-  **DEMO_APP** --> **OUTPUTS**
+  Inputs --> App
+  App --> Outputs
 ```
 
 ```mermaid
 flowchart LR
-  subgraph **INPUTS**
+  subgraph Inputs[<b>INPUTS<b>]
     direction TB
 
-    subgraph **Paths**
+    subgraph Paths[<b>Paths<b>]
       direction LR
-      path1["plot_title.txt _(file)_"]
+      path1["plot_title.txt <i>(file)<i>"]
     end
 
-    subgraph **Parameters**
+    subgraph Parameters[<b>Parameters<b>]
       direction LR
-      param1["nb_sides _(int)_"]
+      param1["nb_sides <i>(int)<i>"]
     end
   end
 
-  subgraph **DEMO_APP**
+  subgraph App[<b>DEMO_APP<b>]
     direction RL
     proc1["PolygonGeometryProc"]
   end
 
-  subgraph **OUTPUTS**
+  subgraph Outputs[<b>OUTPUTS<b>]
     direction RL
-    out1["points_coordinates.csv _(file)_"]
-    out2["polygon_shape.png _(file)_"]
+    out1["points_coordinates.csv <i>(file)<i>"]
+    out2["polygon_shape.png <i>(file)<i>"]
   end
 
-  **INPUTS** --> proc1
-  proc1 --> **OUTPUTS**
+  Inputs --> proc1
+  proc1 --> Outputs
 ```
 
 ```mermaid
 flowchart LR
-  subgraph **INPUTS**
+  subgraph Inputs[<b>INPUTS<b>]
     direction TB
 
-    subgraph **Paths**
+    subgraph Paths[<b>Paths<b>]
       direction LR
-      path2["velocity.json _(file)_"]
-      path3["configs _(folder)_"]
-      out1["points_coordinates.csv _(file)_"]
+      path2["velocity.json <i>(file)<i>"]
+      path3["configs <i>(folder)<i>"]
+      out1["points_coordinates.csv <i>(file)<i>"]
     end
 
-    subgraph **Parameters**
+    subgraph Parameters[<b>Parameters<b>]
       direction LR
-      param2["gravity _(float)_"]
-      param3["mass _(float)_"]
+      param2["gravity <i>(float)<i>"]
+      param3["mass <i>(float)<i>"]
     end
   end
 
-  subgraph **DEMO_APP**
+  subgraph App[<b>DEMO_APP<b>]
     direction RL
     proc2["ProjectileModelProc"]
   end
 
-  subgraph **OUTPUTS**
+  subgraph Outputs[<b>OUTPUTS<b>]
     direction RL
-    out3["comparison _(folder)_"]
+    out3["comparison <i>(folder)<i>"]
   end
 
-  **INPUTS** --> proc2
-  proc2 --> **OUTPUTS**
+  Inputs --> proc2
+  proc2 --> Outputs
 
   classDef blueBox fill:#d0e6ff,stroke:#339,stroke-width:1.5px;
   class out1 blueBox;
@@ -224,32 +224,32 @@ flowchart LR
 
 ```mermaid
 flowchart LR
-  subgraph **INPUTS**
+  subgraph Inputs[<b>INPUTS<b>]
     direction TB
 
-    subgraph **Paths**
+    subgraph Paths[<b>Paths<b>]
       direction LR
-      out3["comparison _(folder)_"]
+      out3["comparison <i>(folder)<i>"]
     end
 
-    subgraph **Parameters**
+    subgraph Parameters[<b>Parameters<b>]
       direction LR
       param["_"]
     end
   end
 
-  subgraph **DEMO_APP**
+  subgraph App[<b>DEMO_APP<b>]
     direction RL
     proc3["TrajectoryAnalysisProc"]
   end
 
-  subgraph **OUTPUTS**
+  subgraph Outputs[<b>OUTPUTS<b>]
     direction RL
-    out4["overall_comparisons.png _(file)_"]
+    out4["overall_comparisons.png <i>(file)<i>"]
   end
 
-  **INPUTS** --> proc3
-  proc3 --> **OUTPUTS**
+  Inputs --> proc3
+  proc3 --> Outputs
 
   classDef blueBox fill:#d0e6ff,stroke:#339,stroke-width:1.5px;
   class out3 blueBox;
