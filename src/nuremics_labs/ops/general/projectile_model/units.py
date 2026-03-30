@@ -446,7 +446,7 @@ def compare_model_vs_analytical_trajectories(
     ax.legend(fontsize=14)
     ax.grid(True)
 
-    # Insert NUREMICS logo in plot background
+    # Insert nuRemics logo in plot background
     insert_image_into_plot(
         img_path=files("nuremics.resources").joinpath("logo.png"),
         fig=fig,

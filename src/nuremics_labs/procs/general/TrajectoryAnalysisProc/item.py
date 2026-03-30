@@ -20,7 +20,7 @@ class TrajectoryAnalysisProc(Process):
 
     Analysis
     --------
-        - comp_folder : folder
+        comp_folder : folder
             'results.xlsx' : File containing both trajectories.
 
     Outputs
@@ -82,10 +82,10 @@ if __name__ == "__main__":
     fig_file = "overall_comparisons.png"
 
     # Paths file
-    paths_file = Path(r"...") / ".paths.json"
+    paths_file = working_dir.parents[0] / ".paths.json"
 
     # Analysis file
-    analysis_file = Path(r"...") / "analysis.json"
+    analysis_file = working_dir.parents[0] / "analysis.json"
 
     # ================================================================== #
 
@@ -103,6 +103,7 @@ if __name__ == "__main__":
         dict_inputs=dict_inputs,
         set_inputs=True,
     )
+    process.name = process.__class__.__name__
     process.is_case = False
 
     # Get dictionary of paths
