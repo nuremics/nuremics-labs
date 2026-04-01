@@ -39,7 +39,6 @@ def simulate_projectile_motion(
     return df_trajectory
 
 
-# def simulate_projectile_motion(
 def _pygame_simulation(
     queue: mp.Queue,
     df_points: pd.DataFrame,
@@ -223,137 +222,6 @@ def _pygame_simulation(
 
     # return df_trajectory
     queue.put(df_trajectory)
-
-
-# def simulate_projectile_motion(
-#     df_points: pd.DataFrame,
-#     mass: float,
-#     gravity: float,
-#     v0: float,
-#     angle: float,
-#     timestep: float,
-#     fps: int = 60,
-#     window_size: int = 600,
-#     silent: bool = False,
-# ) -> pd.DataFrame:
-
-#     if silent:
-#         # Mode silencieux : pas de pygame, tout tourne ici directement
-#         # (copie de la logique sans affichage — inchangée)
-#         ...  # ton code silent existant
-#         return df_trajectory
-
-#     # Mode visuel : spawn un processus dédié pour pygame (obligatoire sur macOS)
-#     ctx = mp.get_context("spawn")  # ← clé : évite les restrictions Cocoa/OpenGL après fork
-#     queue = ctx.Queue()
-
-#     p = ctx.Process(
-#         target=_pygame_simulation_worker,
-#         args=(queue, df_points, mass, gravity, v0, angle, timestep, fps, window_size),
-#     )
-#     p.start()
-#     p.join()  # Attend la fin de la simulation
-
-#     df_trajectory = queue.get()
-
-#     return df_trajectory
-
-
-# def _pygame_simulation_worker(queue, df_points, mass, gravity, v0, angle, timestep, fps, window_size):
-#     """Worker qui tourne dans un processus spawn dédié (requis sur macOS)."""
-#     import pygame
-#     import pymunk
-#     import pymunk.pygame_util
-    
-#     df_trajectory = pd.DataFrame(columns=["t", "x_model", "y_model"])
-
-#     vx = v0 * np.cos(np.radians(angle))
-#     vy = v0 * np.sin(np.radians(angle))
-
-#     coords = df_points[["X", "Y"]].values
-#     distances = np.linalg.norm(coords, axis=1)
-#     h0 = np.mean(distances)
-
-#     fps = min(fps, int(1 / timestep))
-
-#     t_flight, d_flight, h_max = _compute_analytical_characteristics(
-#         v0=v0, h0=h0, angle=angle, gravity=gravity,
-#     )
-
-#     contact = False
-#     running = True
-#     current_time = 0.0
-#     dt = timestep
-#     t_final = t_flight + 2.0
-
-#     metric = window_size / max((d_flight + 4.0), (h_max + 3.0))
-#     window_height = window_size
-#     window_width = window_size
-
-#     pygame.init()
-#     screen = pygame.display.set_mode((window_width, window_height))
-#     clock = pygame.time.Clock()
-#     draw_options = pymunk.pygame_util.DrawOptions(screen)
-#     draw_options.transform = pymunk.Transform(
-#         a=metric, b=0, c=0, d=-metric,
-#         tx=1.5 * metric, ty=window_height - 2.0 * metric,
-#     )
-
-#     space = pymunk.Space()
-#     space.gravity = (0, gravity)
-
-#     segment_ground = pymunk.Segment(
-#         body=space.static_body,
-#         a=(d_flight - 1.0, -0.5), b=(d_flight + 1.0, -0.5), radius=0.5
-#     )
-#     segment_ground.friction = 1.0
-#     space.add(segment_ground)
-
-#     segment_wall = pymunk.Segment(
-#         body=space.static_body,
-#         a=(d_flight + 1.0, -0.5), b=(d_flight + 1.0, 1.5), radius=0.5
-#     )
-#     segment_wall.friction = 1.0
-#     space.add(segment_wall)
-
-#     shape = _create_body(
-#         space=space, points=df_points, position=(0.0, h0),
-#         mass=mass, friction=1.0, velocity=(vx, vy),
-#     )
-
-#     pos = shape.body.position
-#     df_trajectory.loc[len(df_trajectory)] = {"t": current_time, "x_model": pos.x, "y_model": pos.y}
-
-#     while running:
-#         for event in pygame.event.get():
-#             if event.type == pygame.QUIT:
-#                 running = False
-
-#         screen.fill((255, 255, 255))
-#         space.debug_draw(draw_options)
-#         pygame.display.flip()
-#         clock.tick(fps)
-
-#         space.step(dt)
-#         current_time += dt
-
-#         try:
-#             shape.shapes_collide(segment_ground)
-#             contact = True
-#         except AssertionError:
-#             if not contact:
-#                 pos = shape.body.position
-#                 df_trajectory.loc[len(df_trajectory)] = {
-#                     "t": current_time, "x_model": pos.x, "y_model": pos.y
-#                 }
-
-#         if current_time > t_final:
-#             running = False
-
-#     pygame.quit()
-
-#     # Renvoie le résultat au processus parent via la queue
-#     queue.put(df_trajectory)
 
 
 def _create_body(
@@ -605,7 +473,7 @@ def compare_model_vs_analytical_trajectories(
     ax.legend(fontsize=14)
     ax.grid(True)
 
-    # Insert nuRemics logo in plot background
+    # Insert NUREMICS logo in plot background
     insert_image_into_plot(
         img_path=files("nuremics.resources").joinpath("logo.png"),
         fig=fig,
