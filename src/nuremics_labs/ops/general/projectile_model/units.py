@@ -1,9 +1,9 @@
 from importlib.resources import files
+import multiprocessing as mp
 from pathlib import Path
 from typing import Optional
 
 import matplotlib.pyplot as plt
-import multiprocessing as mp
 import numpy as np
 import pandas as pd
 import pygame
@@ -13,189 +13,6 @@ import pymunk.pygame_util
 from nuremics_labs.deps.plotting import (
     insert_image_into_plot,
 )
-
-
-# def simulate_projectile_motion(
-#     df_points: pd.DataFrame,
-#     mass: float,
-#     gravity: float,
-#     v0: float,
-#     angle: float,
-#     timestep: float,
-#     fps: int = 60,
-#     window_size: int = 600,
-#     silent: bool = False,
-# ) -> pd.DataFrame:
-#     """
-#     Simulate the motion of a 2D rigid body under gravity projected with an initial velocity.
-
-#     A polygonal rigid body is launched with a given initial speed and angle from an initial height.
-#     The simulation is run using the pymunk physics engine, and displayed using pygame. The environment
-#     includes a static horizontal plane and a vertical wall forming a corner.
-
-#     The simulation runs until a predefined final time or until the user closes the window.
-
-#     During the simulation, the body's position is recorded at each time step into a DataFrame,
-#     but only until the first contact with the horizontal ground occurs.
-
-#     Parameters
-#     ----------
-#     df_points : pd.DataFrame
-#         2D coordinates of the polygon defining the shape of the body (in its local frame).
-#     mass : float
-#         Mass of the body (kg).
-#     gravity : float
-#         Gravitational acceleration (m/s²).
-#     v0 : float
-#         Initial velocity magnitude (m/s).
-#     angle : float
-#         Launch angle in degrees (from horizontal).
-#     timestep : float
-#         Time increment for physics simulation steps (in seconds).
-#     fps : int, optional (default is 60)
-#         Frame rate for the visual simulation when silent is False (in frames per second).
-#     window_size : int, optional (default is 600)
-#         Size in pixels of the square pygame window for visual simulation.
-#     silent : bool (default is False)
-#         If False, displays the simulation using pygame.
-#         If True, runs silently.
-
-#     Returns
-#     -------
-#     pd.DataFrame
-#         A DataFrame with columns ['t', 'x_model', 'y_model'], containing the trajectory of the body
-#         from t=0 until the first contact with the ground.
-#     """
-
-#     # Prepare an empty DataFrame to store trajectory points
-#     df_trajectory = pd.DataFrame(columns=["t", "x_model", "y_model"])
-
-#     # Compute initial velocity components
-#     vx = v0 * np.cos(np.radians(angle))
-#     vy = v0 * np.sin(np.radians(angle))
-
-#     # Compute initial vertical position of the body's center.
-#     coords = df_points[["X", "Y"]].values
-#     distances = np.linalg.norm(coords, axis=1)
-#     h0 = np.mean(distances)
-
-#     # Reset frame rate depending on timestep setting
-#     fps = min(fps, int(1 / timestep))
-    
-#     # Compute theoretical flight characteristics (time, distance, height)
-#     t_flight, d_flight, h_max = _compute_analytical_characteristics(
-#         v0=v0,
-#         h0=h0,
-#         angle=angle,
-#         gravity=gravity,
-#     )
-
-#     # Initialize simulation state
-#     contact = False
-#     running = True
-#     current_time = 0.0
-#     dt = timestep             # Time step (s)
-#     t_final = t_flight + 2.0  # Final simulation time
-
-#     # Define visualization scale and window size
-#     metric = window_size / max((d_flight + 4.0), (h_max + 3.0))
-#     window_height = window_size
-#     window_width = window_size
-
-#     # Initialize pygame and pymunk rendering
-#     if not silent:
-#         pygame.init()
-#         screen = pygame.display.set_mode((window_width, window_height))
-#         clock = pygame.time.Clock()
-#         draw_options = pymunk.pygame_util.DrawOptions(screen)
-#         draw_options.transform = pymunk.Transform(
-#             a=metric,
-#             b=0,
-#             c=0,
-#             d=-metric,
-#             tx=1.5 * metric,
-#             ty=window_height - 2.0 * metric,
-#         )
-
-#     # Create pymunk simulation space with gravity
-#     space = pymunk.Space()
-#     space.gravity = (0, gravity)
-
-#     # Create static ground segment
-#     segment_ground = pymunk.Segment(
-#         body=space.static_body,
-#         a=(d_flight - 1.0, -0.5),
-#         b=(d_flight + 1.0, -0.5),
-#         radius=0.5
-#     )
-#     segment_ground.friction = 1.0
-#     space.add(segment_ground)
-
-#     # Create static vertical wall forming a corner
-#     segment_wall = pymunk.Segment(
-#         body=space.static_body,
-#         a=(d_flight + 1.0, -0.5),
-#         b=(d_flight + 1.0, 1.5),
-#         radius=0.5
-#     )
-#     segment_wall.friction = 1.0
-#     space.add(segment_wall)
-
-#     # Create the dynamic body from shape and add it to the space
-#     shape: pymunk.Poly = _create_body(
-#         space=space,
-#         points=df_points,
-#         position=(0.0, h0),
-#         mass=mass,
-#         friction=1.0,
-#         velocity=(vx, vy),
-#     )
-
-#     # Write initial conditions in trajectory dataframe
-#     pos = shape.body.position
-#     new_row = {"t": current_time, "x_model": pos.x, "y_model": pos.y}
-#     df_trajectory.loc[len(df_trajectory)] = new_row
-
-#     # Main simulation loop
-#     while running:
-        
-#         # Handle user window events (e.g., quit)
-#         if not silent:
-#             for event in pygame.event.get():
-#                 if event.type == pygame.QUIT:
-#                     running = False
-
-#             # Clear the screen and draw the current state
-#             screen.fill((255, 255, 255))
-#             space.debug_draw(draw_options)
-
-#             # Update the display and timing
-#             pygame.display.flip()
-#             clock.tick(fps)
-
-#         # Advance physics simulation by one step
-#         space.step(dt)
-#         current_time += dt
-
-#         # Record trajectory before contact
-#         try:
-#             shape.shapes_collide(segment_ground)
-#             contact = True
-#         except AssertionError:
-#             if not contact:
-#                 pos = shape.body.position
-#                 new_row = {"t": current_time, "x_model": pos.x, "y_model": pos.y}
-#                 df_trajectory.loc[len(df_trajectory)] = new_row
-
-#         # Stop simulation after final time
-#         if current_time > t_final:
-#             running = False
-
-#     # Clean up the pygame window
-#     if not silent:
-#         pygame.quit()
-
-#     return df_trajectory
 
 
 def simulate_projectile_motion(
@@ -210,123 +27,333 @@ def simulate_projectile_motion(
     silent: bool = False,
 ) -> pd.DataFrame:
 
-    if silent:
-        # Mode silencieux : pas de pygame, tout tourne ici directement
-        # (copie de la logique sans affichage — inchangée)
-        ...  # ton code silent existant
-        return df_trajectory
-
-    # Mode visuel : spawn un processus dédié pour pygame (obligatoire sur macOS)
-    ctx = mp.get_context("spawn")  # ← clé : évite les restrictions Cocoa/OpenGL après fork
+    ctx = mp.get_context("spawn")
     queue = ctx.Queue()
-
     p = ctx.Process(
-        target=_pygame_simulation_worker,
-        args=(queue, df_points, mass, gravity, v0, angle, timestep, fps, window_size),
+        target=_pygame_simulation,
+        args=(queue, df_points, mass, gravity, v0, angle, timestep, fps, window_size, silent),
     )
     p.start()
-    p.join()  # Attend la fin de la simulation
-
     df_trajectory = queue.get()
-
+    p.join()
     return df_trajectory
 
 
-def _pygame_simulation_worker(queue, df_points, mass, gravity, v0, angle, timestep, fps, window_size):
-    """Worker qui tourne dans un processus spawn dédié (requis sur macOS)."""
-    import pygame
-    import pymunk
-    import pymunk.pygame_util
-    
+# def simulate_projectile_motion(
+def _pygame_simulation(
+    queue: mp.Queue,
+    df_points: pd.DataFrame,
+    mass: float,
+    gravity: float,
+    v0: float,
+    angle: float,
+    timestep: float,
+    fps: int = 60,
+    window_size: int = 600,
+    silent: bool = False,
+) -> pd.DataFrame:
+    """
+    Simulate the motion of a 2D rigid body under gravity projected with an initial velocity.
+
+    A polygonal rigid body is launched with a given initial speed and angle from an initial height.
+    The simulation is run using the pymunk physics engine, and displayed using pygame. The environment
+    includes a static horizontal plane and a vertical wall forming a corner.
+
+    The simulation runs until a predefined final time or until the user closes the window.
+
+    During the simulation, the body's position is recorded at each time step into a DataFrame,
+    but only until the first contact with the horizontal ground occurs.
+
+    Parameters
+    ----------
+    df_points : pd.DataFrame
+        2D coordinates of the polygon defining the shape of the body (in its local frame).
+    mass : float
+        Mass of the body (kg).
+    gravity : float
+        Gravitational acceleration (m/s²).
+    v0 : float
+        Initial velocity magnitude (m/s).
+    angle : float
+        Launch angle in degrees (from horizontal).
+    timestep : float
+        Time increment for physics simulation steps (in seconds).
+    fps : int, optional (default is 60)
+        Frame rate for the visual simulation when silent is False (in frames per second).
+    window_size : int, optional (default is 600)
+        Size in pixels of the square pygame window for visual simulation.
+    silent : bool (default is False)
+        If False, displays the simulation using pygame.
+        If True, runs silently.
+
+    Returns
+    -------
+    pd.DataFrame
+        A DataFrame with columns ['t', 'x_model', 'y_model'], containing the trajectory of the body
+        from t=0 until the first contact with the ground.
+    """
+
+    # Prepare an empty DataFrame to store trajectory points
     df_trajectory = pd.DataFrame(columns=["t", "x_model", "y_model"])
 
+    # Compute initial velocity components
     vx = v0 * np.cos(np.radians(angle))
     vy = v0 * np.sin(np.radians(angle))
 
+    # Compute initial vertical position of the body's center.
     coords = df_points[["X", "Y"]].values
     distances = np.linalg.norm(coords, axis=1)
     h0 = np.mean(distances)
 
+    # Reset frame rate depending on timestep setting
     fps = min(fps, int(1 / timestep))
-
+    
+    # Compute theoretical flight characteristics (time, distance, height)
     t_flight, d_flight, h_max = _compute_analytical_characteristics(
-        v0=v0, h0=h0, angle=angle, gravity=gravity,
+        v0=v0,
+        h0=h0,
+        angle=angle,
+        gravity=gravity,
     )
 
+    # Initialize simulation state
     contact = False
     running = True
     current_time = 0.0
-    dt = timestep
-    t_final = t_flight + 2.0
+    dt = timestep             # Time step (s)
+    t_final = t_flight + 2.0  # Final simulation time
 
+    # Define visualization scale and window size
     metric = window_size / max((d_flight + 4.0), (h_max + 3.0))
     window_height = window_size
     window_width = window_size
 
-    pygame.init()
-    screen = pygame.display.set_mode((window_width, window_height))
-    clock = pygame.time.Clock()
-    draw_options = pymunk.pygame_util.DrawOptions(screen)
-    draw_options.transform = pymunk.Transform(
-        a=metric, b=0, c=0, d=-metric,
-        tx=1.5 * metric, ty=window_height - 2.0 * metric,
-    )
+    # Initialize pygame and pymunk rendering
+    if not silent:
+        pygame.init()
+        screen = pygame.display.set_mode((window_width, window_height))
+        clock = pygame.time.Clock()
+        draw_options = pymunk.pygame_util.DrawOptions(screen)
+        draw_options.transform = pymunk.Transform(
+            a=metric,
+            b=0,
+            c=0,
+            d=-metric,
+            tx=1.5 * metric,
+            ty=window_height - 2.0 * metric,
+        )
 
+    # Create pymunk simulation space with gravity
     space = pymunk.Space()
     space.gravity = (0, gravity)
 
+    # Create static ground segment
     segment_ground = pymunk.Segment(
         body=space.static_body,
-        a=(d_flight - 1.0, -0.5), b=(d_flight + 1.0, -0.5), radius=0.5
+        a=(d_flight - 1.0, -0.5),
+        b=(d_flight + 1.0, -0.5),
+        radius=0.5
     )
     segment_ground.friction = 1.0
     space.add(segment_ground)
 
+    # Create static vertical wall forming a corner
     segment_wall = pymunk.Segment(
         body=space.static_body,
-        a=(d_flight + 1.0, -0.5), b=(d_flight + 1.0, 1.5), radius=0.5
+        a=(d_flight + 1.0, -0.5),
+        b=(d_flight + 1.0, 1.5),
+        radius=0.5
     )
     segment_wall.friction = 1.0
     space.add(segment_wall)
 
-    shape = _create_body(
-        space=space, points=df_points, position=(0.0, h0),
-        mass=mass, friction=1.0, velocity=(vx, vy),
+    # Create the dynamic body from shape and add it to the space
+    shape: pymunk.Poly = _create_body(
+        space=space,
+        points=df_points,
+        position=(0.0, h0),
+        mass=mass,
+        friction=1.0,
+        velocity=(vx, vy),
     )
 
+    # Write initial conditions in trajectory dataframe
     pos = shape.body.position
-    df_trajectory.loc[len(df_trajectory)] = {"t": current_time, "x_model": pos.x, "y_model": pos.y}
+    new_row = {"t": current_time, "x_model": pos.x, "y_model": pos.y}
+    df_trajectory.loc[len(df_trajectory)] = new_row
 
+    # Main simulation loop
     while running:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
+        
+        # Handle user window events (e.g., quit)
+        if not silent:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    running = False
 
-        screen.fill((255, 255, 255))
-        space.debug_draw(draw_options)
-        pygame.display.flip()
-        clock.tick(fps)
+            # Clear the screen and draw the current state
+            screen.fill((255, 255, 255))
+            space.debug_draw(draw_options)
 
+            # Update the display and timing
+            pygame.display.flip()
+            clock.tick(fps)
+
+        # Advance physics simulation by one step
         space.step(dt)
         current_time += dt
 
+        # Record trajectory before contact
         try:
             shape.shapes_collide(segment_ground)
             contact = True
         except AssertionError:
             if not contact:
                 pos = shape.body.position
-                df_trajectory.loc[len(df_trajectory)] = {
-                    "t": current_time, "x_model": pos.x, "y_model": pos.y
-                }
+                new_row = {"t": current_time, "x_model": pos.x, "y_model": pos.y}
+                df_trajectory.loc[len(df_trajectory)] = new_row
 
+        # Stop simulation after final time
         if current_time > t_final:
             running = False
 
-    pygame.quit()
+    # Clean up the pygame window
+    if not silent:
+        pygame.quit()
 
-    # Renvoie le résultat au processus parent via la queue
+    # return df_trajectory
     queue.put(df_trajectory)
+
+
+# def simulate_projectile_motion(
+#     df_points: pd.DataFrame,
+#     mass: float,
+#     gravity: float,
+#     v0: float,
+#     angle: float,
+#     timestep: float,
+#     fps: int = 60,
+#     window_size: int = 600,
+#     silent: bool = False,
+# ) -> pd.DataFrame:
+
+#     if silent:
+#         # Mode silencieux : pas de pygame, tout tourne ici directement
+#         # (copie de la logique sans affichage — inchangée)
+#         ...  # ton code silent existant
+#         return df_trajectory
+
+#     # Mode visuel : spawn un processus dédié pour pygame (obligatoire sur macOS)
+#     ctx = mp.get_context("spawn")  # ← clé : évite les restrictions Cocoa/OpenGL après fork
+#     queue = ctx.Queue()
+
+#     p = ctx.Process(
+#         target=_pygame_simulation_worker,
+#         args=(queue, df_points, mass, gravity, v0, angle, timestep, fps, window_size),
+#     )
+#     p.start()
+#     p.join()  # Attend la fin de la simulation
+
+#     df_trajectory = queue.get()
+
+#     return df_trajectory
+
+
+# def _pygame_simulation_worker(queue, df_points, mass, gravity, v0, angle, timestep, fps, window_size):
+#     """Worker qui tourne dans un processus spawn dédié (requis sur macOS)."""
+#     import pygame
+#     import pymunk
+#     import pymunk.pygame_util
+    
+#     df_trajectory = pd.DataFrame(columns=["t", "x_model", "y_model"])
+
+#     vx = v0 * np.cos(np.radians(angle))
+#     vy = v0 * np.sin(np.radians(angle))
+
+#     coords = df_points[["X", "Y"]].values
+#     distances = np.linalg.norm(coords, axis=1)
+#     h0 = np.mean(distances)
+
+#     fps = min(fps, int(1 / timestep))
+
+#     t_flight, d_flight, h_max = _compute_analytical_characteristics(
+#         v0=v0, h0=h0, angle=angle, gravity=gravity,
+#     )
+
+#     contact = False
+#     running = True
+#     current_time = 0.0
+#     dt = timestep
+#     t_final = t_flight + 2.0
+
+#     metric = window_size / max((d_flight + 4.0), (h_max + 3.0))
+#     window_height = window_size
+#     window_width = window_size
+
+#     pygame.init()
+#     screen = pygame.display.set_mode((window_width, window_height))
+#     clock = pygame.time.Clock()
+#     draw_options = pymunk.pygame_util.DrawOptions(screen)
+#     draw_options.transform = pymunk.Transform(
+#         a=metric, b=0, c=0, d=-metric,
+#         tx=1.5 * metric, ty=window_height - 2.0 * metric,
+#     )
+
+#     space = pymunk.Space()
+#     space.gravity = (0, gravity)
+
+#     segment_ground = pymunk.Segment(
+#         body=space.static_body,
+#         a=(d_flight - 1.0, -0.5), b=(d_flight + 1.0, -0.5), radius=0.5
+#     )
+#     segment_ground.friction = 1.0
+#     space.add(segment_ground)
+
+#     segment_wall = pymunk.Segment(
+#         body=space.static_body,
+#         a=(d_flight + 1.0, -0.5), b=(d_flight + 1.0, 1.5), radius=0.5
+#     )
+#     segment_wall.friction = 1.0
+#     space.add(segment_wall)
+
+#     shape = _create_body(
+#         space=space, points=df_points, position=(0.0, h0),
+#         mass=mass, friction=1.0, velocity=(vx, vy),
+#     )
+
+#     pos = shape.body.position
+#     df_trajectory.loc[len(df_trajectory)] = {"t": current_time, "x_model": pos.x, "y_model": pos.y}
+
+#     while running:
+#         for event in pygame.event.get():
+#             if event.type == pygame.QUIT:
+#                 running = False
+
+#         screen.fill((255, 255, 255))
+#         space.debug_draw(draw_options)
+#         pygame.display.flip()
+#         clock.tick(fps)
+
+#         space.step(dt)
+#         current_time += dt
+
+#         try:
+#             shape.shapes_collide(segment_ground)
+#             contact = True
+#         except AssertionError:
+#             if not contact:
+#                 pos = shape.body.position
+#                 df_trajectory.loc[len(df_trajectory)] = {
+#                     "t": current_time, "x_model": pos.x, "y_model": pos.y
+#                 }
+
+#         if current_time > t_final:
+#             running = False
+
+#     pygame.quit()
+
+#     # Renvoie le résultat au processus parent via la queue
+#     queue.put(df_trajectory)
 
 
 def _create_body(
