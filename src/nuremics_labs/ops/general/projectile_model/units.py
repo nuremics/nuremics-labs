@@ -1,4 +1,5 @@
 from importlib.resources import files
+import multiprocessing as mp
 from pathlib import Path
 from typing import Optional
 
@@ -15,6 +16,31 @@ from nuremics_labs.deps.plotting import (
 
 
 def simulate_projectile_motion(
+    df_points: pd.DataFrame,
+    mass: float,
+    gravity: float,
+    v0: float,
+    angle: float,
+    timestep: float,
+    fps: int = 60,
+    window_size: int = 600,
+    silent: bool = False,
+) -> pd.DataFrame:
+
+    ctx = mp.get_context("spawn")
+    queue = ctx.Queue()
+    p = ctx.Process(
+        target=_pygame_simulation,
+        args=(queue, df_points, mass, gravity, v0, angle, timestep, fps, window_size, silent),
+    )
+    p.start()
+    df_trajectory = queue.get()
+    p.join()
+    return df_trajectory
+
+
+def _pygame_simulation(
+    queue: mp.Queue,
     df_points: pd.DataFrame,
     mass: float,
     gravity: float,
@@ -194,7 +220,8 @@ def simulate_projectile_motion(
     if not silent:
         pygame.quit()
 
-    return df_trajectory
+    # return df_trajectory
+    queue.put(df_trajectory)
 
 
 def _create_body(
