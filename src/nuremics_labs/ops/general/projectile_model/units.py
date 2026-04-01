@@ -1,5 +1,5 @@
-from importlib.resources import files
 import multiprocessing as mp
+from importlib.resources import files
 from pathlib import Path
 from typing import Optional
 
@@ -16,31 +16,6 @@ from nuremics_labs.deps.plotting import (
 
 
 def simulate_projectile_motion(
-    df_points: pd.DataFrame,
-    mass: float,
-    gravity: float,
-    v0: float,
-    angle: float,
-    timestep: float,
-    fps: int = 60,
-    window_size: int = 600,
-    silent: bool = False,
-) -> pd.DataFrame:
-
-    ctx = mp.get_context("spawn")
-    queue = ctx.Queue()
-    p = ctx.Process(
-        target=_pygame_simulation,
-        args=(queue, df_points, mass, gravity, v0, angle, timestep, fps, window_size, silent),
-    )
-    p.start()
-    df_trajectory = queue.get()
-    p.join()
-    return df_trajectory
-
-
-def _pygame_simulation(
-    queue: mp.Queue,
     df_points: pd.DataFrame,
     mass: float,
     gravity: float,
@@ -91,6 +66,31 @@ def _pygame_simulation(
         A DataFrame with columns ['t', 'x_model', 'y_model'], containing the trajectory of the body
         from t=0 until the first contact with the ground.
     """
+
+    ctx = mp.get_context("spawn")
+    queue = ctx.Queue()
+    p = ctx.Process(
+        target=_pygame_simulation,
+        args=(queue, df_points, mass, gravity, v0, angle, timestep, fps, window_size, silent),
+    )
+    p.start()
+    df_trajectory = queue.get()
+    p.join()
+    return df_trajectory
+
+
+def _pygame_simulation(
+    queue: mp.Queue,
+    df_points: pd.DataFrame,
+    mass: float,
+    gravity: float,
+    v0: float,
+    angle: float,
+    timestep: float,
+    fps: int = 60,
+    window_size: int = 600,
+    silent: bool = False,
+) -> pd.DataFrame:
 
     # Prepare an empty DataFrame to store trajectory points
     df_trajectory = pd.DataFrame(columns=["t", "x_model", "y_model"])
