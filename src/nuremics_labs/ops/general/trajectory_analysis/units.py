@@ -109,7 +109,7 @@ def plot_overall_model_vs_theory(
     )
     ax.grid(True)
 
-    # Insert NUREMICS logo in plot background
+    # Insert nuRemics logo in plot background
     insert_image_into_plot(
         img_path=files("nuremics.resources").joinpath("logo.png"),
         fig=fig,
