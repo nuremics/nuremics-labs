@@ -1,7 +1,5 @@
-app_name: DEMO_APP
-
 workflow:
-  - process: PolygonGeometryProc
+  - process: nuremics_labs.procs.general.PolygonGeometryProc
     user_params:
       n_sides: nb_sides
     hard_params:
@@ -12,7 +10,7 @@ workflow:
       coords_file: points_coordinates.csv
       fig_file: polygon_shape.png
 
-  - process: ProjectileModelProc
+  - process: nuremics_labs.procs.general.ProjectileModelProc
     user_params:
       gravity: gravity
       mass: mass
@@ -24,7 +22,7 @@ workflow:
     output_paths:
       comp_folder: comparison
 
-  - process: TrajectoryAnalysisProc
+  - process: nuremics_labs.procs.general.TrajectoryAnalysisProc
     overall_analysis:
       comp_folder: comparison
     output_paths:

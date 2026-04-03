@@ -11,6 +11,7 @@ ruff = ">=0.12.7,<0.16"
 
 [pypi-dependencies]
 nuremics-labs = { path = ".", editable = true }
+nuremics = { path = "../nuremics", editable = true }
 
 [tasks]
 ruff-check = "ruff check"
@@ -24,7 +25,7 @@ xlsxwriter = ">=3.2.3,<4"
 openpyxl = ">=3.1.5,<4"
 
 [feature.DEMO_APP.tasks]
-DEMO_APP = "python ./src/nuremics_labs/apps/general/DEMO_APP/system.py"
+DEMO_APP = "python ./src/nuremics_labs/system.py general DEMO_APP"
 
 [environments]
 demo = ["DEMO_APP"]
