@@ -4,7 +4,9 @@ from typing import Optional
 
 from nuremics import Application
 
-APPS_DIR = Path(__file__).parent
+import nuremics_labs
+
+APPS_DIR = Path(nuremics_labs.__file__).parent
 
 
 def main(
