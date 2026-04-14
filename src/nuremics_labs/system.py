@@ -24,7 +24,7 @@ def main(
     )
     app()
     
-    return app.list_workflow, app, app.default_params
+    return app
 
 
 if __name__ == "__main__":
@@ -32,7 +32,7 @@ if __name__ == "__main__":
     # --------------- #
     # Run application #
     # --------------- #
-    workflow, app, _ = main(
+    main(
         app_id=[sys.argv[1], sys.argv[2]],
         stage="run",
     )

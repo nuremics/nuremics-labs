@@ -4852,7 +4852,7 @@ packages:
 - pypi: ./
   name: nuremics-labs
   version: 1.0.0
-  sha256: 3d13f5fa35d7afabdbc4d7d4185ac1610bde9c7d05563eb472ab461dd7e3c2e9
+  sha256: 023f8ebb26c9031877a88a984d29909342d882e787a855122d44fc605e6c14d3
   requires_dist:
   - nuremics @ git+https://github.com/nuremics/nuremics.git@app-yaml
 - conda: https://conda.anaconda.org/conda-forge/linux-64/openjpeg-2.5.4-h55fea9a_0.conda
