@@ -8,16 +8,21 @@
 # nuRemics
 _An open-source Python framework for building software-grade scientific tools._
 
-🔬 Scientific agility — engineering rigor.<br>
-🧩 Modular by design — no more siloed tools.<br>
-📊 Parametric exploration — iterate without limits.<br>
-📋 Full traceability — every experiment accounted for.<br>
-📈 Built to scale — from lab to industry. <br>
-🌐 Community-driven — innovation thrives together.
+Most R&D teams never turn their research scripts into lasting tools. Not because they lack talent, but because nobody ever showed them how. A research script solves a problem once: it's written fast, in a notebook or a standalone `.py` file, by one person, for one purpose. It works brilliantly, sometimes. Then it gets used once, saved somewhere, and forgotten. Six months later, nobody can run it. Not even the person who wrote it.
 
-## Why nuRemics?
+A research tool is fundamentally different:
 
-🎥 [Watch the video](https://www.suffisciens.com/nuremics)
+- **Documented** — not just for you, but for a stranger.
+- **Tested** — not just "it ran on my machine", but verified against known results.
+- **Modular** — so others can extend it without breaking everything.
+- **Versioned** — so every result can be traced back to the exact code that produced it.
+- **Collaborative** — so the whole team builds on the same foundation.
+
+The difference isn't about the quality of the underlying science. It's about whether the science can grow beyond the person who created it.
+
+**nuRemics** bridges this gap. It's an open-source Python framework that brings software engineering best practices into scientific development, without requiring a team of software engineers. The goal isn't perfection. It's durability.
+
+🎥 [Watch the presentation video](https://www.suffisciens.com/nuremics)
 
 ## Overview
 
@@ -34,15 +39,15 @@ It is the execution engine where the core scientific logic is formalized and imp
 
 **INPUTS**
 
-It defines the entry points required by the application to function (e.g., Input1–6) and ensures that each input is routed to its respective software process, in order to satisfy the corresponding data requirements.
+It defines the entry points required by the application to function (e.g., Input1-6) and ensures that each input is routed to its respective software process, in order to satisfy the corresponding data requirements.
 
 **OUTPUTS**
 
-It defines the delivery points where results are produced during execution (e.g., Output1–4). Each software process generates its own outputs, which are either stored as final results or re-routed as inputs of subsequent software processes within the workflow.
+It defines the delivery points where results are produced during execution (e.g., Output1-4). Each software process generates its own outputs, which are either stored as final results or re-routed as inputs of subsequent software processes within the workflow.
 
 **CONFIGURATION**
 
-It orchestrates how the application is controlled by the operator across different study scenarios (e.g., Study1–2). For each study, the operator defines which inputs are _Fixed_ (constant throughout the study) and which are _Variable_ (changing between individual tests). This enables automated batch execution of multiple tests (e.g., Test1–3) by systematically updating the inputs.
+It orchestrates how the application is controlled by the operator across different study scenarios (e.g., Study1-2). For each study, the operator defines which inputs are _Fixed_ (constant throughout the study) and which are _Variable_ (changing between individual tests). This enables automated batch execution of multiple tests (e.g., Test1-3) by systematically updating the inputs.
 
 **TRACEABILITY**
 
