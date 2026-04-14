@@ -6,6 +6,7 @@ platforms = ["linux-64", "win-64", "osx-64", "osx-arm64"]
 python = ">=3.9,<3.15"
 attrs = ">=22.1.0,<26"
 pandas = ">=2.1.1,<4"
+pyyaml = ">=5.4.1,<7"
 ruff = ">=0.12.7,<0.16"
 
 [pypi-dependencies]
@@ -23,7 +24,7 @@ xlsxwriter = ">=3.2.3,<4"
 openpyxl = ">=3.1.5,<4"
 
 [feature.DEMO_APP.tasks]
-DEMO_APP = "python ./src/nuremics_labs/apps/general/DEMO_APP/system.py"
+DEMO_APP = "python ./src/nuremics_labs/system.py general DEMO_APP"
 
 [environments]
 demo = ["DEMO_APP"]
