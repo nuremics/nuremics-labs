@@ -1,4 +1,4 @@
-# ProjectileModelProc
+# [ProjectileModelProc](../../../../../specs/DEMO_APP.md#fr-2-projectilemodelproc)
 
 <p align="left">
   <img src="https://img.shields.io/badge/Pandas-2.1.1+-0b0153?style=flat&logo=pandas&logoColor=white" />
@@ -12,9 +12,9 @@
 ## Process
 
 Simulate the motion of a projectile and compare its trajectory with the analytical solution.<br>
-A/ **`simulate_projectile_motion`:** Simulate the motion of a 2D rigid body under gravity projected with an initial velocity.<br>
-B/ **`calculate_analytical_trajectory`:** Calculate the theoretical trajectory of a projectile using analytical equations.<br>
-C/ **`compare_model_vs_analytical_trajectories`:** Plot and save the comparison between simulated (model) and theoretical projectile trajectories.
+A/ **[`simulate_projectile_motion`](../../../ops/general/projectile_model/README.md#simulate_projectile_motion):** Simulate the motion of a 2D rigid body under gravity projected with an initial velocity.<br>
+B/ **[`calculate_analytical_trajectory`](../../../ops/general/projectile_model/README.md#calculate_analytical_trajectory):** Calculate the theoretical trajectory of a projectile using analytical equations.<br>
+C/ **[`compare_model_vs_analytical_trajectories`](../../../ops/general/projectile_model/README.md#compare_model_vs_analytical_trajectories):** Plot and save the comparison between simulated (model) and theoretical projectile trajectories.
 
 ```mermaid
 erDiagram

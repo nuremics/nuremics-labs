@@ -1,4 +1,4 @@
-# TrajectoryAnalysisProc
+# [TrajectoryAnalysisProc](../../../../../specs/DEMO_APP.md#fr-3-trajectoryanalysisproc)
 
 <p align="left">
   <img src="https://img.shields.io/badge/Pandas-2.1.1+-0b0153?style=flat&logo=pandas&logoColor=white" />
@@ -9,7 +9,7 @@
 ## Process
 
 Perform overall comparisons between simulated (model) and theoretical trajectories.<br>
-A/ **`plot_overall_model_vs_theory`:** Generate overall comparative plots of simulated (model) and theoritical trajectories.
+A/ **[`plot_overall_model_vs_theory`](../../../ops/general/trajectory_analysis/README.md#plot_overall_model_vs_theory):** Generate overall comparative plots of simulated (model) and theoritical trajectories.
 
 ```mermaid
 erDiagram
