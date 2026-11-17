@@ -1,4 +1,4 @@
-# DEMO_APP
+# [DEMO_APP](../../../../../specs/DEMO_APP.md)
 
 <p align="left">
   <img src="https://img.shields.io/badge/Pandas-2.1.1+-0b0153?style=flat&logo=pandas&logoColor=white" />
@@ -12,15 +12,15 @@
 
 ## Workflow
 
-1. **[`PolygonGeometryProc`](https://github.com/nuremics/nuremics-labs/tree/main/src/nuremics_labs/procs/general/PolygonGeometryProc):** Generate and plot a regular 2D polygon shape.<br>
-  A/ **`generate_polygon_shape`:** Generate the 2D coordinates of a regular polygon.<br>
-  B/ **`plot_polygon_shape`:** Plot a closed 2D polygon from a set of points.
-2. **[`ProjectileModelProc`](https://github.com/nuremics/nuremics-labs/tree/main/src/nuremics_labs/procs/general/ProjectileModelProc):** Simulate the motion of a projectile and compare its trajectory with the analytical solution.<br>
-  A/ **`simulate_projectile_motion`:** Simulate the motion of a 2D rigid body under gravity projected with an initial velocity.<br>
-  B/ **`calculate_analytical_trajectory`:** Calculate the theoretical trajectory of a projectile using analytical equations.<br>
-  C/ **`compare_model_vs_analytical_trajectories`:** Plot and save the comparison between simulated (model) and theoretical projectile trajectories.
-3. **[`TrajectoryAnalysisProc`](https://github.com/nuremics/nuremics-labs/tree/main/src/nuremics_labs/procs/general/TrajectoryAnalysisProc):** Perform overall comparisons between simulated (model) and theoretical trajectories.<br>
-  A/ **`plot_overall_model_vs_theory`:** Generate overall comparative plots of simulated (model) and theoritical trajectories.
+1. **[`PolygonGeometryProc`](../../../procs/general/PolygonGeometryProc/):** Generate and plot a regular 2D polygon shape.<br>
+  A/ **[`generate_polygon_shape`](../../../ops/general/polygon_geometry/README.md#generate_polygon_shape):** Generate the 2D coordinates of a regular polygon.<br>
+  B/ **[`plot_polygon_shape`](../../../ops/general/polygon_geometry/README.md#plot_polygon_shape):** Plot a closed 2D polygon from a set of points.
+2. **[`ProjectileModelProc`](../../../procs/general/ProjectileModelProc/):** Simulate the motion of a projectile and compare its trajectory with the analytical solution.<br>
+  A/ **[`simulate_projectile_motion`](../../../ops/general/projectile_model/README.md#simulate_projectile_motion):** Simulate the motion of a 2D rigid body under gravity projected with an initial velocity.<br>
+  B/ **[`calculate_analytical_trajectory`](../../../ops/general/projectile_model/README.md#calculate_analytical_trajectory):** Calculate the theoretical trajectory of a projectile using analytical equations.<br>
+  C/ **[`compare_model_vs_analytical_trajectories`](../../../ops/general/projectile_model/README.md#compare_model_vs_analytical_trajectories):** Plot and save the comparison between simulated (model) and theoretical projectile trajectories.
+3. **[`TrajectoryAnalysisProc`](../../../procs/general/TrajectoryAnalysisProc/):** Perform overall comparisons between simulated (model) and theoretical trajectories.<br>
+  A/ **[`plot_overall_model_vs_theory`](../../../ops/general/trajectory_analysis/README.md#plot_overall_model_vs_theory):** Generate overall comparative plots of simulated (model) and theoritical trajectories.
 
 ```mermaid
 flowchart RL

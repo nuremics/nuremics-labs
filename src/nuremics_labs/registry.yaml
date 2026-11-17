@@ -1,0 +1,84 @@
+# nuRemics Labs registry
+#
+# WHO USES WHAT: reverse index of the apps, procs and ops of this repository.
+# READMEs tell WHAT each component does, AGENTS.md tells HOW it is organized:
+# this registry tells WHO USES it (impact analysis, import resolution, duplication check).
+#
+# Machine-maintained by nuRemics skills (init-nuremics-app updates apps/, procs/ and ops/
+# entries at app initialization; future proc/op skills maintain their own entries).
+# Never hand-edited. Keys are import paths exactly as used by the code.
+# Ops are the public functions of every units.py: each op gets its own entry, keyed by
+# its function import path. Underscore-prefixed helper functions are internal to the ops
+# (used inside them, never by a proc) and are not listed. Residency is local or shared:
+# for a proc, local = hosted in the app; for an op, local = hosted in the proc's own ops/.
+# deps are out of scope (not stabilized).
+
+apps:
+  DEMO_APP:
+    category: general
+    app_id: [general, DEMO_APP]
+    procs:
+      - nuremics_labs.procs.general.PolygonGeometryProc
+      - nuremics_labs.procs.general.ProjectileModelProc
+      - nuremics_labs.procs.general.TrajectoryAnalysisProc
+    pixi:
+      feature: DEMO_APP
+      env: demo
+
+procs:
+  nuremics_labs.procs.general.PolygonGeometryProc:
+    residency: shared
+    item: src/nuremics_labs/procs/general/PolygonGeometryProc/item.py
+    apps:
+      - DEMO_APP
+    ops:
+      - nuremics_labs.ops.general.polygon_geometry.generate_polygon_shape
+      - nuremics_labs.ops.general.polygon_geometry.plot_polygon_shape
+  nuremics_labs.procs.general.ProjectileModelProc:
+    residency: shared
+    item: src/nuremics_labs/procs/general/ProjectileModelProc/item.py
+    apps:
+      - DEMO_APP
+    ops:
+      - nuremics_labs.ops.general.projectile_model.simulate_projectile_motion
+      - nuremics_labs.ops.general.projectile_model.calculate_analytical_trajectory
+      - nuremics_labs.ops.general.projectile_model.compare_model_vs_analytical_trajectories
+  nuremics_labs.procs.general.TrajectoryAnalysisProc:
+    residency: shared
+    item: src/nuremics_labs/procs/general/TrajectoryAnalysisProc/item.py
+    apps:
+      - DEMO_APP
+    ops:
+      - nuremics_labs.ops.general.trajectory_analysis.plot_overall_model_vs_theory
+
+ops:
+  nuremics_labs.ops.general.polygon_geometry.generate_polygon_shape:
+    residency: shared
+    units: src/nuremics_labs/ops/general/polygon_geometry/units.py
+    procs:
+      - nuremics_labs.procs.general.PolygonGeometryProc
+  nuremics_labs.ops.general.polygon_geometry.plot_polygon_shape:
+    residency: shared
+    units: src/nuremics_labs/ops/general/polygon_geometry/units.py
+    procs:
+      - nuremics_labs.procs.general.PolygonGeometryProc
+  nuremics_labs.ops.general.projectile_model.simulate_projectile_motion:
+    residency: shared
+    units: src/nuremics_labs/ops/general/projectile_model/units.py
+    procs:
+      - nuremics_labs.procs.general.ProjectileModelProc
+  nuremics_labs.ops.general.projectile_model.calculate_analytical_trajectory:
+    residency: shared
+    units: src/nuremics_labs/ops/general/projectile_model/units.py
+    procs:
+      - nuremics_labs.procs.general.ProjectileModelProc
+  nuremics_labs.ops.general.projectile_model.compare_model_vs_analytical_trajectories:
+    residency: shared
+    units: src/nuremics_labs/ops/general/projectile_model/units.py
+    procs:
+      - nuremics_labs.procs.general.ProjectileModelProc
+  nuremics_labs.ops.general.trajectory_analysis.plot_overall_model_vs_theory:
+    residency: shared
+    units: src/nuremics_labs/ops/general/trajectory_analysis/units.py
+    procs:
+      - nuremics_labs.procs.general.TrajectoryAnalysisProc

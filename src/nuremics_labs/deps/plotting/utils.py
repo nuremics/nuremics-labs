@@ -1,4 +1,5 @@
 from importlib.resources import files
+from typing import Literal
 
 import matplotlib.image as mpimg
 import matplotlib.pyplot as plt
@@ -107,6 +108,7 @@ def plot_xy(
     list_plots: list,
     config: tuple,
     size: tuple,
+    legend_position: Literal["outside", "right", "top", "bottom"] = "outside",
     logo: bool = True,
     save_pdf: str = None,
     save_png: str = None,
@@ -120,15 +122,15 @@ def plot_xy(
         
         x_column = plot["x_column"]
         y_column = plot["y_column"]
-        title = plot["title"]
-        x_label = plot["x_label"]
-        y_label = plot["y_label"]
-        marker = plot["marker"]
+        title = plot.get("title", None)
+        x_label = plot.get("x_label", None)
+        y_label = plot.get("y_label", None)
+        marker = plot.get("marker", None)
         linestyle = plot["linestyle"]
         linewidth = plot["linewidth"]
         color = plot["color"]
-        label = plot["label"]
-        zorder = plot["zorder"]
+        label = plot.get("label", None)
+        zorder = plot.get("zorder", None)
 
         for j, df in enumerate(plot["df"]):
         
@@ -174,21 +176,47 @@ def plot_xy(
                 zorder=this_zorder,
             )
 
+        if "x_area" in plot:
+            x_area = plot["x_area"]
+            ax[i].axvspan(
+                xmin=x_area["xmin"],
+                xmax=x_area["xmax"],
+                color=x_area["color"],
+                alpha=x_area["alpha"],
+                label=x_area.get("label", None),
+            )
+
+        if "y_area" in plot:
+            y_area = plot["y_area"]
+            ax[i].axhspan(
+                ymin=y_area["ymin"],
+                ymax=y_area["ymax"],
+                color=y_area["color"],
+                alpha=y_area["alpha"],
+                label=y_area.get("label", None),
+            )
+
         if title is not None:
             ax[i].set_title(title)
         if x_label is not None:
             ax[i].set_xlabel(x_label)
         if y_label is not None:
             ax[i].set_ylabel(y_label)
+        
         ax[i].grid(True)
 
         # Check if a legend label is provided
         if label is not None:
             ax[i].legend()  # Display the legend if a label is given
-            ax[i].legend(
-                loc="center left",
-                bbox_to_anchor=(1, 0.5)
-            )
+            if legend_position == "outside":
+                ax[i].legend(
+                    loc="center left",
+                    bbox_to_anchor=(1, 0.5)
+                )
+            elif legend_position == "upper left":
+                ax[i].legend(
+                    loc="upper left",
+                )
 
         # Insert nuRemics logo in plot background
         if logo:
